@@ -118,7 +118,21 @@
     <Compile Include="Resources\FrmAddSensor.Designer.cs">
       <DependentUpon>FrmAddSensor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScreenBuffer.cs" />
+    <Compile Include="SqlCreate.cs" />
     <Compile Include="StaticClass.cs" />
+    <Compile Include="IpAddressTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IpAddressTextBox.Designer.cs">
+      <DependentUpon>IpAddressTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCPictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCPictureBox.Designer.cs">
+      <DependentUpon>UCPictureBox.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FrmAddSensor.resx">
       <DependentUpon>FrmAddSensor.cs</DependentUpon>
     </EmbeddedResource>
@@ -137,6 +151,12 @@
     </Compile>
     <EmbeddedResource Include="Resources\FrmAddSensor.resx">
       <DependentUpon>FrmAddSensor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IpAddressTextBox.resx">
+      <DependentUpon>IpAddressTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCPictureBox.resx">
+      <DependentUpon>UCPictureBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DM_Config.config" />
     <None Include="packages.config" />

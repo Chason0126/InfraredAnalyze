@@ -17,6 +17,8 @@ namespace InfraredAnalyze
             InitializeComponent();
         }
 
+        IpAddressTextBox ipTextBox = new IpAddressTextBox();
+
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {
             btnClose.BackColor = Color.Red;
@@ -46,6 +48,17 @@ namespace InfraredAnalyze
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void FrmAddSensor_Load(object sender, EventArgs e)
+        {
+            pnlIPAdd.Controls.Add(ipTextBox);
+            ipTextBox.Location = new Point(0, 4);
+        }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(ipTextBox.IPAdd.ToString());
         }
     }
 }

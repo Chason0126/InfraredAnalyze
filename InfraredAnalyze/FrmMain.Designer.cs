@@ -33,10 +33,6 @@
             this.ss = new System.Windows.Forms.StatusStrip();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblLogo = new System.Windows.Forms.Label();
-            this.pbxLogo = new System.Windows.Forms.PictureBox();
-            this.btnMin = new System.Windows.Forms.Button();
-            this.btnWindow = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.mnsMeuns = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,18 +42,15 @@
             this.btn1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.btnPwd = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.spcMain = new System.Windows.Forms.SplitContainer();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pnlMonitorArea = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.pnlTVSensor = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAddSensor = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -79,8 +72,20 @@
             this.cmsShowNum_2 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_3 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.显示设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.单画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.四画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.九画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.十六画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.语言ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddSensor = new System.Windows.Forms.Button();
+            this.btnPwd = new System.Windows.Forms.Button();
+            this.pbxLogo = new System.Windows.Forms.PictureBox();
+            this.btnMin = new System.Windows.Forms.Button();
+            this.btnWindow = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.mnsMeuns.SuspendLayout();
             this.tlpTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcMain)).BeginInit();
@@ -106,6 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvErr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarning)).BeginInit();
             this.cmsShowNum.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // ss
@@ -132,6 +138,7 @@
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1273, 35);
             this.pnlHeader.TabIndex = 1;
+            this.pnlHeader.DoubleClick += new System.EventHandler(this.pnlHeader_DoubleClick);
             this.pnlHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseDown);
             this.pnlHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseMove);
             // 
@@ -145,66 +152,6 @@
             this.lblLogo.Size = new System.Drawing.Size(168, 16);
             this.lblLogo.TabIndex = 2;
             this.lblLogo.Text = "红外火灾监控预警系统";
-            // 
-            // pbxLogo
-            // 
-            this.pbxLogo.BackColor = System.Drawing.Color.Transparent;
-            this.pbxLogo.Image = global::InfraredAnalyze.Properties.Resources.logo1;
-            this.pbxLogo.Location = new System.Drawing.Point(0, 0);
-            this.pbxLogo.Name = "pbxLogo";
-            this.pbxLogo.Size = new System.Drawing.Size(105, 35);
-            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxLogo.TabIndex = 1;
-            this.pbxLogo.TabStop = false;
-            // 
-            // btnMin
-            // 
-            this.btnMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMin.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最小化;
-            this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMin.FlatAppearance.BorderSize = 0;
-            this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMin.Location = new System.Drawing.Point(1168, 0);
-            this.btnMin.Name = "btnMin";
-            this.btnMin.Size = new System.Drawing.Size(35, 35);
-            this.btnMin.TabIndex = 0;
-            this.btnMin.UseVisualStyleBackColor = true;
-            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
-            this.btnMin.MouseEnter += new System.EventHandler(this.btnMin_MouseEnter);
-            this.btnMin.MouseLeave += new System.EventHandler(this.btnMin_MouseLeave);
-            // 
-            // btnWindow
-            // 
-            this.btnWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWindow.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最大化;
-            this.btnWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnWindow.FlatAppearance.BorderSize = 0;
-            this.btnWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWindow.Location = new System.Drawing.Point(1203, 0);
-            this.btnWindow.Name = "btnWindow";
-            this.btnWindow.Size = new System.Drawing.Size(35, 35);
-            this.btnWindow.TabIndex = 0;
-            this.btnWindow.Tag = "Maximized";
-            this.btnWindow.UseVisualStyleBackColor = true;
-            this.btnWindow.Click += new System.EventHandler(this.btnWindow_Click);
-            this.btnWindow.MouseEnter += new System.EventHandler(this.btnWindow_MouseEnter);
-            this.btnWindow.MouseLeave += new System.EventHandler(this.btnWindow_MouseLeave);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
-            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(1238, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(35, 35);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
-            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
             // 
             // mnsMeuns
             // 
@@ -235,6 +182,9 @@
             // 
             // 选项ToolStripMenuItem
             // 
+            this.选项ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.显示设置ToolStripMenuItem,
+            this.语言ToolStripMenuItem});
             this.选项ToolStripMenuItem.Name = "选项ToolStripMenuItem";
             this.选项ToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.选项ToolStripMenuItem.Text = "选项";
@@ -255,7 +205,7 @@
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1110F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1114F));
             this.tlpTools.Controls.Add(this.btn1, 0, 0);
             this.tlpTools.Controls.Add(this.button2, 1, 0);
             this.tlpTools.Controls.Add(this.button3, 2, 0);
@@ -294,18 +244,6 @@
             this.button3.TabIndex = 7;
             this.button3.Text = "button1";
             this.button3.UseVisualStyleBackColor = true;
-            // 
-            // btnPwd
-            // 
-            this.btnPwd.BackgroundImage = global::InfraredAnalyze.Properties.Resources.password;
-            this.btnPwd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPwd.FlatAppearance.BorderSize = 0;
-            this.btnPwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPwd.Location = new System.Drawing.Point(131, 5);
-            this.btnPwd.Name = "btnPwd";
-            this.btnPwd.Size = new System.Drawing.Size(49, 40);
-            this.btnPwd.TabIndex = 7;
-            this.btnPwd.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -382,18 +320,6 @@
             this.panel3.Size = new System.Drawing.Size(141, 28);
             this.panel3.TabIndex = 2;
             // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(0, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(20, 20);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -424,18 +350,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(141, 28);
             this.panel1.TabIndex = 0;
-            // 
-            // btnAddSensor
-            // 
-            this.btnAddSensor.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
-            this.btnAddSensor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAddSensor.FlatAppearance.BorderSize = 0;
-            this.btnAddSensor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddSensor.Location = new System.Drawing.Point(0, 4);
-            this.btnAddSensor.Name = "btnAddSensor";
-            this.btnAddSensor.Size = new System.Drawing.Size(20, 20);
-            this.btnAddSensor.TabIndex = 1;
-            this.btnAddSensor.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -578,6 +492,7 @@
             this.tlpScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpScreen.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
             this.tlpScreen.Location = new System.Drawing.Point(0, 0);
+            this.tlpScreen.Margin = new System.Windows.Forms.Padding(0);
             this.tlpScreen.Name = "tlpScreen";
             this.tlpScreen.RowCount = 2;
             this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -599,7 +514,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dgvWarning);
             this.splitContainer2.Size = new System.Drawing.Size(1110, 94);
-            this.splitContainer2.SplitterDistance = 553;
+            this.splitContainer2.SplitterDistance = 560;
             this.splitContainer2.TabIndex = 0;
             // 
             // dgvErr
@@ -609,7 +524,7 @@
             this.dgvErr.Location = new System.Drawing.Point(0, 0);
             this.dgvErr.Name = "dgvErr";
             this.dgvErr.RowTemplate.Height = 23;
-            this.dgvErr.Size = new System.Drawing.Size(553, 94);
+            this.dgvErr.Size = new System.Drawing.Size(560, 94);
             this.dgvErr.TabIndex = 0;
             // 
             // dgvWarning
@@ -619,7 +534,7 @@
             this.dgvWarning.Location = new System.Drawing.Point(0, 0);
             this.dgvWarning.Name = "dgvWarning";
             this.dgvWarning.RowTemplate.Height = 23;
-            this.dgvWarning.Size = new System.Drawing.Size(553, 94);
+            this.dgvWarning.Size = new System.Drawing.Size(546, 94);
             this.dgvWarning.TabIndex = 0;
             // 
             // cmsShowNum
@@ -660,6 +575,147 @@
             this.cmsShowNum_4.Text = "十六画面";
             this.cmsShowNum_4.Click += new System.EventHandler(this.cmsShowNum_4_Click);
             // 
+            // 显示设置ToolStripMenuItem
+            // 
+            this.显示设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.单画面ToolStripMenuItem,
+            this.四画面ToolStripMenuItem,
+            this.九画面ToolStripMenuItem,
+            this.十六画面ToolStripMenuItem});
+            this.显示设置ToolStripMenuItem.Name = "显示设置ToolStripMenuItem";
+            this.显示设置ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.显示设置ToolStripMenuItem.Text = "显示设置";
+            // 
+            // 单画面ToolStripMenuItem
+            // 
+            this.单画面ToolStripMenuItem.Name = "单画面ToolStripMenuItem";
+            this.单画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.单画面ToolStripMenuItem.Text = "单画面";
+            this.单画面ToolStripMenuItem.Click += new System.EventHandler(this.单画面ToolStripMenuItem_Click);
+            // 
+            // 四画面ToolStripMenuItem
+            // 
+            this.四画面ToolStripMenuItem.Name = "四画面ToolStripMenuItem";
+            this.四画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.四画面ToolStripMenuItem.Text = "四画面";
+            this.四画面ToolStripMenuItem.Click += new System.EventHandler(this.四画面ToolStripMenuItem_Click);
+            // 
+            // 九画面ToolStripMenuItem
+            // 
+            this.九画面ToolStripMenuItem.Name = "九画面ToolStripMenuItem";
+            this.九画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.九画面ToolStripMenuItem.Text = "九画面";
+            this.九画面ToolStripMenuItem.Click += new System.EventHandler(this.九画面ToolStripMenuItem_Click);
+            // 
+            // 十六画面ToolStripMenuItem
+            // 
+            this.十六画面ToolStripMenuItem.Name = "十六画面ToolStripMenuItem";
+            this.十六画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.十六画面ToolStripMenuItem.Text = "十六画面";
+            this.十六画面ToolStripMenuItem.Click += new System.EventHandler(this.十六画面ToolStripMenuItem_Click);
+            // 
+            // 语言ToolStripMenuItem
+            // 
+            this.语言ToolStripMenuItem.Name = "语言ToolStripMenuItem";
+            this.语言ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.语言ToolStripMenuItem.Text = "语言设置";
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(0, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(20, 20);
+            this.button1.TabIndex = 1;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnAddSensor
+            // 
+            this.btnAddSensor.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
+            this.btnAddSensor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddSensor.FlatAppearance.BorderSize = 0;
+            this.btnAddSensor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddSensor.Location = new System.Drawing.Point(0, 4);
+            this.btnAddSensor.Name = "btnAddSensor";
+            this.btnAddSensor.Size = new System.Drawing.Size(20, 20);
+            this.btnAddSensor.TabIndex = 1;
+            this.btnAddSensor.UseVisualStyleBackColor = true;
+            // 
+            // btnPwd
+            // 
+            this.btnPwd.BackgroundImage = global::InfraredAnalyze.Properties.Resources.password;
+            this.btnPwd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPwd.FlatAppearance.BorderSize = 0;
+            this.btnPwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPwd.Location = new System.Drawing.Point(131, 5);
+            this.btnPwd.Name = "btnPwd";
+            this.btnPwd.Size = new System.Drawing.Size(49, 40);
+            this.btnPwd.TabIndex = 7;
+            this.btnPwd.UseVisualStyleBackColor = true;
+            // 
+            // pbxLogo
+            // 
+            this.pbxLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pbxLogo.Image = global::InfraredAnalyze.Properties.Resources.logo1;
+            this.pbxLogo.Location = new System.Drawing.Point(0, 0);
+            this.pbxLogo.Name = "pbxLogo";
+            this.pbxLogo.Size = new System.Drawing.Size(105, 35);
+            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxLogo.TabIndex = 1;
+            this.pbxLogo.TabStop = false;
+            // 
+            // btnMin
+            // 
+            this.btnMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMin.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最小化;
+            this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMin.FlatAppearance.BorderSize = 0;
+            this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMin.Location = new System.Drawing.Point(1168, 0);
+            this.btnMin.Name = "btnMin";
+            this.btnMin.Size = new System.Drawing.Size(35, 35);
+            this.btnMin.TabIndex = 0;
+            this.btnMin.UseVisualStyleBackColor = true;
+            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
+            this.btnMin.MouseEnter += new System.EventHandler(this.btnMin_MouseEnter);
+            this.btnMin.MouseLeave += new System.EventHandler(this.btnMin_MouseLeave);
+            // 
+            // btnWindow
+            // 
+            this.btnWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnWindow.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最大化;
+            this.btnWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnWindow.FlatAppearance.BorderSize = 0;
+            this.btnWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWindow.Location = new System.Drawing.Point(1203, 0);
+            this.btnWindow.Name = "btnWindow";
+            this.btnWindow.Size = new System.Drawing.Size(35, 35);
+            this.btnWindow.TabIndex = 0;
+            this.btnWindow.Tag = "";
+            this.btnWindow.UseVisualStyleBackColor = true;
+            this.btnWindow.Click += new System.EventHandler(this.btnWindow_Click);
+            this.btnWindow.MouseEnter += new System.EventHandler(this.btnWindow_MouseEnter);
+            this.btnWindow.MouseLeave += new System.EventHandler(this.btnWindow_MouseLeave);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Location = new System.Drawing.Point(1238, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(35, 35);
+            this.btnClose.TabIndex = 0;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
+            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -682,7 +738,6 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmMain_MouseUp);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.mnsMeuns.ResumeLayout(false);
             this.mnsMeuns.PerformLayout();
             this.tlpTools.ResumeLayout(false);
@@ -714,6 +769,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvErr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarning)).EndInit();
             this.cmsShowNum.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -770,6 +826,12 @@
         private System.Windows.Forms.ToolStripMenuItem cmsShowNum_3;
         private System.Windows.Forms.ToolStripMenuItem cmsShowNum_4;
         private System.Windows.Forms.TableLayoutPanel tlpScreen;
+        private System.Windows.Forms.ToolStripMenuItem 显示设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 单画面ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 四画面ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 九画面ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 十六画面ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 语言ToolStripMenuItem;
     }
 }
 

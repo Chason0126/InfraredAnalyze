@@ -68,17 +68,31 @@ namespace InfraredAnalyze
 
         private void btnWindow_Click(object sender, EventArgs e)//窗口全屏、恢复按钮 
         {
-            if (btnWindow.Tag.ToString() == "Maximized")
+            if (this.WindowState==FormWindowState.Normal)
             {
                 this.WindowState = FormWindowState.Maximized;
                 btnWindow.BackgroundImage = Properties.Resources.窗口化;
-                btnWindow.Tag = "Normal";
             }
-            else if (btnWindow.Tag.ToString() == "Normal")
+            else if (this.WindowState==FormWindowState.Maximized)
             {
                 this.WindowState = FormWindowState.Normal;
                 btnWindow.BackgroundImage = Properties.Resources.最大化;
-                btnWindow.Tag = "Maximized";
+            }
+        }
+        #endregion
+
+        #region//双击头部 变换窗体模式  最大化或者为 窗体化
+        private void pnlHeader_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                btnWindow.BackgroundImage = Properties.Resources.窗口化;
+            }
+            else if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                btnWindow.BackgroundImage = Properties.Resources.最大化;
             }
         }
         #endregion
@@ -184,17 +198,16 @@ namespace InfraredAnalyze
             tlpScreen.RowCount = tlpScreen.ColumnCount = num;
             for (int i = 1; i <= num * num; i++)
             {
-                PictureBox pictureBox = new PictureBox();
-                pictureBox.BackColor = Color.Black;
-                pictureBox.BorderStyle = BorderStyle.None;
-                pictureBox.Height = spcScreen.Panel1.Height / num;
-                pictureBox.Width = spcScreen.Width / num;
-                tlpScreen.Controls.Add(pictureBox);
+                UCPictureBox uCPictureBox = new UCPictureBox();
+                uCPictureBox.Height = spcScreen.Panel1.Height / num;
+                uCPictureBox.Width = spcScreen.Panel1.Width / num;
+                tlpScreen.Controls.Add(uCPictureBox);
+                uCPictureBox.Draw_Tag(i.ToString());
             }
         }
         #endregion
 
-        #region//消除控件加载时的闪烁问题  但是会卡主呢
+        #region//消除控件加载时的闪烁问题  但是会卡住呢
         //protected override CreateParams CreateParams
         //{
         //    get
@@ -204,6 +217,18 @@ namespace InfraredAnalyze
         //        return cp;
         //    }
         //}
+        #endregion
+
+        #region//全屏显示
+        public void Full_Screen_Display(UCPictureBox pictureBox)
+        {
+            //tlpScreen.Controls.Clear();
+            tlpScreen.RowCount = tlpScreen.ColumnCount = 1;
+            pictureBox.Height = spcScreen.Panel1.Height;
+            pictureBox.Width = spcScreen.Panel1.Width;
+            tlpScreen.Controls.Add(pictureBox);
+            pictureBox.Draw_Tag(pictureBox.Tagg.ToString());
+        }
         #endregion
 
         private void btnLoadFile_Click(object sender, EventArgs e)
@@ -350,9 +375,25 @@ namespace InfraredAnalyze
             Refresh_Screen(4);
         }
 
-        
+        private void 单画面ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Refresh_Screen(1);
+        }
 
-       
+        private void 四画面ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Refresh_Screen(2);
+        }
 
+        private void 九画面ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Refresh_Screen(3);
+        }
+
+        private void 十六画面ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Refresh_Screen(4);
+        }
+      
     }
 }
