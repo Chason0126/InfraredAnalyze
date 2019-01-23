@@ -227,7 +227,7 @@ namespace InfraredAnalyze
             pictureBox.Height = spcScreen.Panel1.Height;
             pictureBox.Width = spcScreen.Panel1.Width;
             tlpScreen.Controls.Add(pictureBox);
-            pictureBox.Draw_Tag(pictureBox.Tagg.ToString());
+            pictureBox.Draw_Tag(pictureBox.Number.ToString());
         }
         #endregion
 

@@ -20,12 +20,12 @@ namespace InfraredAnalyze
 
         FrmMain frmMain = new FrmMain();
         public delegate void FullScreen_DispalyEventHandler(UCPictureBox pictureBox);
-        private string tag;
+        private string number;
 
-        public string Tagg
+        public string Number
         {
-            get => tag = label1.Text;
-            set => tag = value;
+            get => number = label1.Text;
+            set => number = value;
         }
 
         public void Draw_Tag(string tag)
