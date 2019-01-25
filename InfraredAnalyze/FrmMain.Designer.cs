@@ -37,11 +37,16 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.显示设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.单画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.四画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.九画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.十六画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.语言ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpTools = new System.Windows.Forms.TableLayoutPanel();
             this.btn1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.spcMain = new System.Windows.Forms.SplitContainer();
             this.tabMain = new System.Windows.Forms.TabControl();
@@ -63,23 +68,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.img = new System.Windows.Forms.ImageList(this.components);
             this.spcScreen = new System.Windows.Forms.SplitContainer();
-            this.tlpScreen = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvErr = new System.Windows.Forms.DataGridView();
             this.dgvWarning = new System.Windows.Forms.DataGridView();
+            this.tlpScreen = new System.Windows.Forms.TableLayoutPanel();
             this.cmsShowNum = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsShowNum_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_2 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_3 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.显示设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.单画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.四画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.九画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.十六画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.语言ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.btnAddSensor = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.btnPwd = new System.Windows.Forms.Button();
             this.pbxLogo = new System.Windows.Forms.PictureBox();
             this.btnMin = new System.Windows.Forms.Button();
@@ -101,7 +101,6 @@
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcScreen)).BeginInit();
-            this.spcScreen.Panel1.SuspendLayout();
             this.spcScreen.Panel2.SuspendLayout();
             this.spcScreen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -189,6 +188,51 @@
             this.选项ToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.选项ToolStripMenuItem.Text = "选项";
             // 
+            // 显示设置ToolStripMenuItem
+            // 
+            this.显示设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.单画面ToolStripMenuItem,
+            this.四画面ToolStripMenuItem,
+            this.九画面ToolStripMenuItem,
+            this.十六画面ToolStripMenuItem});
+            this.显示设置ToolStripMenuItem.Name = "显示设置ToolStripMenuItem";
+            this.显示设置ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.显示设置ToolStripMenuItem.Text = "显示设置";
+            // 
+            // 单画面ToolStripMenuItem
+            // 
+            this.单画面ToolStripMenuItem.Name = "单画面ToolStripMenuItem";
+            this.单画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.单画面ToolStripMenuItem.Text = "单画面";
+            this.单画面ToolStripMenuItem.Click += new System.EventHandler(this.单画面ToolStripMenuItem_Click);
+            // 
+            // 四画面ToolStripMenuItem
+            // 
+            this.四画面ToolStripMenuItem.Name = "四画面ToolStripMenuItem";
+            this.四画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.四画面ToolStripMenuItem.Text = "四画面";
+            this.四画面ToolStripMenuItem.Click += new System.EventHandler(this.四画面ToolStripMenuItem_Click);
+            // 
+            // 九画面ToolStripMenuItem
+            // 
+            this.九画面ToolStripMenuItem.Name = "九画面ToolStripMenuItem";
+            this.九画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.九画面ToolStripMenuItem.Text = "九画面";
+            this.九画面ToolStripMenuItem.Click += new System.EventHandler(this.九画面ToolStripMenuItem_Click);
+            // 
+            // 十六画面ToolStripMenuItem
+            // 
+            this.十六画面ToolStripMenuItem.Name = "十六画面ToolStripMenuItem";
+            this.十六画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.十六画面ToolStripMenuItem.Text = "十六画面";
+            this.十六画面ToolStripMenuItem.Click += new System.EventHandler(this.十六画面ToolStripMenuItem_Click);
+            // 
+            // 语言ToolStripMenuItem
+            // 
+            this.语言ToolStripMenuItem.Name = "语言ToolStripMenuItem";
+            this.语言ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.语言ToolStripMenuItem.Text = "语言设置";
+            // 
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
@@ -203,12 +247,12 @@
             this.tlpTools.ColumnCount = 5;
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1114F));
             this.tlpTools.Controls.Add(this.btn1, 0, 0);
             this.tlpTools.Controls.Add(this.button2, 1, 0);
-            this.tlpTools.Controls.Add(this.button3, 2, 0);
+            this.tlpTools.Controls.Add(this.btnStart, 2, 0);
             this.tlpTools.Controls.Add(this.btnPwd, 3, 0);
             this.tlpTools.Controls.Add(this.button5, 4, 0);
             this.tlpTools.Location = new System.Drawing.Point(0, 64);
@@ -236,18 +280,9 @@
             this.button2.Text = "button1";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(89, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(34, 34);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "button1";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(188, 5);
+            this.button5.Location = new System.Drawing.Point(196, 5);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(34, 34);
             this.button5.TabIndex = 7;
@@ -273,6 +308,7 @@
             this.spcMain.Panel2.Controls.Add(this.spcScreen);
             this.spcMain.Size = new System.Drawing.Size(1273, 633);
             this.spcMain.SplitterDistance = 157;
+            this.spcMain.SplitterWidth = 1;
             this.spcMain.TabIndex = 7;
             // 
             // tabMain
@@ -282,6 +318,7 @@
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.ImageList = this.img;
             this.tabMain.Location = new System.Drawing.Point(0, 0);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(2);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(155, 631);
@@ -295,8 +332,8 @@
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.ImageKey = "setting_.png";
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(147, 600);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -315,9 +352,9 @@
             this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(3, 292);
+            this.panel3.Location = new System.Drawing.Point(0, 289);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(141, 28);
+            this.panel3.Size = new System.Drawing.Size(147, 28);
             this.panel3.TabIndex = 2;
             // 
             // label3
@@ -326,7 +363,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label3.Location = new System.Drawing.Point(38, 6);
+            this.label3.Location = new System.Drawing.Point(41, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 17);
             this.label3.TabIndex = 0;
@@ -346,9 +383,9 @@
             this.panel1.Controls.Add(this.btnAddSensor);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(141, 28);
+            this.panel1.Size = new System.Drawing.Size(147, 28);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -357,7 +394,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label1.Location = new System.Drawing.Point(38, 6);
+            this.label1.Location = new System.Drawing.Point(41, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 17);
             this.label1.TabIndex = 0;
@@ -473,32 +510,13 @@
             this.spcScreen.Name = "spcScreen";
             this.spcScreen.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // spcScreen.Panel1
-            // 
-            this.spcScreen.Panel1.Controls.Add(this.tlpScreen);
-            // 
             // spcScreen.Panel2
             // 
             this.spcScreen.Panel2.Controls.Add(this.splitContainer2);
-            this.spcScreen.Size = new System.Drawing.Size(1110, 631);
+            this.spcScreen.Size = new System.Drawing.Size(1113, 631);
             this.spcScreen.SplitterDistance = 533;
+            this.spcScreen.SplitterWidth = 1;
             this.spcScreen.TabIndex = 5;
-            // 
-            // tlpScreen
-            // 
-            this.tlpScreen.ColumnCount = 2;
-            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpScreen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpScreen.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
-            this.tlpScreen.Location = new System.Drawing.Point(0, 0);
-            this.tlpScreen.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpScreen.Name = "tlpScreen";
-            this.tlpScreen.RowCount = 2;
-            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpScreen.Size = new System.Drawing.Size(1110, 533);
-            this.tlpScreen.TabIndex = 5;
             // 
             // splitContainer2
             // 
@@ -513,8 +531,9 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dgvWarning);
-            this.splitContainer2.Size = new System.Drawing.Size(1110, 94);
-            this.splitContainer2.SplitterDistance = 560;
+            this.splitContainer2.Size = new System.Drawing.Size(1113, 97);
+            this.splitContainer2.SplitterDistance = 555;
+            this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             // 
             // dgvErr
@@ -524,7 +543,7 @@
             this.dgvErr.Location = new System.Drawing.Point(0, 0);
             this.dgvErr.Name = "dgvErr";
             this.dgvErr.RowTemplate.Height = 23;
-            this.dgvErr.Size = new System.Drawing.Size(560, 94);
+            this.dgvErr.Size = new System.Drawing.Size(555, 97);
             this.dgvErr.TabIndex = 0;
             // 
             // dgvWarning
@@ -534,8 +553,28 @@
             this.dgvWarning.Location = new System.Drawing.Point(0, 0);
             this.dgvWarning.Name = "dgvWarning";
             this.dgvWarning.RowTemplate.Height = 23;
-            this.dgvWarning.Size = new System.Drawing.Size(546, 94);
+            this.dgvWarning.Size = new System.Drawing.Size(557, 97);
             this.dgvWarning.TabIndex = 0;
+            // 
+            // tlpScreen
+            // 
+            this.tlpScreen.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tlpScreen.ColumnCount = 4;
+            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
+            this.tlpScreen.Location = new System.Drawing.Point(582, 58);
+            this.tlpScreen.Margin = new System.Windows.Forms.Padding(1);
+            this.tlpScreen.Name = "tlpScreen";
+            this.tlpScreen.RowCount = 4;
+            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.Size = new System.Drawing.Size(132, 51);
+            this.tlpScreen.TabIndex = 5;
             // 
             // cmsShowNum
             // 
@@ -575,51 +614,6 @@
             this.cmsShowNum_4.Text = "十六画面";
             this.cmsShowNum_4.Click += new System.EventHandler(this.cmsShowNum_4_Click);
             // 
-            // 显示设置ToolStripMenuItem
-            // 
-            this.显示设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.单画面ToolStripMenuItem,
-            this.四画面ToolStripMenuItem,
-            this.九画面ToolStripMenuItem,
-            this.十六画面ToolStripMenuItem});
-            this.显示设置ToolStripMenuItem.Name = "显示设置ToolStripMenuItem";
-            this.显示设置ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.显示设置ToolStripMenuItem.Text = "显示设置";
-            // 
-            // 单画面ToolStripMenuItem
-            // 
-            this.单画面ToolStripMenuItem.Name = "单画面ToolStripMenuItem";
-            this.单画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.单画面ToolStripMenuItem.Text = "单画面";
-            this.单画面ToolStripMenuItem.Click += new System.EventHandler(this.单画面ToolStripMenuItem_Click);
-            // 
-            // 四画面ToolStripMenuItem
-            // 
-            this.四画面ToolStripMenuItem.Name = "四画面ToolStripMenuItem";
-            this.四画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.四画面ToolStripMenuItem.Text = "四画面";
-            this.四画面ToolStripMenuItem.Click += new System.EventHandler(this.四画面ToolStripMenuItem_Click);
-            // 
-            // 九画面ToolStripMenuItem
-            // 
-            this.九画面ToolStripMenuItem.Name = "九画面ToolStripMenuItem";
-            this.九画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.九画面ToolStripMenuItem.Text = "九画面";
-            this.九画面ToolStripMenuItem.Click += new System.EventHandler(this.九画面ToolStripMenuItem_Click);
-            // 
-            // 十六画面ToolStripMenuItem
-            // 
-            this.十六画面ToolStripMenuItem.Name = "十六画面ToolStripMenuItem";
-            this.十六画面ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.十六画面ToolStripMenuItem.Text = "十六画面";
-            this.十六画面ToolStripMenuItem.Click += new System.EventHandler(this.十六画面ToolStripMenuItem_Click);
-            // 
-            // 语言ToolStripMenuItem
-            // 
-            this.语言ToolStripMenuItem.Name = "语言ToolStripMenuItem";
-            this.语言ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.语言ToolStripMenuItem.Text = "语言设置";
-            // 
             // button1
             // 
             this.button1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
@@ -644,13 +638,28 @@
             this.btnAddSensor.TabIndex = 1;
             this.btnAddSensor.UseVisualStyleBackColor = true;
             // 
+            // btnStart
+            // 
+            this.btnStart.BackgroundImage = global::InfraredAnalyze.Properties.Resources.start;
+            this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStart.FlatAppearance.BorderSize = 0;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.Location = new System.Drawing.Point(89, 5);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(42, 40);
+            this.btnStart.TabIndex = 7;
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
             // btnPwd
             // 
             this.btnPwd.BackgroundImage = global::InfraredAnalyze.Properties.Resources.password;
             this.btnPwd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPwd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPwd.FlatAppearance.BorderSize = 0;
             this.btnPwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPwd.Location = new System.Drawing.Point(131, 5);
+            this.btnPwd.Location = new System.Drawing.Point(139, 5);
             this.btnPwd.Name = "btnPwd";
             this.btnPwd.Size = new System.Drawing.Size(49, 40);
             this.btnPwd.TabIndex = 7;
@@ -722,6 +731,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1273, 778);
             this.ContextMenuStrip = this.cmsShowNum;
+            this.Controls.Add(this.tlpScreen);
             this.Controls.Add(this.spcMain);
             this.Controls.Add(this.tlpTools);
             this.Controls.Add(this.pnlHeader);
@@ -758,7 +768,6 @@
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.spcScreen.Panel1.ResumeLayout(false);
             this.spcScreen.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcScreen)).EndInit();
             this.spcScreen.ResumeLayout(false);
@@ -792,7 +801,7 @@
         private System.Windows.Forms.TableLayoutPanel tlpTools;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btn1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnPwd;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.SplitContainer spcMain;

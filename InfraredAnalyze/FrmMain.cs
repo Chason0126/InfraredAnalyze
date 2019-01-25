@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Microsoft.DirectX.PrivateImplementationDetails;
-using Microsoft.DirectX.DirectDraw;
+using System.Configuration;
 
 namespace InfraredAnalyze
 {
@@ -24,6 +24,7 @@ namespace InfraredAnalyze
 
 
         Drawing drawing = new Drawing();
+        ScreenBuffer screenBuffer = new ScreenBuffer();
 
         #region//窗体右上角按钮功能
         private void btnClose_MouseEnter(object sender, EventArgs e)
@@ -231,6 +232,69 @@ namespace InfraredAnalyze
         }
         #endregion
 
+        #region//计算分割的点
+        Point[] points;
+        /// <summary>
+        /// 返回分割好的坐标点数组
+        /// </summary>
+        /// <param name="num">输入需要分割显示的数量</param>
+        /// <returns></returns>
+        public Point[] Calc_points(int num)
+        {
+            switch (num)
+            {
+                case 1:
+                    points = new Point[1];
+                    points[0] = new Point(0, 0);
+                    break;
+                case 4:
+                    points = new Point[4];
+                    points[0] = new Point(0, 0);
+                    points[1] = new Point(0, spcScreen.Panel1.Width / 2);
+                    points[2] = new Point(spcScreen.Panel1.Height / 2, 0);
+                    points[3] = new Point(spcScreen.Panel1.Width / 2, spcScreen.Panel1.Height / 2);
+                    break;
+                case 9:
+                    points = new Point[9];
+                    points[0] = new Point(0, 0);
+                    points[1] = new Point(0, spcScreen.Panel1.Width / 3);
+                    points[2] = new Point(0, spcScreen.Panel1.Width / 3 * 2);
+
+                    points[3] = new Point(spcScreen.Panel1.Height / 3, 0);
+                    points[4] = new Point(spcScreen.Panel1.Height / 3, spcScreen.Panel1.Width / 3);
+                    points[5] = new Point(spcScreen.Panel1.Height / 3, spcScreen.Panel1.Width / 3 * 2);
+
+                    points[6] = new Point(spcScreen.Panel1.Height / 3 * 2, 0);
+                    points[7] = new Point(spcScreen.Panel1.Height / 3 * 2, spcScreen.Panel1.Width / 3);
+                    points[8] = new Point(spcScreen.Panel1.Height / 3 * 2, spcScreen.Panel1.Width / 3 * 2);
+                    break;
+                case 16:
+                    points = new Point[16];
+                    points[0] = new Point(0, 0);
+                    points[1] = new Point(0, spcScreen.Panel1.Width / 4);
+                    points[2] = new Point(0, spcScreen.Panel1.Width / 4 * 2);
+                    points[3] = new Point(0, spcScreen.Panel1.Width / 4 * 3);
+
+                    points[4] = new Point(spcScreen.Panel1.Height / 4, 0);
+                    points[5] = new Point(spcScreen.Panel1.Height / 4, spcScreen.Panel1.Width / 4);
+                    points[6] = new Point(spcScreen.Panel1.Height / 4, spcScreen.Panel1.Width / 4 * 2);
+                    points[7] = new Point(spcScreen.Panel1.Height / 4, spcScreen.Panel1.Width / 4 * 3);
+
+                    points[8] = new Point(spcScreen.Panel1.Height / 2, 0);
+                    points[9] = new Point(spcScreen.Panel1.Height / 2, spcScreen.Panel1.Width / 4);
+                    points[10] = new Point(spcScreen.Panel1.Height / 2, spcScreen.Panel1.Width / 4 * 2);
+                    points[11] = new Point(spcScreen.Panel1.Height / 2, spcScreen.Panel1.Width / 4 * 3);
+
+                    points[12] = new Point(spcScreen.Panel1.Height / 4 * 3, 0);
+                    points[13] = new Point(spcScreen.Panel1.Height / 4 * 3, spcScreen.Panel1.Width / 4);
+                    points[14] = new Point(spcScreen.Panel1.Height / 4 * 3, spcScreen.Panel1.Width / 4 * 2);
+                    points[15] = new Point(spcScreen.Panel1.Height / 4 * 3, spcScreen.Panel1.Width / 4 * 3);
+                    break;
+            }
+            return points;
+        }
+
+        #endregion
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
 
@@ -277,74 +341,27 @@ namespace InfraredAnalyze
             //}
         }
 
+        UCPictureBox pictureBox;
         private void FrmMain_Load(object sender, EventArgs e)
         {
-
-        }
-
-        public int STREAMCALLBACK(IntPtr hIntPtr, IntPtr stream, int len, long nTime)
-        {
-            StaticClass.g_stream = stream;
-            StaticClass.g_Len = len;
-            StaticClass.g_nTime = (int)nTime;
-            StaticClass.g_Intptr = hIntPtr;
-            return Play(hIntPtr, stream, len, (int)nTime);
-            //return 1;
-        }
-
-
-
-        public int Play(IntPtr intPtr, IntPtr stream, int len, int nTime)
-        {
-            #region
-            //Device displayDevice = null;//定义DirectDraw设备
-            //Surface surfaceLP = null;//离屏表面（内存块）
-            //displayDevice = new Device();
-            //displayDevice.SetCooperativeLevel(axAnimation1, CooperativeLevelFlags.Normal);//设置显示窗口为 ax控件 显示方式为  全屏
-            //displayDevice.SetDisplayMode(StaticClass.g_nWidth, StaticClass.g_nHeight, 24, 0, true);//设置显示模式  大小  位色 等等
-            //ColorKey key = new ColorKey();
-            //key.ColorSpaceHighValue = key.ColorSpaceLowValue = 0;//设置透明色  黑色
-            //surfaceLP.SetColorKey(ColorKeyFlags.SourceDraw, key);//设置页面透明色
-            //SurfaceDescription surfaceDescription = new SurfaceDescription();//目标表面
-            //surfaceDescription.SurfaceCaps.PrimarySurface = surfaceDescription.SurfaceCaps.Complex = true;
-            //surfaceDescription.BackBufferCount = 1;//为目标建立一个后表面
-            //surfaceLP = new Surface(surfaceDescription, displayDevice);
-            #endregion//Device
-            #region
-            Bitmap bitmapLP = new Bitmap(StaticClass.g_nWidth, StaticClass.g_nHeight);
-
-            IntPtr LP = bitmapLP.GetHbitmap();
-            #endregion
-
-            if (intPtr == null)
+            Point[] points = Calc_points(16);
+            for (int i = 1; i <= 16; i++)
             {
-                return -1;
+                pictureBox = new UCPictureBox();
+                // panel.Visible = false;
+                pictureBox.Width1 = spcScreen.Panel1.Width / 4;
+                pictureBox.Height1 = spcScreen.Panel1.Height / 4;
+                spcScreen.Panel1.Controls.Add(pictureBox);
+                pictureBox.Location = points[i - 1];
             }
-            //InfraredSDK.IFR_DoHistogramProcess(intPtr, stream);
-            //int nTmp = -1;
-            //nTmp = InfraredSDK.IFR_GetDrawBuffer(intPtr, stream,ref  LP);
-            //float fTemp, Mintemp, MaxTemp;
-
-            //Point temp_Point = new Point(100, 100);
-            //fTemp = InfraredSDK.IFR_GetPointTemp(StaticClass.m_Intptr,temp_Point);
-            //InfraredSDK.IFR_Flip(StaticClass.m_Intptr);
-            //Graphics graphics = axAnimation1.CreateGraphics();
-            //Pen pen = new Pen(Color.Red, 2);
-            //Font font = new Font("微软雅黑", 9);
-            //Brush brush = new SolidBrush(Color.Red);
-            //Rectangle rectangle = new Rectangle(20, 20, 30, 40);
-            //graphics.DrawRectangle(pen, rectangle);
-            //graphics.DrawString(fTemp.ToString(), font, brush, temp_Point.X + 2, temp_Point.Y - 30);
-            //Point[] points = drawing.Draw_Cross(temp_Point);
-            //for (int i = 0; i < points.Length; i = i + 2)
-            //{
-            //    graphics.DrawLine(pen, points[i], points[i + 1]);
-            //}
-
-            return 1;
         }
-        Graphics g;
-        Pen pen;
+
+        private void Panel_DoubleClick(object sender, EventArgs e)
+        {
+            Panel panel = sender as Panel;
+            MessageBox.Show(panel.Name);
+        }
+       
         private void axAnimation1_MouseDownEvent(object sender, AxMSComCtl2.DAnimationEvents_MouseDownEvent e)
         {
             //Point point = new Point(e.x, e.y);
@@ -394,6 +411,11 @@ namespace InfraredAnalyze
         {
             Refresh_Screen(4);
         }
-      
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            DMSDK.DM_PlayerInit(screenBuffer.IntPtrHandles[0]);
+            DMSDK.DM_OpenMonitor(screenBuffer.IntPtrHandles[0], ConfigurationSettings.AppSettings["IPAddre_1"])
+        }
     }
 }

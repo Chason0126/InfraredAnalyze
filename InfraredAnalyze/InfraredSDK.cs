@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using Microsoft.DirectX.PrivateImplementationDetails;
 using Microsoft.DirectX;
-using Microsoft.DirectX.DirectDraw;
 
 namespace InfraredAnalyze
 {
