@@ -104,7 +104,7 @@ namespace InfraredAnalyze
 		                <= 0 连接失败 
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Connect")]
-        public static extern int DM_Connect();
+        public static extern int DM_Connect(IntPtr intPtr, string IPAddr, int Port);
 
         /*
             函数名称:	DM_ConnectWithName
@@ -1643,7 +1643,7 @@ namespace InfraredAnalyze
         public static extern int   DM_PlayerInit(IntPtr hwnd);
 
         /*
-            函数名称:	DM_OpenMonitor
+         函数名称:	DM_OpenMonitor
         *函数说明:	打开视频监控
         *输入参数:  
                     hwnd：　	视频显示窗口句柄
@@ -1656,7 +1656,7 @@ namespace InfraredAnalyze
         */
         //预留, netsdk暂时不提供此接口
         [DllImport("DMSDK.dll", EntryPoint = "DM_OpenMonitor")]
-        public static extern int  DM_OpenMonitor(IntPtr hwnd, ref string ip, ushort port, int channel = 0);
+        public static extern int  DM_OpenMonitor(IntPtr hwnd, string ip, ushort port, int channel = 0);
 
         /*
             函数名称:	DM_SetOSD
@@ -2020,7 +2020,7 @@ namespace InfraredAnalyze
         *	返回值： N/A
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetMAC")]
-        public static extern void  DM_GetMAC(int handle, ref string Mac);
+        public static extern void  DM_GetMAC(int handle, out string Mac);
 
         /*	函数名称: DM_GetRemoteLanguage
         *	函数说明：获取仪器的语言

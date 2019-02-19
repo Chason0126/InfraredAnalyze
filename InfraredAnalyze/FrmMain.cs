@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO;
 using Microsoft.DirectX.PrivateImplementationDetails;
 using System.Configuration;
+using System.Collections;
 
 namespace InfraredAnalyze
 {
@@ -22,9 +23,9 @@ namespace InfraredAnalyze
             InitializeComponent();
         }
 
-
-        Drawing drawing = new Drawing();
+        SqlCreate sqlCreate = new SqlCreate();
         ScreenBuffer screenBuffer = new ScreenBuffer();
+        Drawing drawing = new Drawing();
 
         #region//窗体右上角按钮功能
         private void btnClose_MouseEnter(object sender, EventArgs e)
@@ -199,7 +200,7 @@ namespace InfraredAnalyze
             tlpScreen.RowCount = tlpScreen.ColumnCount = num;
             for (int i = 1; i <= num * num; i++)
             {
-                UCPictureBox uCPictureBox = new UCPictureBox();
+                UCPictureBox uCPictureBox = FromHandle(screenBuffer.intPtrs_UCpbx[0]) as UCPictureBox;
                 uCPictureBox.Height = spcScreen.Panel1.Height / num;
                 uCPictureBox.Width = spcScreen.Panel1.Width / num;
                 tlpScreen.Controls.Add(uCPictureBox);
@@ -295,65 +296,96 @@ namespace InfraredAnalyze
         }
 
         #endregion
-        private void btnLoadFile_Click(object sender, EventArgs e)
+
+        #region//从数据库中加载探测器类表并转换为树视图
+        public void LoadTreeView()
         {
-
-            ////StaticClass.m_Intptr=InfraredSDK.IFR_Init(axAnimation1.Handle, axAnimation1.Width, axAnimation1.Height);
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.Filter = "InfraredFile (*.DLV;*.DLI;*.JPG)|*.DLV;*.DLI;*.JPG||";
-            //openFileDialog.Title = "请选择文件";
-            //openFileDialog.RestoreDirectory = true;
-
-
-            //if(openFileDialog.ShowDialog()==DialogResult.OK)
-            //{
-            //    try
-            //    {
-            //        string FileName = openFileDialog.FileName;
-            //        if (Path.GetExtension(FileName) == "DLV" || Path.GetExtension(FileName) == "dlv")
-            //        {
-            //            StaticClass.g_filetype = 1;
-            //        }
-            //        else if (Path.GetExtension(FileName) == "JPG" || Path.GetExtension(FileName) == "jpg")
-            //        {
-            //            StaticClass.g_filetype = 2;
-            //        }
-            //        else
-            //        {
-            //            StaticClass.g_filetype = 0;
-            //        }
-            //        FileInfo fileInfo = new FileInfo(FileName);
-            //        string time = fileInfo.LastWriteTime.ToString();
-
-            //        int seconds = (int)DateTime.UtcNow.Subtract(DateTime.Parse("1970-01-01")).TotalSeconds;
-            //        StaticClass.m_Intptr = InfraredSDK.IFR_LoadFile(axAnimation1.Handle, FileName, StaticClass.g_filetype, ref seconds, ref seconds);
-            //        if (StaticClass.m_Intptr != null)
-            //        {
-            //            InfraredSDK.IFR_GetImageWidthHeight(StaticClass.m_Intptr, out StaticClass.g_nWidth, out StaticClass.g_nHeight);
-            //            InfraredSDK.IFR_ReceiveStream(StaticClass.m_Intptr, STREAMCALLBACK);
-            //            InfraredSDK.IFR_Play( StaticClass.m_Intptr);
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
+            ArrayList temp_arrayList = sqlCreate.Select_All_SMInfraredConfig();
+            try
+            {
+                tvwSensor.Nodes.Clear();
+                if(temp_arrayList.Count>0)
+                {
+                    foreach(StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    {
+                        TreeNode temp_Node = new TreeNode();
+                        StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+                        temp_Node.Text = structIAnalyzeConfig.CameraName;
+                        structSM7003Tag.CameraID = structIAnalyzeConfig.CameraID;
+                        structSM7003Tag.IP = structIAnalyzeConfig.IP;
+                        structSM7003Tag.Port = structIAnalyzeConfig.Port;
+                        structSM7003Tag.Reamrks = structIAnalyzeConfig.Reamrks;
+                        structSM7003Tag.Enable = structIAnalyzeConfig.Enable;
+                        if(structSM7003Tag.Enable==false)
+                        {
+                            temp_Node.ForeColor = Color.Gray;
+                            temp_Node.NodeFont = new Font("微软雅黑", 9, FontStyle.Strikeout);
+                        }else
+                        {
+                           
+                        }
+                        temp_Node.Tag = structSM7003Tag;
+                        tvwSensor.Nodes.Add(temp_Node);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("加载探测器列表失败！" + ex.Message);
+            }
         }
+        #endregion
 
-        UCPictureBox pictureBox;
+        #region// 树视图点击事件
+        Point tvwPoint;
+        private void tvwSensor_MouseDown(object sender, MouseEventArgs e)
+        {
+            tvwPoint = new Point(e.X, e.Y);
+            try
+            {
+                if(e.Button==MouseButtons.Left)
+                {
+                    tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+                    if(tvwSensor.SelectedNode==null)
+                    {
+                        tvwSensor.SelectedNode = null;//取消选中的树视图节点
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("探测器列表异常！" + ex.Message);
+            }
+        }
+        #endregion
+
+        #region//树视图双击事件
+        private void tvwSensor_DoubleClick(object sender, EventArgs e)
+        {
+            TreeNode treeNode = tvwSensor.GetNodeAt(tvwPoint);
+            FrmCameraConfig frmCameraConfig = new FrmCameraConfig();
+            if (treeNode != null)
+            {
+                StaticClass.StructSM7003Tag sM7003Tag = (StaticClass.StructSM7003Tag)treeNode.Tag;//将所双击的树视图的节点的 cameraID赋值给弹出窗体的ID属性
+                frmCameraConfig.IPCameraID = sM7003Tag.CameraID;
+                frmCameraConfig.ShowDialog();
+            }
+        }
+        #endregion
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            Point[] points = Calc_points(16);
-            for (int i = 1; i <= 16; i++)
-            {
-                pictureBox = new UCPictureBox();
-                // panel.Visible = false;
-                pictureBox.Width1 = spcScreen.Panel1.Width / 4;
-                pictureBox.Height1 = spcScreen.Panel1.Height / 4;
-                spcScreen.Panel1.Controls.Add(pictureBox);
-                pictureBox.Location = points[i - 1];
-            }
+            LoadTreeView();
+            UCPictureBox uCPictureBox = FromHandle(screenBuffer.intPtrs_UCpbx[0]) as UCPictureBox;
+            uCPictureBox.Width1 = spcScreen.Panel1.Width;
+            uCPictureBox.Height1 = spcScreen.Panel1.Height;
+            tlpScreen.Controls.Add(uCPictureBox);
+            uCPictureBox.Location = new Point(0, 0);
+            uCPictureBox.Draw_Tag("0");//编号顺序
         }
 
         private void Panel_DoubleClick(object sender, EventArgs e)
@@ -362,16 +394,6 @@ namespace InfraredAnalyze
             MessageBox.Show(panel.Name);
         }
        
-        private void axAnimation1_MouseDownEvent(object sender, AxMSComCtl2.DAnimationEvents_MouseDownEvent e)
-        {
-            //Point point = new Point(e.x, e.y);
-            //float temp = InfraredSDK.IFR_GetPointTemp(StaticClass.m_Intptr, point);
-            //g = axAnimation1.CreateGraphics();
-            //pen = new Pen(Color.Red, 2);
-
-
-        }
-
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             Refresh_Screen(3);
@@ -412,10 +434,41 @@ namespace InfraredAnalyze
             Refresh_Screen(4);
         }
 
+        int OpenHandle;
         private void btnStart_Click(object sender, EventArgs e)
         {
-            DMSDK.DM_PlayerInit(screenBuffer.IntPtrHandles[0]);
-            DMSDK.DM_OpenMonitor(screenBuffer.IntPtrHandles[0], ConfigurationSettings.AppSettings["IPAddre_1"])
+            try
+            {
+                if (btnStart.Tag.ToString() == "Start")
+                {
+                    string IP = ConfigurationManager.AppSettings["IPAddre_2"];
+                    DMSDK.DM_Init();
+                    DMSDK.DM_PlayerInit(screenBuffer.intPtrs_Pbx[0]);
+                    OpenHandle = DMSDK.DM_OpenMonitor(screenBuffer.intPtrs_Pbx[0], IP, 5000);//6.0默认9989端口 ,7.0默认80端口 
+                    if (OpenHandle >= 0)
+                    {
+                        btnStart.BackgroundImage = Properties.Resources.Pause;
+                        btnStart.Tag = "Pause";
+                    }
+                    else
+                    {
+                        MessageBox.Show("连接失败！请检查参数后重试。");
+                    }
+                }
+                else if (btnStart.Tag.ToString() == "Pause")
+                {
+                    btnStart.Tag = "Start";
+                    btnStart.BackgroundImage = Properties.Resources.start;
+                    DMSDK.DM_CloseMonitor(OpenHandle);
+                    DMSDK.DM_PlayerCleanup();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
+       
     }
 }

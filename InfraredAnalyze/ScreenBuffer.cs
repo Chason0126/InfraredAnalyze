@@ -4,32 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InfraredAnalyze
 {
     class ScreenBuffer
     {
-        List<UCPictureBox> screenBuffer = new List<UCPictureBox>();
-        IntPtr[] intPtrs = new IntPtr[17];
-        private IntPtr[] intPtrHandles;
-
+        public ArrayList VideoBuffer = new ArrayList();
+        public IntPtr[] intPtrs_Pbx = new IntPtr[16];
+        public IntPtr[] intPtrs_UCpbx = new IntPtr[16];
 
         public ScreenBuffer()//构造函数 初始化 缓冲区
         {
-            for (int i = 1; i <= 16; i++)
+            try
             {
-                UCPictureBox uCPictureBox = new UCPictureBox();
-                uCPictureBox.Number = i.ToString();
-                screenBuffer[i] = uCPictureBox;
-                intPtrs[i] = uCPictureBox.IntPtrHandle;
+                for (int i = 0; i < 16; i++)
+                {
+                    UCPictureBox uCPictureBox = new UCPictureBox();
+                    uCPictureBox.Number = i.ToString();
+                    VideoBuffer.Add(uCPictureBox);
+                    intPtrs_Pbx[i] = uCPictureBox.IntPtrHandle;
+                    intPtrs_UCpbx[i] = uCPictureBox.Handle;
+                }
             }
-            
-        }
-
-        public IntPtr[] IntPtrHandles
-        {
-            get => intPtrHandles = intPtrs;
-            set => intPtrHandles = value;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

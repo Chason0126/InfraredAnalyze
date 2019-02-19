@@ -75,6 +75,7 @@
             this.tbx4.Name = "tbx4";
             this.tbx4.Size = new System.Drawing.Size(50, 19);
             this.tbx4.TabIndex = 3;
+            this.tbx4.Text = "2";
             this.tbx4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbx4.TextChanged += new System.EventHandler(this.tbx4_TextChanged);
             this.tbx4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbx4_KeyDown);
@@ -88,6 +89,7 @@
             this.tbx3.Name = "tbx3";
             this.tbx3.Size = new System.Drawing.Size(50, 19);
             this.tbx3.TabIndex = 2;
+            this.tbx3.Text = "1";
             this.tbx3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbx3.TextChanged += new System.EventHandler(this.tbx3_TextChanged);
             this.tbx3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbx3_KeyDown);
@@ -101,6 +103,7 @@
             this.tbx2.Name = "tbx2";
             this.tbx2.Size = new System.Drawing.Size(50, 19);
             this.tbx2.TabIndex = 1;
+            this.tbx2.Text = "168";
             this.tbx2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbx2.TextChanged += new System.EventHandler(this.tbx2_TextChanged);
             this.tbx2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbx2_KeyDown);
@@ -115,6 +118,7 @@
             this.tbx1.Name = "tbx1";
             this.tbx1.Size = new System.Drawing.Size(50, 19);
             this.tbx1.TabIndex = 0;
+            this.tbx1.Text = "192";
             this.tbx1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbx1.TextChanged += new System.EventHandler(this.tbx1_TextChanged);
             this.tbx1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbx1_KeyDown);
@@ -143,9 +147,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbx4;
-        private System.Windows.Forms.TextBox tbx3;
-        private System.Windows.Forms.TextBox tbx2;
-        private System.Windows.Forms.TextBox tbx1;
+        public System.Windows.Forms.TextBox tbx4;
+        public System.Windows.Forms.TextBox tbx3;
+        public System.Windows.Forms.TextBox tbx2;
+        public System.Windows.Forms.TextBox tbx1;
     }
 }

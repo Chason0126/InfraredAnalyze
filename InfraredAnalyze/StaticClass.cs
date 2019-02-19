@@ -24,5 +24,28 @@ namespace InfraredAnalyze
         public static int g_Len;
         public static int g_nTime;
         public static IntPtr g_Intptr;
+
+        public  struct StructIAnalyzeConfig
+        {
+           public int CameraID;
+           public string CameraName;
+           public string IP;
+           public int Port;
+           public int NodeID;
+           public string Reamrks;
+           public bool Enable;
+        }
+
+        public struct StructSM7003Tag
+        {
+            public int CameraID;
+            public string IP;
+            public int Port;
+            public string Reamrks;
+            public bool Enable;
+        }
+
+        public static int[] intPtrs_Operate = new int[16];
+
     }
 }

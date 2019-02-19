@@ -29,10 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("节点0");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("节点1");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("节点2");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.ss = new System.Windows.Forms.StatusStrip();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblLogo = new System.Windows.Forms.Label();
+            this.pbxLogo = new System.Windows.Forms.PictureBox();
+            this.btnMin = new System.Windows.Forms.Button();
+            this.btnWindow = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.mnsMeuns = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,15 +54,21 @@
             this.tlpTools = new System.Windows.Forms.TableLayoutPanel();
             this.btn1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnPwd = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.spcMain = new System.Windows.Forms.SplitContainer();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pnlMonitorArea = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.pnlTVSensor = new System.Windows.Forms.Panel();
+            this.tvwSensor = new System.Windows.Forms.TreeView();
+            this.imgCamera = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAddSensor = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -68,24 +81,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.img = new System.Windows.Forms.ImageList(this.components);
             this.spcScreen = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.dgvErr = new System.Windows.Forms.DataGridView();
-            this.dgvWarning = new System.Windows.Forms.DataGridView();
-            this.tlpScreen = new System.Windows.Forms.TableLayoutPanel();
             this.cmsShowNum = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsShowNum_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_2 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_3 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnAddSensor = new System.Windows.Forms.Button();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.btnPwd = new System.Windows.Forms.Button();
-            this.pbxLogo = new System.Windows.Forms.PictureBox();
-            this.btnMin = new System.Windows.Forms.Button();
-            this.btnWindow = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.tlpScreen = new System.Windows.Forms.TableLayoutPanel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.dgvErr = new System.Windows.Forms.DataGridView();
+            this.dgvWarning = new System.Windows.Forms.DataGridView();
             this.pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.mnsMeuns.SuspendLayout();
             this.tlpTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcMain)).BeginInit();
@@ -95,22 +101,23 @@
             this.tabMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.pnlTVSensor.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcScreen)).BeginInit();
+            this.spcScreen.Panel1.SuspendLayout();
             this.spcScreen.Panel2.SuspendLayout();
             this.spcScreen.SuspendLayout();
+            this.cmsShowNum.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvErr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarning)).BeginInit();
-            this.cmsShowNum.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // ss
@@ -151,6 +158,66 @@
             this.lblLogo.Size = new System.Drawing.Size(168, 16);
             this.lblLogo.TabIndex = 2;
             this.lblLogo.Text = "红外火灾监控预警系统";
+            // 
+            // pbxLogo
+            // 
+            this.pbxLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pbxLogo.Image = global::InfraredAnalyze.Properties.Resources.logo1;
+            this.pbxLogo.Location = new System.Drawing.Point(0, 0);
+            this.pbxLogo.Name = "pbxLogo";
+            this.pbxLogo.Size = new System.Drawing.Size(105, 35);
+            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxLogo.TabIndex = 1;
+            this.pbxLogo.TabStop = false;
+            // 
+            // btnMin
+            // 
+            this.btnMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMin.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最小化;
+            this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMin.FlatAppearance.BorderSize = 0;
+            this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMin.Location = new System.Drawing.Point(1168, 0);
+            this.btnMin.Name = "btnMin";
+            this.btnMin.Size = new System.Drawing.Size(35, 35);
+            this.btnMin.TabIndex = 0;
+            this.btnMin.UseVisualStyleBackColor = true;
+            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
+            this.btnMin.MouseEnter += new System.EventHandler(this.btnMin_MouseEnter);
+            this.btnMin.MouseLeave += new System.EventHandler(this.btnMin_MouseLeave);
+            // 
+            // btnWindow
+            // 
+            this.btnWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnWindow.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最大化;
+            this.btnWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnWindow.FlatAppearance.BorderSize = 0;
+            this.btnWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWindow.Location = new System.Drawing.Point(1203, 0);
+            this.btnWindow.Name = "btnWindow";
+            this.btnWindow.Size = new System.Drawing.Size(35, 35);
+            this.btnWindow.TabIndex = 0;
+            this.btnWindow.Tag = "";
+            this.btnWindow.UseVisualStyleBackColor = true;
+            this.btnWindow.Click += new System.EventHandler(this.btnWindow_Click);
+            this.btnWindow.MouseEnter += new System.EventHandler(this.btnWindow_MouseEnter);
+            this.btnWindow.MouseLeave += new System.EventHandler(this.btnWindow_MouseLeave);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Location = new System.Drawing.Point(1238, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(35, 35);
+            this.btnClose.TabIndex = 0;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
+            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
             // 
             // mnsMeuns
             // 
@@ -249,7 +316,7 @@
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1114F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1128F));
             this.tlpTools.Controls.Add(this.btn1, 0, 0);
             this.tlpTools.Controls.Add(this.button2, 1, 0);
             this.tlpTools.Controls.Add(this.btnStart, 2, 0);
@@ -279,6 +346,34 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "button1";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btnStart
+            // 
+            this.btnStart.BackgroundImage = global::InfraredAnalyze.Properties.Resources.start;
+            this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStart.FlatAppearance.BorderSize = 0;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.Location = new System.Drawing.Point(89, 5);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(42, 40);
+            this.btnStart.TabIndex = 7;
+            this.btnStart.Tag = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnPwd
+            // 
+            this.btnPwd.BackgroundImage = global::InfraredAnalyze.Properties.Resources.password;
+            this.btnPwd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPwd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPwd.FlatAppearance.BorderSize = 0;
+            this.btnPwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPwd.Location = new System.Drawing.Point(139, 5);
+            this.btnPwd.Name = "btnPwd";
+            this.btnPwd.Size = new System.Drawing.Size(49, 40);
+            this.btnPwd.TabIndex = 7;
+            this.btnPwd.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -357,6 +452,18 @@
             this.panel3.Size = new System.Drawing.Size(147, 28);
             this.panel3.TabIndex = 2;
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(0, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(20, 20);
+            this.button1.TabIndex = 1;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -371,11 +478,47 @@
             // 
             // pnlTVSensor
             // 
+            this.pnlTVSensor.Controls.Add(this.tvwSensor);
             this.pnlTVSensor.Location = new System.Drawing.Point(-5, 34);
             this.pnlTVSensor.Name = "pnlTVSensor";
             this.pnlTVSensor.Padding = new System.Windows.Forms.Padding(2);
             this.pnlTVSensor.Size = new System.Drawing.Size(153, 252);
             this.pnlTVSensor.TabIndex = 1;
+            // 
+            // tvwSensor
+            // 
+            this.tvwSensor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvwSensor.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tvwSensor.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tvwSensor.ImageIndex = 0;
+            this.tvwSensor.ImageList = this.imgCamera;
+            this.tvwSensor.Location = new System.Drawing.Point(2, 2);
+            this.tvwSensor.Name = "tvwSensor";
+            treeNode1.BackColor = System.Drawing.Color.Transparent;
+            treeNode1.ForeColor = System.Drawing.Color.Gray;
+            treeNode1.Name = "节点0";
+            treeNode1.NodeFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            treeNode1.Text = "节点0";
+            treeNode2.Name = "节点1";
+            treeNode2.Text = "节点1";
+            treeNode3.ForeColor = System.Drawing.Color.Gray;
+            treeNode3.Name = "节点2";
+            treeNode3.Text = "节点2";
+            this.tvwSensor.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            this.tvwSensor.SelectedImageIndex = 0;
+            this.tvwSensor.Size = new System.Drawing.Size(149, 248);
+            this.tvwSensor.TabIndex = 0;
+            this.tvwSensor.DoubleClick += new System.EventHandler(this.tvwSensor_DoubleClick);
+            this.tvwSensor.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvwSensor_MouseDown);
+            // 
+            // imgCamera
+            // 
+            this.imgCamera.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgCamera.ImageStream")));
+            this.imgCamera.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgCamera.Images.SetKeyName(0, "camera.png");
             // 
             // panel1
             // 
@@ -387,6 +530,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(147, 28);
             this.panel1.TabIndex = 0;
+            // 
+            // btnAddSensor
+            // 
+            this.btnAddSensor.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
+            this.btnAddSensor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddSensor.FlatAppearance.BorderSize = 0;
+            this.btnAddSensor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddSensor.Location = new System.Drawing.Point(0, 4);
+            this.btnAddSensor.Name = "btnAddSensor";
+            this.btnAddSensor.Size = new System.Drawing.Size(20, 20);
+            this.btnAddSensor.TabIndex = 1;
+            this.btnAddSensor.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -502,6 +657,8 @@
             this.img.TransparentColor = System.Drawing.Color.Transparent;
             this.img.Images.SetKeyName(0, "setting_.png");
             this.img.Images.SetKeyName(1, "monitor.png");
+            this.img.Images.SetKeyName(2, "camera.png");
+            this.img.Images.SetKeyName(3, "disableCamera.png");
             // 
             // spcScreen
             // 
@@ -510,6 +667,11 @@
             this.spcScreen.Name = "spcScreen";
             this.spcScreen.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
+            // spcScreen.Panel1
+            // 
+            this.spcScreen.Panel1.ContextMenuStrip = this.cmsShowNum;
+            this.spcScreen.Panel1.Controls.Add(this.tlpScreen);
+            // 
             // spcScreen.Panel2
             // 
             this.spcScreen.Panel2.Controls.Add(this.splitContainer2);
@@ -517,64 +679,6 @@
             this.spcScreen.SplitterDistance = 533;
             this.spcScreen.SplitterWidth = 1;
             this.spcScreen.TabIndex = 5;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.dgvErr);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.dgvWarning);
-            this.splitContainer2.Size = new System.Drawing.Size(1113, 97);
-            this.splitContainer2.SplitterDistance = 555;
-            this.splitContainer2.SplitterWidth = 1;
-            this.splitContainer2.TabIndex = 0;
-            // 
-            // dgvErr
-            // 
-            this.dgvErr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvErr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvErr.Location = new System.Drawing.Point(0, 0);
-            this.dgvErr.Name = "dgvErr";
-            this.dgvErr.RowTemplate.Height = 23;
-            this.dgvErr.Size = new System.Drawing.Size(555, 97);
-            this.dgvErr.TabIndex = 0;
-            // 
-            // dgvWarning
-            // 
-            this.dgvWarning.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvWarning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvWarning.Location = new System.Drawing.Point(0, 0);
-            this.dgvWarning.Name = "dgvWarning";
-            this.dgvWarning.RowTemplate.Height = 23;
-            this.dgvWarning.Size = new System.Drawing.Size(557, 97);
-            this.dgvWarning.TabIndex = 0;
-            // 
-            // tlpScreen
-            // 
-            this.tlpScreen.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tlpScreen.ColumnCount = 4;
-            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
-            this.tlpScreen.Location = new System.Drawing.Point(582, 58);
-            this.tlpScreen.Margin = new System.Windows.Forms.Padding(1);
-            this.tlpScreen.Name = "tlpScreen";
-            this.tlpScreen.RowCount = 4;
-            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.Size = new System.Drawing.Size(132, 51);
-            this.tlpScreen.TabIndex = 5;
             // 
             // cmsShowNum
             // 
@@ -614,124 +718,70 @@
             this.cmsShowNum_4.Text = "十六画面";
             this.cmsShowNum_4.Click += new System.EventHandler(this.cmsShowNum_4_Click);
             // 
-            // button1
+            // tlpScreen
             // 
-            this.button1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(0, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(20, 20);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = true;
+            this.tlpScreen.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tlpScreen.ColumnCount = 1;
+            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpScreen.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
+            this.tlpScreen.Location = new System.Drawing.Point(0, 0);
+            this.tlpScreen.Margin = new System.Windows.Forms.Padding(1);
+            this.tlpScreen.Name = "tlpScreen";
+            this.tlpScreen.RowCount = 1;
+            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpScreen.Size = new System.Drawing.Size(1113, 533);
+            this.tlpScreen.TabIndex = 5;
             // 
-            // btnAddSensor
+            // splitContainer2
             // 
-            this.btnAddSensor.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
-            this.btnAddSensor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAddSensor.FlatAppearance.BorderSize = 0;
-            this.btnAddSensor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddSensor.Location = new System.Drawing.Point(0, 4);
-            this.btnAddSensor.Name = "btnAddSensor";
-            this.btnAddSensor.Size = new System.Drawing.Size(20, 20);
-            this.btnAddSensor.TabIndex = 1;
-            this.btnAddSensor.UseVisualStyleBackColor = true;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
             // 
-            // btnStart
+            // splitContainer2.Panel1
             // 
-            this.btnStart.BackgroundImage = global::InfraredAnalyze.Properties.Resources.start;
-            this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStart.FlatAppearance.BorderSize = 0;
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Location = new System.Drawing.Point(89, 5);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(42, 40);
-            this.btnStart.TabIndex = 7;
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.splitContainer2.Panel1.Controls.Add(this.dgvErr);
             // 
-            // btnPwd
+            // splitContainer2.Panel2
             // 
-            this.btnPwd.BackgroundImage = global::InfraredAnalyze.Properties.Resources.password;
-            this.btnPwd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPwd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPwd.FlatAppearance.BorderSize = 0;
-            this.btnPwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPwd.Location = new System.Drawing.Point(139, 5);
-            this.btnPwd.Name = "btnPwd";
-            this.btnPwd.Size = new System.Drawing.Size(49, 40);
-            this.btnPwd.TabIndex = 7;
-            this.btnPwd.UseVisualStyleBackColor = true;
+            this.splitContainer2.Panel2.Controls.Add(this.dgvWarning);
+            this.splitContainer2.Size = new System.Drawing.Size(1113, 97);
+            this.splitContainer2.SplitterDistance = 555;
+            this.splitContainer2.SplitterWidth = 1;
+            this.splitContainer2.TabIndex = 0;
             // 
-            // pbxLogo
+            // dgvErr
             // 
-            this.pbxLogo.BackColor = System.Drawing.Color.Transparent;
-            this.pbxLogo.Image = global::InfraredAnalyze.Properties.Resources.logo1;
-            this.pbxLogo.Location = new System.Drawing.Point(0, 0);
-            this.pbxLogo.Name = "pbxLogo";
-            this.pbxLogo.Size = new System.Drawing.Size(105, 35);
-            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxLogo.TabIndex = 1;
-            this.pbxLogo.TabStop = false;
+            this.dgvErr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvErr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvErr.Location = new System.Drawing.Point(0, 0);
+            this.dgvErr.Name = "dgvErr";
+            this.dgvErr.RowTemplate.Height = 23;
+            this.dgvErr.Size = new System.Drawing.Size(555, 97);
+            this.dgvErr.TabIndex = 0;
             // 
-            // btnMin
+            // dgvWarning
             // 
-            this.btnMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMin.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最小化;
-            this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMin.FlatAppearance.BorderSize = 0;
-            this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMin.Location = new System.Drawing.Point(1168, 0);
-            this.btnMin.Name = "btnMin";
-            this.btnMin.Size = new System.Drawing.Size(35, 35);
-            this.btnMin.TabIndex = 0;
-            this.btnMin.UseVisualStyleBackColor = true;
-            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
-            this.btnMin.MouseEnter += new System.EventHandler(this.btnMin_MouseEnter);
-            this.btnMin.MouseLeave += new System.EventHandler(this.btnMin_MouseLeave);
-            // 
-            // btnWindow
-            // 
-            this.btnWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWindow.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最大化;
-            this.btnWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnWindow.FlatAppearance.BorderSize = 0;
-            this.btnWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWindow.Location = new System.Drawing.Point(1203, 0);
-            this.btnWindow.Name = "btnWindow";
-            this.btnWindow.Size = new System.Drawing.Size(35, 35);
-            this.btnWindow.TabIndex = 0;
-            this.btnWindow.Tag = "";
-            this.btnWindow.UseVisualStyleBackColor = true;
-            this.btnWindow.Click += new System.EventHandler(this.btnWindow_Click);
-            this.btnWindow.MouseEnter += new System.EventHandler(this.btnWindow_MouseEnter);
-            this.btnWindow.MouseLeave += new System.EventHandler(this.btnWindow_MouseLeave);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
-            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(1238, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(35, 35);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
-            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
+            this.dgvWarning.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWarning.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvWarning.Location = new System.Drawing.Point(0, 0);
+            this.dgvWarning.Name = "dgvWarning";
+            this.dgvWarning.RowTemplate.Height = 23;
+            this.dgvWarning.Size = new System.Drawing.Size(557, 97);
+            this.dgvWarning.TabIndex = 0;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1273, 778);
-            this.ContextMenuStrip = this.cmsShowNum;
-            this.Controls.Add(this.tlpScreen);
             this.Controls.Add(this.spcMain);
             this.Controls.Add(this.tlpTools);
             this.Controls.Add(this.pnlHeader);
@@ -748,6 +798,7 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmMain_MouseUp);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.mnsMeuns.ResumeLayout(false);
             this.mnsMeuns.PerformLayout();
             this.tlpTools.ResumeLayout(false);
@@ -759,6 +810,7 @@
             this.tabPage1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.pnlTVSensor.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -768,17 +820,17 @@
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.spcScreen.Panel1.ResumeLayout(false);
             this.spcScreen.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcScreen)).EndInit();
             this.spcScreen.ResumeLayout(false);
+            this.cmsShowNum.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvErr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarning)).EndInit();
-            this.cmsShowNum.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -841,6 +893,8 @@
         private System.Windows.Forms.ToolStripMenuItem 九画面ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 十六画面ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 语言ToolStripMenuItem;
+        private System.Windows.Forms.TreeView tvwSensor;
+        private System.Windows.Forms.ImageList imgCamera;
     }
 }
 

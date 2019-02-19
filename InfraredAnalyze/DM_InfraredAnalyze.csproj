@@ -84,6 +84,7 @@
       <HintPath>C:\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2911.0\Microsoft.DirectX.Direct3DX.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -103,6 +104,12 @@
     </Compile>
     <Compile Include="FrmAddSensor.Designer.cs">
       <DependentUpon>FrmAddSensor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCameraConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCameraConfig.Designer.cs">
+      <DependentUpon>FrmCameraConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
@@ -137,6 +144,9 @@
     <EmbeddedResource Include="FrmAddSensor.resx">
       <DependentUpon>FrmAddSensor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmCameraConfig.resx">
+      <DependentUpon>FrmCameraConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,7 +169,6 @@
     <EmbeddedResource Include="UCPictureBox.resx">
       <DependentUpon>UCPictureBox.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DM_Config.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -246,6 +255,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pause.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

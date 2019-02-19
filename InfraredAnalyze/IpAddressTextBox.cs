@@ -19,6 +19,7 @@ namespace InfraredAnalyze
         }
 
         private IPAddress iPAdd;
+        
 
         public IPAddress IPAdd
         {

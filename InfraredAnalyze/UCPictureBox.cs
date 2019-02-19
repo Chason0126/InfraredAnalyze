@@ -18,8 +18,7 @@ namespace InfraredAnalyze
             pbxScreen.DoubleClick += new EventHandler(UCPictureBox_DoubleClick);
         }
 
-        FrmMain frmMain = new FrmMain();
-        public delegate void FullScreen_DispalyEventHandler(UCPictureBox pictureBox);
+        //public delegate void FullScreen_DispalyEventHandler(UCPictureBox pictureBox);
         private string number;
         private int width;
         private int height;
@@ -46,8 +45,8 @@ namespace InfraredAnalyze
 
         private void UCPictureBox_DoubleClick(object sender, EventArgs e)
         {
-            FullScreen_DispalyEventHandler fullScreen_Display = new FullScreen_DispalyEventHandler(frmMain.Full_Screen_Display);
-            fullScreen_Display(this);
+            //FullScreen_DispalyEventHandler fullScreen_Display = new FullScreen_DispalyEventHandler(frmMain.Full_Screen_Display);
+            //fullScreen_Display(this);
         }
 
         private void btnClose_MouseEnter(object sender, EventArgs e)
