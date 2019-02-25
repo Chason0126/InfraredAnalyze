@@ -20,16 +20,14 @@ namespace InfraredAnalyze
 
         //public delegate void FullScreen_DispalyEventHandler(UCPictureBox pictureBox);
         private string number;
-        private int width;
-        private int height;
+      
 
         public string Number
         {
             get => number = label1.Text;
             set => number = value;
         }
-        public int Width1 { get => width; set => width = value; }
-        public int Height1 { get => height; set => height = value; }
+       
         public IntPtr IntPtrHandle
         {
             get => intPtrHandle = pbxScreen.Handle;

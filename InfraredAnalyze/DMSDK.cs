@@ -118,7 +118,7 @@ namespace InfraredAnalyze
 		            <= 0 连接失败			
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_ConnectWithName")]
-        public static extern int DM_ConnectWithName(IntPtr hintptr, ref string IPAddr, int Port, ref string UserName, ref string Password);
+        public static extern int DM_ConnectWithName(IntPtr hintptr,  string IPAddr, int Port,  string UserName,  string Password);
 
         /*
             函数名称:	DM_Disconnect
@@ -408,7 +408,7 @@ namespace InfraredAnalyze
         *返回值:			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAreaTemp")]
-        public static extern void DM_GetAreaTemp(int handle, int AreaID = 1, int Mode = 0);
+        public static extern void DM_GetAreaTemp(int handle, int AreaID , int Mode );
 
         /*
             函数名称:	DM_GetTemp
@@ -1135,7 +1135,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetIPAddr")]
-        public static extern void   DM_SetIPAddr(int handle, ref string IP, ref string SubMask, ref string GateWay);
+        public static extern void   DM_SetIPAddr(int handle,  string IP,  string SubMask,  string GateWay);
 
         /*
             函数名称:	DM_SetMAC
@@ -1198,7 +1198,7 @@ namespace InfraredAnalyze
                     ss			秒
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetDateTime")]
-        public static extern void  DM_GetDateTime(int handle, ref string DateTime);
+        public static extern void  DM_GetDateTime(int handle, StringBuilder DateTime);
 
         /*
             函数名称:	DM_LoadDefault
@@ -2020,7 +2020,7 @@ namespace InfraredAnalyze
         *	返回值： N/A
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetMAC")]
-        public static extern void  DM_GetMAC(int handle, out string Mac);
+        public static extern void  DM_GetMAC(int handle, StringBuilder Mac);
 
         /*	函数名称: DM_GetRemoteLanguage
         *	函数说明：获取仪器的语言
@@ -2810,7 +2810,7 @@ namespace InfraredAnalyze
         *返回值:TRUE表示成功, FALSE表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetIPAddress")]
-        public static extern int  DM_GetIPAddress(int handle, out string IPAddress);
+        public static extern int  DM_GetIPAddress(int handle,  StringBuilder IPAddress);
 
         /*
             函数名称:	DM_GetNetmask
@@ -2820,7 +2820,7 @@ namespace InfraredAnalyze
         *返回值:TRUE表示成功, FALSE表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetNetmask")]
-        public static extern int  DM_GetNetmask(int handle, out string Netmask);
+        public static extern int  DM_GetNetmask(int handle, StringBuilder Netmask);
 
         /*
             函数名称:	DM_GetGateway
@@ -2830,7 +2830,7 @@ namespace InfraredAnalyze
         *返回值:TRUE表示成功, FALSE表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetGateway")]
-        public static extern int  DM_GetGateway(int handle, out string Gateway);
+        public static extern int  DM_GetGateway(int handle, StringBuilder Gateway);
 
         public delegate void fMessCallBack(int msg, ref string pBuf, int dwBufLen, int dwUser);
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetAllMessCallBack")]

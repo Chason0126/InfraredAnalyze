@@ -99,7 +99,7 @@ namespace InfraredAnalyze
                 con_DB.Open();
                 cmd = new SqlCommand("select * from SMInfraredAnalyze order by NodeID asc", con_DB);
                 SqlDataReader sqlDataReader = cmd.ExecuteReader();
-                while(sqlDataReader.Read())
+                while (sqlDataReader.Read())
                 {
                     structIAnalyzeConfig.CameraID = (int)sqlDataReader.GetValue(0);
                     structIAnalyzeConfig.CameraName = (string)sqlDataReader.GetValue(1);
@@ -154,5 +154,153 @@ namespace InfraredAnalyze
             }
             return arrayList;
         }
+
+        public void Delete_Node_SMInfraredConfig(int CameraId,int NodeId)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand(" delete from SMInfraredAnalyze  where CameraId ='" + CameraId + "' ", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand(" update SMInfraredAnalyze set CameraId=CameraId-1 where CameraId >='" + CameraId + "' ", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand(" update SMInfraredAnalyze set NodeId=NodeId-1 where NodeId >='" + NodeId + "' ", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("获取探测器列表信息失败：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        int num;
+        public int Select_Num_SMInfraredConfig()
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("select count(*) from SMInfraredAnalyze", con_DB);
+                num = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("数据库查询异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return num;
+        }
+
+        public void Insert_SMInfraredAnalyze(int CameraId, string CameraName, string IPAddress, int Port, int NodeID, string Remarks, bool Enable)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("insert into SMInfraredAnalyze(CameraId,CameraName,IPAddress,Port,NodeID,Remarks,Enable) values('" + CameraId + "','" + CameraName + "','" + IPAddress + "','" + Port + "','" + NodeID + "','" + Remarks + "','" + Enable + "')", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("添加探测器失败：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void Delet_Table_SMInfraredAnalyze()
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("delete from SMInfraredAnalyze", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("配置操作异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void Move_Node_Up(int NodeId)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("update SMInfraredAnalyze set NodeId='" + (NodeId + 16) + "' where NodeId='" + NodeId + "'", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("update SMInfraredAnalyze set NodeId='" + NodeId + "' where NodeId='" + (NodeId - 1) + "'", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("update SMInfraredAnalyze set NodeId='" + (NodeId - 1) + "' where NodeId='" + (NodeId + 16) + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("探测器列表上移失败：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void Move_Node_Down(int NodeId)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("update SMInfraredAnalyze set NodeId='" + (NodeId + 16) + "' where NodeId='" + NodeId + "'", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("update SMInfraredAnalyze set NodeId='" + NodeId + "' where NodeId='" + (NodeId + 1) + "'", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("update SMInfraredAnalyze set NodeId='" + (NodeId + 1) + "' where NodeId='" + (NodeId + 16) + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("探测器列表下移失败：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void UpDate_IPAddress(int CameraId,string IP)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("update SMInfraredAnalyze set IPAddress='"+IP+ "' where CameraId='" + CameraId + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("IP地址修改异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
     }
 }

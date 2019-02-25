@@ -18,14 +18,29 @@ namespace InfraredAnalyze
 
     public partial class FrmMain : Form
     {
+        SqlCreate sqlCreate = new SqlCreate();
+        Drawing drawing = new Drawing();
+        #region//构造函数
         public FrmMain()
         {
             InitializeComponent();
+            DMSDK.DM_Init();
+            try
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    UCPictureBox uCPictureBox = new UCPictureBox();
+                    uCPictureBox.Number = i.ToString();
+                    StaticClass.intPtrs_UCPbx_Screen[i] = uCPictureBox.IntPtrHandle;
+                    StaticClass.intPtrs_UCPbx[i] = uCPictureBox.Handle;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-
-        SqlCreate sqlCreate = new SqlCreate();
-        ScreenBuffer screenBuffer = new ScreenBuffer();
-        Drawing drawing = new Drawing();
+        #endregion
 
         #region//窗体右上角按钮功能
         private void btnClose_MouseEnter(object sender, EventArgs e)
@@ -200,7 +215,7 @@ namespace InfraredAnalyze
             tlpScreen.RowCount = tlpScreen.ColumnCount = num;
             for (int i = 1; i <= num * num; i++)
             {
-                UCPictureBox uCPictureBox = FromHandle(screenBuffer.intPtrs_UCpbx[0]) as UCPictureBox;
+                UCPictureBox uCPictureBox = FromHandle(StaticClass.intPtrs_UCPbx[0]) as UCPictureBox;
                 uCPictureBox.Height = spcScreen.Panel1.Height / num;
                 uCPictureBox.Width = spcScreen.Panel1.Width / num;
                 tlpScreen.Controls.Add(uCPictureBox);
@@ -314,6 +329,7 @@ namespace InfraredAnalyze
                         structSM7003Tag.CameraID = structIAnalyzeConfig.CameraID;
                         structSM7003Tag.IP = structIAnalyzeConfig.IP;
                         structSM7003Tag.Port = structIAnalyzeConfig.Port;
+                        structSM7003Tag.NodeID = structIAnalyzeConfig.NodeID;
                         structSM7003Tag.Reamrks = structIAnalyzeConfig.Reamrks;
                         structSM7003Tag.Enable = structIAnalyzeConfig.Enable;
                         if(structSM7003Tag.Enable==false)
@@ -325,6 +341,7 @@ namespace InfraredAnalyze
                            
                         }
                         temp_Node.Tag = structSM7003Tag;
+                        temp_Node.ContextMenuStrip = cmsIPCameraConfig;
                         tvwSensor.Nodes.Add(temp_Node);
                     }
                 }
@@ -352,7 +369,26 @@ namespace InfraredAnalyze
                     }
                     else
                     {
-
+                       
+                    }
+                }else if(e.Button==MouseButtons.Right)
+                {
+                    tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+                    if (tvwSensor.SelectedNode != null)
+                    {
+                        if (tvwSensor.SelectedNode.Index == 0)
+                        {
+                            cmsIPCameraConfig.Items[4].Visible = false;
+                        }
+                        else if (tvwSensor.SelectedNode.Index > 0 && tvwSensor.SelectedNode.Index < tvwSensor.Nodes.Count-1)
+                        {
+                            cmsIPCameraConfig.Items[4].Visible = true;
+                            cmsIPCameraConfig.Items[5].Visible = true;
+                        }
+                        else if (tvwSensor.SelectedNode.Index == tvwSensor.Nodes.Count-1)
+                        {
+                            cmsIPCameraConfig.Items[5].Visible = false;
+                        }
                     }
                 }
             }
@@ -367,7 +403,7 @@ namespace InfraredAnalyze
         private void tvwSensor_DoubleClick(object sender, EventArgs e)
         {
             TreeNode treeNode = tvwSensor.GetNodeAt(tvwPoint);
-            FrmCameraConfig frmCameraConfig = new FrmCameraConfig();
+            FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
             if (treeNode != null)
             {
                 StaticClass.StructSM7003Tag sM7003Tag = (StaticClass.StructSM7003Tag)treeNode.Tag;//将所双击的树视图的节点的 cameraID赋值给弹出窗体的ID属性
@@ -377,15 +413,175 @@ namespace InfraredAnalyze
         }
         #endregion
 
+        #region//探测器列表操作(上移、下移、删除)
+        #region//删除探测器节点
+        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+                tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+                if (tvwSensor.SelectedNode != null)
+                {
+                    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                    int CameraId = structSM7003Tag.CameraID;
+                    int NodeId = structSM7003Tag.NodeID;
+                    sqlCreate.Delete_Node_SMInfraredConfig(CameraId, NodeId);//修改大于选项的CameraId
+                    LoadTreeView();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("删除失败：" + ex.Message);
+            }
+        }
+        #endregion
+
+        #region//探测器节点上移
+        private void 上移ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+                StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+                if (tvwSensor.SelectedNode != null)
+                {
+                    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                    int CameraId = structSM7003Tag.CameraID;
+                    int NodeId = structSM7003Tag.NodeID;
+                    sqlCreate.Move_Node_Up(NodeId);
+                    LoadTreeView();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("上移失败：" + ex.Message);
+            }
+        }
+        #endregion
+
+        #region//探测器下移
+        private void 下移ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+                StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+                if (tvwSensor.SelectedNode != null)
+                {
+                    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                    int CameraId = structSM7003Tag.CameraID;
+                    int NodeId = structSM7003Tag.NodeID;
+                    sqlCreate.Move_Node_Down(NodeId);
+                    LoadTreeView();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("下移失败：" + ex.Message);
+            }
+        }
+        #endregion
+        #endregion
+
+        #region//系统参数设置
+        private void 系统参数ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCameraSystemConfig frmCameraSystemConfig = new FrmCameraSystemConfig();
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                frmCameraSystemConfig.IPCameraID = structSM7003Tag.CameraID;
+                frmCameraSystemConfig.IP = structSM7003Tag.IP;
+                frmCameraSystemConfig.ShowDialog();
+            }
+        }
+        #endregion
+
+        #region//网络参数设置
+        private void 网络参数设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                frmCameraConfig.IPCameraID = structSM7003Tag.CameraID;
+                frmCameraConfig.ShowDialog();
+            }
+        }
+        #endregion
+
+        #region//连接
+        private void 连接ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            try
+            {
+                if (tvwSensor.SelectedNode != null)
+                {
+                    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+
+                    int InitValue = DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx_Screen[structSM7003Tag.CameraID - 1]);
+                    if (InitValue < 0)
+                    {
+                        MessageBox.Show("探测器初始化失败");
+                        return;
+                    }
+                    StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx_Screen[structSM7003Tag.CameraID - 1], structSM7003Tag.IP, 5000);
+                    if (StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] >= 0)
+                    {
+                        //UCPictureBox uCPictureBox = new UCPictureBox();
+                        //uCPictureBox = (UCPictureBox)FromHandle(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1]);
+                        //tlpScreen.Controls.Add(uCPictureBox);
+                        StringBuilder systemTime = new StringBuilder();
+                        System.DateTime currentTime = new DateTime();
+                        currentTime = System.DateTime.Now;
+                        DMSDK.DM_Init();
+                        StaticClass.intPtrs_Operate[structSM7003Tag.CameraID - 1] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1], structSM7003Tag.IP, 80);
+                        DMSDK.DM_SetDateTime(StaticClass.intPtrs_Operate[structSM7003Tag.CameraID - 1], currentTime.Year, currentTime.Month, currentTime.Day, currentTime.Hour, currentTime.Minute, currentTime.Second);
+                        DMSDK.DM_GetDateTime(StaticClass.intPtrs_Operate[structSM7003Tag.CameraID - 1], systemTime);
+                    }
+                    else if (StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] < 0)
+                    {
+                        MessageBox.Show("探测器连接失败");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region//断开连接
+        private void 断开ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1]);
+            }
+        }
+        #endregion
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             LoadTreeView();
-            UCPictureBox uCPictureBox = FromHandle(screenBuffer.intPtrs_UCpbx[0]) as UCPictureBox;
-            uCPictureBox.Width1 = spcScreen.Panel1.Width;
-            uCPictureBox.Height1 = spcScreen.Panel1.Height;
-            tlpScreen.Controls.Add(uCPictureBox);
-            uCPictureBox.Location = new Point(0, 0);
-            uCPictureBox.Draw_Tag("0");//编号顺序
+            //UCPictureBox uCPictureBox = FromHandle(StaticClass.intPtrs_UCPbx[0]) as UCPictureBox;
+            //uCPictureBox.Width1 = spcScreen.Panel1.Width;
+            //uCPictureBox.Height1 = spcScreen.Panel1.Height;
+            //tlpScreen.Controls.Add(uCPictureBox);
+            //uCPictureBox.Location = new Point(0, 0);
+            //uCPictureBox.Draw_Tag("0");//编号顺序
         }
 
         private void Panel_DoubleClick(object sender, EventArgs e)
@@ -443,8 +639,8 @@ namespace InfraredAnalyze
                 {
                     string IP = ConfigurationManager.AppSettings["IPAddre_2"];
                     DMSDK.DM_Init();
-                    DMSDK.DM_PlayerInit(screenBuffer.intPtrs_Pbx[0]);
-                    OpenHandle = DMSDK.DM_OpenMonitor(screenBuffer.intPtrs_Pbx[0], IP, 5000);//6.0默认9989端口 ,7.0默认80端口 
+                    DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx_Screen[0]);
+                    OpenHandle = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx_Screen[0], IP, 5000);// 返回值为视频操作句柄
                     if (OpenHandle >= 0)
                     {
                         btnStart.BackgroundImage = Properties.Resources.Pause;
@@ -466,6 +662,121 @@ namespace InfraredAnalyze
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnAddSensor_Click(object sender, EventArgs e)//添加探测器
+        {
+            int num = sqlCreate.Select_Num_SMInfraredConfig();
+            if(num>=16)
+            {
+                MessageBox.Show("探测器数量不足，该版本最多只支持16台探测器！");
+            }else
+            {
+                FrmAddIPCamera frmAddIPCamera = new FrmAddIPCamera();
+                frmAddIPCamera.Num = num;
+                if(frmAddIPCamera.ShowDialog()==DialogResult.OK)
+                {
+                    LoadTreeView();
+                }
+            }
+        }
+
+       
+
+        private void btnCameraConfig_Click(object sender, EventArgs e)
+        {
+            int numScreen = tlpScreen.Controls.Count + 1;
+            UCPictureBox uCPictureBox = new UCPictureBox();
+            uCPictureBox = (UCPictureBox)FromHandle(StaticClass.intPtrs_UCPbx[tlpScreen.Controls.Count]);
+            tlpScreen.Controls.Add(uCPictureBox);
+            if (numScreen == 1)
+            {
+                tlpScreen.ColumnCount = 1;
+                tlpScreen.RowCount = 1;
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Height = tlpScreen.Height;
+                    control.Width = tlpScreen.Width;
+                }
+            }
+            else if(numScreen == 2)
+            {
+                tlpScreen.ColumnCount = 2;
+                tlpScreen.RowCount = 1;
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 2;
+                    control.Height = tlpScreen.Height / 1;
+                }
+            }
+            else if(numScreen >= 3 && numScreen <= 4)
+            {
+                tlpScreen.ColumnCount = 2;
+                tlpScreen.RowCount = 2;
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 2;
+                    control.Height = tlpScreen.Height / 2;
+                }
+            }
+            else if(numScreen >= 5 && numScreen <= 6)
+            {
+                tlpScreen.ColumnCount = 3;
+                tlpScreen.RowCount = 2;
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 3;
+                    control.Height = tlpScreen.Height / 2;
+                }
+            }
+            else if (numScreen >= 7 && numScreen <= 9)
+            {
+                tlpScreen.ColumnCount = 3;
+                tlpScreen.RowCount = 3;
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 3;
+                    control.Height = tlpScreen.Height / 3;
+                }
+            }
+            else if (numScreen >= 10 && numScreen <= 12)
+            {
+                tlpScreen.ColumnCount = 4;
+                tlpScreen.RowCount = 3;
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 4;
+                    control.Height = tlpScreen.Height / 3;
+                }
+            }
+            else if (numScreen >= 13 && numScreen <= 16)
+            {
+                tlpScreen.ColumnCount = 4;
+                tlpScreen.RowCount = 4;
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 4;
+                    control.Height = tlpScreen.Height / 4;
+                }
+            }
+        }
+
+        private void btnDisConnect_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnDisConnect, "全部断开");
+        }
+
+        private void btnDisConnect_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= (tlpScreen.Controls.Count-1); i++)
+            {
+                int ReturnValue = DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[i]);
+                if (ReturnValue < 0)
+                {
+                    MessageBox.Show("断开失败！");
+                }
             }
         }
 

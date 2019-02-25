@@ -41,11 +41,15 @@ namespace InfraredAnalyze
             public int CameraID;
             public string IP;
             public int Port;
+            public int NodeID;
             public string Reamrks;
             public bool Enable;
         }
 
         public static int[] intPtrs_Operate = new int[16];
+        public static IntPtr[] intPtrs_UCPbx = new IntPtr[16];
+        public static IntPtr[] intPtrs_UCPbx_Screen = new IntPtr[16];
+        public static int[] intPtrs_Connect = new int[16];
 
     }
 }
