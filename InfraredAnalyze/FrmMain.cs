@@ -487,16 +487,16 @@ namespace InfraredAnalyze
         #region//系统参数设置
         private void 系统参数ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmCameraSystemConfig frmCameraSystemConfig = new FrmCameraSystemConfig();
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
-            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
-            if (tvwSensor.SelectedNode != null)
-            {
-                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
-                frmCameraSystemConfig.IPCameraID = structSM7003Tag.CameraID;
-                frmCameraSystemConfig.IP = structSM7003Tag.IP;
-                frmCameraSystemConfig.ShowDialog();
-            }
+            //FrmCameraSystemConfig frmCameraSystemConfig = new FrmCameraSystemConfig();
+            //StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            //tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            //if (tvwSensor.SelectedNode != null)
+            //{
+            //    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+            //    frmCameraSystemConfig.IPCameraID = structSM7003Tag.CameraID;
+            //    frmCameraSystemConfig.IP = structSM7003Tag.IP;
+            //    frmCameraSystemConfig.ShowDialog();
+            //}
         }
         #endregion
 
@@ -557,6 +557,24 @@ namespace InfraredAnalyze
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        #endregion
+
+        #region//视频参数设置
+        private void 视频设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmVideoConfig frmVideoConfig = new FrmVideoConfig();
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            if(tvwSensor.SelectedNode!=null)
+            {
+                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                frmVideoConfig.IPCameraId = structSM7003Tag.CameraID;
+                frmVideoConfig.IPAddress = structSM7003Tag.IP;
+                frmVideoConfig.CName = tvwSensor.SelectedNode.Text;
+                frmVideoConfig.ShowDialog();
+            }
+
         }
         #endregion
 
@@ -780,6 +798,7 @@ namespace InfraredAnalyze
             }
         }
 
-       
+
+        
     }
 }

@@ -82,7 +82,6 @@ namespace InfraredAnalyze
                 }
                 else
                 {
-                    DMSDK.DM_LoadDefault(StaticClass.intPtrs_Operate[iPCameraID - 1]);
                     DMSDK.DM_GetMAC(StaticClass.intPtrs_Operate[iPCameraID - 1], Mac);
                     DMSDK.DM_GetNetmask(StaticClass.intPtrs_Operate[iPCameraID - 1], SubMask);
                     DMSDK.DM_GetGateway(StaticClass.intPtrs_Operate[iPCameraID - 1], GateWay);

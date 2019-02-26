@@ -1,0 +1,556 @@
+﻿namespace InfraredAnalyze
+{
+    partial class FrmVideoConfig
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.lable11 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnlCameraName = new System.Windows.Forms.Panel();
+            this.rdbNotCameraName = new System.Windows.Forms.RadioButton();
+            this.rdbIsCameraName = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pnlTime = new System.Windows.Forms.Panel();
+            this.rdbNotTime = new System.Windows.Forms.RadioButton();
+            this.rdbIsTime = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbxCameraName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnConfirm = new System.Windows.Forms.Button();
+            this.btnUpdateTime = new System.Windows.Forms.Button();
+            this.tbxFrameRate = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dtpCameraDateTime = new System.Windows.Forms.DateTimePicker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbxBitrateType = new System.Windows.Forms.ComboBox();
+            this.cbxResolution = new System.Windows.Forms.ComboBox();
+            this.cbxBitrate = new System.Windows.Forms.ComboBox();
+            this.pnlLocation = new System.Windows.Forms.Panel();
+            this.rdbCNameLocation = new System.Windows.Forms.RadioButton();
+            this.rdbCTimeLocation = new System.Windows.Forms.RadioButton();
+            this.btnLocationDown = new System.Windows.Forms.Button();
+            this.btnLocationRight = new System.Windows.Forms.Button();
+            this.btnLocationLeft = new System.Windows.Forms.Button();
+            this.btnLocationUp = new System.Windows.Forms.Button();
+            this.pbxVideo = new System.Windows.Forms.PictureBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.trbLocation = new System.Windows.Forms.TrackBar();
+            this.pnlHeader.SuspendLayout();
+            this.pnlCameraName.SuspendLayout();
+            this.pnlTime.SuspendLayout();
+            this.pnlLocation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxVideo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbLocation)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlHeader.Controls.Add(this.btnClose);
+            this.pnlHeader.Controls.Add(this.lable11);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(880, 35);
+            this.pnlHeader.TabIndex = 0;
+            this.pnlHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseDown);
+            this.pnlHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseMove);
+            // 
+            // lable11
+            // 
+            this.lable11.AutoSize = true;
+            this.lable11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lable11.Location = new System.Drawing.Point(328, 9);
+            this.lable11.Name = "lable11";
+            this.lable11.Size = new System.Drawing.Size(110, 16);
+            this.lable11.TabIndex = 0;
+            this.lable11.Text = "视频参数设置";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(498, 79);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 21);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "相机名称：";
+            // 
+            // pnlCameraName
+            // 
+            this.pnlCameraName.Controls.Add(this.rdbNotCameraName);
+            this.pnlCameraName.Controls.Add(this.rdbIsCameraName);
+            this.pnlCameraName.Controls.Add(this.label2);
+            this.pnlCameraName.Location = new System.Drawing.Point(520, 164);
+            this.pnlCameraName.Name = "pnlCameraName";
+            this.pnlCameraName.Size = new System.Drawing.Size(259, 37);
+            this.pnlCameraName.TabIndex = 2;
+            // 
+            // rdbNotCameraName
+            // 
+            this.rdbNotCameraName.AutoSize = true;
+            this.rdbNotCameraName.Location = new System.Drawing.Point(212, 10);
+            this.rdbNotCameraName.Name = "rdbNotCameraName";
+            this.rdbNotCameraName.Size = new System.Drawing.Size(35, 16);
+            this.rdbNotCameraName.TabIndex = 3;
+            this.rdbNotCameraName.Text = "否";
+            this.rdbNotCameraName.UseVisualStyleBackColor = true;
+            this.rdbNotCameraName.CheckedChanged += new System.EventHandler(this.rdbNotCameraName_CheckedChanged);
+            // 
+            // rdbIsCameraName
+            // 
+            this.rdbIsCameraName.AutoSize = true;
+            this.rdbIsCameraName.Location = new System.Drawing.Point(156, 10);
+            this.rdbIsCameraName.Name = "rdbIsCameraName";
+            this.rdbIsCameraName.Size = new System.Drawing.Size(35, 16);
+            this.rdbIsCameraName.TabIndex = 2;
+            this.rdbIsCameraName.Text = "是";
+            this.rdbIsCameraName.UseVisualStyleBackColor = true;
+            this.rdbIsCameraName.CheckedChanged += new System.EventHandler(this.rdbIsCameraName_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(3, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(154, 21);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "是否显示相机名称：";
+            // 
+            // pnlTime
+            // 
+            this.pnlTime.Controls.Add(this.rdbNotTime);
+            this.pnlTime.Controls.Add(this.rdbIsTime);
+            this.pnlTime.Controls.Add(this.label3);
+            this.pnlTime.Location = new System.Drawing.Point(520, 207);
+            this.pnlTime.Name = "pnlTime";
+            this.pnlTime.Size = new System.Drawing.Size(259, 40);
+            this.pnlTime.TabIndex = 2;
+            // 
+            // rdbNotTime
+            // 
+            this.rdbNotTime.AutoSize = true;
+            this.rdbNotTime.Location = new System.Drawing.Point(212, 15);
+            this.rdbNotTime.Name = "rdbNotTime";
+            this.rdbNotTime.Size = new System.Drawing.Size(35, 16);
+            this.rdbNotTime.TabIndex = 3;
+            this.rdbNotTime.Text = "否";
+            this.rdbNotTime.UseVisualStyleBackColor = true;
+            this.rdbNotTime.CheckedChanged += new System.EventHandler(this.rdbNotTime_CheckedChanged);
+            // 
+            // rdbIsTime
+            // 
+            this.rdbIsTime.AutoSize = true;
+            this.rdbIsTime.Location = new System.Drawing.Point(156, 15);
+            this.rdbIsTime.Name = "rdbIsTime";
+            this.rdbIsTime.Size = new System.Drawing.Size(35, 16);
+            this.rdbIsTime.TabIndex = 2;
+            this.rdbIsTime.Text = "是";
+            this.rdbIsTime.UseVisualStyleBackColor = true;
+            this.rdbIsTime.CheckedChanged += new System.EventHandler(this.rdbIsTime_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(19, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(122, 21);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "是否显示时间：";
+            // 
+            // tbxCameraName
+            // 
+            this.tbxCameraName.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxCameraName.Location = new System.Drawing.Point(593, 76);
+            this.tbxCameraName.Name = "tbxCameraName";
+            this.tbxCameraName.Size = new System.Drawing.Size(172, 23);
+            this.tbxCameraName.TabIndex = 3;
+            this.tbxCameraName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxCameraName.Leave += new System.EventHandler(this.tbxCameraName_Leave);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(313, 470);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(136, 16);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "（改变显示位置）";
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnConfirm.Location = new System.Drawing.Point(622, 528);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(75, 25);
+            this.btnConfirm.TabIndex = 8;
+            this.btnConfirm.Text = "保存设置";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            // 
+            // btnUpdateTime
+            // 
+            this.btnUpdateTime.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnUpdateTime.Location = new System.Drawing.Point(788, 118);
+            this.btnUpdateTime.Name = "btnUpdateTime";
+            this.btnUpdateTime.Size = new System.Drawing.Size(60, 23);
+            this.btnUpdateTime.TabIndex = 14;
+            this.btnUpdateTime.Text = "同步";
+            this.btnUpdateTime.UseVisualStyleBackColor = true;
+            this.btnUpdateTime.Click += new System.EventHandler(this.btnUpdateTime_Click);
+            // 
+            // tbxFrameRate
+            // 
+            this.tbxFrameRate.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxFrameRate.Location = new System.Drawing.Point(644, 384);
+            this.tbxFrameRate.Name = "tbxFrameRate";
+            this.tbxFrameRate.Size = new System.Drawing.Size(121, 23);
+            this.tbxFrameRate.TabIndex = 13;
+            this.tbxFrameRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxFrameRate.Leave += new System.EventHandler(this.tbxFrameRate_Leave);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(563, 382);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 21);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "帧数：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(498, 120);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 21);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "系统时间：";
+            // 
+            // dtpCameraDateTime
+            // 
+            this.dtpCameraDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dtpCameraDateTime.Enabled = false;
+            this.dtpCameraDateTime.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dtpCameraDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpCameraDateTime.Location = new System.Drawing.Point(594, 120);
+            this.dtpCameraDateTime.Name = "dtpCameraDateTime";
+            this.dtpCameraDateTime.Size = new System.Drawing.Size(173, 23);
+            this.dtpCameraDateTime.TabIndex = 10;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(563, 346);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 21);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "码流：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(555, 312);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 21);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "分辨率：";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(547, 267);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(90, 21);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "编码类型：";
+            // 
+            // cbxBitrateType
+            // 
+            this.cbxBitrateType.FormattingEnabled = true;
+            this.cbxBitrateType.Items.AddRange(new object[] {
+            "可变编码",
+            "固定编码"});
+            this.cbxBitrateType.Location = new System.Drawing.Point(644, 267);
+            this.cbxBitrateType.Name = "cbxBitrateType";
+            this.cbxBitrateType.Size = new System.Drawing.Size(121, 20);
+            this.cbxBitrateType.TabIndex = 15;
+            // 
+            // cbxResolution
+            // 
+            this.cbxResolution.FormattingEnabled = true;
+            this.cbxResolution.Items.AddRange(new object[] {
+            "320x240",
+            "384x288",
+            "640x480",
+            "720x480",
+            "720x576"});
+            this.cbxResolution.Location = new System.Drawing.Point(644, 312);
+            this.cbxResolution.Name = "cbxResolution";
+            this.cbxResolution.Size = new System.Drawing.Size(121, 20);
+            this.cbxResolution.TabIndex = 15;
+            // 
+            // cbxBitrate
+            // 
+            this.cbxBitrate.FormattingEnabled = true;
+            this.cbxBitrate.Items.AddRange(new object[] {
+            "128",
+            "256 ",
+            "512",
+            "1024"});
+            this.cbxBitrate.Location = new System.Drawing.Point(644, 350);
+            this.cbxBitrate.Name = "cbxBitrate";
+            this.cbxBitrate.Size = new System.Drawing.Size(121, 20);
+            this.cbxBitrate.TabIndex = 15;
+            // 
+            // pnlLocation
+            // 
+            this.pnlLocation.Controls.Add(this.rdbCTimeLocation);
+            this.pnlLocation.Controls.Add(this.rdbCNameLocation);
+            this.pnlLocation.Location = new System.Drawing.Point(331, 489);
+            this.pnlLocation.Name = "pnlLocation";
+            this.pnlLocation.Size = new System.Drawing.Size(102, 88);
+            this.pnlLocation.TabIndex = 16;
+            // 
+            // rdbCNameLocation
+            // 
+            this.rdbCNameLocation.AutoSize = true;
+            this.rdbCNameLocation.Checked = true;
+            this.rdbCNameLocation.Location = new System.Drawing.Point(14, 16);
+            this.rdbCNameLocation.Name = "rdbCNameLocation";
+            this.rdbCNameLocation.Size = new System.Drawing.Size(47, 16);
+            this.rdbCNameLocation.TabIndex = 0;
+            this.rdbCNameLocation.TabStop = true;
+            this.rdbCNameLocation.Text = "名称";
+            this.rdbCNameLocation.UseVisualStyleBackColor = true;
+            // 
+            // rdbCTimeLocation
+            // 
+            this.rdbCTimeLocation.AutoSize = true;
+            this.rdbCTimeLocation.Location = new System.Drawing.Point(14, 54);
+            this.rdbCTimeLocation.Name = "rdbCTimeLocation";
+            this.rdbCTimeLocation.Size = new System.Drawing.Size(47, 16);
+            this.rdbCTimeLocation.TabIndex = 1;
+            this.rdbCTimeLocation.Text = "时间";
+            this.rdbCTimeLocation.UseVisualStyleBackColor = true;
+            // 
+            // btnLocationDown
+            // 
+            this.btnLocationDown.BackgroundImage = global::InfraredAnalyze.Properties.Resources.down;
+            this.btnLocationDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLocationDown.FlatAppearance.BorderSize = 0;
+            this.btnLocationDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLocationDown.Location = new System.Drawing.Point(165, 531);
+            this.btnLocationDown.Name = "btnLocationDown";
+            this.btnLocationDown.Size = new System.Drawing.Size(40, 40);
+            this.btnLocationDown.TabIndex = 17;
+            this.btnLocationDown.UseVisualStyleBackColor = true;
+            this.btnLocationDown.Click += new System.EventHandler(this.btnLocationDown_Click);
+            // 
+            // btnLocationRight
+            // 
+            this.btnLocationRight.BackgroundImage = global::InfraredAnalyze.Properties.Resources.right;
+            this.btnLocationRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLocationRight.FlatAppearance.BorderSize = 0;
+            this.btnLocationRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLocationRight.Location = new System.Drawing.Point(211, 493);
+            this.btnLocationRight.Name = "btnLocationRight";
+            this.btnLocationRight.Size = new System.Drawing.Size(40, 40);
+            this.btnLocationRight.TabIndex = 17;
+            this.btnLocationRight.UseVisualStyleBackColor = true;
+            this.btnLocationRight.Click += new System.EventHandler(this.btnLocationRight_Click);
+            // 
+            // btnLocationLeft
+            // 
+            this.btnLocationLeft.BackgroundImage = global::InfraredAnalyze.Properties.Resources.left;
+            this.btnLocationLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLocationLeft.FlatAppearance.BorderSize = 0;
+            this.btnLocationLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLocationLeft.Location = new System.Drawing.Point(119, 493);
+            this.btnLocationLeft.Name = "btnLocationLeft";
+            this.btnLocationLeft.Size = new System.Drawing.Size(40, 40);
+            this.btnLocationLeft.TabIndex = 17;
+            this.btnLocationLeft.UseVisualStyleBackColor = true;
+            this.btnLocationLeft.Click += new System.EventHandler(this.btnLocationLeft_Click);
+            // 
+            // btnLocationUp
+            // 
+            this.btnLocationUp.BackgroundImage = global::InfraredAnalyze.Properties.Resources.up;
+            this.btnLocationUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLocationUp.FlatAppearance.BorderSize = 0;
+            this.btnLocationUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLocationUp.Location = new System.Drawing.Point(165, 458);
+            this.btnLocationUp.Name = "btnLocationUp";
+            this.btnLocationUp.Size = new System.Drawing.Size(40, 40);
+            this.btnLocationUp.TabIndex = 17;
+            this.btnLocationUp.UseVisualStyleBackColor = true;
+            this.btnLocationUp.Click += new System.EventHandler(this.btnLocationUp_Click);
+            // 
+            // pbxVideo
+            // 
+            this.pbxVideo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pbxVideo.Location = new System.Drawing.Point(12, 79);
+            this.pbxVideo.Name = "pbxVideo";
+            this.pbxVideo.Size = new System.Drawing.Size(480, 360);
+            this.pbxVideo.TabIndex = 4;
+            this.pbxVideo.TabStop = false;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Location = new System.Drawing.Point(845, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(35, 35);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // trbLocation
+            // 
+            this.trbLocation.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.trbLocation.Location = new System.Drawing.Point(32, 458);
+            this.trbLocation.Name = "trbLocation";
+            this.trbLocation.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trbLocation.Size = new System.Drawing.Size(45, 104);
+            this.trbLocation.TabIndex = 18;
+            this.trbLocation.TickStyle = System.Windows.Forms.TickStyle.Both;
+            // 
+            // FrmVideoConfig
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(880, 600);
+            this.Controls.Add(this.trbLocation);
+            this.Controls.Add(this.btnLocationDown);
+            this.Controls.Add(this.btnLocationRight);
+            this.Controls.Add(this.btnLocationLeft);
+            this.Controls.Add(this.btnLocationUp);
+            this.Controls.Add(this.pnlLocation);
+            this.Controls.Add(this.cbxBitrate);
+            this.Controls.Add(this.cbxResolution);
+            this.Controls.Add(this.cbxBitrateType);
+            this.Controls.Add(this.btnUpdateTime);
+            this.Controls.Add(this.tbxFrameRate);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.dtpCameraDateTime);
+            this.Controls.Add(this.btnConfirm);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.pbxVideo);
+            this.Controls.Add(this.tbxCameraName);
+            this.Controls.Add(this.pnlTime);
+            this.Controls.Add(this.pnlCameraName);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pnlHeader);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "FrmVideoConfig";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FrmVideoConfig";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmVideoConfig_FormClosed);
+            this.Load += new System.EventHandler(this.FrmVideoConfig_Load);
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
+            this.pnlCameraName.ResumeLayout(false);
+            this.pnlCameraName.PerformLayout();
+            this.pnlTime.ResumeLayout(false);
+            this.pnlTime.PerformLayout();
+            this.pnlLocation.ResumeLayout(false);
+            this.pnlLocation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxVideo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbLocation)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.Label lable11;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel pnlCameraName;
+        private System.Windows.Forms.RadioButton rdbNotCameraName;
+        private System.Windows.Forms.RadioButton rdbIsCameraName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel pnlTime;
+        private System.Windows.Forms.RadioButton rdbNotTime;
+        private System.Windows.Forms.RadioButton rdbIsTime;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbxCameraName;
+        private System.Windows.Forms.PictureBox pbxVideo;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Button btnUpdateTime;
+        private System.Windows.Forms.TextBox tbxFrameRate;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dtpCameraDateTime;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cbxBitrateType;
+        private System.Windows.Forms.ComboBox cbxResolution;
+        private System.Windows.Forms.ComboBox cbxBitrate;
+        private System.Windows.Forms.Panel pnlLocation;
+        private System.Windows.Forms.RadioButton rdbCTimeLocation;
+        private System.Windows.Forms.RadioButton rdbCNameLocation;
+        private System.Windows.Forms.Button btnLocationUp;
+        private System.Windows.Forms.Button btnLocationLeft;
+        private System.Windows.Forms.Button btnLocationRight;
+        private System.Windows.Forms.Button btnLocationDown;
+        private System.Windows.Forms.TrackBar trbLocation;
+    }
+}

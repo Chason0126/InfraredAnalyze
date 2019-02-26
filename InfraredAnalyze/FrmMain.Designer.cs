@@ -268,7 +268,7 @@
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1036F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1040F));
             this.tlpTools.Controls.Add(this.btn1, 0, 0);
             this.tlpTools.Controls.Add(this.button2, 1, 0);
             this.tlpTools.Controls.Add(this.btnStart, 2, 0);
@@ -683,60 +683,61 @@
             this.连接ToolStripMenuItem,
             this.断开ToolStripMenuItem});
             this.cmsIPCameraConfig.Name = "cmsIPCameraConfig";
-            this.cmsIPCameraConfig.Size = new System.Drawing.Size(125, 180);
+            this.cmsIPCameraConfig.Size = new System.Drawing.Size(181, 202);
             // 
             // 网络参数设置ToolStripMenuItem
             // 
             this.网络参数设置ToolStripMenuItem.Name = "网络参数设置ToolStripMenuItem";
-            this.网络参数设置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.网络参数设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.网络参数设置ToolStripMenuItem.Text = "网络参数";
             this.网络参数设置ToolStripMenuItem.Click += new System.EventHandler(this.网络参数设置ToolStripMenuItem_Click);
             // 
             // 系统参数ToolStripMenuItem
             // 
             this.系统参数ToolStripMenuItem.Name = "系统参数ToolStripMenuItem";
-            this.系统参数ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.系统参数ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.系统参数ToolStripMenuItem.Text = "系统参数";
             this.系统参数ToolStripMenuItem.Click += new System.EventHandler(this.系统参数ToolStripMenuItem_Click);
             // 
             // 视频设置ToolStripMenuItem
             // 
             this.视频设置ToolStripMenuItem.Name = "视频设置ToolStripMenuItem";
-            this.视频设置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.视频设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.视频设置ToolStripMenuItem.Text = "视频设置";
+            this.视频设置ToolStripMenuItem.Click += new System.EventHandler(this.视频设置ToolStripMenuItem_Click);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
             // 上移ToolStripMenuItem
             // 
             this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
-            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.上移ToolStripMenuItem.Text = "上移";
             this.上移ToolStripMenuItem.Click += new System.EventHandler(this.上移ToolStripMenuItem_Click);
             // 
             // 下移ToolStripMenuItem
             // 
             this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
-            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.下移ToolStripMenuItem.Text = "下移";
             this.下移ToolStripMenuItem.Click += new System.EventHandler(this.下移ToolStripMenuItem_Click);
             // 
             // 连接ToolStripMenuItem
             // 
             this.连接ToolStripMenuItem.Name = "连接ToolStripMenuItem";
-            this.连接ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.连接ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.连接ToolStripMenuItem.Text = "连接";
             this.连接ToolStripMenuItem.Click += new System.EventHandler(this.连接ToolStripMenuItem_Click);
             // 
             // 断开ToolStripMenuItem
             // 
             this.断开ToolStripMenuItem.Name = "断开ToolStripMenuItem";
-            this.断开ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.断开ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.断开ToolStripMenuItem.Text = "断开";
             this.断开ToolStripMenuItem.Click += new System.EventHandler(this.断开ToolStripMenuItem_Click);
             // 

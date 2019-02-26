@@ -49,8 +49,8 @@ namespace InfraredAnalyze
 
         public struct tagResolutionInfo
         {
-            int width;
-            int height;
+          public  int width;
+          public  int height;
         }
 
 
@@ -128,7 +128,7 @@ namespace InfraredAnalyze
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Disconnect")]
         public static extern int DM_Disconnect(int handle);
-
+        
         /*
             函数名称:	DM_SetIsotherm
         *函数说明:	设置等温区域
@@ -1262,9 +1262,9 @@ namespace InfraredAnalyze
         *返回值:	>0 成功 
                     <0 失败
         */
-        [DllImport("DMSDK.dll", EntryPoint = "DM_SetOSDInfo_CameraName")]
-        public static extern int  DM_SetOSDInfo_CameraName(int handle, ref string cCameraName, int iDisplayName, int iPosX, int iPosY);
-
+        [DllImport("DMSDK.dll", EntryPoint = "DM_SetOSDInfo_CameraName",CharSet =CharSet.Ansi)]
+        //public static extern int DM_SetOSDInfo_CameraName(int handle, string cCameraName, int iDisplayName, int iPosX, int iPosY);
+        public static extern int DM_SetOSDInfo_CameraName(int handle, string cCameraName, int iDisplayName, int iPosX, int iPosY);
         /*
             函数名称:	DM_SetOSDInfo_UserDefine
         *函数说明:	设置视频中的用户自定义信息
@@ -1460,8 +1460,10 @@ namespace InfraredAnalyze
         *返回值:	>0 成功 
                     <0 失败
         */
-        [DllImport("DMSDK.dll", EntryPoint = "DM_GetOSDInfo_CameraName")]
-        public static extern int DM_GetOSDInfo_CameraName(int handle, ref string cCameraName, ref int iDisplayName, ref int iPosX, ref int iPosY);
+        [DllImport("DMSDK.dll", EntryPoint = "DM_GetOSDInfo_CameraName", CharSet = CharSet.Ansi)]
+        //public static extern int DM_GetOSDInfo_CameraName(int handle, ref byte cCameraName, out int iDisplayName, out int iPosX, out int iPosY);
+        //public static extern int DM_GetOSDInfo_CameraName(int handle, [MarshalAs(UnmanagedType.LPStr)]StringBuilder cCameraName, out int iDisplayName, out int iPosX, out int iPosY);
+        public static extern int DM_GetOSDInfo_CameraName(int handle, StringBuilder cCameraName, out int iDisplayName, out int iPosX, out int iPosY);
 
         /*
             函数名称:	DM_GetOSDInfo_UserDefine
@@ -1476,7 +1478,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetOSDInfo_UserDefine")]
-        public static extern int  DM_GetOSDInfo_UserDefine(int handle, ref string cUserDefineInfo,ref int iDisplayUserDefineInfo,ref int iPosX,ref int iPosY);
+        public static extern int  DM_GetOSDInfo_UserDefine(int handle,  string cUserDefineInfo,out int iDisplayUserDefineInfo,out int iPosX,out int iPosY);
     
         /*
             函数名称:	DM_GetOSDInfo_DateTime
@@ -1489,8 +1491,8 @@ namespace InfraredAnalyze
         *返回值:	>0 成功 
                     <0 失败
         */
-        [DllImport("DMSDK.dll", EntryPoint = "DM_GetOSDInfo_PeaDisplay")]
-        public static extern int DM_GetOSDInfo_PeaDisplay(int handle, ref int iDisplayTime, ref int iPosX, ref int iPosY);
+        [DllImport("DMSDK.dll", EntryPoint = "DM_GetOSDInfo_DateTime")]
+        public static extern int DM_GetOSDInfo_DateTime(int handle, out int iDisplayTime, out int iPosX, out int iPosY);
 
         /*
             函数名称:	DM_GetOSDInfo_PeaDisplay
