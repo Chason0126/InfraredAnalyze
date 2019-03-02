@@ -40,9 +40,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbxScreen.BackColor = System.Drawing.Color.Black;
-            this.pbxScreen.Location = new System.Drawing.Point(0, 23);
+            this.pbxScreen.Location = new System.Drawing.Point(0, 0);
             this.pbxScreen.Name = "pbxScreen";
-            this.pbxScreen.Size = new System.Drawing.Size(400, 377);
+            this.pbxScreen.Size = new System.Drawing.Size(400, 400);
             this.pbxScreen.TabIndex = 0;
             this.pbxScreen.TabStop = false;
             // 
@@ -79,9 +79,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.Controls.Add(this.pbxScreen);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.pbxScreen);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "UCPictureBox";
             this.Size = new System.Drawing.Size(400, 400);

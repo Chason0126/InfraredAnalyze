@@ -89,7 +89,7 @@ namespace InfraredAnalyze
         }
 
         ArrayList arrayList;
-        public ArrayList Select_All_SMInfraredConfig()
+        public ArrayList Select_All_SMInfraredConfig()//按nodeid降序排列
         {
             arrayList = new ArrayList();
             StaticClass.StructIAnalyzeConfig structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
@@ -295,6 +295,25 @@ namespace InfraredAnalyze
             catch (Exception ex)
             {
                 MessageBox.Show("IP地址修改异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public  void UpDate_CameraName(int CameraId, string CameraName)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("update SMInfraredAnalyze set CameraName='" + CameraName + "' where CameraId='" + CameraId + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("相机名称修改异常：" + ex.Message);
             }
             finally
             {

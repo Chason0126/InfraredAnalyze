@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.DirectX.PrivateImplementationDetails;
 using System.Configuration;
 using System.Collections;
+using System.Threading;
 
 namespace InfraredAnalyze
 {
@@ -19,7 +20,8 @@ namespace InfraredAnalyze
     public partial class FrmMain : Form
     {
         SqlCreate sqlCreate = new SqlCreate();
-        Drawing drawing = new Drawing();
+        int ScreenNum = 1;
+
         #region//构造函数
         public FrmMain()
         {
@@ -27,13 +29,27 @@ namespace InfraredAnalyze
             DMSDK.DM_Init();
             try
             {
-                for (int i = 0; i < 16; i++)
-                {
-                    UCPictureBox uCPictureBox = new UCPictureBox();
-                    uCPictureBox.Number = i.ToString();
-                    StaticClass.intPtrs_UCPbx_Screen[i] = uCPictureBox.IntPtrHandle;
-                    StaticClass.intPtrs_UCPbx[i] = uCPictureBox.Handle;
-                }
+                //for (int i = 0; i < 16; i++)
+                //{
+                //    UCPbx uCPbx = new UCPbx();
+                //    StaticClass.intPtrs_UCPbx[i] = uCPbx.Handle;//会返回null值
+                //}
+                StaticClass.intPtrs_UCPbx[0] = ucPbx1.Handle;
+                StaticClass.intPtrs_UCPbx[1] = ucPbx2.Handle;
+                StaticClass.intPtrs_UCPbx[2] = ucPbx3.Handle;
+                StaticClass.intPtrs_UCPbx[3] = ucPbx4.Handle;
+                StaticClass.intPtrs_UCPbx[4] = ucPbx5.Handle;
+                StaticClass.intPtrs_UCPbx[5] = ucPbx6.Handle;
+                StaticClass.intPtrs_UCPbx[6] = ucPbx7.Handle;
+                StaticClass.intPtrs_UCPbx[7] = ucPbx8.Handle;
+                StaticClass.intPtrs_UCPbx[8] = ucPbx9.Handle;
+                StaticClass.intPtrs_UCPbx[9] = ucPbx10.Handle;
+                StaticClass.intPtrs_UCPbx[10] = ucPbx11.Handle;
+                StaticClass.intPtrs_UCPbx[11] = ucPbx12.Handle;
+                StaticClass.intPtrs_UCPbx[12] = ucPbx13.Handle;
+                StaticClass.intPtrs_UCPbx[13] = ucPbx14.Handle;
+                StaticClass.intPtrs_UCPbx[14] = ucPbx15.Handle;
+                StaticClass.intPtrs_UCPbx[15] = ucPbx16.Handle;
             }
             catch (Exception ex)
             {
@@ -89,6 +105,7 @@ namespace InfraredAnalyze
             {
                 this.WindowState = FormWindowState.Maximized;
                 btnWindow.BackgroundImage = Properties.Resources.窗口化;
+                Refresh_Screen(ScreenNum);
             }
             else if (this.WindowState==FormWindowState.Maximized)
             {
@@ -211,15 +228,99 @@ namespace InfraredAnalyze
         #region//根据数量 分割主窗体 显示监控画面
         public void Refresh_Screen(int num)
         {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);//保存配置文件中当前屏幕数量
+            config.AppSettings.Settings["ScreenNum"].Value = num.ToString();
+            ConfigurationManager.RefreshSection("appSettings");
+            config.Save(ConfigurationSaveMode.Modified);
             tlpScreen.Controls.Clear();
-            tlpScreen.RowCount = tlpScreen.ColumnCount = num;
-            for (int i = 1; i <= num * num; i++)
+            spcScreen.Panel1.Controls.Clear();
+            spcScreen.Panel1.Controls.Add(tlpScreen);
+            tlpScreen.Dock = DockStyle.Fill;
+            switch (num)
             {
-                UCPictureBox uCPictureBox = FromHandle(StaticClass.intPtrs_UCPbx[0]) as UCPictureBox;
-                uCPictureBox.Height = spcScreen.Panel1.Height / num;
-                uCPictureBox.Width = spcScreen.Panel1.Width / num;
-                tlpScreen.Controls.Add(uCPictureBox);
-                uCPictureBox.Draw_Tag(i.ToString());
+            case 1:
+                tlpScreen.ColumnCount = 1;
+                tlpScreen.RowCount = 1;
+                Add_UCPbx(num);
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Height = tlpScreen.Height;
+                    control.Width = tlpScreen.Width;
+                }
+                break;
+            case 2:
+                tlpScreen.ColumnCount = 2;
+                tlpScreen.RowCount = 1;
+                Add_UCPbx(num);
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 2;
+                    control.Height = tlpScreen.Height / 1;
+                }
+                break;
+            case 4:
+                tlpScreen.ColumnCount = 2;
+                tlpScreen.RowCount = 2;
+                Add_UCPbx(num);
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 2;
+                    control.Height = tlpScreen.Height / 2;
+                }
+                break;
+            case 6:
+                tlpScreen.ColumnCount = 3;
+                tlpScreen.RowCount = 2;
+                Add_UCPbx(num);
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 3;
+                    control.Height = tlpScreen.Height / 2;
+                }
+                break;
+            case 9:
+                tlpScreen.ColumnCount = 3;
+                tlpScreen.RowCount = 3;
+                Add_UCPbx(num);
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 3;
+                    control.Height = tlpScreen.Height / 3;
+                }
+                break;
+            case 12:
+                tlpScreen.ColumnCount = 4;
+                tlpScreen.RowCount = 3;
+                Add_UCPbx(num);
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 4;
+                    control.Height = tlpScreen.Height / 3;
+                }
+                break;
+            case 16:
+                tlpScreen.ColumnCount = 4;
+                tlpScreen.RowCount = 4;
+                Add_UCPbx(num);
+                foreach (Control control in tlpScreen.Controls)
+                {
+                    control.Width = tlpScreen.Width / 4;
+                    control.Height = tlpScreen.Height / 4;
+                }
+                break;
+            }
+            ScreenNum = Convert.ToInt32(ConfigurationManager.AppSettings["ScreenNum"]);
+        }
+
+        public void Add_UCPbx(int num)//按数量在主屏幕中添加UCPbx
+        {
+            for (int i = 0; i < num; i++)
+            {
+                UCPbx uCPbx = new UCPbx();
+                uCPbx = (UCPbx)FromHandle(StaticClass.intPtrs_UCPbx[i]);
+                uCPbx.Id = i + 1;
+                uCPbx.DoubleClick += new EventHandler(UCPbx_DoubleClick);
+                tlpScreen.Controls.Add(uCPbx);
             }
         }
         #endregion
@@ -237,14 +338,20 @@ namespace InfraredAnalyze
         #endregion
 
         #region//全屏显示
-        public void Full_Screen_Display(UCPictureBox pictureBox)
+        private void UCPbx_DoubleClick(object sender, EventArgs e)
         {
-            //tlpScreen.Controls.Clear();
-            tlpScreen.RowCount = tlpScreen.ColumnCount = 1;
-            pictureBox.Height = spcScreen.Panel1.Height;
-            pictureBox.Width = spcScreen.Panel1.Width;
-            tlpScreen.Controls.Add(pictureBox);
-            pictureBox.Draw_Tag(pictureBox.Number.ToString());
+            UCPbx uCPbx = (UCPbx)sender;
+            tlpScreen.Controls.Clear();
+            spcScreen.Panel1.Controls.Clear();
+            TableLayoutPanel layoutPanel = new TableLayoutPanel();
+            spcScreen.Panel1.Controls.Add(layoutPanel);
+            layoutPanel.Dock = DockStyle.Fill;
+            layoutPanel.RowCount = 1;
+            layoutPanel.ColumnCount = 1;
+            uCPbx.Height = spcScreen.Panel1.Height;
+            uCPbx.Width = spcScreen.Panel1.Width;
+            layoutPanel.Controls.Add(uCPbx);  //双击事件会被执行两次？
+            return;//直接return
         }
         #endregion
 
@@ -485,18 +592,18 @@ namespace InfraredAnalyze
         #endregion
 
         #region//系统参数设置
-        private void 系统参数ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 测温参数ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //FrmCameraSystemConfig frmCameraSystemConfig = new FrmCameraSystemConfig();
-            //StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
-            //tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
-            //if (tvwSensor.SelectedNode != null)
-            //{
-            //    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
-            //    frmCameraSystemConfig.IPCameraID = structSM7003Tag.CameraID;
-            //    frmCameraSystemConfig.IP = structSM7003Tag.IP;
-            //    frmCameraSystemConfig.ShowDialog();
-            //}
+            FrmTemperParamConfig frmTemperParamConfig = new FrmTemperParamConfig();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                frmTemperParamConfig.Ip = structSM7003Tag.IP;
+                frmTemperParamConfig.CameraId = structSM7003Tag.CameraID;
+                frmTemperParamConfig.ShowDialog();
+            }
         }
         #endregion
 
@@ -518,7 +625,6 @@ namespace InfraredAnalyze
         #region//连接
         private void 连接ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
             StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             try
@@ -527,27 +633,14 @@ namespace InfraredAnalyze
                 {
                     structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
 
-                    int InitValue = DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx_Screen[structSM7003Tag.CameraID - 1]);
+                    int InitValue = DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1]);
                     if (InitValue < 0)
                     {
                         MessageBox.Show("探测器初始化失败");
                         return;
                     }
-                    StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx_Screen[structSM7003Tag.CameraID - 1], structSM7003Tag.IP, 5000);
-                    if (StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] >= 0)
-                    {
-                        //UCPictureBox uCPictureBox = new UCPictureBox();
-                        //uCPictureBox = (UCPictureBox)FromHandle(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1]);
-                        //tlpScreen.Controls.Add(uCPictureBox);
-                        StringBuilder systemTime = new StringBuilder();
-                        System.DateTime currentTime = new DateTime();
-                        currentTime = System.DateTime.Now;
-                        DMSDK.DM_Init();
-                        StaticClass.intPtrs_Operate[structSM7003Tag.CameraID - 1] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1], structSM7003Tag.IP, 80);
-                        DMSDK.DM_SetDateTime(StaticClass.intPtrs_Operate[structSM7003Tag.CameraID - 1], currentTime.Year, currentTime.Month, currentTime.Day, currentTime.Hour, currentTime.Minute, currentTime.Second);
-                        DMSDK.DM_GetDateTime(StaticClass.intPtrs_Operate[structSM7003Tag.CameraID - 1], systemTime);
-                    }
-                    else if (StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] < 0)
+                    StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1], structSM7003Tag.IP, 5000);
+                    if (StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] < 0)
                     {
                         MessageBox.Show("探测器连接失败");
                     }
@@ -572,7 +665,10 @@ namespace InfraredAnalyze
                 frmVideoConfig.IPCameraId = structSM7003Tag.CameraID;
                 frmVideoConfig.IPAddress = structSM7003Tag.IP;
                 frmVideoConfig.CName = tvwSensor.SelectedNode.Text;
-                frmVideoConfig.ShowDialog();
+                if(frmVideoConfig.ShowDialog()==DialogResult.OK)
+                {
+                    LoadTreeView();
+                }
             }
 
         }
@@ -591,31 +687,15 @@ namespace InfraredAnalyze
         }
         #endregion
 
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-            LoadTreeView();
-            //UCPictureBox uCPictureBox = FromHandle(StaticClass.intPtrs_UCPbx[0]) as UCPictureBox;
-            //uCPictureBox.Width1 = spcScreen.Panel1.Width;
-            //uCPictureBox.Height1 = spcScreen.Panel1.Height;
-            //tlpScreen.Controls.Add(uCPictureBox);
-            //uCPictureBox.Location = new Point(0, 0);
-            //uCPictureBox.Draw_Tag("0");//编号顺序
-        }
-
-        private void Panel_DoubleClick(object sender, EventArgs e)
-        {
-            Panel panel = sender as Panel;
-            MessageBox.Show(panel.Name);
-        }
-       
+        #region//显示画面数量切换
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Refresh_Screen(3);
+            Refresh_Screen(9);
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Refresh_Screen(2);
+            Refresh_Screen(4);
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
@@ -625,7 +705,7 @@ namespace InfraredAnalyze
 
         private void cmsShowNum_4_Click(object sender, EventArgs e)
         {
-            Refresh_Screen(4);
+            Refresh_Screen(16);
         }
 
         private void 单画面ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -635,52 +715,25 @@ namespace InfraredAnalyze
 
         private void 四画面ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Refresh_Screen(2);
+            Refresh_Screen(4);
         }
 
         private void 九画面ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Refresh_Screen(3);
+            Refresh_Screen(9);
         }
 
         private void 十六画面ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Refresh_Screen(4);
+            Refresh_Screen(16);
         }
+        #endregion
 
-        int OpenHandle;
-        private void btnStart_Click(object sender, EventArgs e)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
-            try
-            {
-                if (btnStart.Tag.ToString() == "Start")
-                {
-                    string IP = ConfigurationManager.AppSettings["IPAddre_2"];
-                    DMSDK.DM_Init();
-                    DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx_Screen[0]);
-                    OpenHandle = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx_Screen[0], IP, 5000);// 返回值为视频操作句柄
-                    if (OpenHandle >= 0)
-                    {
-                        btnStart.BackgroundImage = Properties.Resources.Pause;
-                        btnStart.Tag = "Pause";
-                    }
-                    else
-                    {
-                        MessageBox.Show("连接失败！请检查参数后重试。");
-                    }
-                }
-                else if (btnStart.Tag.ToString() == "Pause")
-                {
-                    btnStart.Tag = "Start";
-                    btnStart.BackgroundImage = Properties.Resources.start;
-                    DMSDK.DM_CloseMonitor(OpenHandle);
-                    DMSDK.DM_PlayerCleanup();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            LoadTreeView();
+            ScreenNum = Convert.ToInt32(ConfigurationManager.AppSettings["ScreenNum"]);
+            Refresh_Screen(ScreenNum);
         }
 
         private void btnAddSensor_Click(object sender, EventArgs e)//添加探测器
@@ -700,84 +753,9 @@ namespace InfraredAnalyze
             }
         }
 
-       
-
         private void btnCameraConfig_Click(object sender, EventArgs e)
         {
-            int numScreen = tlpScreen.Controls.Count + 1;
-            UCPictureBox uCPictureBox = new UCPictureBox();
-            uCPictureBox = (UCPictureBox)FromHandle(StaticClass.intPtrs_UCPbx[tlpScreen.Controls.Count]);
-            tlpScreen.Controls.Add(uCPictureBox);
-            if (numScreen == 1)
-            {
-                tlpScreen.ColumnCount = 1;
-                tlpScreen.RowCount = 1;
-                foreach (Control control in tlpScreen.Controls)
-                {
-                    control.Height = tlpScreen.Height;
-                    control.Width = tlpScreen.Width;
-                }
-            }
-            else if(numScreen == 2)
-            {
-                tlpScreen.ColumnCount = 2;
-                tlpScreen.RowCount = 1;
-                foreach (Control control in tlpScreen.Controls)
-                {
-                    control.Width = tlpScreen.Width / 2;
-                    control.Height = tlpScreen.Height / 1;
-                }
-            }
-            else if(numScreen >= 3 && numScreen <= 4)
-            {
-                tlpScreen.ColumnCount = 2;
-                tlpScreen.RowCount = 2;
-                foreach (Control control in tlpScreen.Controls)
-                {
-                    control.Width = tlpScreen.Width / 2;
-                    control.Height = tlpScreen.Height / 2;
-                }
-            }
-            else if(numScreen >= 5 && numScreen <= 6)
-            {
-                tlpScreen.ColumnCount = 3;
-                tlpScreen.RowCount = 2;
-                foreach (Control control in tlpScreen.Controls)
-                {
-                    control.Width = tlpScreen.Width / 3;
-                    control.Height = tlpScreen.Height / 2;
-                }
-            }
-            else if (numScreen >= 7 && numScreen <= 9)
-            {
-                tlpScreen.ColumnCount = 3;
-                tlpScreen.RowCount = 3;
-                foreach (Control control in tlpScreen.Controls)
-                {
-                    control.Width = tlpScreen.Width / 3;
-                    control.Height = tlpScreen.Height / 3;
-                }
-            }
-            else if (numScreen >= 10 && numScreen <= 12)
-            {
-                tlpScreen.ColumnCount = 4;
-                tlpScreen.RowCount = 3;
-                foreach (Control control in tlpScreen.Controls)
-                {
-                    control.Width = tlpScreen.Width / 4;
-                    control.Height = tlpScreen.Height / 3;
-                }
-            }
-            else if (numScreen >= 13 && numScreen <= 16)
-            {
-                tlpScreen.ColumnCount = 4;
-                tlpScreen.RowCount = 4;
-                foreach (Control control in tlpScreen.Controls)
-                {
-                    control.Width = tlpScreen.Width / 4;
-                    control.Height = tlpScreen.Height / 4;
-                }
-            }
+           
         }
 
         private void btnDisConnect_MouseEnter(object sender, EventArgs e)
@@ -798,7 +776,72 @@ namespace InfraredAnalyze
             }
         }
 
+        private void btnStart_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnStart, "一键链接");
+        }
+       
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            StringBuilder builder_ConnFailed = new StringBuilder();
+            StringBuilder builder_ConnDisable = new StringBuilder();
+            try
+            {
+                ArrayList temp_arrayList = sqlCreate.Select_All_SMInfraredConfig();//按NodeId降序排列
+                if (btnStart.Tag.ToString() == "Start")
+                {
+                    foreach(StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    {
+                        int Numbering = structIAnalyzeConfig.NodeID - 1;
+                        if (structIAnalyzeConfig.Enable==true)//启用
+                        {
+                            DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx[Numbering]);
+                            StaticClass.intPtrs_Connect[Numbering] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[Numbering], structIAnalyzeConfig.IP, 5000);// 返回值为视频操作句柄
+                            if (StaticClass.intPtrs_Connect[Numbering] < 0)//连接失败
+                            {
+                              Control[] controls= Controls.Find(("ucPbx" + structIAnalyzeConfig.NodeID).ToString(), true);
+                                if (controls != null)
+                                {
+                                    UCPbx uCPbx = controls[0] as UCPbx;
+                                    uCPbx.BackgroundImage = Properties.Resources.disconnectCamera;
+                                }
+                            }
+                        }
+                        else//未启用
+                        {
+                            Control[] controls = Controls.Find(("ucPbx" + structIAnalyzeConfig.NodeID).ToString(), true);
+                            if(controls!=null)
+                            {
+                                UCPbx uCPbx = controls[0] as UCPbx;
+                                uCPbx.BackgroundImage = Properties.Resources.disableCamera;
+                            }
+                        }
+                    }
+                    btnStart.BackgroundImage = Properties.Resources.Pause;
+                    btnStart.Tag = "Pause";
+                }
+                else if (btnStart.Tag.ToString() == "Pause")
+                {
+                    foreach (StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    {
+                        int Numbering = structIAnalyzeConfig.NodeID - 1;
+                        DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[Numbering]);
+                        btnStart.Tag = "Start";
+                        btnStart.BackgroundImage = Properties.Resources.start;
+                    }
+                    //DMSDK.DM_PlayerCleanup();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-        
+        private void 图像设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

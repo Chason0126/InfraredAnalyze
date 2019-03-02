@@ -20,6 +20,7 @@ namespace InfraredAnalyze
 
         private int iPCameraID;
         SqlCreate sqlCreate = new SqlCreate();
+        int tempOperateIntptr;
 
         public int IPCameraID { get => iPCameraID; set => iPCameraID = value; }
 
@@ -69,8 +70,8 @@ namespace InfraredAnalyze
                 IPAddressIP.tbx3.Text = str[2];
                 IPAddressIP.tbx4.Text = str[3];
                 DMSDK.DM_Init();
-                StaticClass.intPtrs_Operate[iPCameraID - 1] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[iPCameraID-1], structSM7003Tag.IP, 80);// 操作端口号6.0默认9989端口 ,7.0默认80端口
-                if(StaticClass.intPtrs_Operate[iPCameraID - 1]<=0)
+                tempOperateIntptr = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[iPCameraID - 1], structSM7003Tag.IP, 80);// 操作端口号6.0默认9989端口 ,7.0默认80端口
+                if (tempOperateIntptr <= 0)
                 {
                     MessageBox.Show("连接失败，请检查线路,或修改参数后新连接试！");
                     btnConfirm.Tag = "Reconnect";
@@ -82,9 +83,9 @@ namespace InfraredAnalyze
                 }
                 else
                 {
-                    DMSDK.DM_GetMAC(StaticClass.intPtrs_Operate[iPCameraID - 1], Mac);
-                    DMSDK.DM_GetNetmask(StaticClass.intPtrs_Operate[iPCameraID - 1], SubMask);
-                    DMSDK.DM_GetGateway(StaticClass.intPtrs_Operate[iPCameraID - 1], GateWay);
+                    DMSDK.DM_GetMAC(tempOperateIntptr, Mac);
+                    DMSDK.DM_GetNetmask(tempOperateIntptr, SubMask);
+                    DMSDK.DM_GetGateway(tempOperateIntptr, GateWay);
                     Update_IpAddrGateWay(GateWay.ToString());
                     Update_IpAddrSubMask(SubMask.ToString());
                     tbxMAC.Text = Mac.ToString();
@@ -131,7 +132,7 @@ namespace InfraredAnalyze
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            DMSDK.DM_Disconnect(StaticClass.intPtrs_Operate[iPCameraID - 1]);
+            DMSDK.DM_Disconnect(tempOperateIntptr);
             this.Close();
         }
 
@@ -176,7 +177,7 @@ namespace InfraredAnalyze
             if(btnConfirm.Tag.ToString()=="Confirm")
             {
                 btnConfirm.Text = "确认修改";
-                DMSDK.DM_SetIPAddr(StaticClass.intPtrs_Operate[iPCameraID - 1], IPAddressIP.IPAdd.ToString(), IPAddressSubMask.IPAdd.ToString(), IPAddressGateWay.IPAdd.ToString());
+                DMSDK.DM_SetIPAddr(tempOperateIntptr, IPAddressIP.IPAdd.ToString(), IPAddressSubMask.IPAdd.ToString(), IPAddressGateWay.IPAdd.ToString());
                 sqlCreate.UpDate_IPAddress(iPCameraID, IPAddressIP.IPAdd.ToString());
                 MessageBox.Show("修改成功！");
             }
@@ -184,8 +185,8 @@ namespace InfraredAnalyze
             {
                 btnConfirm.Text = "重新连接";
                 DMSDK.DM_Init();
-                StaticClass.intPtrs_Operate[iPCameraID - 1] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[iPCameraID - 1], IPAddressIP.IPAdd.ToString(), 80);
-                if (StaticClass.intPtrs_Operate[iPCameraID - 1] <= 0)
+                tempOperateIntptr = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[iPCameraID - 1], IPAddressIP.IPAdd.ToString(), 80);
+                if (tempOperateIntptr <= 0)
                 {
                     MessageBox.Show("无法连接探测器，请检查线路,或修改参数后重新连接！");
                     btnConfirm.Tag = "Reconnect";
@@ -200,9 +201,9 @@ namespace InfraredAnalyze
                     Mac = new StringBuilder();
                     SubMask = new StringBuilder();
                     GateWay = new StringBuilder();
-                    DMSDK.DM_GetMAC(StaticClass.intPtrs_Operate[iPCameraID - 1], Mac);
-                    DMSDK.DM_GetNetmask(StaticClass.intPtrs_Operate[iPCameraID - 1], SubMask);
-                    DMSDK.DM_GetGateway(StaticClass.intPtrs_Operate[iPCameraID - 1], GateWay);
+                    DMSDK.DM_GetMAC(tempOperateIntptr, Mac);
+                    DMSDK.DM_GetNetmask(tempOperateIntptr, SubMask);
+                    DMSDK.DM_GetGateway(tempOperateIntptr, GateWay);
                     Update_IpAddrGateWay(GateWay.ToString());
                     Update_IpAddrSubMask(SubMask.ToString());
                     tbxMAC.Text = Mac.ToString();

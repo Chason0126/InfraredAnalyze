@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlHeader = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
             this.lable11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlCameraName = new System.Windows.Forms.Panel();
@@ -56,21 +57,27 @@
             this.cbxResolution = new System.Windows.Forms.ComboBox();
             this.cbxBitrate = new System.Windows.Forms.ComboBox();
             this.pnlLocation = new System.Windows.Forms.Panel();
-            this.rdbCNameLocation = new System.Windows.Forms.RadioButton();
             this.rdbCTimeLocation = new System.Windows.Forms.RadioButton();
+            this.rdbCNameLocation = new System.Windows.Forms.RadioButton();
             this.btnLocationDown = new System.Windows.Forms.Button();
             this.btnLocationRight = new System.Windows.Forms.Button();
             this.btnLocationLeft = new System.Windows.Forms.Button();
             this.btnLocationUp = new System.Windows.Forms.Button();
             this.pbxVideo = new System.Windows.Forms.PictureBox();
-            this.btnClose = new System.Windows.Forms.Button();
             this.trbLocation = new System.Windows.Forms.TrackBar();
+            this.lbltrbValue = new System.Windows.Forms.Label();
+            this.pnlEncodingInfoChoose = new System.Windows.Forms.Panel();
+            this.rdbMinor = new System.Windows.Forms.RadioButton();
+            this.rdbMajor = new System.Windows.Forms.RadioButton();
+            this.pnlEncodingInfo = new System.Windows.Forms.Panel();
             this.pnlHeader.SuspendLayout();
             this.pnlCameraName.SuspendLayout();
             this.pnlTime.SuspendLayout();
             this.pnlLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxVideo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbLocation)).BeginInit();
+            this.pnlEncodingInfoChoose.SuspendLayout();
+            this.pnlEncodingInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -85,6 +92,20 @@
             this.pnlHeader.TabIndex = 0;
             this.pnlHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseDown);
             this.pnlHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseMove);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Location = new System.Drawing.Point(845, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(35, 35);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lable11
             // 
@@ -122,7 +143,7 @@
             this.rdbNotCameraName.Location = new System.Drawing.Point(212, 10);
             this.rdbNotCameraName.Name = "rdbNotCameraName";
             this.rdbNotCameraName.Size = new System.Drawing.Size(35, 16);
-            this.rdbNotCameraName.TabIndex = 3;
+            this.rdbNotCameraName.TabIndex = 6;
             this.rdbNotCameraName.Text = "否";
             this.rdbNotCameraName.UseVisualStyleBackColor = true;
             this.rdbNotCameraName.CheckedChanged += new System.EventHandler(this.rdbNotCameraName_CheckedChanged);
@@ -133,7 +154,7 @@
             this.rdbIsCameraName.Location = new System.Drawing.Point(156, 10);
             this.rdbIsCameraName.Name = "rdbIsCameraName";
             this.rdbIsCameraName.Size = new System.Drawing.Size(35, 16);
-            this.rdbIsCameraName.TabIndex = 2;
+            this.rdbIsCameraName.TabIndex = 5;
             this.rdbIsCameraName.Text = "是";
             this.rdbIsCameraName.UseVisualStyleBackColor = true;
             this.rdbIsCameraName.CheckedChanged += new System.EventHandler(this.rdbIsCameraName_CheckedChanged);
@@ -164,7 +185,7 @@
             this.rdbNotTime.Location = new System.Drawing.Point(212, 15);
             this.rdbNotTime.Name = "rdbNotTime";
             this.rdbNotTime.Size = new System.Drawing.Size(35, 16);
-            this.rdbNotTime.TabIndex = 3;
+            this.rdbNotTime.TabIndex = 8;
             this.rdbNotTime.Text = "否";
             this.rdbNotTime.UseVisualStyleBackColor = true;
             this.rdbNotTime.CheckedChanged += new System.EventHandler(this.rdbNotTime_CheckedChanged);
@@ -175,7 +196,7 @@
             this.rdbIsTime.Location = new System.Drawing.Point(156, 15);
             this.rdbIsTime.Name = "rdbIsTime";
             this.rdbIsTime.Size = new System.Drawing.Size(35, 16);
-            this.rdbIsTime.TabIndex = 2;
+            this.rdbIsTime.TabIndex = 7;
             this.rdbIsTime.Text = "是";
             this.rdbIsTime.UseVisualStyleBackColor = true;
             this.rdbIsTime.CheckedChanged += new System.EventHandler(this.rdbIsTime_CheckedChanged);
@@ -196,7 +217,7 @@
             this.tbxCameraName.Location = new System.Drawing.Point(593, 76);
             this.tbxCameraName.Name = "tbxCameraName";
             this.tbxCameraName.Size = new System.Drawing.Size(172, 23);
-            this.tbxCameraName.TabIndex = 3;
+            this.tbxCameraName.TabIndex = 2;
             this.tbxCameraName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbxCameraName.Leave += new System.EventHandler(this.tbxCameraName_Leave);
             // 
@@ -214,10 +235,10 @@
             // btnConfirm
             // 
             this.btnConfirm.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnConfirm.Location = new System.Drawing.Point(622, 528);
+            this.btnConfirm.Location = new System.Drawing.Point(636, 508);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 25);
-            this.btnConfirm.TabIndex = 8;
+            this.btnConfirm.Size = new System.Drawing.Size(80, 30);
+            this.btnConfirm.TabIndex = 22;
             this.btnConfirm.Text = "保存设置";
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
@@ -228,7 +249,7 @@
             this.btnUpdateTime.Location = new System.Drawing.Point(788, 118);
             this.btnUpdateTime.Name = "btnUpdateTime";
             this.btnUpdateTime.Size = new System.Drawing.Size(60, 23);
-            this.btnUpdateTime.TabIndex = 14;
+            this.btnUpdateTime.TabIndex = 4;
             this.btnUpdateTime.Text = "同步";
             this.btnUpdateTime.UseVisualStyleBackColor = true;
             this.btnUpdateTime.Click += new System.EventHandler(this.btnUpdateTime_Click);
@@ -236,10 +257,10 @@
             // tbxFrameRate
             // 
             this.tbxFrameRate.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxFrameRate.Location = new System.Drawing.Point(644, 384);
+            this.tbxFrameRate.Location = new System.Drawing.Point(103, 130);
             this.tbxFrameRate.Name = "tbxFrameRate";
             this.tbxFrameRate.Size = new System.Drawing.Size(121, 23);
-            this.tbxFrameRate.TabIndex = 13;
+            this.tbxFrameRate.TabIndex = 12;
             this.tbxFrameRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbxFrameRate.Leave += new System.EventHandler(this.tbxFrameRate_Leave);
             // 
@@ -247,7 +268,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(563, 382);
+            this.label5.Location = new System.Drawing.Point(22, 128);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 21);
             this.label5.TabIndex = 11;
@@ -272,7 +293,7 @@
             this.dtpCameraDateTime.Location = new System.Drawing.Point(594, 120);
             this.dtpCameraDateTime.Name = "dtpCameraDateTime";
             this.dtpCameraDateTime.Size = new System.Drawing.Size(173, 23);
-            this.dtpCameraDateTime.TabIndex = 10;
+            this.dtpCameraDateTime.TabIndex = 3;
             // 
             // timer1
             // 
@@ -282,7 +303,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(563, 346);
+            this.label7.Location = new System.Drawing.Point(22, 92);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 21);
             this.label7.TabIndex = 11;
@@ -292,7 +313,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(555, 312);
+            this.label8.Location = new System.Drawing.Point(14, 58);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 21);
             this.label8.TabIndex = 11;
@@ -302,7 +323,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(547, 267);
+            this.label9.Location = new System.Drawing.Point(6, 13);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(90, 21);
             this.label9.TabIndex = 11;
@@ -314,10 +335,11 @@
             this.cbxBitrateType.Items.AddRange(new object[] {
             "可变编码",
             "固定编码"});
-            this.cbxBitrateType.Location = new System.Drawing.Point(644, 267);
+            this.cbxBitrateType.Location = new System.Drawing.Point(103, 13);
             this.cbxBitrateType.Name = "cbxBitrateType";
             this.cbxBitrateType.Size = new System.Drawing.Size(121, 20);
-            this.cbxBitrateType.TabIndex = 15;
+            this.cbxBitrateType.TabIndex = 9;
+            this.cbxBitrateType.SelectedIndexChanged += new System.EventHandler(this.cbxBitrateType_SelectedIndexChanged);
             // 
             // cbxResolution
             // 
@@ -328,10 +350,11 @@
             "640x480",
             "720x480",
             "720x576"});
-            this.cbxResolution.Location = new System.Drawing.Point(644, 312);
+            this.cbxResolution.Location = new System.Drawing.Point(103, 58);
             this.cbxResolution.Name = "cbxResolution";
             this.cbxResolution.Size = new System.Drawing.Size(121, 20);
-            this.cbxResolution.TabIndex = 15;
+            this.cbxResolution.TabIndex = 10;
+            this.cbxResolution.SelectedIndexChanged += new System.EventHandler(this.cbxResolution_SelectedIndexChanged);
             // 
             // cbxBitrate
             // 
@@ -341,10 +364,11 @@
             "256 ",
             "512",
             "1024"});
-            this.cbxBitrate.Location = new System.Drawing.Point(644, 350);
+            this.cbxBitrate.Location = new System.Drawing.Point(103, 96);
             this.cbxBitrate.Name = "cbxBitrate";
             this.cbxBitrate.Size = new System.Drawing.Size(121, 20);
-            this.cbxBitrate.TabIndex = 15;
+            this.cbxBitrate.TabIndex = 11;
+            this.cbxBitrate.SelectedIndexChanged += new System.EventHandler(this.cbxBitrate_SelectedIndexChanged);
             // 
             // pnlLocation
             // 
@@ -355,6 +379,16 @@
             this.pnlLocation.Size = new System.Drawing.Size(102, 88);
             this.pnlLocation.TabIndex = 16;
             // 
+            // rdbCTimeLocation
+            // 
+            this.rdbCTimeLocation.AutoSize = true;
+            this.rdbCTimeLocation.Location = new System.Drawing.Point(14, 54);
+            this.rdbCTimeLocation.Name = "rdbCTimeLocation";
+            this.rdbCTimeLocation.Size = new System.Drawing.Size(47, 16);
+            this.rdbCTimeLocation.TabIndex = 21;
+            this.rdbCTimeLocation.Text = "时间";
+            this.rdbCTimeLocation.UseVisualStyleBackColor = true;
+            // 
             // rdbCNameLocation
             // 
             this.rdbCNameLocation.AutoSize = true;
@@ -362,20 +396,10 @@
             this.rdbCNameLocation.Location = new System.Drawing.Point(14, 16);
             this.rdbCNameLocation.Name = "rdbCNameLocation";
             this.rdbCNameLocation.Size = new System.Drawing.Size(47, 16);
-            this.rdbCNameLocation.TabIndex = 0;
+            this.rdbCNameLocation.TabIndex = 20;
             this.rdbCNameLocation.TabStop = true;
             this.rdbCNameLocation.Text = "名称";
             this.rdbCNameLocation.UseVisualStyleBackColor = true;
-            // 
-            // rdbCTimeLocation
-            // 
-            this.rdbCTimeLocation.AutoSize = true;
-            this.rdbCTimeLocation.Location = new System.Drawing.Point(14, 54);
-            this.rdbCTimeLocation.Name = "rdbCTimeLocation";
-            this.rdbCTimeLocation.Size = new System.Drawing.Size(47, 16);
-            this.rdbCTimeLocation.TabIndex = 1;
-            this.rdbCTimeLocation.Text = "时间";
-            this.rdbCTimeLocation.UseVisualStyleBackColor = true;
             // 
             // btnLocationDown
             // 
@@ -399,7 +423,7 @@
             this.btnLocationRight.Location = new System.Drawing.Point(211, 493);
             this.btnLocationRight.Name = "btnLocationRight";
             this.btnLocationRight.Size = new System.Drawing.Size(40, 40);
-            this.btnLocationRight.TabIndex = 17;
+            this.btnLocationRight.TabIndex = 19;
             this.btnLocationRight.UseVisualStyleBackColor = true;
             this.btnLocationRight.Click += new System.EventHandler(this.btnLocationRight_Click);
             // 
@@ -412,7 +436,7 @@
             this.btnLocationLeft.Location = new System.Drawing.Point(119, 493);
             this.btnLocationLeft.Name = "btnLocationLeft";
             this.btnLocationLeft.Size = new System.Drawing.Size(40, 40);
-            this.btnLocationLeft.TabIndex = 17;
+            this.btnLocationLeft.TabIndex = 18;
             this.btnLocationLeft.UseVisualStyleBackColor = true;
             this.btnLocationLeft.Click += new System.EventHandler(this.btnLocationLeft_Click);
             // 
@@ -425,7 +449,7 @@
             this.btnLocationUp.Location = new System.Drawing.Point(165, 458);
             this.btnLocationUp.Name = "btnLocationUp";
             this.btnLocationUp.Size = new System.Drawing.Size(40, 40);
-            this.btnLocationUp.TabIndex = 17;
+            this.btnLocationUp.TabIndex = 16;
             this.btnLocationUp.UseVisualStyleBackColor = true;
             this.btnLocationUp.Click += new System.EventHandler(this.btnLocationUp_Click);
             // 
@@ -438,29 +462,72 @@
             this.pbxVideo.TabIndex = 4;
             this.pbxVideo.TabStop = false;
             // 
-            // btnClose
-            // 
-            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
-            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(845, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(35, 35);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // trbLocation
             // 
             this.trbLocation.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.trbLocation.Location = new System.Drawing.Point(32, 458);
+            this.trbLocation.Location = new System.Drawing.Point(31, 473);
+            this.trbLocation.Minimum = 1;
             this.trbLocation.Name = "trbLocation";
             this.trbLocation.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trbLocation.Size = new System.Drawing.Size(45, 104);
-            this.trbLocation.TabIndex = 18;
+            this.trbLocation.TabIndex = 15;
             this.trbLocation.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trbLocation.Value = 1;
+            this.trbLocation.Scroll += new System.EventHandler(this.trbLocation_Scroll);
+            // 
+            // lbltrbValue
+            // 
+            this.lbltrbValue.AutoSize = true;
+            this.lbltrbValue.Location = new System.Drawing.Point(46, 455);
+            this.lbltrbValue.Name = "lbltrbValue";
+            this.lbltrbValue.Size = new System.Drawing.Size(0, 12);
+            this.lbltrbValue.TabIndex = 19;
+            // 
+            // pnlEncodingInfoChoose
+            // 
+            this.pnlEncodingInfoChoose.Controls.Add(this.rdbMinor);
+            this.pnlEncodingInfoChoose.Controls.Add(this.rdbMajor);
+            this.pnlEncodingInfoChoose.Location = new System.Drawing.Point(766, 296);
+            this.pnlEncodingInfoChoose.Name = "pnlEncodingInfoChoose";
+            this.pnlEncodingInfoChoose.Size = new System.Drawing.Size(102, 88);
+            this.pnlEncodingInfoChoose.TabIndex = 16;
+            // 
+            // rdbMinor
+            // 
+            this.rdbMinor.AutoSize = true;
+            this.rdbMinor.Location = new System.Drawing.Point(14, 54);
+            this.rdbMinor.Name = "rdbMinor";
+            this.rdbMinor.Size = new System.Drawing.Size(59, 16);
+            this.rdbMinor.TabIndex = 14;
+            this.rdbMinor.Text = "子码流";
+            this.rdbMinor.UseVisualStyleBackColor = true;
+            this.rdbMinor.CheckedChanged += new System.EventHandler(this.rdbMinor_CheckedChanged);
+            // 
+            // rdbMajor
+            // 
+            this.rdbMajor.AutoSize = true;
+            this.rdbMajor.Location = new System.Drawing.Point(14, 16);
+            this.rdbMajor.Name = "rdbMajor";
+            this.rdbMajor.Size = new System.Drawing.Size(59, 16);
+            this.rdbMajor.TabIndex = 13;
+            this.rdbMajor.Text = "主码流";
+            this.rdbMajor.UseVisualStyleBackColor = true;
+            this.rdbMajor.CheckedChanged += new System.EventHandler(this.rdbMajor_CheckedChanged);
+            // 
+            // pnlEncodingInfo
+            // 
+            this.pnlEncodingInfo.Controls.Add(this.tbxFrameRate);
+            this.pnlEncodingInfo.Controls.Add(this.label5);
+            this.pnlEncodingInfo.Controls.Add(this.label7);
+            this.pnlEncodingInfo.Controls.Add(this.label8);
+            this.pnlEncodingInfo.Controls.Add(this.label9);
+            this.pnlEncodingInfo.Controls.Add(this.cbxBitrateType);
+            this.pnlEncodingInfo.Controls.Add(this.cbxResolution);
+            this.pnlEncodingInfo.Controls.Add(this.cbxBitrate);
+            this.pnlEncodingInfo.Location = new System.Drawing.Point(520, 275);
+            this.pnlEncodingInfo.Name = "pnlEncodingInfo";
+            this.pnlEncodingInfo.Size = new System.Drawing.Size(245, 164);
+            this.pnlEncodingInfo.TabIndex = 20;
             // 
             // FrmVideoConfig
             // 
@@ -468,21 +535,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(880, 600);
+            this.Controls.Add(this.pnlEncodingInfo);
+            this.Controls.Add(this.lbltrbValue);
             this.Controls.Add(this.trbLocation);
             this.Controls.Add(this.btnLocationDown);
             this.Controls.Add(this.btnLocationRight);
             this.Controls.Add(this.btnLocationLeft);
             this.Controls.Add(this.btnLocationUp);
+            this.Controls.Add(this.pnlEncodingInfoChoose);
             this.Controls.Add(this.pnlLocation);
-            this.Controls.Add(this.cbxBitrate);
-            this.Controls.Add(this.cbxResolution);
-            this.Controls.Add(this.cbxBitrateType);
             this.Controls.Add(this.btnUpdateTime);
-            this.Controls.Add(this.tbxFrameRate);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dtpCameraDateTime);
             this.Controls.Add(this.btnConfirm);
@@ -509,6 +571,10 @@
             this.pnlLocation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxVideo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbLocation)).EndInit();
+            this.pnlEncodingInfoChoose.ResumeLayout(false);
+            this.pnlEncodingInfoChoose.PerformLayout();
+            this.pnlEncodingInfo.ResumeLayout(false);
+            this.pnlEncodingInfo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -552,5 +618,10 @@
         private System.Windows.Forms.Button btnLocationRight;
         private System.Windows.Forms.Button btnLocationDown;
         private System.Windows.Forms.TrackBar trbLocation;
+        private System.Windows.Forms.Label lbltrbValue;
+        private System.Windows.Forms.Panel pnlEncodingInfoChoose;
+        private System.Windows.Forms.RadioButton rdbMinor;
+        private System.Windows.Forms.RadioButton rdbMajor;
+        private System.Windows.Forms.Panel pnlEncodingInfo;
     }
 }

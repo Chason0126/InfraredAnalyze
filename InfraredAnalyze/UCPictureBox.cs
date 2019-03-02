@@ -72,9 +72,7 @@ namespace InfraredAnalyze
         {
             if(e.Button==MouseButtons.Left)
             {
-                //Point temp_Poit = MousePosition;
-                //temp_Poit.Offset(-point.X, -point.Y);
-                //this.Location = temp_Poit;
+                
             }
         }
     }
