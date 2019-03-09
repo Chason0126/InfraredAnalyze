@@ -7,6 +7,7 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace InfraredAnalyze
 {
@@ -58,6 +59,11 @@ namespace InfraredAnalyze
                 con_Server.Open();
                 cmd = new SqlCommand("CREATE DATABASE SM_Infrared;", con_Server);
                 cmd.ExecuteNonQuery();
+                for(int i = 1; i <= 16; i++)
+                {
+                    cmd = new SqlCommand("CREATE DATABASE SM_InfraredCamera" + i + ";", con_Server);
+                    cmd.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
@@ -88,6 +94,24 @@ namespace InfraredAnalyze
             }
         }
 
+        public void Table_TemperArea_Create(string SM_InfraredCamera)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=" + SM_InfraredCamera + "");
+                con_DB.Open();
+                cmd = new SqlCommand("create table TemperArea(AreaId int,Type nvarchar(MAX),X1 int,Y1 int,X2 int,Y2 int,X3 int,Y3 int,Emiss int,MeasureType int)", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("数据库创建异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
         ArrayList arrayList;
         public ArrayList Select_All_SMInfraredConfig()//按nodeid降序排列
         {
@@ -321,5 +345,80 @@ namespace InfraredAnalyze
             }
         }
 
+        public ArrayList Select_Spot(int CameraId)
+        {
+            arrayList = new ArrayList();
+            DMSDK.temperAreaSpot areaSpot = new DMSDK.temperAreaSpot();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("select AreaId,X1,Y1,Emiss from TemperArea where Type='S' order by AreaId", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    areaSpot.AreaId = (int)sqlDataReader.GetValue(0);
+                    areaSpot.X1 = (int)sqlDataReader.GetValue(1);
+                    areaSpot.Y1 = (int)sqlDataReader.GetValue(2);
+                    areaSpot.Emiss = (int)sqlDataReader.GetValue(3);
+                    arrayList.Add(areaSpot);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温点参数异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList;
+        }
+
+        public StructType ConverBytesToStructure<StructType>(byte[] bytesBuffer)
+        {
+            // 检查长度  
+            if (bytesBuffer.Length != Marshal.SizeOf(typeof(StructType)))
+            {
+                throw new ArgumentException("bytesBuffer参数和structObject参数字节长度不一致。");
+            }
+            //分配一个未托管类型变量  
+            IntPtr bufferHandler = Marshal.AllocHGlobal(bytesBuffer.Length);
+            //逐个复制，也可以直接用copy()方法  
+            for (int index = 0; index < bytesBuffer.Length; index++)
+            {
+                Marshal.WriteByte(bufferHandler, index, bytesBuffer[index]);
+            }
+            //从非托管类型转化为托管类型变量  
+            StructType structObject = (StructType)Marshal.PtrToStructure(bufferHandler, typeof(StructType));
+            //释放非托管类型变量  
+            Marshal.FreeHGlobal(bufferHandler);
+            return structObject;
+        }
+
+        public static object BytesToStruct(byte[] bytes, Type strType)
+        {
+            //获取结构体的大小（以字节为单位）  
+            int size = Marshal.SizeOf(strType);
+            //简单的判断（可以去掉）  
+            if (size > bytes.Length)
+            {
+                return null;
+            }
+
+            //从进程的非托管堆中分配内存给structPtr  
+            IntPtr strPtr = Marshal.AllocHGlobal(size);
+
+            //将数据从一维托管数组bytes复制到非托管内存指针strPtr  
+            Marshal.Copy(bytes, 0, strPtr, size);
+
+            //将数据从非托管内存块封送到新分配的指定类型的托管对象  
+            //将内存空间转换为目标结构体  
+            object obj = Marshal.PtrToStructure(strPtr, strType);
+
+            //释放以前使用 AllocHGlobal 从进程的非托管内存中分配的内存  
+            Marshal.FreeHGlobal(strPtr);
+            return obj;
+        }
     }
 }

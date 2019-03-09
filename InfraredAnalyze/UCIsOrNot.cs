@@ -17,23 +17,26 @@ namespace InfraredAnalyze
             InitializeComponent();
         }
 
-        bool isOrnot;
-        string gpbName;
+        string ucText;
+        bool isOrNot;
 
-        public string GpbName
+        public bool IsOrNot { get => rdbIs.Checked; set => rdbIs.Checked = value; }
+        public string UcText { get => gpb.Text; set => gpb.Text = value; }
+
+        private void rdbIs_CheckedChanged(object sender, EventArgs e)
         {
-            get => gpb.Name;
-            set => gpbName = gpb.Name;
-        }
-        public bool IsOrnot
-        {
-            get => rdbIs.Checked;
-            set => isOrnot = rdbIs.Checked;
+            if(rdbIs.Checked==true)
+            {
+                IsOrNot = true;
+            }
         }
 
-        private void UCIsOrNot_Load(object sender, EventArgs e)
+        private void rbdNot_CheckedChanged(object sender, EventArgs e)
         {
-           
+            if(rbdNot.Checked==true)
+            {
+                IsOrNot = false;
+            }
         }
     }
 }

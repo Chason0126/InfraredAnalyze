@@ -16,7 +16,7 @@ namespace InfraredAnalyze
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmImageConfig());
+            Application.Run(new FrmMain());
         }
     }
 }

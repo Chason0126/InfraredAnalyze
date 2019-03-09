@@ -49,8 +49,8 @@ namespace InfraredAnalyze
 
         public struct tagResolutionInfo
         {
-          public  int width;
-          public  int height;
+            public int width;
+            public int height;
         }
 
 
@@ -90,6 +90,56 @@ namespace InfraredAnalyze
         *输入参数:  
         *返回值:
             */
+
+        public struct temperAreaSpot
+        {
+            public int AreaId;
+            public int X1;
+            public int Y1;
+            public int Emiss;
+        }
+
+        public struct tagTemperaturePos//4*9
+        {
+            int type;
+            int number;
+            int MaxTemper;
+            int MaxTemperPosX;
+            int MaxTemperPosY;
+            int MinTemper;
+            int MinTemperPosX;
+            int MinTemperPosY;
+            int AveTemper;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tagTempMessage
+        {
+            public int handle;//4
+            public int len;//4
+            //char dvrIP[16];
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)] public string dvrIP;//16
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)] public tagTemperature[] temperInfo;//12*32=384 一共408
+            //public tagTemperature temperInfo;
+        }
+
+        public struct tagTemperature
+        {
+            public int type;
+            public int number;
+            public int temper;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tagTempMessagePos
+        {
+            int handle;//4
+            int len;//temperInfo的个数//4
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)] public string dvrIP;//16
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)] public tagTemperaturePos[] temperInfo;//36*32
+        }
+
+
         [DllImport("DMSDK.dll", EntryPoint = "DM_Init")]
         public static extern void DM_Init();
 
@@ -118,7 +168,7 @@ namespace InfraredAnalyze
 		            <= 0 连接失败			
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_ConnectWithName")]
-        public static extern int DM_ConnectWithName(IntPtr hintptr,  string IPAddr, int Port,  string UserName,  string Password);
+        public static extern int DM_ConnectWithName(IntPtr hintptr, string IPAddr, int Port, string UserName, string Password);
 
         /*
             函数名称:	DM_Disconnect
@@ -128,7 +178,7 @@ namespace InfraredAnalyze
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Disconnect")]
         public static extern int DM_Disconnect(int handle);
-        
+
         /*
             函数名称:	DM_SetIsotherm
         *函数说明:	设置等温区域
@@ -155,7 +205,7 @@ namespace InfraredAnalyze
 			        iHightTemp:		等温区域温度范围 * 100
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetIsotherm")]
-        public static extern int DM_GetIsotherm(int handle, int iIndex,out int iColorID,out int iIsoTemp,out int iHightTemp);
+        public static extern int DM_GetIsotherm(int handle, int iIndex, out int iColorID, out int iIsoTemp, out int iHightTemp);
 
         /*
             函数名称:	DM_SetAlarmInfo
@@ -191,7 +241,7 @@ namespace InfraredAnalyze
         *注：	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAlarmInfo")]
-        public static extern int DM_GetAlarmInfo(int handle,int type,int Index,out int AlarmPower,out  int AlarmType,out int AlarmTemp,out int AlarmColorID,out int AlarmMessageType);
+        public static extern int DM_GetAlarmInfo(int handle, int type, int Index, out int AlarmPower, out int AlarmType, out int AlarmTemp, out int AlarmColorID, out int AlarmMessageType);
 
         /*
             函数名称:	DM_SetPreset
@@ -226,7 +276,7 @@ namespace InfraredAnalyze
         *返回值:	>0 成功, <0失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_ResetPresetName")]
-        public static extern int DM_ResetPresetName(int handle, int iIndex,ref string cPresetName);
+        public static extern int DM_ResetPresetName(int handle, int iIndex, ref string cPresetName);
 
         /*
             函数名称:	DM_GetAllPreset
@@ -269,7 +319,7 @@ namespace InfraredAnalyze
         *返回值:	>0 成功, <0失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_CallPos")]
-        public static extern int DM_CallPos(int handle,int iPos);
+        public static extern int DM_CallPos(int handle, int iPos);
 
         /*
             函数名称:	DM_SetSpot
@@ -408,7 +458,7 @@ namespace InfraredAnalyze
         *返回值:			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAreaTemp")]
-        public static extern void DM_GetAreaTemp(int handle, int AreaID , int Mode );
+        public static extern void DM_GetAreaTemp(int handle, int AreaID, int Mode);
 
         /*
             函数名称:	DM_GetTemp
@@ -439,7 +489,7 @@ namespace InfraredAnalyze
         *返回值:>0 成功			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetTempParam")]
-        public static extern int DM_GetTempParam(int handle);
+        public static extern int DM_GetTempParam(int handle, int Type, int Number);
 
         /*
             函数名称:	DM_CaptureInfraredFrame
@@ -589,7 +639,7 @@ namespace InfraredAnalyze
         *返回值:			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetUpdateMeaTemp")]
-        public static extern void DM_SetUpdateMeaTemp(int handle,int Freq);
+        public static extern void DM_SetUpdateMeaTemp(int handle, int Freq);
 
         /*
             函数名称:	DM_GetUpdateMeaTemp
@@ -608,7 +658,7 @@ namespace InfraredAnalyze
         *返回值:		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetVideoMode")]
-        public static extern void DM_SetVideoMode(int handle,int Mode);
+        public static extern void DM_SetVideoMode(int handle, int Mode);
 
         /*
             函数名称:	DM_AutoFocus
@@ -627,7 +677,7 @@ namespace InfraredAnalyze
         *返回值:		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_FocusFar")]
-        public static extern void DM_FocusFar(int handle,int step=1);
+        public static extern void DM_FocusFar(int handle, int step = 1);
 
         /*
             函数名称:	DM_FocusNear
@@ -701,7 +751,7 @@ namespace InfraredAnalyze
         *返回值:		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_ShowTempValueOnImage")]
-        public static extern void DM_ShowTempValueOnImage(int handle,bool bEnable);
+        public static extern void DM_ShowTempValueOnImage(int handle, bool bEnable);
 
         /*
             函数名称:	DM_GetTempValueOnImageStatus
@@ -720,7 +770,7 @@ namespace InfraredAnalyze
         *返回值:	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetISOTemp")]
-        public static extern void  DM_SetISOTemp(int handle, int ThermTemp);
+        public static extern void DM_SetISOTemp(int handle, int ThermTemp);
 
         /*
             函数名称:	DM_GetISOTemp
@@ -729,7 +779,7 @@ namespace InfraredAnalyze
         *返回值:	等温温度
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetISOTemp")]
-        public static extern int  DM_GetISOTemp(int handle);
+        public static extern int DM_GetISOTemp(int handle);
 
         /*
             函数名称:	DM_SetISOHight
@@ -740,7 +790,7 @@ namespace InfraredAnalyze
         *返回值:	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetISOHight")]
-        public static extern void  DM_SetISOHight(int handle, int ThermHight);
+        public static extern void DM_SetISOHight(int handle, int ThermHight);
 
         /*
             函数名称:	DM_GetISOHight
@@ -752,7 +802,7 @@ namespace InfraredAnalyze
         *返回值:	等温高度
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetISOHight")]
-        public static extern int  DM_GetISOHight(int handle);
+        public static extern int DM_GetISOHight(int handle);
 
         /*
             函数名称:	DM_SetISOColor
@@ -762,7 +812,7 @@ namespace InfraredAnalyze
         *返回值:	等温高度
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetISOColor")]
-        public static extern void  DM_SetISOColor(int handle, int ColorID);
+        public static extern void DM_SetISOColor(int handle, int ColorID);
 
         /*
             函数名称:	DM_GetISOColor
@@ -771,7 +821,7 @@ namespace InfraredAnalyze
         *返回值:	等温色（见颜色索引号）
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetISOColor")]
-        public static extern int  DM_GetISOColor(int handle);
+        public static extern int DM_GetISOColor(int handle);
 
         /*
             函数名称:	DM_SetTempUnit
@@ -781,7 +831,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetTempUnit")]
-        public static extern void  DM_SetTempUnit(int handle, int Unit);
+        public static extern void DM_SetTempUnit(int handle, int Unit);
 
         /*
             函数名称:	DM_GetTempUnit
@@ -790,7 +840,7 @@ namespace InfraredAnalyze
         *返回值:	温度单位（0：℃;1 ℉;2 K）
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetTempUnit")]
-        public static extern int  DM_GetTempUnit(int handle);
+        public static extern int DM_GetTempUnit(int handle);
 
         /*
             函数名称:	DM_SetUpTempRange
@@ -801,7 +851,7 @@ namespace InfraredAnalyze
         *返回值:	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetUpTempRange")]
-        public static extern void  DM_SetUpTempRange(int handle, int Offset);
+        public static extern void DM_SetUpTempRange(int handle, int Offset);
 
         /*
             函数名称:	DM_SetDownTempRange
@@ -812,7 +862,7 @@ namespace InfraredAnalyze
         *返回值:	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetDownTempRange")]
-        public static extern void  DM_SetDownTempRange(int handle, int Offset);
+        public static extern void DM_SetDownTempRange(int handle, int Offset);
 
 
         /****************************************************************************************************************/
@@ -828,7 +878,7 @@ namespace InfraredAnalyze
         *返回值:			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetMeasureClass")]
-        public static extern void  DM_SetMeasureClass(int handle, int ParamValue);
+        public static extern void DM_SetMeasureClass(int handle, int ParamValue);
 
         /*
             函数名称:	DM_GetMeasureClass
@@ -837,7 +887,7 @@ namespace InfraredAnalyze
         *返回值:	当前的测温档位（档位值从1开始）		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetMeasureClass")]
-        public static extern int  DM_GetMeasureClass(int handle);
+        public static extern int DM_GetMeasureClass(int handle);
 
         /*
             函数名称:	DM_SetRefeType
@@ -851,7 +901,7 @@ namespace InfraredAnalyze
         *返回值:			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetRefeType")]
-        public static extern void  DM_SetRefeType(int handle, int ParamValue);
+        public static extern void DM_SetRefeType(int handle, int ParamValue);
 
         /*
             函数名称:	DM_GetRefeType
@@ -860,7 +910,7 @@ namespace InfraredAnalyze
         *返回值:    仪器的参考温度类型			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetRefeType")]
-        public static extern  int  DM_GetRefeType(int handle);
+        public static extern int DM_GetRefeType(int handle);
 
         /*
             函数名称:	DM_SetRefeTemp
@@ -871,7 +921,7 @@ namespace InfraredAnalyze
         *返回值:    仪器的参考温度类型			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetRefeTemp")]
-        public static extern void  DM_SetRefeTemp(int handle, int ParamValue);
+        public static extern void DM_SetRefeTemp(int handle, int ParamValue);
 
         /*
             函数名称:	DM_GetRefeTemp
@@ -882,7 +932,7 @@ namespace InfraredAnalyze
         *返回值:    仪器的参考温度类型			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetRefeTemp")]
-        public static extern int  DM_GetRefeTemp(int handle);
+        public static extern int DM_GetRefeTemp(int handle);
 
         /*
             函数名称:	DM_SetAmbientTemp
@@ -893,7 +943,7 @@ namespace InfraredAnalyze
         *返回值:    			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetAmbientTemp")]
-        public static extern void  DM_SetAmbientTemp(int handle, int Temp);
+        public static extern void DM_SetAmbientTemp(int handle, int Temp);
 
         /*
             函数名称:	DM_GetAmbientTemp
@@ -903,7 +953,7 @@ namespace InfraredAnalyze
         *返回值:    环境温度			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAmbientTemp")]
-        public static extern int  DM_GetAmbientTemp(int handle);
+        public static extern int DM_GetAmbientTemp(int handle);
 
         /*
             函数名称:	DM_SetObjDistance
@@ -914,7 +964,7 @@ namespace InfraredAnalyze
         *返回值:    			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetObjDistance")]
-        public static extern  void  DM_SetObjDistance(int handle, int Distance);
+        public static extern void DM_SetObjDistance(int handle, int Distance);
 
         /*
             函数名称:	DM_GetObjDistance
@@ -924,7 +974,7 @@ namespace InfraredAnalyze
         *返回值:    环境距离			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetObjDistance")]
-        public static extern int  DM_GetObjDistance(int handle);
+        public static extern int DM_GetObjDistance(int handle);
 
         /*
             函数名称:	DM_SetAmbientHumidity
@@ -934,7 +984,7 @@ namespace InfraredAnalyze
         *返回值:    环境距离			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetAmbientHumidity")]
-        public static extern  void  DM_SetAmbientHumidity(int handle, int Humidity);
+        public static extern void DM_SetAmbientHumidity(int handle, int Humidity);
 
         /*
             函数名称:	DM_GetAmbientHumidity
@@ -944,7 +994,7 @@ namespace InfraredAnalyze
         *返回值:    环境湿度 湿度范围（0-100）			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAmbientHumidity")]
-        public static extern  int  DM_GetAmbientHumidity(int handle);
+        public static extern int DM_GetAmbientHumidity(int handle);
 
         /*
             函数名称:	DM_SetReviseParam
@@ -956,7 +1006,7 @@ namespace InfraredAnalyze
         *返回值:   			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetReviseParam")]
-        public static extern void  DM_SetReviseParam(int handle, int ReviseParam);
+        public static extern void DM_SetReviseParam(int handle, int ReviseParam);
 
         /*
             函数名称:	DM_GetReviseParam
@@ -967,7 +1017,7 @@ namespace InfraredAnalyze
         *返回值:   			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetReviseParam")]
-        public static extern int  DM_GetReviseParam(int handle);
+        public static extern int DM_GetReviseParam(int handle);
 
         /*
             函数名称:	DM_SetReviseTemp
@@ -979,7 +1029,7 @@ namespace InfraredAnalyze
         *返回值:   			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetReviseTemp")]
-        public static extern void  DM_SetReviseTemp(int handle, int ReviseTemp);
+        public static extern void DM_SetReviseTemp(int handle, int ReviseTemp);
 
         /*
             函数名称:	DM_GetReviseTemp
@@ -989,7 +1039,7 @@ namespace InfraredAnalyze
         *返回值:   	修正温度		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetReviseTemp")]
-        public static extern int  DM_GetReviseTemp(int handle);
+        public static extern int DM_GetReviseTemp(int handle);
 
         /****************************************************************************************************************/
         /* 报警设置                                                                                                     */
@@ -1003,7 +1053,7 @@ namespace InfraredAnalyze
         **注：		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_OpenAlarm")]
-        public static extern void  DM_OpenAlarm(int handle);
+        public static extern void DM_OpenAlarm(int handle);
 
         /*
             函数名称:	DM_CloseAlarm
@@ -1013,7 +1063,7 @@ namespace InfraredAnalyze
         *注：	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_CloseAlarm")]
-        public static extern void  DM_CloseAlarm(int handle);
+        public static extern void DM_CloseAlarm(int handle);
 
         /*
             函数名称:	DM_SetAlarmTemp
@@ -1024,7 +1074,7 @@ namespace InfraredAnalyze
         *注：
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetAlarmTemp")]
-        public static extern void  DM_SetAlarmTemp(int handle, int Temp);
+        public static extern void DM_SetAlarmTemp(int handle, int Temp);
 
         /*
             函数名称:	DM_GetAlarmTemp
@@ -1034,7 +1084,7 @@ namespace InfraredAnalyze
         *注：	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAlarmTemp")]
-        public static extern int  DM_GetAlarmTemp(int handle);
+        public static extern int DM_GetAlarmTemp(int handle);
 
         /*
             函数名称:	DM_SetAlarmColor
@@ -1045,7 +1095,7 @@ namespace InfraredAnalyze
         *注：
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetAlarmColor")]
-        public static extern void  DM_SetAlarmColor(int handle, int ColorID);
+        public static extern void DM_SetAlarmColor(int handle, int ColorID);
 
         /*
             函数名称:	DM_GetAlarmColor
@@ -1055,7 +1105,7 @@ namespace InfraredAnalyze
         *注：
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAlarmColor")]
-        public static extern int  DM_GetAlarmColor(int handle);
+        public static extern int DM_GetAlarmColor(int handle);
 
         /*
             函数名称:	DM_OpenRemoteAlarm
@@ -1064,7 +1114,7 @@ namespace InfraredAnalyze
         *返回值:	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_OpenRemoteAlarm")]
-        public static extern void   DM_OpenRemoteAlarm(int handle);
+        public static extern void DM_OpenRemoteAlarm(int handle);
 
         /*
             函数名称:	DM_CloseRemoteAlarm
@@ -1073,7 +1123,7 @@ namespace InfraredAnalyze
         *返回值:	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_CloseRemoteAlarm")]
-        public static extern void   DM_CloseRemoteAlarm(int handle);
+        public static extern void DM_CloseRemoteAlarm(int handle);
 
         /*
             函数名称:	DM_SetRemoteAlarmTemp
@@ -1083,7 +1133,7 @@ namespace InfraredAnalyze
         *返回值:	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetRemoteAlarmTemp")]
-        public static extern void   DM_SetRemoteAlarmTemp(int handle, int Temp);
+        public static extern void DM_SetRemoteAlarmTemp(int handle, int Temp);
 
         /*
             函数名称:	DM_GetRemoteAlarmTemp
@@ -1092,7 +1142,7 @@ namespace InfraredAnalyze
         *返回值:	报警温度
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetRemoteAlarmTemp")]
-        public static extern int   DM_GetRemoteAlarmTemp(int handle);
+        public static extern int DM_GetRemoteAlarmTemp(int handle);
 
         /*
             函数名称:	DM_SetRemoteAlarmColor
@@ -1102,7 +1152,7 @@ namespace InfraredAnalyze
         *返回值:	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetRemoteAlarmColor")]
-        public static extern void   DM_SetRemoteAlarmColor(int handle, int ColorID);
+        public static extern void DM_SetRemoteAlarmColor(int handle, int ColorID);
 
         /*
             函数名称:	DM_GetRemoteAlarmColor
@@ -1111,7 +1161,7 @@ namespace InfraredAnalyze
         *返回值:	报警颜色（见颜色索引号）
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetRemoteAlarmColor")]
-        public static extern int   DM_GetRemoteAlarmColor(int handle);
+        public static extern int DM_GetRemoteAlarmColor(int handle);
 
         /*
             函数名称:	DM_IOAlarm
@@ -1120,7 +1170,7 @@ namespace InfraredAnalyze
         *返回值:	报警颜色（见颜色索引号）
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_IOAlarm")]
-        public static extern void  DM_IOAlarm(int handle, int iIO, int iEnable);
+        public static extern void DM_IOAlarm(int handle, int iIO, int iEnable);
 
         /*************************************************************************************************************8****/
         /*   系统配置设置                                                                                                 */
@@ -1135,7 +1185,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetIPAddr")]
-        public static extern void   DM_SetIPAddr(int handle,  string IP,  string SubMask,  string GateWay);
+        public static extern void DM_SetIPAddr(int handle, string IP, string SubMask, string GateWay);
 
         /*
             函数名称:	DM_SetMAC
@@ -1145,7 +1195,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetMAC")]
-        public static extern void   DM_SetMAC(int handle, ref string Mac);
+        public static extern void DM_SetMAC(int handle, ref string Mac);
 
         /*
             函数名称:	DM_SetAutoAdjustTime
@@ -1156,7 +1206,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetAutoAdjustTime")]
-        public static extern void  DM_SetAutoAdjustTime(int handle, int Time);
+        public static extern void DM_SetAutoAdjustTime(int handle, int Time);
 
         /*
             函数名称:	DM_GetAutoAdjustTime
@@ -1166,7 +1216,7 @@ namespace InfraredAnalyze
         *返回值:    间隔时间（秒）
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAutoAdjustTime")]
-        public static extern int  DM_GetAutoAdjustTime(int handle);
+        public static extern int DM_GetAutoAdjustTime(int handle);
 
         /*
             函数名称:	DM_SetDateTime
@@ -1182,7 +1232,7 @@ namespace InfraredAnalyze
         *返回值:    
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetDateTime")]
-        public static extern void  DM_SetDateTime(int handle, int year, int month, int day, int hour, int min, int sec);
+        public static extern void DM_SetDateTime(int handle, int year, int month, int day, int hour, int min, int sec);
 
         /*
             函数名称:	DM_GetDateTime
@@ -1198,7 +1248,7 @@ namespace InfraredAnalyze
                     ss			秒
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetDateTime")]
-        public static extern void  DM_GetDateTime(int handle, StringBuilder DateTime);
+        public static extern void DM_GetDateTime(int handle, StringBuilder DateTime);
 
         /*
             函数名称:	DM_LoadDefault
@@ -1207,7 +1257,7 @@ namespace InfraredAnalyze
         *返回值：无
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_LoadDefault")]
-        public static extern void  DM_LoadDefault(int handle);
+        public static extern void DM_LoadDefault(int handle);
 
         /*
             函数名称:	DM_GetSystemInfo
@@ -1217,7 +1267,7 @@ namespace InfraredAnalyze
         *返回值：无
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetSystemInfo")]
-        public static extern void   DM_GetSystemInfo(int handle, ref string SysInfo);
+        public static extern void DM_GetSystemInfo(int handle, ref string SysInfo);
 
         /*
             函数名称:	DM_SetZoom
@@ -1229,7 +1279,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetZoom")]
-        public static extern int  DM_SetZoom(int handle, int iZoom);
+        public static extern int DM_SetZoom(int handle, int iZoom);
 
         /*
             函数名称:	DM_SetBright
@@ -1239,7 +1289,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetBright")]
-        public static extern int  DM_SetBright(int handle, int iBright);
+        public static extern int DM_SetBright(int handle, int iBright);
 
         /*
             函数名称:	DM_SetContrast
@@ -1249,7 +1299,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetContrast")]
-        public static extern int  DM_SetContrast(int handle, int iContrast);
+        public static extern int DM_SetContrast(int handle, int iContrast);
 
         /*
             函数名称:	DM_SetOSDInfo_CameraName
@@ -1262,7 +1312,7 @@ namespace InfraredAnalyze
         *返回值:	>0 成功 
                     <0 失败
         */
-        [DllImport("DMSDK.dll", EntryPoint = "DM_SetOSDInfo_CameraName",CharSet =CharSet.Ansi)]
+        [DllImport("DMSDK.dll", EntryPoint = "DM_SetOSDInfo_CameraName", CharSet = CharSet.Ansi)]
         //public static extern int DM_SetOSDInfo_CameraName(int handle, string cCameraName, int iDisplayName, int iPosX, int iPosY);
         public static extern int DM_SetOSDInfo_CameraName(int handle, string cCameraName, int iDisplayName, int iPosX, int iPosY);
         /*
@@ -1277,7 +1327,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetOSDInfo_UserDefine")]
-        public static extern int  DM_SetOSDInfo_UserDefine(int handle, ref string cUserDefineInfo, int iDisplayUserDefineInfo, int iPosX, int iPosY);
+        public static extern int DM_SetOSDInfo_UserDefine(int handle, ref string cUserDefineInfo, int iDisplayUserDefineInfo, int iPosX, int iPosY);
 
         /*
             函数名称:	DM_SetOSDInfo_DateTime
@@ -1290,7 +1340,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetOSDInfo_DateTime")]
-        public static extern int  DM_SetOSDInfo_DateTime(int handle, int iDisplayTime, int iPosX, int iPosY);
+        public static extern int DM_SetOSDInfo_DateTime(int handle, int iDisplayTime, int iPosX, int iPosY);
 
         /*
             函数名称:	DM_SetOSDInfo_PeaDisplay
@@ -1302,7 +1352,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetOSDInfo_PeaDisplay")]
-        public static extern int  DM_SetOSDInfo_PeaDisplay(int handle, int iDisplayPea);
+        public static extern int DM_SetOSDInfo_PeaDisplay(int handle, int iDisplayPea);
 
         /*
             函数名称:	DM_SetEncodingInfo_Major
@@ -1318,7 +1368,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetEncodingInfo_Major")]
-        public static extern int  DM_SetEncodingInfo_Major(int handle, int BitrateType, int Resolution, int Bitrate, int FrameRate);
+        public static extern int DM_SetEncodingInfo_Major(int handle, int BitrateType, int Resolution, int Bitrate, int FrameRate);
 
         /*
             函数名称:	DM_SetEncodingInfo_Minor
@@ -1334,7 +1384,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetEncodingInfo_Minor")]
-        public static extern int  DM_SetEncodingInfo_Minor(int handle, int BitrateType, int Resolution, int Bitrate, int FrameRate);
+        public static extern int DM_SetEncodingInfo_Minor(int handle, int BitrateType, int Resolution, int Bitrate, int FrameRate);
 
         /*
             函数名称:	DM_SetRecordSchedule
@@ -1348,7 +1398,7 @@ namespace InfraredAnalyze
 			        <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetRecordSchedule")]
-        public static extern int  DM_SetRecordSchedule(int handle, int iEnable, ref string RecordTime);
+        public static extern int DM_SetRecordSchedule(int handle, int iEnable, ref string RecordTime);
 
         /*
             函数名称:	DM_SetStorageInfo
@@ -1364,7 +1414,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetStorageInfo")]
-        public static extern int  DM_SetStorageInfo(int handle, int iEnable, int iOverWrite, int iFullAlarm, int iFullGrade);
+        public static extern int DM_SetStorageInfo(int handle, int iEnable, int iOverWrite, int iFullAlarm, int iFullGrade);
 
         /*
             函数名称:	DM_SetNASInfo
@@ -1384,7 +1434,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetNASInfo")]
-        public static extern int  DM_SetNASInfo(int handle, int iEnable, ref string IP, ref string ID, ref string Password,ref string Path, int iOverWrite, int iFullAlarm, int iFullGrade);
+        public static extern int DM_SetNASInfo(int handle, int iEnable, ref string IP, ref string ID, ref string Password, ref string Path, int iOverWrite, int iFullAlarm, int iFullGrade);
 
         /*
             函数名称:	DM_SetUnexpectedInfo_Network
@@ -1400,7 +1450,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetUnexpectedInfo_Network")]
-        public static extern int  DM_SetUnexpectedInfo_Network(int handle, int iAlarmType, int iEnable, int iRecTime, int iPreRecTime);
+        public static extern int DM_SetUnexpectedInfo_Network(int handle, int iAlarmType, int iEnable, int iRecTime, int iPreRecTime);
 
         /*
             函数名称:	DM_SetUnexpectedInfo_Storage
@@ -1417,7 +1467,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetUnexpectedInfo_Storage")]
-        public static extern int  DM_SetUnexpectedInfo_Storage(int handle, int iAlarmType, ref string AlarmLinkOutInfo, int iMailContentType, int iEMailPicNum, int iFtpPicNum);
+        public static extern int DM_SetUnexpectedInfo_Storage(int handle, int iAlarmType, ref string AlarmLinkOutInfo, int iMailContentType, int iEMailPicNum, int iFtpPicNum);
 
         /*
             函数名称:	DM_GetZoom
@@ -1428,7 +1478,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetZoom")]
-        public static extern int  DM_GetZoom(int handle);
+        public static extern int DM_GetZoom(int handle);
 
         /*
             函数名称:	DM_GetBright
@@ -1437,7 +1487,7 @@ namespace InfraredAnalyze
         *返回值:	正数表示亮度值, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetBright")]
-        public static extern int  DM_GetBright(int handle);
+        public static extern int DM_GetBright(int handle);
 
         /*
             函数名称:	DM_GetContrast
@@ -1446,7 +1496,7 @@ namespace InfraredAnalyze
         *返回值:	正数表示增益值, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetContrast")]
-        public static extern int  DM_GetContrast(int handle);
+        public static extern int DM_GetContrast(int handle);
 
         /*
             函数名称:	DM_GetOSDInfo_CameraName
@@ -1478,8 +1528,8 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetOSDInfo_UserDefine")]
-        public static extern int  DM_GetOSDInfo_UserDefine(int handle,  string cUserDefineInfo,out int iDisplayUserDefineInfo,out int iPosX,out int iPosY);
-    
+        public static extern int DM_GetOSDInfo_UserDefine(int handle, string cUserDefineInfo, out int iDisplayUserDefineInfo, out int iPosX, out int iPosY);
+
         /*
             函数名称:	DM_GetOSDInfo_DateTime
         *函数说明:	获得视频中的时间信息
@@ -1502,7 +1552,7 @@ namespace InfraredAnalyze
         *返回值:	0: 关闭，1: 打开
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetOSDInfo_PeaDisplay")]
-        public static extern int  DM_GetOSDInfo_PeaDisplay(int handle);
+        public static extern int DM_GetOSDInfo_PeaDisplay(int handle);
 
         /*
             函数名称:	DM_GetEncodingInfo_Major
@@ -1551,7 +1601,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetRecordSchedule")]
-        public static extern int  DM_GetRecordSchedule(int handle,ref int iEnable, ref string RecordTime);
+        public static extern int DM_GetRecordSchedule(int handle, ref int iEnable, ref string RecordTime);
 
         /*
             函数名称:	DM_GetStorageInfo
@@ -1610,7 +1660,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetUnexpectedInfo_Network")]
-        public static extern int  DM_GetUnexpectedInfo_Network(int handle, int iAlarmType,ref int iEnable,ref int iRecTime,ref int iPreRecTime);
+        public static extern int DM_GetUnexpectedInfo_Network(int handle, int iAlarmType, ref int iEnable, ref int iRecTime, ref int iPreRecTime);
 
         /*
             函数名称:	DM_GetUnexpectedInfo_Storage
@@ -1628,7 +1678,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetUnexpectedInfo_Storage")]
-        public static extern int  DM_GetUnexpectedInfo_Storage(int handle, int iAlarmType, ref string AlarmLinkOutInfo, ref int iMailContentType,ref int iEMailPicNum,ref int iFtpPicNum);
+        public static extern int DM_GetUnexpectedInfo_Storage(int handle, int iAlarmType, ref string AlarmLinkOutInfo, ref int iMailContentType, ref int iEMailPicNum, ref int iFtpPicNum);
 
         /********************************************************************************************************8*********/
         /*  视频处理函数                                                                                               */
@@ -1642,7 +1692,7 @@ namespace InfraredAnalyze
                     <0  错误
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PlayerInit")]
-        public static extern int   DM_PlayerInit(IntPtr hwnd);
+        public static extern int DM_PlayerInit(IntPtr hwnd);
 
         /*
          函数名称:	DM_OpenMonitor
@@ -1658,7 +1708,7 @@ namespace InfraredAnalyze
         */
         //预留, netsdk暂时不提供此接口
         [DllImport("DMSDK.dll", EntryPoint = "DM_OpenMonitor")]
-        public static extern int  DM_OpenMonitor(IntPtr hwnd, string ip, ushort port, int channel = 0);
+        public static extern int DM_OpenMonitor(IntPtr hwnd, string ip, ushort port, int channel = 0);
 
         /*
             函数名称:	DM_SetOSD
@@ -1676,7 +1726,7 @@ namespace InfraredAnalyze
         *注： 该接口暂时保留
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetOSD")]
-        public static extern int  DM_SetOSD(int handle, int OSDType);
+        public static extern int DM_SetOSD(int handle, int OSDType);
 
         /*
             函数名称:	DM_CloseMonitor
@@ -1687,7 +1737,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_CloseMonitor")]
-        public static extern int  DM_CloseMonitor(int handle);
+        public static extern int DM_CloseMonitor(int handle);
 
         /*
             函数名称:	DM_PlayerCleanup
@@ -1697,7 +1747,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PlayerCleanup")]
-        public static extern int  DM_PlayerCleanup();
+        public static extern int DM_PlayerCleanup();
 
         /*
             函数名称:	DM_Record
@@ -1710,7 +1760,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Record")]
-        public static extern int   DM_Record(int handle, ref string path);
+        public static extern int DM_Record(int handle, ref string path);
 
         /*
         *函数名称:	DM_StopRecord
@@ -1720,7 +1770,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_StopRecord")]
-        public static extern int  DM_StopRecord(int handle);
+        public static extern int DM_StopRecord(int handle);
 
         /*
         *函数名称:	DM_Capture
@@ -1732,7 +1782,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Capture")]
-        public static extern int  DM_Capture(int handle, ref string path);
+        public static extern int DM_Capture(int handle, ref string path);
 
         /*
         *函数名称:	DM_PlayBack
@@ -1743,7 +1793,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PlayBack")]
-        public static extern int  DM_PlayBack(IntPtr hwnd, ref string file);
+        public static extern int DM_PlayBack(IntPtr hwnd, ref string file);
 
         /*
         *函数名称:	DM_ClosePlayBack
@@ -1754,7 +1804,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_ClosePlayBack")]
-        public static extern int  DM_ClosePlayBack(int handle);
+        public static extern int DM_ClosePlayBack(int handle);
 
         /*
         *函数名称:	DM_PlayBackPause
@@ -1764,7 +1814,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PlayBackPause")]
-        public static extern int  DM_PlayBackPause(int handle);
+        public static extern int DM_PlayBackPause(int handle);
 
         /*
         *函数名称:	DM_PlayBackContinue
@@ -1774,7 +1824,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PlayBackContinue")]
-        public static extern int  DM_PlayBackContinue(int handle);
+        public static extern int DM_PlayBackContinue(int handle);
 
         /*
         *函数名称:	DM_PlayBackStop
@@ -1784,7 +1834,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PlayBackStop")]
-        public static extern int  DM_PlayBackStop(int handle);
+        public static extern int DM_PlayBackStop(int handle);
 
         /*
         *函数名称:	DM_PlayBackSpeed
@@ -1803,7 +1853,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PlayBackSpeed")]
-        public static extern int  DM_PlayBackSpeed(int handle, int speed);
+        public static extern int DM_PlayBackSpeed(int handle, int speed);
 
         /*
         *函数名称:	DM_PlayBackStep
@@ -1814,7 +1864,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PlayBackStep")]
-        public static extern int  DM_PlayBackStep(int handle);
+        public static extern int DM_PlayBackStep(int handle);
 
         /******************************************************************************************************************/
         /*  云台控制                                                                                                   */
@@ -1890,7 +1940,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PTZSettings")]
-        public static extern void  DM_PTZSettings(int handle, DALI_PTZ_PROTOCOL Protocol = DALI_PTZ_PROTOCOL.PELCO_D, int nAddrID = 1);
+        public static extern void DM_PTZSettings(int handle, DALI_PTZ_PROTOCOL Protocol = DALI_PTZ_PROTOCOL.PELCO_D, int nAddrID = 1);
 
         /*
         *函数名称:	DM_PTZSpeed
@@ -1905,7 +1955,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PTZSpeed")]
-        public static extern void  DM_PTZSpeed(int handle, int nSpeedTrgID, int nSpeed = 1);
+        public static extern void DM_PTZSpeed(int handle, int nSpeedTrgID, int nSpeed = 1);
 
         /*
         *函数名称:	DM_PTZControl
@@ -1917,7 +1967,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PTZControl")]
-        public static extern void  DM_PTZControl(int handle, DALI_CONTROL_CMD_DIR ctrlCmd, DALI_MOVEMENT_DIR Movement);
+        public static extern void DM_PTZControl(int handle, DALI_CONTROL_CMD_DIR ctrlCmd, DALI_MOVEMENT_DIR Movement);
 
         /*
         *函数名称:	DM_PTZPreset
@@ -1929,7 +1979,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_PTZPreset")]
-        public static extern void  DM_PTZPreset(int handle, DALI_PRESET_DIR Preset, int nPoint);
+        public static extern void DM_PTZPreset(int handle, DALI_PRESET_DIR Preset, int nPoint);
 
         /*****************************************************************************************************************/
         /* 其他                                                                                                          */
@@ -1942,7 +1992,7 @@ namespace InfraredAnalyze
         *返回值:    DM60的当前状态
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetStatus")]
-        public static extern int   DM_GetStatus(int handle);
+        public static extern int DM_GetStatus(int handle);
 
         /*
         *函数名称:	DM_KBDControl
@@ -1958,7 +2008,7 @@ namespace InfraredAnalyze
         *返回值:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_KBDControl")]
-        public static extern void  DM_KBDControl(int handle, int nValue);
+        public static extern void DM_KBDControl(int handle, int nValue);
 
         /*
         *函数名称:	DM_AutoAdjust
@@ -1968,7 +2018,7 @@ namespace InfraredAnalyze
         *返回值:	>0 成功			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_AutoAdjust")]
-        public static extern int  DM_AutoAdjust(int handle);
+        public static extern int DM_AutoAdjust(int handle);
 
         /*
             函数名称:	DM_AutoAdjustForJxx
@@ -1978,7 +2028,7 @@ namespace InfraredAnalyze
         *返回值:	>0 成功			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_AutoAdjustForJxx")]
-        public static extern int  DM_AutoAdjustForJxx(int handle);
+        public static extern int DM_AutoAdjustForJxx(int handle);
 
         /*	函数名称: DM_Open
             *	函数说明：打开仪器前端
@@ -1986,7 +2036,7 @@ namespace InfraredAnalyze
             *	返回值： >=0 成功
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Open")]
-        public static extern int  DM_Open(int handle);
+        public static extern int DM_Open(int handle);
 
 
         /*	函数名称: DM_Close
@@ -1995,7 +2045,7 @@ namespace InfraredAnalyze
             *	返回值： >=0 成功
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Close")]
-        public static extern int  DM_Close(int handle);
+        public static extern int DM_Close(int handle);
 
 
         /*	函数名称: DM_GetRemoteAlarm
@@ -2004,7 +2054,7 @@ namespace InfraredAnalyze
             *	返回值：器端报警状态(0：关闭, 1：打开)
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetRemoteAlarm")]
-        public static extern int  DM_GetRemoteAlarm(int handle);
+        public static extern int DM_GetRemoteAlarm(int handle);
 
 
         /*	函数名称: DM_GetVideoMode
@@ -2013,7 +2063,7 @@ namespace InfraredAnalyze
             *	返回值：模式(0、手动, 1、自动)
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetVideoMode")]
-        public static extern int  DM_GetVideoMode(int handle);
+        public static extern int DM_GetVideoMode(int handle);
 
         /*	函数名称: DM_GetMAC
         *	函数说明：	获取MAC地址
@@ -2022,7 +2072,7 @@ namespace InfraredAnalyze
         *	返回值： N/A
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetMAC")]
-        public static extern void  DM_GetMAC(int handle, StringBuilder Mac);
+        public static extern void DM_GetMAC(int handle, StringBuilder Mac);
 
         /*	函数名称: DM_GetRemoteLanguage
         *	函数说明：获取仪器的语言
@@ -2030,7 +2080,7 @@ namespace InfraredAnalyze
         *	返回值： 仪器的语言(0：英文, 1：中文)
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetRemoteLanguage")]
-        public static extern int  DM_GetRemoteLanguage(int handle);
+        public static extern int DM_GetRemoteLanguage(int handle);
 
         /*	函数名称: DM_SetRemoteLanguage
         *	函数说明：设置仪器的语言
@@ -2040,7 +2090,7 @@ namespace InfraredAnalyze
         *	返回值： >=0 成功
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetRemoteLanguage")]
-        public static extern int  DM_SetRemoteLanguage(int handle, int iLanguage);
+        public static extern int DM_SetRemoteLanguage(int handle, int iLanguage);
 
         /*	函数名称: DM_Reset
         *	函数说明：重启仪器
@@ -2048,7 +2098,7 @@ namespace InfraredAnalyze
         *	返回值： >=0 成功
             */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Reset")]
-        public static extern int  DM_Reset(int handle);
+        public static extern int DM_Reset(int handle);
 
         //-----------------------------------------------------
         //2010-11-01,以下接口为兼容老的DM60机型而特意增加
@@ -2067,7 +2117,7 @@ namespace InfraredAnalyze
         public delegate int STREAMCALL(int handle, int dataType, ref byte stream, int len, int err, IntPtr cbpara);
         //typedef int (__stdcall* STREAMCALL) (int handle, int dataType, BYTE* stream, int len, int err, void* cbpara);
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetVersion")]
-        public static extern void  DM_GetVersion(ref string Version);
+        public static extern void DM_GetVersion(ref string Version);
 
         // 以下函数均为早期的DM60仪器所用，现已废弃
         /*
@@ -2078,7 +2128,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_OpenLocalAlarm")]
-        public static extern int  DM_OpenLocalAlarm(int handle);
+        public static extern int DM_OpenLocalAlarm(int handle);
 
         /*
         Description：	close local alram
@@ -2088,7 +2138,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_CloseLocalAlarm")]
-        public static extern int  DM_CloseLocalAlarm(int handle);
+        public static extern int DM_CloseLocalAlarm(int handle);
 
         /*
         Description：	set local alram type
@@ -2099,7 +2149,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetLocalAlarmType")]
-        public static extern int  DM_SetLocalAlarmType(int handle, int type);
+        public static extern int DM_SetLocalAlarmType(int handle, int type);
 
         /*
         Description：	get local alram type
@@ -2109,7 +2159,7 @@ namespace InfraredAnalyze
         0: Min 1: Max 2: Diff
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetLocalAlarmType")]
-        public static extern int  DM_GetLocalAlarmType(int handle);
+        public static extern int DM_GetLocalAlarmType(int handle);
 
         /*
         Description：	set local alram mode
@@ -2120,7 +2170,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetLocalAlarmMode")]
-        public static extern int  DM_SetLocalAlarmMode(int handle, int mode);
+        public static extern int DM_SetLocalAlarmMode(int handle, int mode);
 
         /*
         Description：	get local alram mode
@@ -2130,7 +2180,7 @@ namespace InfraredAnalyze
         0: > 1: <
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetLocalAlarmMode")]
-        public static extern int  DM_GetLocalAlarmMode(int handle);
+        public static extern int DM_GetLocalAlarmMode(int handle);
 
         /*
         Description：	set local alram refe 
@@ -2145,7 +2195,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetLocalAlarmRefe")]
-        public static extern int  DM_SetLocalAlarmRefe(int handle, int refe);
+        public static extern int DM_SetLocalAlarmRefe(int handle, int refe);
 
         /*
         Description：	get local alram refe
@@ -2158,7 +2208,7 @@ namespace InfraredAnalyze
         6 - 8 ：area (1-3) tempature
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetLocalAlarmRefe")]
-        public static extern int  DM_GetLocalAlarmRefe(int handle);
+        public static extern int DM_GetLocalAlarmRefe(int handle);
 
         /*
         Description：	set local alram tempature
@@ -2169,7 +2219,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetLocalAlarmTemp")]
-        public static extern int  DM_SetLocalAlarmTemp(int handle, float temp);
+        public static extern int DM_SetLocalAlarmTemp(int handle, float temp);
 
         /*
         Description：	get local alram tempature
@@ -2179,7 +2229,7 @@ namespace InfraredAnalyze
         tempature
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetLocalAlarmTemp")]
-        public static extern float  DM_GetLocalAlarmTemp(int handle);
+        public static extern float DM_GetLocalAlarmTemp(int handle);
 
         /*
         Description：get device system info
@@ -2204,7 +2254,7 @@ namespace InfraredAnalyze
         =0: success 1:fail
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_ReceiveMonitorStream")]
-        public static extern int  DM_ReceiveMonitorStream(ref string ip, ushort port, int channel, STREAMCALL callback, IntPtr data);
+        public static extern int DM_ReceiveMonitorStream(ref string ip, ushort port, int channel, STREAMCALL callback, IntPtr data);
 
         /*
         Input:	
@@ -2213,7 +2263,7 @@ namespace InfraredAnalyze
         =0: success <0: fail
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_StopMonitorStream")]
-        public static extern int  DM_StopMonitorStream(int handle);
+        public static extern int DM_StopMonitorStream(int handle);
 
         //下面几个接口尚未实现--------------------------------------------------------begin
         //hWnd: WM_DM_PLAYER 消息的 wParam 返回的句柄
@@ -2232,7 +2282,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_YTControl")]
-        public static extern int  DM_YTControl(int handle, ref string cmd, int len);
+        public static extern int DM_YTControl(int handle, ref string cmd, int len);
 
         //tempature struct
         struct stTempDest
@@ -2266,7 +2316,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetNaturalTempRangeEnable")]
-        public static extern int  DM_SetNaturalTempRangeEnable(int handle, int iEnable);
+        public static extern int DM_SetNaturalTempRangeEnable(int handle, int iEnable);
 
         /*
         Description：	get natural termpature range status
@@ -2276,7 +2326,7 @@ namespace InfraredAnalyze
         0: disable 1: enable
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetNaturalTempRangeEnable")]
-        public static extern int  DM_GetNaturalTempRangeEnable(int handle);
+        public static extern int DM_GetNaturalTempRangeEnable(int handle);
 
         /*
         Description：	set termpature range
@@ -2288,7 +2338,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetNaturalTempRange")]
-        public static extern int  DM_SetNaturalTempRange(int handle, int LowTemp, int HighTemp);
+        public static extern int DM_SetNaturalTempRange(int handle, int LowTemp, int HighTemp);
 
         /*
         Description：	get termpature range
@@ -2300,7 +2350,7 @@ namespace InfraredAnalyze
         LowTemp:	Low Tempature * 100
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetNaturalTempRange")]
-        public static extern int  DM_GetNaturalTempRange(int handle,ref int LowTemp,ref int HighTemp);
+        public static extern int DM_GetNaturalTempRange(int handle, ref int LowTemp, ref int HighTemp);
 
         /*
         Description：	enable intellect Measure Tempature
@@ -2311,7 +2361,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetIntellectMeasureTemp")]
-        public static extern int  DM_SetIntellectMeasureTemp(int handle, int nIntellect);
+        public static extern int DM_SetIntellectMeasureTemp(int handle, int nIntellect);
 
         /*
         Description：	get intelleect measure tempature
@@ -2321,7 +2371,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetIntellectMeasureTemp")]
-        public static extern int  DM_GetIntellectMeasureTemp(int handle);
+        public static extern int DM_GetIntellectMeasureTemp(int handle);
 
         /*
         Description：	set Black Board Paramter
@@ -2337,7 +2387,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetBlackBoardPara")]
-        public static extern int  DM_SetBlackBoardPara(int handle, int nStartX, int nStartY, int nEndX, int nEndY,
+        public static extern int DM_SetBlackBoardPara(int handle, int nStartX, int nStartY, int nEndX, int nEndY,
                                     int dblBlackTemp, int dblBlackEmiss);
 
         /*
@@ -2354,8 +2404,8 @@ namespace InfraredAnalyze
             dblBlackEmiss:	Emiss * 100
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetBlackBoardPara")]
-        public static extern int  DM_GetBlackBoardPara(int handle,ref int nStartX,ref int nStartY,ref int nEndX,ref int nEndY,
-                                    ref int dblBlackTemp,ref int dblBlackEmiss);
+        public static extern int DM_GetBlackBoardPara(int handle, ref int nStartX, ref int nStartY, ref int nEndX, ref int nEndY,
+                                    ref int dblBlackTemp, ref int dblBlackEmiss);
 
         /*
         Description：	set intellect tempature range
@@ -2367,7 +2417,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetIntellectTempRange")]
-        public static extern int  DM_SetIntellectTempRange(int handle, int HighTemp, int nLowerTemp);
+        public static extern int DM_SetIntellectTempRange(int handle, int HighTemp, int nLowerTemp);
 
         /*
         Description：	Get Intellect Tempature Range
@@ -2377,7 +2427,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetIntellectTempRange")]
-        public static extern int  DM_GetIntellectTempRange(int handle);
+        public static extern int DM_GetIntellectTempRange(int handle);
 
         /*
         Description：	set shield Region
@@ -2391,7 +2441,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetShieldRegion")]
-        public static extern int  DM_SetShieldRegion(int handle, int nID, int nStatus, int nStartX, int nStartY, int nEndX, int nEndY);
+        public static extern int DM_SetShieldRegion(int handle, int nID, int nStatus, int nStartX, int nStartY, int nEndX, int nEndY);
 
         /*
         Description：	Get Shield Region
@@ -2405,7 +2455,7 @@ namespace InfraredAnalyze
         nEndX,nEndY:		coordinate RightDown 
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetShieldRegion")]
-        public static extern int  DM_GetShieldRegion(int handle, int nID,ref int nStatus,ref int nStartX,ref int nStartY,ref int nEndX,ref int nEndY);
+        public static extern int DM_GetShieldRegion(int handle, int nID, ref int nStatus, ref int nStartX, ref int nStartY, ref int nEndX, ref int nEndY);
 
         /*
         Description：	Get All Shield Region
@@ -2417,7 +2467,7 @@ namespace InfraredAnalyze
         pShieldRegion:	All shield region info
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetShieldRegionAll")]
-        public static extern int  DM_GetShieldRegionAll(int handle,ref int nCount, tagShieldRegion[] pShieldRegion);
+        public static extern int DM_GetShieldRegionAll(int handle, ref int nCount, tagShieldRegion[] pShieldRegion);
 
         /*
         Description：	set pallette range
@@ -2429,7 +2479,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetPalletteTempRange")]
-        public static extern int  DM_SetPalletteTempRange(int handle, int HighTemp, int nLowerTemp);
+        public static extern int DM_SetPalletteTempRange(int handle, int HighTemp, int nLowerTemp);
 
         /*
         Description：	get pallette range
@@ -2439,7 +2489,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetPalletteTempRange")]
-        public static extern int  DM_GetPalletteTempRange(int handle);
+        public static extern int DM_GetPalletteTempRange(int handle);
 
         /*
         Description：	enable auto ambient tempature 
@@ -2450,7 +2500,7 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetAutoAmbientTemp")]
-        public static extern int  DM_SetAutoAmbientTemp(int handle, int nStatus);
+        public static extern int DM_SetAutoAmbientTemp(int handle, int nStatus);
 
         /*
         Description：	enable auto ambient tempature 
@@ -2461,11 +2511,11 @@ namespace InfraredAnalyze
         >=0:     Success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetAutoAmbientTempStatus")]
-        public static extern int  DM_GetAutoAmbientTempStatus(int handle);
+        public static extern int DM_GetAutoAmbientTempStatus(int handle);
 
         //Test funciton,dont use 
         [DllImport("DMSDK.dll", EntryPoint = "DM_Test")]
-        public static extern int  DM_Test(int handle, ref byte[] Test, int nLen);
+        public static extern int DM_Test(int handle, ref byte[] Test, int nLen);
 
         /**
         @breif Open Active Test
@@ -2473,7 +2523,7 @@ namespace InfraredAnalyze
         @retval >0 success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_OpenActiveTest")]
-        public static extern int  DM_OpenActiveTest(int handle);
+        public static extern int DM_OpenActiveTest(int handle);
 
         /**
         @breif Close Active Test
@@ -2481,7 +2531,7 @@ namespace InfraredAnalyze
         @retval >0 success
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_CloseActiveTest")]
-        public static extern int  DM_CloseActiveTest(int handle);
+        public static extern int DM_CloseActiveTest(int handle);
 
         /**
         @breif Get Lens ID
@@ -2490,7 +2540,7 @@ namespace InfraredAnalyze
         @retval >0 Lens ID
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetLensID")]
-        public static extern int  DM_GetLensID(int handle);
+        public static extern int DM_GetLensID(int handle);
 
         /**
         @breif Set Lens ID
@@ -2500,25 +2550,25 @@ namespace InfraredAnalyze
         @retval >0 Lens ID
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetLensID")]
-        public static extern int  DM_SetLensID(int handle, int ParamValue);
+        public static extern int DM_SetLensID(int handle, int ParamValue);
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetTempLimit")]
-        public static extern int  DM_GetTempLimit(int handle);
+        public static extern int DM_GetTempLimit(int handle);
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetTempLimit")]
-        public static extern int  DM_SetTempLimit(int handle, int HighTemp);
+        public static extern int DM_SetTempLimit(int handle, int HighTemp);
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetEdgeradiiEnable")]
-        public static extern int  DM_SetEdgeradiiEnable(int handle, bool Enable);
+        public static extern int DM_SetEdgeradiiEnable(int handle, bool Enable);
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetEdgeradiiEnable")]
-        public static extern bool  DM_GetEdgeradiiEnable(int handle);
+        public static extern bool DM_GetEdgeradiiEnable(int handle);
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetEdgeradii")]
-        public static extern int  DM_SetEdgeradii(int handle, int Edgeradii);
+        public static extern int DM_SetEdgeradii(int handle, int Edgeradii);
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetEdgeradii")]
-        public static extern int  DM_GetEdgeradii(int handle);
+        public static extern int DM_GetEdgeradii(int handle);
         //以上函数属于检验检疫定制仪器所用
 
         /*
@@ -2529,7 +2579,7 @@ namespace InfraredAnalyze
         *返回值:正数表示在线, 负数表示不在线			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_CheckOnline")]
-        public static extern int  DM_CheckOnline(ref string IPAddr, int Port);
+        public static extern int DM_CheckOnline(ref string IPAddr, int Port);
 
         /*
             函数名称:	DM_ClearAllJpeg
@@ -2538,7 +2588,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_ClearAllJpeg")]
-        public static extern int  DM_ClearAllJpeg(int handle);
+        public static extern int DM_ClearAllJpeg(int handle);
 
         /*
             函数名称:	DM_BrightAdjust
@@ -2548,7 +2598,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_BrightAdjust")]
-        public static extern int  DM_BrightAdjust(int handle, int step);
+        public static extern int DM_BrightAdjust(int handle, int step);
 
         /*
             函数名称:	DM_ContrastAdjust
@@ -2558,7 +2608,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_ContrastAdjust")]
-        public static extern int  DM_ContrastAdjust(int handle, int step);
+        public static extern int DM_ContrastAdjust(int handle, int step);
 
         /*
             函数名称:	DM_RemoteJpeg
@@ -2567,7 +2617,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_RemoteJpeg")]
-        public static extern int  DM_RemoteJpeg(int handle);
+        public static extern int DM_RemoteJpeg(int handle);
 
         /*
         函数名称:	DM_Zoom，与 DM_GetZoomStatus 成对，仅适用于S730
@@ -2577,7 +2627,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Zoom")]
-        public static extern int  DM_Zoom(int handle, int value);
+        public static extern int DM_Zoom(int handle, int value);
 
 
         /*
@@ -2588,7 +2638,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetPalority")]
-        public static extern int  DM_SetPalority(int handle, int value);
+        public static extern int DM_SetPalority(int handle, int value);
 
         /*
         函数名称:	DM_GetCapacity
@@ -2597,7 +2647,7 @@ namespace InfraredAnalyze
         *返回值:容量值, 若返回负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetCapacity")]
-        public static extern int  DM_GetCapacity(int handle);
+        public static extern int DM_GetCapacity(int handle);
 
         /*
         函数名称:	DM_GetBright_S730
@@ -2606,7 +2656,7 @@ namespace InfraredAnalyze
         *返回值:亮度值, 范围在-2048-2048, 返回其它值为失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetBright_S730")]
-        public static extern int  DM_GetBright_S730(int handle);
+        public static extern int DM_GetBright_S730(int handle);
 
         /*
         函数名称:	DM_GetContrast_S730
@@ -2615,7 +2665,7 @@ namespace InfraredAnalyze
         *返回值:对比度, 范围在0-255, 返回其它值为失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetContrast_S730")]
-        public static extern int  DM_GetContrast_S730(int handle);
+        public static extern int DM_GetContrast_S730(int handle);
 
         /*
         函数名称:	DM_GetZoomStatus，与 DM_Zoom 成对，仅适用于S730
@@ -2624,7 +2674,7 @@ namespace InfraredAnalyze
         *返回值:放大倍数。0-1倍； 1-2倍	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetZoomStatus")]
-        public static extern int  DM_GetZoomStatus(int handle);
+        public static extern int DM_GetZoomStatus(int handle);
 
         /*
         函数名称:	DM_GetPalority
@@ -2633,7 +2683,7 @@ namespace InfraredAnalyze
         *返回值:1-白热； 0-黑热		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetPalority")]
-        public static extern int  DM_GetPalority(int handle);
+        public static extern int DM_GetPalority(int handle);
 
 
         /*
@@ -2644,7 +2694,7 @@ namespace InfraredAnalyze
         *注意：S730和DM60-S机型适用	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetGFZ")]
-        public static extern int  DM_GetGFZ(int handle);
+        public static extern int DM_GetGFZ(int handle);
 
         /*
             函数名称:	DM_SetEIS
@@ -2654,7 +2704,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetEIS")]
-        public static extern int  DM_SetEIS(int handle, int cmd);
+        public static extern int DM_SetEIS(int handle, int cmd);
 
         /*
             函数名称:	DM_SetFiltering
@@ -2664,7 +2714,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetFiltering")]
-        public static extern int  DM_SetFiltering(int handle, int cmd);
+        public static extern int DM_SetFiltering(int handle, int cmd);
 
         /*
             函数名称:	DM_SetEnhancement
@@ -2674,7 +2724,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetEnhancement")]
-        public static extern int  DM_SetEnhancement(int handle, int cmd);
+        public static extern int DM_SetEnhancement(int handle, int cmd);
 
         /*
             函数名称:	DM_SetFlip
@@ -2684,7 +2734,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetFlip")]
-        public static extern int  DM_SetFlip(int handle, int cmd);
+        public static extern int DM_SetFlip(int handle, int cmd);
 
         /*
             函数名称:	DM_SetMirror
@@ -2694,7 +2744,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetMirror")]
-        public static extern int  DM_SetMirror(int handle, int cmd);
+        public static extern int DM_SetMirror(int handle, int cmd);
 
         /*
             函数名称:	DM_GetFiltering
@@ -2703,7 +2753,7 @@ namespace InfraredAnalyze
         *返回值: 1-打开   0-关闭	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetFiltering")]
-        public static extern int  DM_GetFiltering(int handle);
+        public static extern int DM_GetFiltering(int handle);
 
         /*
             函数名称:	DM_GetEnhancement
@@ -2712,7 +2762,7 @@ namespace InfraredAnalyze
         *返回值:    1-打开   0-关闭		
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetEnhancement")]
-        public static extern int  DM_GetEnhancement(int handle);
+        public static extern int DM_GetEnhancement(int handle);
 
         /*
             函数名称:	DM_GetFlip
@@ -2721,7 +2771,7 @@ namespace InfraredAnalyze
         *返回值:	1-打开   0-关闭
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetFlip")]
-        public static extern int  DM_GetFlip(int handle);
+        public static extern int DM_GetFlip(int handle);
 
         /*
             函数名称:	DM_GetMirror
@@ -2730,7 +2780,7 @@ namespace InfraredAnalyze
         *返回值:	1-打开   0-关闭
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetMirror")]
-        public static extern int  DM_GetMirror(int handle);
+        public static extern int DM_GetMirror(int handle);
 
         /*
             函数名称:	DM_GetDistance
@@ -2750,9 +2800,9 @@ namespace InfraredAnalyze
 
         //解码后的视频帧回调函数定义, dwFrameRate 表示帧率(1---25)
         public delegate void fYUVDataCallBack(int handle, ulong dwFrameRate, ref byte[] pBuffer,
-                                                        ulong nWidth,  ulong nHeight, int err, ulong dwUser);
+                                                        ulong nWidth, ulong nHeight, int err, ulong dwUser);
         //typedef void (CALLBACK* fYUVDataCallBack) (int handle, unsigned long dwFrameRate, unsigned char* pBuffer,
-                                                    //unsigned long nWidth, unsigned long nHeight, int err, unsigned long dwUser);
+        //unsigned long nWidth, unsigned long nHeight, int err, unsigned long dwUser);
 
         /* 	功能说明:设置用于YUV视频回调的回调函数
         *	输入参数: lRealHandle, 监视句柄, 即WM_DM_PLAYER 消息的 wParam 返回的句柄
@@ -2763,7 +2813,7 @@ namespace InfraredAnalyze
         *	说明:
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetYUVDataCallBack")]
-        public static extern bool   DM_SetYUVDataCallBack(int lRealHandle, fYUVDataCallBack yuvDataCallBack, ulong dwUser);
+        public static extern bool DM_SetYUVDataCallBack(int lRealHandle, fYUVDataCallBack yuvDataCallBack, ulong dwUser);
 
         /*
             函数名称:	DM_AutoCheck
@@ -2773,7 +2823,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_AutoCheck")]
-        public static extern int  DM_AutoCheck(int handle);
+        public static extern int DM_AutoCheck(int handle);
 
 
         /*
@@ -2785,7 +2835,7 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_VideoStable")]
-        public static extern int  DM_VideoStable(int lRealHandle, int cmd);
+        public static extern int DM_VideoStable(int lRealHandle, int cmd);
 
         /*
             函数名称:	DM_SetGFZStatus
@@ -2796,13 +2846,13 @@ namespace InfraredAnalyze
         *返回值:正数表示成功, 负数表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetGFZStatus")]
-        public static extern int  DM_SetGFZStatus(int lRealHandle, int cmd);
+        public static extern int DM_SetGFZStatus(int lRealHandle, int cmd);
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetTemperatureScope")]
-        public static extern bool  DM_SetTemperatureScope(int handle, int dwValue1, int dwValue2);
+        public static extern bool DM_SetTemperatureScope(int handle, int dwValue1, int dwValue2);
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetTemperatureScope")]
-        public static extern bool  DM_GetTemperatureScope(int handle, ref int dwValue1, ref int dwValue2);
+        public static extern bool DM_GetTemperatureScope(int handle, out int dwValue1, out int dwValue2);
 
         /*
             函数名称:	DM_GetIPAddress
@@ -2812,7 +2862,7 @@ namespace InfraredAnalyze
         *返回值:TRUE表示成功, FALSE表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetIPAddress")]
-        public static extern int  DM_GetIPAddress(int handle,  StringBuilder IPAddress);
+        public static extern int DM_GetIPAddress(int handle, StringBuilder IPAddress);
 
         /*
             函数名称:	DM_GetNetmask
@@ -2822,7 +2872,7 @@ namespace InfraredAnalyze
         *返回值:TRUE表示成功, FALSE表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetNetmask")]
-        public static extern int  DM_GetNetmask(int handle, StringBuilder Netmask);
+        public static extern int DM_GetNetmask(int handle, StringBuilder Netmask);
 
         /*
             函数名称:	DM_GetGateway
@@ -2832,11 +2882,13 @@ namespace InfraredAnalyze
         *返回值:TRUE表示成功, FALSE表示失败	
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetGateway")]
-        public static extern int  DM_GetGateway(int handle, StringBuilder Gateway);
+        public static extern int DM_GetGateway(int handle, StringBuilder Gateway);
 
-        public delegate void fMessCallBack(int msg, ref string pBuf, int dwBufLen, int dwUser);
+
+        public delegate void fMessCallBack(int msg, IntPtr pBuf, int dwBufLen, uint dwUser);//
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetAllMessCallBack")]
-        public static extern void  DM_SetAllMessCallBack(fMessCallBack messCallBack, int dwUser = 0);
+        public static extern void DM_SetAllMessCallBack(fMessCallBack messCallBack, uint dwUser = 0);
+    
 
         /*
             函数名称:	DM_GetDM6xResolution

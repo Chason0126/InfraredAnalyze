@@ -139,6 +139,18 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMassureConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMassureConfig.Designer.cs">
+      <DependentUpon>FrmMassureConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMointorArea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMointorArea.Designer.cs">
+      <DependentUpon>FrmMointorArea.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmTemperParamConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +209,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMassureConfig.resx">
+      <DependentUpon>FrmMassureConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMointorArea.resx">
+      <DependentUpon>FrmMointorArea.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTemperParamConfig.resx">
       <DependentUpon>FrmTemperParamConfig.cs</DependentUpon>

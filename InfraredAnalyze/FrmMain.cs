@@ -622,6 +622,23 @@ namespace InfraredAnalyze
         }
         #endregion
 
+        #region//图像设置
+        private void 图像设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmImageConfig frmImageConfig = new FrmImageConfig();
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                frmImageConfig.CameraId = structSM7003Tag.CameraID;
+                frmImageConfig.Ip = structSM7003Tag.IP;
+                frmImageConfig.ShowDialog();
+            }
+
+        }
+        #endregion
+
         #region//连接
         private void 连接ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -839,9 +856,6 @@ namespace InfraredAnalyze
             }
         }
 
-        private void 图像设置ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

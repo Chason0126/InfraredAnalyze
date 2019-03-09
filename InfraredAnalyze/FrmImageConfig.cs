@@ -34,6 +34,8 @@ namespace InfraredAnalyze
         int ZoomStatus = 0;//电子放大倍数
         int Palority = 0;//热图像模式
         int GFZ = 0;//冻结状态
+
+
         public int CameraId { get => cameraId; set => cameraId = value; }
         public string Ip { get => ip; set => ip = value; }
 
@@ -85,8 +87,8 @@ namespace InfraredAnalyze
             TempUnit = DMSDK.DM_GetTempUnit(tempOperateIntptr);//温度单位
             Bright = DMSDK.DM_GetBright(tempOperateIntptr);//亮度
             Contrast = DMSDK.DM_GetContrast(tempOperateIntptr);//对比度
-            ZoomStatus = DMSDK.DM_GetZoomStatus(tempOperateIntptr);//电子放大倍数
-            Palority = DMSDK.DM_GetPalority(tempOperateIntptr);//热图像模式
+            ZoomStatus = DMSDK.DM_GetZoomStatus(tempOperateIntptr);//电子放大倍数 型号不对 不支持
+            //Palority = DMSDK.DM_GetPalority(tempOperateIntptr);//热图像模式(返回-50)
             GFZ = DMSDK.DM_GetGFZ(tempOperateIntptr);//冻结状态
         }
         #endregion
@@ -106,10 +108,115 @@ namespace InfraredAnalyze
             {
                 tempConnectIntptr = DMSDK.DM_OpenMonitor(pbxScreen.Handle, ip, 5000);
                 GetImageConfigParam();
+                UpdateCbx();
             }
         }
 
-      
+        private void UpdateCbx()
+        {
+            cbxTempOnImage.SelectedIndex = TempValueOnImageStatus;
+            cbxVideoOutType.SelectedIndex = VideoOutType;
+            cbxVideoOutType.SelectedIndex = VideoOutType;
+            cbxVideoMode.SelectedIndex = VideoMode;//(0与2)
+            tbxISOHight.Text = ISOHight.ToString();
+            tbxISOTemp.Text = ISOTemp.ToString();
+            cbxISOColor.SelectedIndex = ISOColor;
+            cbxTempUnit.SelectedIndex = TempUnit;
+            cbxPallette.SelectedIndex = Pallette;
+            //cbxPalority.SelectedIndex = Palority;
+            //tbxZoom.Text = ZoomStatus.ToString();
+            tbxBright.Text = Bright.ToString();
+            tbxContrast.Text = Contrast.ToString();
+            cbxGFZ.SelectedIndex = GFZ;
+        }
 
+        private void btnBrightUp_Click(object sender, EventArgs e)
+        {
+            DMSDK.DM_BrightAdjust(tempOperateIntptr, 5);
+            Bright = DMSDK.DM_GetBright(tempOperateIntptr);//亮度
+            tbxBright.Text = Bright.ToString();
+        }
+
+        private void btnBrightDown_Click(object sender, EventArgs e)
+        {
+            DMSDK.DM_BrightAdjust(tempOperateIntptr, -5);
+            Bright = DMSDK.DM_GetBright(tempOperateIntptr);//亮度
+            tbxBright.Text = Bright.ToString();
+        }
+
+        private void btnContrastUp_Click(object sender, EventArgs e)
+        {
+            DMSDK.DM_ContrastAdjust(tempOperateIntptr, 5);
+            Contrast = DMSDK.DM_GetContrast(tempOperateIntptr);//对比度
+            tbxContrast.Text = Contrast.ToString();
+        }
+
+        private void btnContrasDown_Click(object sender, EventArgs e)
+        {
+            DMSDK.DM_ContrastAdjust(tempOperateIntptr, -5);
+            Contrast = DMSDK.DM_GetContrast(tempOperateIntptr);//对比度
+            tbxContrast.Text = Contrast.ToString();
+
+        }
+
+        private void btnAutoFocus_Click(object sender, EventArgs e)
+        {
+            DMSDK.DM_AutoFocus(tempOperateIntptr);
+        }
+
+        private void FrmImageConfig_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DMSDK.DM_CloseMonitor(tempConnectIntptr);
+            DMSDK.DM_Disconnect(tempOperateIntptr);
+        }
+
+        private void cbxTempOnImage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DMSDK.DM_ShowTempValueOnImage(tempOperateIntptr, Convert.ToBoolean(cbxTempOnImage.SelectedIndex));
+        }
+
+        private void cbxVideoOutType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxVideoOutType.SelectedIndex == 0)
+            {
+                DMSDK.DM_SetVideoOutType(tempOperateIntptr, DMSDK.VIDEO_OUT_TYPE.PAL);
+            }
+            if (cbxVideoOutType.SelectedIndex == 1)
+            {
+                DMSDK.DM_SetVideoOutType(tempOperateIntptr, DMSDK.VIDEO_OUT_TYPE.NTSC);
+            }
+        }
+
+        private void cbxVideoMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxVideoMode.SelectedIndex == 0)//手动
+            {
+                DMSDK.DM_SetVideoMode(tempOperateIntptr, 0);
+            }
+            if (cbxVideoMode.SelectedIndex == 1)//自动
+            {
+                DMSDK.DM_SetVideoMode(tempOperateIntptr, 2);
+            }
+        }
+
+        private void cbxTempUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DMSDK.DM_SetTempUnit(tempOperateIntptr, cbxTempUnit.SelectedIndex);
+        }
+
+        private void cbxPallette_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DMSDK.DM_SetPallette(tempOperateIntptr, cbxPallette.SelectedIndex, false);
+        }
+
+        private void cbxGFZ_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DMSDK.DM_SetGFZStatus(tempOperateIntptr, cbxGFZ.SelectedIndex);
+        }
+
+        private void btnAutoAd_Click(object sender, EventArgs e)
+        {
+            DMSDK.DM_AutoAdjust(tempOperateIntptr);
+        }
     }
 }
