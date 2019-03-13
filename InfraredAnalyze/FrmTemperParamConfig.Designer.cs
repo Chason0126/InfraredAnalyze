@@ -1,6 +1,6 @@
 ﻿namespace InfraredAnalyze
 {
-    partial class FrmTemperParamConfig
+    partial class pnl
     {
         /// <summary>
         /// Required designer variable.
@@ -34,16 +34,21 @@
             this.tabTemprParam = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.grpArea = new System.Windows.Forms.GroupBox();
+            this.pnlBtnArea = new System.Windows.Forms.Panel();
+            this.btnClear_Area_2 = new System.Windows.Forms.Button();
+            this.btnAdd_Area_1 = new System.Windows.Forms.Button();
+            this.btnClear_Area_1 = new System.Windows.Forms.Button();
+            this.btnAdd_Area_2 = new System.Windows.Forms.Button();
+            this.btnClear_Area_4 = new System.Windows.Forms.Button();
+            this.btnAdd_Area_3 = new System.Windows.Forms.Button();
+            this.btnAdd_Area_4 = new System.Windows.Forms.Button();
+            this.btnClear_Area_3 = new System.Windows.Forms.Button();
             this.cbxMeasureType_4 = new System.Windows.Forms.ComboBox();
             this.cbxMeasureType_3 = new System.Windows.Forms.ComboBox();
             this.cbxMeasureType_2 = new System.Windows.Forms.ComboBox();
             this.cbxMeasureType_1 = new System.Windows.Forms.ComboBox();
-            this.btnAdd_Area_4 = new System.Windows.Forms.Button();
-            this.btnAdd_Area_3 = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
-            this.btnAdd_Area_2 = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
-            this.btnAdd_Area_1 = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
             this.tbxArea_4_Emiss = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -60,7 +65,7 @@
             this.tbxArea_2_Emiss = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.ttbxArea_4_X2 = new System.Windows.Forms.TextBox();
+            this.tbxArea_4_X2 = new System.Windows.Forms.TextBox();
             this.tbxArea_4_X1 = new System.Windows.Forms.TextBox();
             this.tbxArea_1_X2 = new System.Windows.Forms.TextBox();
             this.tbxArea_1_X1 = new System.Windows.Forms.TextBox();
@@ -74,11 +79,13 @@
             this.tbxArea_2_X1 = new System.Windows.Forms.TextBox();
             this.tbxArea_1_Emiss = new System.Windows.Forms.TextBox();
             this.grpLine = new System.Windows.Forms.GroupBox();
+            this.pnlBtnLine = new System.Windows.Forms.Panel();
+            this.btnClear_Line_1 = new System.Windows.Forms.Button();
+            this.btnAdd_Line_1 = new System.Windows.Forms.Button();
             this.tbxLine_1_X1 = new System.Windows.Forms.TextBox();
             this.tbxLine_1_Emiss = new System.Windows.Forms.TextBox();
             this.tbxLine_1_Y1 = new System.Windows.Forms.TextBox();
             this.tbxLine_1_Y3 = new System.Windows.Forms.TextBox();
-            this.btnAdd_Line_1 = new System.Windows.Forms.Button();
             this.tbxLine_1_X3 = new System.Windows.Forms.TextBox();
             this.tbxLine_1_Y2 = new System.Windows.Forms.TextBox();
             this.tbxLine_1_X2 = new System.Windows.Forms.TextBox();
@@ -91,12 +98,17 @@
             this.label42 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
-            this.grbSpot = new System.Windows.Forms.GroupBox();
-            this.btnAdd_Spot_4 = new System.Windows.Forms.Button();
+            this.grpSpot = new System.Windows.Forms.GroupBox();
+            this.pnlBtnSpot = new System.Windows.Forms.Panel();
             this.btnAdd_Spot_1 = new System.Windows.Forms.Button();
+            this.btnClear_Spot_2 = new System.Windows.Forms.Button();
+            this.btnClear_Spot_3 = new System.Windows.Forms.Button();
+            this.btnClear_Spot_1 = new System.Windows.Forms.Button();
+            this.btnClear_Spot_4 = new System.Windows.Forms.Button();
+            this.btnAdd_Spot_4 = new System.Windows.Forms.Button();
             this.btnAdd_Spot_2 = new System.Windows.Forms.Button();
-            this.tbxSpot_1_Emiss = new System.Windows.Forms.TextBox();
             this.btnAdd_Spot_3 = new System.Windows.Forms.Button();
+            this.tbxSpot_1_Emiss = new System.Windows.Forms.TextBox();
             this.tbxSpot_2_X = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.tbxSpot_3_X = new System.Windows.Forms.TextBox();
@@ -118,7 +130,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.btnConfirm = new System.Windows.Forms.Button();
+            this.btnUpdateAlarmParam = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.tbxdwValue2 = new System.Windows.Forms.TextBox();
             this.tbxdwValue1 = new System.Windows.Forms.TextBox();
@@ -133,16 +145,91 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.gpbRefeTemp = new System.Windows.Forms.GroupBox();
+            this.grpRefeTemp = new System.Windows.Forms.GroupBox();
             this.tbxRefeTemp = new System.Windows.Forms.TextBox();
             this.cbxRefeType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbxMeasureClass = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.grpAlarmInfo = new System.Windows.Forms.GroupBox();
+            this.tbxAlarmTempLine_1 = new System.Windows.Forms.TextBox();
+            this.cbxAlarmColorSpot_4 = new System.Windows.Forms.ComboBox();
+            this.tbxAlarmTempArea_4 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.tbxAlarmTempArea_3 = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.tbxAlarmTempArea_2 = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.tbxAlarmTempArea_1 = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.tbxAlarmTempSpot_4 = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.tbxAlarmTempSpot_3 = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.tbxAlarmTempSpot_2 = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.tbxAlarmTempSpot_1 = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.cbxAlarmTypeLine_1 = new System.Windows.Forms.ComboBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.cbxAlarmTypeArea_4 = new System.Windows.Forms.ComboBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.cbxAlarmTypeArea_3 = new System.Windows.Forms.ComboBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.cbxAlarmTypeSpot_4 = new System.Windows.Forms.ComboBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.cbxAlarmTypeArea_2 = new System.Windows.Forms.ComboBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.cbxAlarmTypeSpot_3 = new System.Windows.Forms.ComboBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.cbxAlarmTypeArea_1 = new System.Windows.Forms.ComboBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.cbxAlarmColorLine_1 = new System.Windows.Forms.ComboBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.cbxAlarmColorArea_4 = new System.Windows.Forms.ComboBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.cbxAlarmColorArea_3 = new System.Windows.Forms.ComboBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.cbxAlarmColorArea_2 = new System.Windows.Forms.ComboBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.cbxAlarmColorArea_1 = new System.Windows.Forms.ComboBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.cbxAlarmColorSpot_3 = new System.Windows.Forms.ComboBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.cbxAlarmColorSpot_2 = new System.Windows.Forms.ComboBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.cbxAlarmPowerLine_1 = new System.Windows.Forms.ComboBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.cbxAlarmPowerArea_4 = new System.Windows.Forms.ComboBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.cbxAlarmPowerArea_3 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmTypeSpot_1 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmPowerArea_2 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmTypeSpot_2 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmPowerArea_1 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmColorSpot_1 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmPowerSpot_4 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmPowerSpot_1 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmPowerSpot_3 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeSpot_1 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmPowerSpot_2 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeSpot_2 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeLine_1 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeSpot_3 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeArea_4 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeSpot_4 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeArea_3 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeArea_1 = new System.Windows.Forms.ComboBox();
+            this.cbxAlarmMessageTypeArea_2 = new System.Windows.Forms.ComboBox();
+            this.grpIO = new System.Windows.Forms.GroupBox();
+            this.cbxiEnable = new System.Windows.Forms.ComboBox();
+            this.cbxiIO = new System.Windows.Forms.ComboBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.ckbIO = new System.Windows.Forms.CheckBox();
+            this.btnUpdateAlarmInfo = new System.Windows.Forms.Button();
             this.cbxAlarmColor = new System.Windows.Forms.ComboBox();
             this.cbxAlarm = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -150,16 +237,23 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.pbxScreen = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pnlHeader.SuspendLayout();
             this.tabTemprParam.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.grpArea.SuspendLayout();
+            this.pnlBtnArea.SuspendLayout();
             this.grpLine.SuspendLayout();
-            this.grbSpot.SuspendLayout();
+            this.pnlBtnLine.SuspendLayout();
+            this.grpSpot.SuspendLayout();
+            this.pnlBtnSpot.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.gpbRefeTemp.SuspendLayout();
+            this.grpRefeTemp.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.grpAlarmInfo.SuspendLayout();
+            this.grpIO.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -170,7 +264,7 @@
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(1149, 35);
+            this.pnlHeader.Size = new System.Drawing.Size(1298, 35);
             this.pnlHeader.TabIndex = 0;
             this.pnlHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseDown);
             this.pnlHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseMove);
@@ -193,7 +287,7 @@
             this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(1114, 0);
+            this.btnClose.Location = new System.Drawing.Point(1263, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 35);
             this.btnClose.TabIndex = 0;
@@ -207,37 +301,34 @@
             this.tabTemprParam.Controls.Add(this.tabPage1);
             this.tabTemprParam.Controls.Add(this.tabPage2);
             this.tabTemprParam.Controls.Add(this.tabPage6);
-            this.tabTemprParam.Location = new System.Drawing.Point(673, 42);
+            this.tabTemprParam.Location = new System.Drawing.Point(658, 42);
             this.tabTemprParam.Name = "tabTemprParam";
             this.tabTemprParam.SelectedIndex = 0;
-            this.tabTemprParam.Size = new System.Drawing.Size(464, 479);
+            this.tabTemprParam.Size = new System.Drawing.Size(640, 479);
             this.tabTemprParam.TabIndex = 2;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.grpArea);
             this.tabPage1.Controls.Add(this.grpLine);
-            this.tabPage1.Controls.Add(this.grbSpot);
+            this.tabPage1.Controls.Add(this.grpSpot);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(456, 453);
+            this.tabPage1.Size = new System.Drawing.Size(632, 453);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "测温区域";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // grpArea
             // 
+            this.grpArea.Controls.Add(this.pnlBtnArea);
             this.grpArea.Controls.Add(this.cbxMeasureType_4);
             this.grpArea.Controls.Add(this.cbxMeasureType_3);
             this.grpArea.Controls.Add(this.cbxMeasureType_2);
             this.grpArea.Controls.Add(this.cbxMeasureType_1);
-            this.grpArea.Controls.Add(this.btnAdd_Area_4);
-            this.grpArea.Controls.Add(this.btnAdd_Area_3);
             this.grpArea.Controls.Add(this.label24);
-            this.grpArea.Controls.Add(this.btnAdd_Area_2);
             this.grpArea.Controls.Add(this.label25);
-            this.grpArea.Controls.Add(this.btnAdd_Area_1);
             this.grpArea.Controls.Add(this.label26);
             this.grpArea.Controls.Add(this.tbxArea_4_Emiss);
             this.grpArea.Controls.Add(this.label27);
@@ -254,7 +345,7 @@
             this.grpArea.Controls.Add(this.tbxArea_2_Emiss);
             this.grpArea.Controls.Add(this.label34);
             this.grpArea.Controls.Add(this.label31);
-            this.grpArea.Controls.Add(this.ttbxArea_4_X2);
+            this.grpArea.Controls.Add(this.tbxArea_4_X2);
             this.grpArea.Controls.Add(this.tbxArea_4_X1);
             this.grpArea.Controls.Add(this.tbxArea_1_X2);
             this.grpArea.Controls.Add(this.tbxArea_1_X1);
@@ -269,10 +360,105 @@
             this.grpArea.Controls.Add(this.tbxArea_1_Emiss);
             this.grpArea.Location = new System.Drawing.Point(6, 172);
             this.grpArea.Name = "grpArea";
-            this.grpArea.Size = new System.Drawing.Size(444, 153);
+            this.grpArea.Size = new System.Drawing.Size(537, 162);
             this.grpArea.TabIndex = 0;
             this.grpArea.TabStop = false;
             this.grpArea.Text = "测温区域";
+            // 
+            // pnlBtnArea
+            // 
+            this.pnlBtnArea.Controls.Add(this.btnClear_Area_2);
+            this.pnlBtnArea.Controls.Add(this.btnAdd_Area_1);
+            this.pnlBtnArea.Controls.Add(this.btnClear_Area_1);
+            this.pnlBtnArea.Controls.Add(this.btnAdd_Area_2);
+            this.pnlBtnArea.Controls.Add(this.btnClear_Area_4);
+            this.pnlBtnArea.Controls.Add(this.btnAdd_Area_3);
+            this.pnlBtnArea.Controls.Add(this.btnAdd_Area_4);
+            this.pnlBtnArea.Controls.Add(this.btnClear_Area_3);
+            this.pnlBtnArea.Location = new System.Drawing.Point(388, 33);
+            this.pnlBtnArea.Name = "pnlBtnArea";
+            this.pnlBtnArea.Size = new System.Drawing.Size(131, 123);
+            this.pnlBtnArea.TabIndex = 3;
+            // 
+            // btnClear_Area_2
+            // 
+            this.btnClear_Area_2.Location = new System.Drawing.Point(78, 36);
+            this.btnClear_Area_2.Name = "btnClear_Area_2";
+            this.btnClear_Area_2.Size = new System.Drawing.Size(50, 23);
+            this.btnClear_Area_2.TabIndex = 4;
+            this.btnClear_Area_2.Text = "清除";
+            this.btnClear_Area_2.UseVisualStyleBackColor = true;
+            this.btnClear_Area_2.Click += new System.EventHandler(this.btnClear_Area_2_Click);
+            // 
+            // btnAdd_Area_1
+            // 
+            this.btnAdd_Area_1.Location = new System.Drawing.Point(10, 3);
+            this.btnAdd_Area_1.Name = "btnAdd_Area_1";
+            this.btnAdd_Area_1.Size = new System.Drawing.Size(50, 23);
+            this.btnAdd_Area_1.TabIndex = 4;
+            this.btnAdd_Area_1.Text = "编辑";
+            this.btnAdd_Area_1.UseVisualStyleBackColor = true;
+            this.btnAdd_Area_1.Click += new System.EventHandler(this.btnAdd_Area_1_Click);
+            // 
+            // btnClear_Area_1
+            // 
+            this.btnClear_Area_1.Location = new System.Drawing.Point(78, 3);
+            this.btnClear_Area_1.Name = "btnClear_Area_1";
+            this.btnClear_Area_1.Size = new System.Drawing.Size(50, 23);
+            this.btnClear_Area_1.TabIndex = 4;
+            this.btnClear_Area_1.Text = "清除";
+            this.btnClear_Area_1.UseVisualStyleBackColor = true;
+            this.btnClear_Area_1.Click += new System.EventHandler(this.btnClear_Area_1_Click);
+            // 
+            // btnAdd_Area_2
+            // 
+            this.btnAdd_Area_2.Location = new System.Drawing.Point(10, 36);
+            this.btnAdd_Area_2.Name = "btnAdd_Area_2";
+            this.btnAdd_Area_2.Size = new System.Drawing.Size(50, 23);
+            this.btnAdd_Area_2.TabIndex = 4;
+            this.btnAdd_Area_2.Text = "编辑";
+            this.btnAdd_Area_2.UseVisualStyleBackColor = true;
+            this.btnAdd_Area_2.Click += new System.EventHandler(this.btnAdd_Area_2_Click);
+            // 
+            // btnClear_Area_4
+            // 
+            this.btnClear_Area_4.Location = new System.Drawing.Point(78, 95);
+            this.btnClear_Area_4.Name = "btnClear_Area_4";
+            this.btnClear_Area_4.Size = new System.Drawing.Size(50, 23);
+            this.btnClear_Area_4.TabIndex = 4;
+            this.btnClear_Area_4.Text = "清除";
+            this.btnClear_Area_4.UseVisualStyleBackColor = true;
+            this.btnClear_Area_4.Click += new System.EventHandler(this.btnClear_Area_4_Click);
+            // 
+            // btnAdd_Area_3
+            // 
+            this.btnAdd_Area_3.Location = new System.Drawing.Point(10, 66);
+            this.btnAdd_Area_3.Name = "btnAdd_Area_3";
+            this.btnAdd_Area_3.Size = new System.Drawing.Size(50, 23);
+            this.btnAdd_Area_3.TabIndex = 4;
+            this.btnAdd_Area_3.Text = "编辑";
+            this.btnAdd_Area_3.UseVisualStyleBackColor = true;
+            this.btnAdd_Area_3.Click += new System.EventHandler(this.btnAdd_Area_3_Click);
+            // 
+            // btnAdd_Area_4
+            // 
+            this.btnAdd_Area_4.Location = new System.Drawing.Point(10, 95);
+            this.btnAdd_Area_4.Name = "btnAdd_Area_4";
+            this.btnAdd_Area_4.Size = new System.Drawing.Size(50, 23);
+            this.btnAdd_Area_4.TabIndex = 4;
+            this.btnAdd_Area_4.Text = "编辑";
+            this.btnAdd_Area_4.UseVisualStyleBackColor = true;
+            this.btnAdd_Area_4.Click += new System.EventHandler(this.btnAdd_Area_4_Click);
+            // 
+            // btnClear_Area_3
+            // 
+            this.btnClear_Area_3.Location = new System.Drawing.Point(78, 66);
+            this.btnClear_Area_3.Name = "btnClear_Area_3";
+            this.btnClear_Area_3.Size = new System.Drawing.Size(50, 23);
+            this.btnClear_Area_3.TabIndex = 4;
+            this.btnClear_Area_3.Text = "清除";
+            this.btnClear_Area_3.UseVisualStyleBackColor = true;
+            this.btnClear_Area_3.Click += new System.EventHandler(this.btnClear_Area_3_Click);
             // 
             // cbxMeasureType_4
             // 
@@ -326,24 +512,6 @@
             this.cbxMeasureType_1.Size = new System.Drawing.Size(51, 20);
             this.cbxMeasureType_1.TabIndex = 5;
             // 
-            // btnAdd_Area_4
-            // 
-            this.btnAdd_Area_4.Location = new System.Drawing.Point(388, 125);
-            this.btnAdd_Area_4.Name = "btnAdd_Area_4";
-            this.btnAdd_Area_4.Size = new System.Drawing.Size(50, 23);
-            this.btnAdd_Area_4.TabIndex = 4;
-            this.btnAdd_Area_4.Text = "编辑";
-            this.btnAdd_Area_4.UseVisualStyleBackColor = true;
-            // 
-            // btnAdd_Area_3
-            // 
-            this.btnAdd_Area_3.Location = new System.Drawing.Point(388, 96);
-            this.btnAdd_Area_3.Name = "btnAdd_Area_3";
-            this.btnAdd_Area_3.Size = new System.Drawing.Size(50, 23);
-            this.btnAdd_Area_3.TabIndex = 4;
-            this.btnAdd_Area_3.Text = "编辑";
-            this.btnAdd_Area_3.UseVisualStyleBackColor = true;
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
@@ -353,15 +521,6 @@
             this.label24.TabIndex = 0;
             this.label24.Text = "编号：";
             // 
-            // btnAdd_Area_2
-            // 
-            this.btnAdd_Area_2.Location = new System.Drawing.Point(388, 66);
-            this.btnAdd_Area_2.Name = "btnAdd_Area_2";
-            this.btnAdd_Area_2.Size = new System.Drawing.Size(50, 23);
-            this.btnAdd_Area_2.TabIndex = 4;
-            this.btnAdd_Area_2.Text = "编辑";
-            this.btnAdd_Area_2.UseVisualStyleBackColor = true;
-            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -370,16 +529,6 @@
             this.label25.Size = new System.Drawing.Size(11, 12);
             this.label25.TabIndex = 0;
             this.label25.Text = "1";
-            // 
-            // btnAdd_Area_1
-            // 
-            this.btnAdd_Area_1.Location = new System.Drawing.Point(388, 33);
-            this.btnAdd_Area_1.Name = "btnAdd_Area_1";
-            this.btnAdd_Area_1.Size = new System.Drawing.Size(50, 23);
-            this.btnAdd_Area_1.TabIndex = 4;
-            this.btnAdd_Area_1.Text = "编辑";
-            this.btnAdd_Area_1.UseVisualStyleBackColor = true;
-            this.btnAdd_Area_1.Click += new System.EventHandler(this.btnAdd_Area_1_Click);
             // 
             // label26
             // 
@@ -542,16 +691,16 @@
             this.label31.TabIndex = 2;
             this.label31.Text = "比辐射率";
             // 
-            // ttbxArea_4_X2
+            // tbxArea_4_X2
             // 
-            this.ttbxArea_4_X2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ttbxArea_4_X2.Enabled = false;
-            this.ttbxArea_4_X2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ttbxArea_4_X2.Location = new System.Drawing.Point(144, 123);
-            this.ttbxArea_4_X2.Name = "ttbxArea_4_X2";
-            this.ttbxArea_4_X2.Size = new System.Drawing.Size(25, 21);
-            this.ttbxArea_4_X2.TabIndex = 3;
-            this.ttbxArea_4_X2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxArea_4_X2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxArea_4_X2.Enabled = false;
+            this.tbxArea_4_X2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxArea_4_X2.Location = new System.Drawing.Point(144, 123);
+            this.tbxArea_4_X2.Name = "tbxArea_4_X2";
+            this.tbxArea_4_X2.Size = new System.Drawing.Size(25, 21);
+            this.tbxArea_4_X2.TabIndex = 3;
+            this.tbxArea_4_X2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbxArea_4_X1
             // 
@@ -688,11 +837,11 @@
             // 
             // grpLine
             // 
+            this.grpLine.Controls.Add(this.pnlBtnLine);
             this.grpLine.Controls.Add(this.tbxLine_1_X1);
             this.grpLine.Controls.Add(this.tbxLine_1_Emiss);
             this.grpLine.Controls.Add(this.tbxLine_1_Y1);
             this.grpLine.Controls.Add(this.tbxLine_1_Y3);
-            this.grpLine.Controls.Add(this.btnAdd_Line_1);
             this.grpLine.Controls.Add(this.tbxLine_1_X3);
             this.grpLine.Controls.Add(this.tbxLine_1_Y2);
             this.grpLine.Controls.Add(this.tbxLine_1_X2);
@@ -707,14 +856,44 @@
             this.grpLine.Controls.Add(this.label39);
             this.grpLine.Location = new System.Drawing.Point(3, 349);
             this.grpLine.Name = "grpLine";
-            this.grpLine.Size = new System.Drawing.Size(444, 101);
+            this.grpLine.Size = new System.Drawing.Size(540, 101);
             this.grpLine.TabIndex = 0;
             this.grpLine.TabStop = false;
             this.grpLine.Text = "测温线（只能有一条）";
             // 
+            // pnlBtnLine
+            // 
+            this.pnlBtnLine.Controls.Add(this.btnClear_Line_1);
+            this.pnlBtnLine.Controls.Add(this.btnAdd_Line_1);
+            this.pnlBtnLine.Location = new System.Drawing.Point(395, 41);
+            this.pnlBtnLine.Name = "pnlBtnLine";
+            this.pnlBtnLine.Size = new System.Drawing.Size(127, 28);
+            this.pnlBtnLine.TabIndex = 3;
+            // 
+            // btnClear_Line_1
+            // 
+            this.btnClear_Line_1.Location = new System.Drawing.Point(77, 3);
+            this.btnClear_Line_1.Name = "btnClear_Line_1";
+            this.btnClear_Line_1.Size = new System.Drawing.Size(47, 23);
+            this.btnClear_Line_1.TabIndex = 4;
+            this.btnClear_Line_1.Text = "清除";
+            this.btnClear_Line_1.UseVisualStyleBackColor = true;
+            this.btnClear_Line_1.Click += new System.EventHandler(this.btnClaer_Line_1_Click);
+            // 
+            // btnAdd_Line_1
+            // 
+            this.btnAdd_Line_1.Location = new System.Drawing.Point(6, 3);
+            this.btnAdd_Line_1.Name = "btnAdd_Line_1";
+            this.btnAdd_Line_1.Size = new System.Drawing.Size(47, 23);
+            this.btnAdd_Line_1.TabIndex = 4;
+            this.btnAdd_Line_1.Text = "编辑";
+            this.btnAdd_Line_1.UseVisualStyleBackColor = true;
+            this.btnAdd_Line_1.Click += new System.EventHandler(this.btnAdd_Line_1_Click);
+            // 
             // tbxLine_1_X1
             // 
             this.tbxLine_1_X1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxLine_1_X1.Enabled = false;
             this.tbxLine_1_X1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxLine_1_X1.Location = new System.Drawing.Point(64, 48);
             this.tbxLine_1_X1.Name = "tbxLine_1_X1";
@@ -725,6 +904,7 @@
             // tbxLine_1_Emiss
             // 
             this.tbxLine_1_Emiss.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxLine_1_Emiss.Enabled = false;
             this.tbxLine_1_Emiss.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxLine_1_Emiss.Location = new System.Drawing.Point(342, 48);
             this.tbxLine_1_Emiss.Name = "tbxLine_1_Emiss";
@@ -736,6 +916,7 @@
             // tbxLine_1_Y1
             // 
             this.tbxLine_1_Y1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxLine_1_Y1.Enabled = false;
             this.tbxLine_1_Y1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxLine_1_Y1.Location = new System.Drawing.Point(107, 48);
             this.tbxLine_1_Y1.Name = "tbxLine_1_Y1";
@@ -746,6 +927,7 @@
             // tbxLine_1_Y3
             // 
             this.tbxLine_1_Y3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxLine_1_Y3.Enabled = false;
             this.tbxLine_1_Y3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxLine_1_Y3.Location = new System.Drawing.Point(279, 48);
             this.tbxLine_1_Y3.Name = "tbxLine_1_Y3";
@@ -753,18 +935,10 @@
             this.tbxLine_1_Y3.TabIndex = 3;
             this.tbxLine_1_Y3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnAdd_Line_1
-            // 
-            this.btnAdd_Line_1.Location = new System.Drawing.Point(391, 45);
-            this.btnAdd_Line_1.Name = "btnAdd_Line_1";
-            this.btnAdd_Line_1.Size = new System.Drawing.Size(47, 23);
-            this.btnAdd_Line_1.TabIndex = 4;
-            this.btnAdd_Line_1.Text = "添加";
-            this.btnAdd_Line_1.UseVisualStyleBackColor = true;
-            // 
             // tbxLine_1_X3
             // 
             this.tbxLine_1_X3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxLine_1_X3.Enabled = false;
             this.tbxLine_1_X3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxLine_1_X3.Location = new System.Drawing.Point(236, 48);
             this.tbxLine_1_X3.Name = "tbxLine_1_X3";
@@ -775,6 +949,7 @@
             // tbxLine_1_Y2
             // 
             this.tbxLine_1_Y2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxLine_1_Y2.Enabled = false;
             this.tbxLine_1_Y2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxLine_1_Y2.Location = new System.Drawing.Point(193, 48);
             this.tbxLine_1_Y2.Name = "tbxLine_1_Y2";
@@ -785,6 +960,7 @@
             // tbxLine_1_X2
             // 
             this.tbxLine_1_X2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxLine_1_X2.Enabled = false;
             this.tbxLine_1_X2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbxLine_1_X2.Location = new System.Drawing.Point(150, 48);
             this.tbxLine_1_X2.Name = "tbxLine_1_X2";
@@ -874,52 +1050,55 @@
             this.label39.TabIndex = 1;
             this.label39.Text = "X2";
             // 
-            // grbSpot
+            // grpSpot
             // 
-            this.grbSpot.Controls.Add(this.btnAdd_Spot_4);
-            this.grbSpot.Controls.Add(this.btnAdd_Spot_1);
-            this.grbSpot.Controls.Add(this.btnAdd_Spot_2);
-            this.grbSpot.Controls.Add(this.tbxSpot_1_Emiss);
-            this.grbSpot.Controls.Add(this.btnAdd_Spot_3);
-            this.grbSpot.Controls.Add(this.tbxSpot_2_X);
-            this.grbSpot.Controls.Add(this.label16);
-            this.grbSpot.Controls.Add(this.tbxSpot_3_X);
-            this.grbSpot.Controls.Add(this.label17);
-            this.grbSpot.Controls.Add(this.tbxSpot_1_Y);
-            this.grbSpot.Controls.Add(this.tbxSpot_2_Y);
-            this.grbSpot.Controls.Add(this.label18);
-            this.grbSpot.Controls.Add(this.tbxSpot_1_X);
-            this.grbSpot.Controls.Add(this.tbxSpot_4_Emiss);
-            this.grbSpot.Controls.Add(this.tbxSpot_4_X);
-            this.grbSpot.Controls.Add(this.label19);
-            this.grbSpot.Controls.Add(this.label23);
-            this.grbSpot.Controls.Add(this.tbxSpot_4_Y);
-            this.grbSpot.Controls.Add(this.tbxSpot_2_Emiss);
-            this.grbSpot.Controls.Add(this.label20);
-            this.grbSpot.Controls.Add(this.label22);
-            this.grbSpot.Controls.Add(this.tbxSpot_3_Emiss);
-            this.grbSpot.Controls.Add(this.tbxSpot_3_Y);
-            this.grbSpot.Controls.Add(this.label21);
-            this.grbSpot.Location = new System.Drawing.Point(9, 15);
-            this.grbSpot.Name = "grbSpot";
-            this.grbSpot.Size = new System.Drawing.Size(444, 151);
-            this.grbSpot.TabIndex = 0;
-            this.grbSpot.TabStop = false;
-            this.grbSpot.Text = "测温点";
+            this.grpSpot.Controls.Add(this.pnlBtnSpot);
+            this.grpSpot.Controls.Add(this.tbxSpot_1_Emiss);
+            this.grpSpot.Controls.Add(this.tbxSpot_2_X);
+            this.grpSpot.Controls.Add(this.label16);
+            this.grpSpot.Controls.Add(this.tbxSpot_3_X);
+            this.grpSpot.Controls.Add(this.label17);
+            this.grpSpot.Controls.Add(this.tbxSpot_1_Y);
+            this.grpSpot.Controls.Add(this.tbxSpot_2_Y);
+            this.grpSpot.Controls.Add(this.label18);
+            this.grpSpot.Controls.Add(this.tbxSpot_1_X);
+            this.grpSpot.Controls.Add(this.tbxSpot_4_Emiss);
+            this.grpSpot.Controls.Add(this.tbxSpot_4_X);
+            this.grpSpot.Controls.Add(this.label19);
+            this.grpSpot.Controls.Add(this.label23);
+            this.grpSpot.Controls.Add(this.tbxSpot_4_Y);
+            this.grpSpot.Controls.Add(this.tbxSpot_2_Emiss);
+            this.grpSpot.Controls.Add(this.label20);
+            this.grpSpot.Controls.Add(this.label22);
+            this.grpSpot.Controls.Add(this.tbxSpot_3_Emiss);
+            this.grpSpot.Controls.Add(this.tbxSpot_3_Y);
+            this.grpSpot.Controls.Add(this.label21);
+            this.grpSpot.Location = new System.Drawing.Point(9, 15);
+            this.grpSpot.Name = "grpSpot";
+            this.grpSpot.Size = new System.Drawing.Size(534, 151);
+            this.grpSpot.TabIndex = 0;
+            this.grpSpot.TabStop = false;
+            this.grpSpot.Text = "测温点";
             // 
-            // btnAdd_Spot_4
+            // pnlBtnSpot
             // 
-            this.btnAdd_Spot_4.Location = new System.Drawing.Point(336, 120);
-            this.btnAdd_Spot_4.Name = "btnAdd_Spot_4";
-            this.btnAdd_Spot_4.Size = new System.Drawing.Size(50, 23);
-            this.btnAdd_Spot_4.TabIndex = 4;
-            this.btnAdd_Spot_4.Text = "编辑";
-            this.btnAdd_Spot_4.UseVisualStyleBackColor = true;
-            this.btnAdd_Spot_4.Click += new System.EventHandler(this.btnAdd_Spot_4_Click);
+            this.pnlBtnSpot.Controls.Add(this.btnAdd_Spot_1);
+            this.pnlBtnSpot.Controls.Add(this.btnClear_Spot_2);
+            this.pnlBtnSpot.Controls.Add(this.btnClear_Spot_3);
+            this.pnlBtnSpot.Controls.Add(this.btnClear_Spot_1);
+            this.pnlBtnSpot.Controls.Add(this.btnClear_Spot_4);
+            this.pnlBtnSpot.Controls.Add(this.btnAdd_Spot_4);
+            this.pnlBtnSpot.Controls.Add(this.btnAdd_Spot_2);
+            this.pnlBtnSpot.Controls.Add(this.btnAdd_Spot_3);
+            this.pnlBtnSpot.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlBtnSpot.Location = new System.Drawing.Point(378, 17);
+            this.pnlBtnSpot.Name = "pnlBtnSpot";
+            this.pnlBtnSpot.Size = new System.Drawing.Size(153, 131);
+            this.pnlBtnSpot.TabIndex = 4;
             // 
             // btnAdd_Spot_1
             // 
-            this.btnAdd_Spot_1.Location = new System.Drawing.Point(336, 28);
+            this.btnAdd_Spot_1.Location = new System.Drawing.Point(13, 8);
             this.btnAdd_Spot_1.Name = "btnAdd_Spot_1";
             this.btnAdd_Spot_1.Size = new System.Drawing.Size(50, 23);
             this.btnAdd_Spot_1.TabIndex = 4;
@@ -927,15 +1106,75 @@
             this.btnAdd_Spot_1.UseVisualStyleBackColor = true;
             this.btnAdd_Spot_1.Click += new System.EventHandler(this.btnAdd_Spot_1_Click);
             // 
+            // btnClear_Spot_2
+            // 
+            this.btnClear_Spot_2.Location = new System.Drawing.Point(81, 41);
+            this.btnClear_Spot_2.Name = "btnClear_Spot_2";
+            this.btnClear_Spot_2.Size = new System.Drawing.Size(50, 23);
+            this.btnClear_Spot_2.TabIndex = 4;
+            this.btnClear_Spot_2.Text = "清除";
+            this.btnClear_Spot_2.UseVisualStyleBackColor = true;
+            this.btnClear_Spot_2.Click += new System.EventHandler(this.btnClear_Spot_2_Click);
+            // 
+            // btnClear_Spot_3
+            // 
+            this.btnClear_Spot_3.Location = new System.Drawing.Point(81, 71);
+            this.btnClear_Spot_3.Name = "btnClear_Spot_3";
+            this.btnClear_Spot_3.Size = new System.Drawing.Size(50, 23);
+            this.btnClear_Spot_3.TabIndex = 4;
+            this.btnClear_Spot_3.Text = "清除";
+            this.btnClear_Spot_3.UseVisualStyleBackColor = true;
+            this.btnClear_Spot_3.Click += new System.EventHandler(this.btnClear_Spot_3_Click);
+            // 
+            // btnClear_Spot_1
+            // 
+            this.btnClear_Spot_1.Location = new System.Drawing.Point(81, 8);
+            this.btnClear_Spot_1.Name = "btnClear_Spot_1";
+            this.btnClear_Spot_1.Size = new System.Drawing.Size(50, 23);
+            this.btnClear_Spot_1.TabIndex = 4;
+            this.btnClear_Spot_1.Text = "清除";
+            this.btnClear_Spot_1.UseVisualStyleBackColor = true;
+            this.btnClear_Spot_1.Click += new System.EventHandler(this.btnClear_Spot_1_Click);
+            // 
+            // btnClear_Spot_4
+            // 
+            this.btnClear_Spot_4.Location = new System.Drawing.Point(81, 100);
+            this.btnClear_Spot_4.Name = "btnClear_Spot_4";
+            this.btnClear_Spot_4.Size = new System.Drawing.Size(50, 23);
+            this.btnClear_Spot_4.TabIndex = 4;
+            this.btnClear_Spot_4.Text = "清除";
+            this.btnClear_Spot_4.UseVisualStyleBackColor = true;
+            this.btnClear_Spot_4.Click += new System.EventHandler(this.btnClear_Spot_4_Click);
+            // 
+            // btnAdd_Spot_4
+            // 
+            this.btnAdd_Spot_4.Location = new System.Drawing.Point(13, 100);
+            this.btnAdd_Spot_4.Name = "btnAdd_Spot_4";
+            this.btnAdd_Spot_4.Size = new System.Drawing.Size(50, 23);
+            this.btnAdd_Spot_4.TabIndex = 4;
+            this.btnAdd_Spot_4.Text = "编辑";
+            this.btnAdd_Spot_4.UseVisualStyleBackColor = true;
+            this.btnAdd_Spot_4.Click += new System.EventHandler(this.btnAdd_Spot_4_Click);
+            // 
             // btnAdd_Spot_2
             // 
-            this.btnAdd_Spot_2.Location = new System.Drawing.Point(336, 61);
+            this.btnAdd_Spot_2.Location = new System.Drawing.Point(13, 41);
             this.btnAdd_Spot_2.Name = "btnAdd_Spot_2";
             this.btnAdd_Spot_2.Size = new System.Drawing.Size(50, 23);
             this.btnAdd_Spot_2.TabIndex = 4;
             this.btnAdd_Spot_2.Text = "编辑";
             this.btnAdd_Spot_2.UseVisualStyleBackColor = true;
             this.btnAdd_Spot_2.Click += new System.EventHandler(this.btnAdd_Spot_2_Click);
+            // 
+            // btnAdd_Spot_3
+            // 
+            this.btnAdd_Spot_3.Location = new System.Drawing.Point(13, 71);
+            this.btnAdd_Spot_3.Name = "btnAdd_Spot_3";
+            this.btnAdd_Spot_3.Size = new System.Drawing.Size(50, 23);
+            this.btnAdd_Spot_3.TabIndex = 4;
+            this.btnAdd_Spot_3.Text = "编辑";
+            this.btnAdd_Spot_3.UseVisualStyleBackColor = true;
+            this.btnAdd_Spot_3.Click += new System.EventHandler(this.btnAdd_Spot_3_Click);
             // 
             // tbxSpot_1_Emiss
             // 
@@ -948,16 +1187,6 @@
             this.tbxSpot_1_Emiss.TabIndex = 3;
             this.tbxSpot_1_Emiss.Text = "90";
             this.tbxSpot_1_Emiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnAdd_Spot_3
-            // 
-            this.btnAdd_Spot_3.Location = new System.Drawing.Point(336, 91);
-            this.btnAdd_Spot_3.Name = "btnAdd_Spot_3";
-            this.btnAdd_Spot_3.Size = new System.Drawing.Size(50, 23);
-            this.btnAdd_Spot_3.TabIndex = 4;
-            this.btnAdd_Spot_3.Text = "编辑";
-            this.btnAdd_Spot_3.UseVisualStyleBackColor = true;
-            this.btnAdd_Spot_3.Click += new System.EventHandler(this.btnAdd_Spot_3_Click);
             // 
             // tbxSpot_2_X
             // 
@@ -1158,7 +1387,7 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.btnConfirm);
+            this.tabPage2.Controls.Add(this.btnUpdateAlarmParam);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.tbxdwValue2);
             this.tabPage2.Controls.Add(this.tbxdwValue1);
@@ -1173,7 +1402,7 @@
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.gpbRefeTemp);
+            this.tabPage2.Controls.Add(this.grpRefeTemp);
             this.tabPage2.Controls.Add(this.cbxRefeType);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.cbxMeasureClass);
@@ -1181,7 +1410,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(456, 453);
+            this.tabPage2.Size = new System.Drawing.Size(632, 453);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "测温参数";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1190,25 +1419,26 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(378, 19);
+            this.label11.Location = new System.Drawing.Point(549, 21);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(24, 16);
             this.label11.TabIndex = 10;
             this.label11.Text = "cm";
             // 
-            // btnConfirm
+            // btnUpdateAlarmParam
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(187, 409);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
-            this.btnConfirm.TabIndex = 9;
-            this.btnConfirm.Text = "确认";
-            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnUpdateAlarmParam.Location = new System.Drawing.Point(261, 401);
+            this.btnUpdateAlarmParam.Name = "btnUpdateAlarmParam";
+            this.btnUpdateAlarmParam.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateAlarmParam.TabIndex = 9;
+            this.btnUpdateAlarmParam.Text = "确认修改";
+            this.btnUpdateAlarmParam.UseVisualStyleBackColor = true;
+            this.btnUpdateAlarmParam.Click += new System.EventHandler(this.btnUpdateAlarmParam_Click);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(354, 349);
+            this.label10.Location = new System.Drawing.Point(486, 354);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(11, 12);
             this.label10.TabIndex = 8;
@@ -1216,7 +1446,7 @@
             // 
             // tbxdwValue2
             // 
-            this.tbxdwValue2.Location = new System.Drawing.Point(371, 346);
+            this.tbxdwValue2.Location = new System.Drawing.Point(503, 351);
             this.tbxdwValue2.Name = "tbxdwValue2";
             this.tbxdwValue2.Size = new System.Drawing.Size(35, 21);
             this.tbxdwValue2.TabIndex = 7;
@@ -1224,7 +1454,7 @@
             // 
             // tbxdwValue1
             // 
-            this.tbxdwValue1.Location = new System.Drawing.Point(313, 346);
+            this.tbxdwValue1.Location = new System.Drawing.Point(445, 351);
             this.tbxdwValue1.Name = "tbxdwValue1";
             this.tbxdwValue1.Size = new System.Drawing.Size(35, 21);
             this.tbxdwValue1.TabIndex = 7;
@@ -1232,7 +1462,7 @@
             // 
             // tbxReviseTemp
             // 
-            this.tbxReviseTemp.Location = new System.Drawing.Point(314, 296);
+            this.tbxReviseTemp.Location = new System.Drawing.Point(446, 301);
             this.tbxReviseTemp.Name = "tbxReviseTemp";
             this.tbxReviseTemp.Size = new System.Drawing.Size(93, 21);
             this.tbxReviseTemp.TabIndex = 7;
@@ -1240,7 +1470,7 @@
             // 
             // tbxReviseParam
             // 
-            this.tbxReviseParam.Location = new System.Drawing.Point(313, 218);
+            this.tbxReviseParam.Location = new System.Drawing.Point(445, 223);
             this.tbxReviseParam.Name = "tbxReviseParam";
             this.tbxReviseParam.Size = new System.Drawing.Size(93, 21);
             this.tbxReviseParam.TabIndex = 7;
@@ -1248,7 +1478,7 @@
             // 
             // tbxAmbientHumidity
             // 
-            this.tbxAmbientHumidity.Location = new System.Drawing.Point(314, 140);
+            this.tbxAmbientHumidity.Location = new System.Drawing.Point(446, 145);
             this.tbxAmbientHumidity.Name = "tbxAmbientHumidity";
             this.tbxAmbientHumidity.Size = new System.Drawing.Size(92, 21);
             this.tbxAmbientHumidity.TabIndex = 6;
@@ -1256,15 +1486,15 @@
             // 
             // tbxObjDistance
             // 
-            this.tbxObjDistance.Location = new System.Drawing.Point(313, 16);
+            this.tbxObjDistance.Location = new System.Drawing.Point(445, 21);
             this.tbxObjDistance.Name = "tbxObjDistance";
-            this.tbxObjDistance.Size = new System.Drawing.Size(59, 21);
+            this.tbxObjDistance.Size = new System.Drawing.Size(93, 21);
             this.tbxObjDistance.TabIndex = 5;
             this.tbxObjDistance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbxAmbientTemp
             // 
-            this.tbxAmbientTemp.Location = new System.Drawing.Point(313, 76);
+            this.tbxAmbientTemp.Location = new System.Drawing.Point(445, 81);
             this.tbxAmbientTemp.Name = "tbxAmbientTemp";
             this.tbxAmbientTemp.Size = new System.Drawing.Size(93, 21);
             this.tbxAmbientTemp.TabIndex = 4;
@@ -1273,7 +1503,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(218, 355);
+            this.label9.Location = new System.Drawing.Point(350, 360);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(89, 12);
             this.label9.TabIndex = 3;
@@ -1282,7 +1512,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(242, 299);
+            this.label8.Location = new System.Drawing.Point(374, 304);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 12);
             this.label8.TabIndex = 3;
@@ -1291,7 +1521,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(242, 221);
+            this.label7.Location = new System.Drawing.Point(374, 226);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 12);
             this.label7.TabIndex = 3;
@@ -1300,7 +1530,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(242, 143);
+            this.label6.Location = new System.Drawing.Point(374, 148);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 3;
@@ -1309,7 +1539,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(242, 79);
+            this.label5.Location = new System.Drawing.Point(374, 84);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 3;
@@ -1318,22 +1548,22 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(242, 19);
+            this.label4.Location = new System.Drawing.Point(374, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 3;
             this.label4.Text = "环境距离：";
             // 
-            // gpbRefeTemp
+            // grpRefeTemp
             // 
-            this.gpbRefeTemp.Controls.Add(this.tbxRefeTemp);
-            this.gpbRefeTemp.Location = new System.Drawing.Point(19, 116);
-            this.gpbRefeTemp.Name = "gpbRefeTemp";
-            this.gpbRefeTemp.Size = new System.Drawing.Size(185, 52);
-            this.gpbRefeTemp.TabIndex = 2;
-            this.gpbRefeTemp.TabStop = false;
-            this.gpbRefeTemp.Text = "自定义参考温度";
-            this.gpbRefeTemp.Visible = false;
+            this.grpRefeTemp.Controls.Add(this.tbxRefeTemp);
+            this.grpRefeTemp.Location = new System.Drawing.Point(36, 203);
+            this.grpRefeTemp.Name = "grpRefeTemp";
+            this.grpRefeTemp.Size = new System.Drawing.Size(185, 52);
+            this.grpRefeTemp.TabIndex = 2;
+            this.grpRefeTemp.TabStop = false;
+            this.grpRefeTemp.Text = "自定义参考温度";
+            this.grpRefeTemp.Visible = false;
             // 
             // tbxRefeTemp
             // 
@@ -1355,7 +1585,7 @@
             "区域1",
             "区域2",
             "区域3"});
-            this.cbxRefeType.Location = new System.Drawing.Point(112, 73);
+            this.cbxRefeType.Location = new System.Drawing.Point(129, 160);
             this.cbxRefeType.Name = "cbxRefeType";
             this.cbxRefeType.Size = new System.Drawing.Size(81, 20);
             this.cbxRefeType.TabIndex = 1;
@@ -1364,7 +1594,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 76);
+            this.label3.Location = new System.Drawing.Point(34, 163);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 12);
             this.label3.TabIndex = 0;
@@ -1382,7 +1612,7 @@
             "6",
             "7",
             "8"});
-            this.cbxMeasureClass.Location = new System.Drawing.Point(112, 18);
+            this.cbxMeasureClass.Location = new System.Drawing.Point(129, 105);
             this.cbxMeasureClass.Name = "cbxMeasureClass";
             this.cbxMeasureClass.Size = new System.Drawing.Size(81, 20);
             this.cbxMeasureClass.TabIndex = 1;
@@ -1390,7 +1620,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 21);
+            this.label2.Location = new System.Drawing.Point(58, 108);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 0;
@@ -1398,58 +1628,111 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.comboBox2);
-            this.tabPage6.Controls.Add(this.comboBox1);
-            this.tabPage6.Controls.Add(this.label15);
-            this.tabPage6.Controls.Add(this.cbxAlarmColor);
-            this.tabPage6.Controls.Add(this.cbxAlarm);
-            this.tabPage6.Controls.Add(this.label13);
-            this.tabPage6.Controls.Add(this.tbxAlarmTemp);
-            this.tabPage6.Controls.Add(this.label14);
-            this.tabPage6.Controls.Add(this.label12);
+            this.tabPage6.Controls.Add(this.grpIO);
+            this.tabPage6.Controls.Add(this.groupBox1);
+            this.tabPage6.Controls.Add(this.ckbIO);
+            this.tabPage6.Controls.Add(this.grpAlarmInfo);
+            this.tabPage6.Controls.Add(this.btnUpdateAlarmInfo);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(456, 453);
+            this.tabPage6.Size = new System.Drawing.Size(632, 453);
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "报警设置";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // grpAlarmInfo
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "停止报警",
-            "启用报警"});
-            this.comboBox2.Location = new System.Drawing.Point(270, 200);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(60, 20);
-            this.comboBox2.TabIndex = 7;
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempLine_1);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorSpot_4);
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempArea_4);
+            this.grpAlarmInfo.Controls.Add(this.label15);
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempArea_3);
+            this.grpAlarmInfo.Controls.Add(this.label46);
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempArea_2);
+            this.grpAlarmInfo.Controls.Add(this.label47);
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempArea_1);
+            this.grpAlarmInfo.Controls.Add(this.label48);
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempSpot_4);
+            this.grpAlarmInfo.Controls.Add(this.label49);
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempSpot_3);
+            this.grpAlarmInfo.Controls.Add(this.label50);
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempSpot_2);
+            this.grpAlarmInfo.Controls.Add(this.label69);
+            this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempSpot_1);
+            this.grpAlarmInfo.Controls.Add(this.label51);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeLine_1);
+            this.grpAlarmInfo.Controls.Add(this.label52);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeArea_4);
+            this.grpAlarmInfo.Controls.Add(this.label55);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeArea_3);
+            this.grpAlarmInfo.Controls.Add(this.label53);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeSpot_4);
+            this.grpAlarmInfo.Controls.Add(this.label56);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeArea_2);
+            this.grpAlarmInfo.Controls.Add(this.label54);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeSpot_3);
+            this.grpAlarmInfo.Controls.Add(this.label57);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeArea_1);
+            this.grpAlarmInfo.Controls.Add(this.label58);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorLine_1);
+            this.grpAlarmInfo.Controls.Add(this.label59);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorArea_4);
+            this.grpAlarmInfo.Controls.Add(this.label60);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorArea_3);
+            this.grpAlarmInfo.Controls.Add(this.label61);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorArea_2);
+            this.grpAlarmInfo.Controls.Add(this.label64);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorArea_1);
+            this.grpAlarmInfo.Controls.Add(this.label62);
+            this.grpAlarmInfo.Controls.Add(this.label65);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorSpot_3);
+            this.grpAlarmInfo.Controls.Add(this.label63);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorSpot_2);
+            this.grpAlarmInfo.Controls.Add(this.label66);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerLine_1);
+            this.grpAlarmInfo.Controls.Add(this.label67);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerArea_4);
+            this.grpAlarmInfo.Controls.Add(this.label68);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerArea_3);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeSpot_1);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerArea_2);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmTypeSpot_2);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerArea_1);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmColorSpot_1);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerSpot_4);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerSpot_1);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerSpot_3);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeSpot_1);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmPowerSpot_2);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeSpot_2);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeLine_1);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeSpot_3);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeArea_4);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeSpot_4);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeArea_3);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeArea_1);
+            this.grpAlarmInfo.Controls.Add(this.cbxAlarmMessageTypeArea_2);
+            this.grpAlarmInfo.Location = new System.Drawing.Point(50, 13);
+            this.grpAlarmInfo.Name = "grpAlarmInfo";
+            this.grpAlarmInfo.Size = new System.Drawing.Size(574, 279);
+            this.grpAlarmInfo.TabIndex = 3;
+            this.grpAlarmInfo.TabStop = false;
             // 
-            // comboBox1
+            // tbxAlarmTempLine_1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "2",
-            "3"});
-            this.comboBox1.Location = new System.Drawing.Point(182, 200);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(48, 20);
-            this.comboBox1.TabIndex = 6;
+            this.tbxAlarmTempLine_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempLine_1.Location = new System.Drawing.Point(179, 246);
+            this.tbxAlarmTempLine_1.Name = "tbxAlarmTempLine_1";
+            this.tbxAlarmTempLine_1.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempLine_1.TabIndex = 23;
+            this.tbxAlarmTempLine_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label15
+            // cbxAlarmColorSpot_4
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(113, 208);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(65, 12);
-            this.label15.TabIndex = 5;
-            this.label15.Text = "报警IO口：";
-            // 
-            // cbxAlarmColor
-            // 
-            this.cbxAlarmColor.FormattingEnabled = true;
-            this.cbxAlarmColor.Items.AddRange(new object[] {
-            "自动",
+            this.cbxAlarmColorSpot_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorSpot_4.FormattingEnabled = true;
+            this.cbxAlarmColorSpot_4.Items.AddRange(new object[] {
+            "无",
             "黑",
             "白",
             "红",
@@ -1459,7 +1742,902 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColor.Location = new System.Drawing.Point(182, 156);
+            this.cbxAlarmColorSpot_4.Location = new System.Drawing.Point(256, 124);
+            this.cbxAlarmColorSpot_4.Name = "cbxAlarmColorSpot_4";
+            this.cbxAlarmColorSpot_4.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorSpot_4.TabIndex = 22;
+            // 
+            // tbxAlarmTempArea_4
+            // 
+            this.tbxAlarmTempArea_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempArea_4.Location = new System.Drawing.Point(179, 222);
+            this.tbxAlarmTempArea_4.Name = "tbxAlarmTempArea_4";
+            this.tbxAlarmTempArea_4.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempArea_4.TabIndex = 23;
+            this.tbxAlarmTempArea_4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 32);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(29, 12);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "类型";
+            // 
+            // tbxAlarmTempArea_3
+            // 
+            this.tbxAlarmTempArea_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempArea_3.Location = new System.Drawing.Point(179, 198);
+            this.tbxAlarmTempArea_3.Name = "tbxAlarmTempArea_3";
+            this.tbxAlarmTempArea_3.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempArea_3.TabIndex = 23;
+            this.tbxAlarmTempArea_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(50, 32);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(29, 12);
+            this.label46.TabIndex = 13;
+            this.label46.Text = "序号";
+            // 
+            // tbxAlarmTempArea_2
+            // 
+            this.tbxAlarmTempArea_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempArea_2.Location = new System.Drawing.Point(179, 174);
+            this.tbxAlarmTempArea_2.Name = "tbxAlarmTempArea_2";
+            this.tbxAlarmTempArea_2.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempArea_2.TabIndex = 23;
+            this.tbxAlarmTempArea_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(102, 32);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(53, 12);
+            this.label47.TabIndex = 14;
+            this.label47.Text = "触发方式";
+            // 
+            // tbxAlarmTempArea_1
+            // 
+            this.tbxAlarmTempArea_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempArea_1.Location = new System.Drawing.Point(179, 150);
+            this.tbxAlarmTempArea_1.Name = "tbxAlarmTempArea_1";
+            this.tbxAlarmTempArea_1.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempArea_1.TabIndex = 23;
+            this.tbxAlarmTempArea_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(177, 32);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(53, 12);
+            this.label48.TabIndex = 15;
+            this.label48.Text = "报警温度";
+            // 
+            // tbxAlarmTempSpot_4
+            // 
+            this.tbxAlarmTempSpot_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempSpot_4.Location = new System.Drawing.Point(179, 126);
+            this.tbxAlarmTempSpot_4.Name = "tbxAlarmTempSpot_4";
+            this.tbxAlarmTempSpot_4.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempSpot_4.TabIndex = 23;
+            this.tbxAlarmTempSpot_4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(256, 31);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(53, 12);
+            this.label49.TabIndex = 16;
+            this.label49.Text = "报警颜色";
+            // 
+            // tbxAlarmTempSpot_3
+            // 
+            this.tbxAlarmTempSpot_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempSpot_3.Location = new System.Drawing.Point(179, 102);
+            this.tbxAlarmTempSpot_3.Name = "tbxAlarmTempSpot_3";
+            this.tbxAlarmTempSpot_3.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempSpot_3.TabIndex = 23;
+            this.tbxAlarmTempSpot_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(340, 31);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(29, 12);
+            this.label50.TabIndex = 17;
+            this.label50.Text = "开关";
+            // 
+            // tbxAlarmTempSpot_2
+            // 
+            this.tbxAlarmTempSpot_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempSpot_2.Location = new System.Drawing.Point(179, 78);
+            this.tbxAlarmTempSpot_2.Name = "tbxAlarmTempSpot_2";
+            this.tbxAlarmTempSpot_2.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempSpot_2.TabIndex = 23;
+            this.tbxAlarmTempSpot_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(419, 31);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(53, 12);
+            this.label69.TabIndex = 17;
+            this.label69.Text = "联动输出";
+            // 
+            // tbxAlarmTempSpot_1
+            // 
+            this.tbxAlarmTempSpot_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbxAlarmTempSpot_1.Location = new System.Drawing.Point(179, 54);
+            this.tbxAlarmTempSpot_1.Name = "tbxAlarmTempSpot_1";
+            this.tbxAlarmTempSpot_1.Size = new System.Drawing.Size(51, 21);
+            this.tbxAlarmTempSpot_1.TabIndex = 23;
+            this.tbxAlarmTempSpot_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(14, 58);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(17, 12);
+            this.label51.TabIndex = 18;
+            this.label51.Text = "点";
+            // 
+            // cbxAlarmTypeLine_1
+            // 
+            this.cbxAlarmTypeLine_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeLine_1.FormattingEnabled = true;
+            this.cbxAlarmTypeLine_1.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeLine_1.Location = new System.Drawing.Point(104, 250);
+            this.cbxAlarmTypeLine_1.Name = "cbxAlarmTypeLine_1";
+            this.cbxAlarmTypeLine_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeLine_1.TabIndex = 22;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(14, 82);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(17, 12);
+            this.label52.TabIndex = 18;
+            this.label52.Text = "点";
+            // 
+            // cbxAlarmTypeArea_4
+            // 
+            this.cbxAlarmTypeArea_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeArea_4.FormattingEnabled = true;
+            this.cbxAlarmTypeArea_4.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeArea_4.Location = new System.Drawing.Point(104, 226);
+            this.cbxAlarmTypeArea_4.Name = "cbxAlarmTypeArea_4";
+            this.cbxAlarmTypeArea_4.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeArea_4.TabIndex = 22;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(8, 154);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(29, 12);
+            this.label55.TabIndex = 18;
+            this.label55.Text = "区域";
+            // 
+            // cbxAlarmTypeArea_3
+            // 
+            this.cbxAlarmTypeArea_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeArea_3.FormattingEnabled = true;
+            this.cbxAlarmTypeArea_3.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeArea_3.Location = new System.Drawing.Point(104, 202);
+            this.cbxAlarmTypeArea_3.Name = "cbxAlarmTypeArea_3";
+            this.cbxAlarmTypeArea_3.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeArea_3.TabIndex = 22;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(14, 106);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(17, 12);
+            this.label53.TabIndex = 18;
+            this.label53.Text = "点";
+            // 
+            // cbxAlarmTypeSpot_4
+            // 
+            this.cbxAlarmTypeSpot_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeSpot_4.FormattingEnabled = true;
+            this.cbxAlarmTypeSpot_4.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeSpot_4.Location = new System.Drawing.Point(104, 129);
+            this.cbxAlarmTypeSpot_4.Name = "cbxAlarmTypeSpot_4";
+            this.cbxAlarmTypeSpot_4.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeSpot_4.TabIndex = 22;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(8, 178);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(29, 12);
+            this.label56.TabIndex = 18;
+            this.label56.Text = "区域";
+            // 
+            // cbxAlarmTypeArea_2
+            // 
+            this.cbxAlarmTypeArea_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeArea_2.FormattingEnabled = true;
+            this.cbxAlarmTypeArea_2.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeArea_2.Location = new System.Drawing.Point(104, 178);
+            this.cbxAlarmTypeArea_2.Name = "cbxAlarmTypeArea_2";
+            this.cbxAlarmTypeArea_2.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeArea_2.TabIndex = 22;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(14, 130);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(17, 12);
+            this.label54.TabIndex = 18;
+            this.label54.Text = "点";
+            // 
+            // cbxAlarmTypeSpot_3
+            // 
+            this.cbxAlarmTypeSpot_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeSpot_3.FormattingEnabled = true;
+            this.cbxAlarmTypeSpot_3.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeSpot_3.Location = new System.Drawing.Point(104, 105);
+            this.cbxAlarmTypeSpot_3.Name = "cbxAlarmTypeSpot_3";
+            this.cbxAlarmTypeSpot_3.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeSpot_3.TabIndex = 22;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(8, 202);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(29, 12);
+            this.label57.TabIndex = 18;
+            this.label57.Text = "区域";
+            // 
+            // cbxAlarmTypeArea_1
+            // 
+            this.cbxAlarmTypeArea_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeArea_1.FormattingEnabled = true;
+            this.cbxAlarmTypeArea_1.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeArea_1.Location = new System.Drawing.Point(104, 152);
+            this.cbxAlarmTypeArea_1.Name = "cbxAlarmTypeArea_1";
+            this.cbxAlarmTypeArea_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeArea_1.TabIndex = 22;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(8, 226);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(29, 12);
+            this.label58.TabIndex = 18;
+            this.label58.Text = "区域";
+            // 
+            // cbxAlarmColorLine_1
+            // 
+            this.cbxAlarmColorLine_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorLine_1.FormattingEnabled = true;
+            this.cbxAlarmColorLine_1.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColorLine_1.Location = new System.Drawing.Point(256, 244);
+            this.cbxAlarmColorLine_1.Name = "cbxAlarmColorLine_1";
+            this.cbxAlarmColorLine_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorLine_1.TabIndex = 22;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(14, 250);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(17, 12);
+            this.label59.TabIndex = 19;
+            this.label59.Text = "线";
+            // 
+            // cbxAlarmColorArea_4
+            // 
+            this.cbxAlarmColorArea_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorArea_4.FormattingEnabled = true;
+            this.cbxAlarmColorArea_4.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColorArea_4.Location = new System.Drawing.Point(256, 220);
+            this.cbxAlarmColorArea_4.Name = "cbxAlarmColorArea_4";
+            this.cbxAlarmColorArea_4.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorArea_4.TabIndex = 22;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(63, 58);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(11, 12);
+            this.label60.TabIndex = 20;
+            this.label60.Text = "1";
+            // 
+            // cbxAlarmColorArea_3
+            // 
+            this.cbxAlarmColorArea_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorArea_3.FormattingEnabled = true;
+            this.cbxAlarmColorArea_3.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColorArea_3.Location = new System.Drawing.Point(256, 196);
+            this.cbxAlarmColorArea_3.Name = "cbxAlarmColorArea_3";
+            this.cbxAlarmColorArea_3.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorArea_3.TabIndex = 22;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(63, 82);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(11, 12);
+            this.label61.TabIndex = 20;
+            this.label61.Text = "2";
+            // 
+            // cbxAlarmColorArea_2
+            // 
+            this.cbxAlarmColorArea_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorArea_2.FormattingEnabled = true;
+            this.cbxAlarmColorArea_2.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColorArea_2.Location = new System.Drawing.Point(256, 172);
+            this.cbxAlarmColorArea_2.Name = "cbxAlarmColorArea_2";
+            this.cbxAlarmColorArea_2.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorArea_2.TabIndex = 22;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(63, 154);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(11, 12);
+            this.label64.TabIndex = 20;
+            this.label64.Text = "1";
+            // 
+            // cbxAlarmColorArea_1
+            // 
+            this.cbxAlarmColorArea_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorArea_1.FormattingEnabled = true;
+            this.cbxAlarmColorArea_1.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColorArea_1.Location = new System.Drawing.Point(256, 148);
+            this.cbxAlarmColorArea_1.Name = "cbxAlarmColorArea_1";
+            this.cbxAlarmColorArea_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorArea_1.TabIndex = 22;
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(63, 106);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(11, 12);
+            this.label62.TabIndex = 20;
+            this.label62.Text = "3";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(63, 178);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(11, 12);
+            this.label65.TabIndex = 20;
+            this.label65.Text = "2";
+            // 
+            // cbxAlarmColorSpot_3
+            // 
+            this.cbxAlarmColorSpot_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorSpot_3.FormattingEnabled = true;
+            this.cbxAlarmColorSpot_3.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColorSpot_3.Location = new System.Drawing.Point(256, 100);
+            this.cbxAlarmColorSpot_3.Name = "cbxAlarmColorSpot_3";
+            this.cbxAlarmColorSpot_3.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorSpot_3.TabIndex = 22;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(63, 130);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(11, 12);
+            this.label63.TabIndex = 20;
+            this.label63.Text = "4";
+            // 
+            // cbxAlarmColorSpot_2
+            // 
+            this.cbxAlarmColorSpot_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorSpot_2.FormattingEnabled = true;
+            this.cbxAlarmColorSpot_2.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColorSpot_2.Location = new System.Drawing.Point(256, 76);
+            this.cbxAlarmColorSpot_2.Name = "cbxAlarmColorSpot_2";
+            this.cbxAlarmColorSpot_2.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorSpot_2.TabIndex = 22;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(63, 202);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(11, 12);
+            this.label66.TabIndex = 20;
+            this.label66.Text = "3";
+            // 
+            // cbxAlarmPowerLine_1
+            // 
+            this.cbxAlarmPowerLine_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerLine_1.FormattingEnabled = true;
+            this.cbxAlarmPowerLine_1.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerLine_1.Location = new System.Drawing.Point(328, 244);
+            this.cbxAlarmPowerLine_1.Name = "cbxAlarmPowerLine_1";
+            this.cbxAlarmPowerLine_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerLine_1.TabIndex = 22;
+            this.cbxAlarmPowerLine_1.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerLine_1_SelectedIndexChanged);
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(63, 226);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(11, 12);
+            this.label67.TabIndex = 20;
+            this.label67.Text = "4";
+            // 
+            // cbxAlarmPowerArea_4
+            // 
+            this.cbxAlarmPowerArea_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerArea_4.FormattingEnabled = true;
+            this.cbxAlarmPowerArea_4.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerArea_4.Location = new System.Drawing.Point(328, 220);
+            this.cbxAlarmPowerArea_4.Name = "cbxAlarmPowerArea_4";
+            this.cbxAlarmPowerArea_4.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerArea_4.TabIndex = 22;
+            this.cbxAlarmPowerArea_4.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerArea_4_SelectedIndexChanged);
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(63, 250);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(11, 12);
+            this.label68.TabIndex = 21;
+            this.label68.Text = "1";
+            // 
+            // cbxAlarmPowerArea_3
+            // 
+            this.cbxAlarmPowerArea_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerArea_3.FormattingEnabled = true;
+            this.cbxAlarmPowerArea_3.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerArea_3.Location = new System.Drawing.Point(328, 196);
+            this.cbxAlarmPowerArea_3.Name = "cbxAlarmPowerArea_3";
+            this.cbxAlarmPowerArea_3.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerArea_3.TabIndex = 22;
+            this.cbxAlarmPowerArea_3.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerArea_3_SelectedIndexChanged);
+            // 
+            // cbxAlarmTypeSpot_1
+            // 
+            this.cbxAlarmTypeSpot_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeSpot_1.FormattingEnabled = true;
+            this.cbxAlarmTypeSpot_1.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeSpot_1.Location = new System.Drawing.Point(104, 55);
+            this.cbxAlarmTypeSpot_1.Name = "cbxAlarmTypeSpot_1";
+            this.cbxAlarmTypeSpot_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeSpot_1.TabIndex = 22;
+            // 
+            // cbxAlarmPowerArea_2
+            // 
+            this.cbxAlarmPowerArea_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerArea_2.FormattingEnabled = true;
+            this.cbxAlarmPowerArea_2.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerArea_2.Location = new System.Drawing.Point(328, 172);
+            this.cbxAlarmPowerArea_2.Name = "cbxAlarmPowerArea_2";
+            this.cbxAlarmPowerArea_2.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerArea_2.TabIndex = 22;
+            this.cbxAlarmPowerArea_2.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerArea_2_SelectedIndexChanged);
+            // 
+            // cbxAlarmTypeSpot_2
+            // 
+            this.cbxAlarmTypeSpot_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmTypeSpot_2.FormattingEnabled = true;
+            this.cbxAlarmTypeSpot_2.Items.AddRange(new object[] {
+            "大于",
+            "小于"});
+            this.cbxAlarmTypeSpot_2.Location = new System.Drawing.Point(104, 81);
+            this.cbxAlarmTypeSpot_2.Name = "cbxAlarmTypeSpot_2";
+            this.cbxAlarmTypeSpot_2.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmTypeSpot_2.TabIndex = 22;
+            // 
+            // cbxAlarmPowerArea_1
+            // 
+            this.cbxAlarmPowerArea_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerArea_1.FormattingEnabled = true;
+            this.cbxAlarmPowerArea_1.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerArea_1.Location = new System.Drawing.Point(328, 148);
+            this.cbxAlarmPowerArea_1.Name = "cbxAlarmPowerArea_1";
+            this.cbxAlarmPowerArea_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerArea_1.TabIndex = 22;
+            this.cbxAlarmPowerArea_1.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerArea_1_SelectedIndexChanged);
+            // 
+            // cbxAlarmColorSpot_1
+            // 
+            this.cbxAlarmColorSpot_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmColorSpot_1.FormattingEnabled = true;
+            this.cbxAlarmColorSpot_1.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColorSpot_1.Location = new System.Drawing.Point(256, 52);
+            this.cbxAlarmColorSpot_1.Name = "cbxAlarmColorSpot_1";
+            this.cbxAlarmColorSpot_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmColorSpot_1.TabIndex = 22;
+            // 
+            // cbxAlarmPowerSpot_4
+            // 
+            this.cbxAlarmPowerSpot_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerSpot_4.FormattingEnabled = true;
+            this.cbxAlarmPowerSpot_4.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerSpot_4.Location = new System.Drawing.Point(328, 124);
+            this.cbxAlarmPowerSpot_4.Name = "cbxAlarmPowerSpot_4";
+            this.cbxAlarmPowerSpot_4.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerSpot_4.TabIndex = 22;
+            this.cbxAlarmPowerSpot_4.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerSpot_4_SelectedIndexChanged);
+            // 
+            // cbxAlarmPowerSpot_1
+            // 
+            this.cbxAlarmPowerSpot_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerSpot_1.FormattingEnabled = true;
+            this.cbxAlarmPowerSpot_1.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerSpot_1.Location = new System.Drawing.Point(328, 52);
+            this.cbxAlarmPowerSpot_1.Name = "cbxAlarmPowerSpot_1";
+            this.cbxAlarmPowerSpot_1.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerSpot_1.TabIndex = 22;
+            this.cbxAlarmPowerSpot_1.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerSpot_1_SelectedIndexChanged);
+            // 
+            // cbxAlarmPowerSpot_3
+            // 
+            this.cbxAlarmPowerSpot_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerSpot_3.FormattingEnabled = true;
+            this.cbxAlarmPowerSpot_3.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerSpot_3.Location = new System.Drawing.Point(328, 100);
+            this.cbxAlarmPowerSpot_3.Name = "cbxAlarmPowerSpot_3";
+            this.cbxAlarmPowerSpot_3.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerSpot_3.TabIndex = 22;
+            this.cbxAlarmPowerSpot_3.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerSpot_3_SelectedIndexChanged);
+            // 
+            // cbxAlarmMessageTypeSpot_1
+            // 
+            this.cbxAlarmMessageTypeSpot_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeSpot_1.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeSpot_1.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeSpot_1.Location = new System.Drawing.Point(406, 52);
+            this.cbxAlarmMessageTypeSpot_1.Name = "cbxAlarmMessageTypeSpot_1";
+            this.cbxAlarmMessageTypeSpot_1.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeSpot_1.TabIndex = 22;
+            // 
+            // cbxAlarmPowerSpot_2
+            // 
+            this.cbxAlarmPowerSpot_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmPowerSpot_2.FormattingEnabled = true;
+            this.cbxAlarmPowerSpot_2.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarmPowerSpot_2.Location = new System.Drawing.Point(328, 76);
+            this.cbxAlarmPowerSpot_2.Name = "cbxAlarmPowerSpot_2";
+            this.cbxAlarmPowerSpot_2.Size = new System.Drawing.Size(51, 20);
+            this.cbxAlarmPowerSpot_2.TabIndex = 22;
+            this.cbxAlarmPowerSpot_2.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerSpot_2_SelectedIndexChanged);
+            // 
+            // cbxAlarmMessageTypeSpot_2
+            // 
+            this.cbxAlarmMessageTypeSpot_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeSpot_2.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeSpot_2.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeSpot_2.Location = new System.Drawing.Point(406, 76);
+            this.cbxAlarmMessageTypeSpot_2.Name = "cbxAlarmMessageTypeSpot_2";
+            this.cbxAlarmMessageTypeSpot_2.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeSpot_2.TabIndex = 22;
+            // 
+            // cbxAlarmMessageTypeLine_1
+            // 
+            this.cbxAlarmMessageTypeLine_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeLine_1.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeLine_1.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeLine_1.Location = new System.Drawing.Point(406, 244);
+            this.cbxAlarmMessageTypeLine_1.Name = "cbxAlarmMessageTypeLine_1";
+            this.cbxAlarmMessageTypeLine_1.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeLine_1.TabIndex = 22;
+            // 
+            // cbxAlarmMessageTypeSpot_3
+            // 
+            this.cbxAlarmMessageTypeSpot_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeSpot_3.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeSpot_3.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeSpot_3.Location = new System.Drawing.Point(406, 100);
+            this.cbxAlarmMessageTypeSpot_3.Name = "cbxAlarmMessageTypeSpot_3";
+            this.cbxAlarmMessageTypeSpot_3.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeSpot_3.TabIndex = 22;
+            // 
+            // cbxAlarmMessageTypeArea_4
+            // 
+            this.cbxAlarmMessageTypeArea_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeArea_4.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeArea_4.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeArea_4.Location = new System.Drawing.Point(406, 220);
+            this.cbxAlarmMessageTypeArea_4.Name = "cbxAlarmMessageTypeArea_4";
+            this.cbxAlarmMessageTypeArea_4.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeArea_4.TabIndex = 22;
+            // 
+            // cbxAlarmMessageTypeSpot_4
+            // 
+            this.cbxAlarmMessageTypeSpot_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeSpot_4.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeSpot_4.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeSpot_4.Location = new System.Drawing.Point(406, 124);
+            this.cbxAlarmMessageTypeSpot_4.Name = "cbxAlarmMessageTypeSpot_4";
+            this.cbxAlarmMessageTypeSpot_4.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeSpot_4.TabIndex = 22;
+            // 
+            // cbxAlarmMessageTypeArea_3
+            // 
+            this.cbxAlarmMessageTypeArea_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeArea_3.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeArea_3.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeArea_3.Location = new System.Drawing.Point(406, 196);
+            this.cbxAlarmMessageTypeArea_3.Name = "cbxAlarmMessageTypeArea_3";
+            this.cbxAlarmMessageTypeArea_3.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeArea_3.TabIndex = 22;
+            // 
+            // cbxAlarmMessageTypeArea_1
+            // 
+            this.cbxAlarmMessageTypeArea_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeArea_1.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeArea_1.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeArea_1.Location = new System.Drawing.Point(406, 148);
+            this.cbxAlarmMessageTypeArea_1.Name = "cbxAlarmMessageTypeArea_1";
+            this.cbxAlarmMessageTypeArea_1.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeArea_1.TabIndex = 22;
+            // 
+            // cbxAlarmMessageTypeArea_2
+            // 
+            this.cbxAlarmMessageTypeArea_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxAlarmMessageTypeArea_2.FormattingEnabled = true;
+            this.cbxAlarmMessageTypeArea_2.Items.AddRange(new object[] {
+            "不联动",
+            "联动方式1",
+            "联动方式2"});
+            this.cbxAlarmMessageTypeArea_2.Location = new System.Drawing.Point(406, 172);
+            this.cbxAlarmMessageTypeArea_2.Name = "cbxAlarmMessageTypeArea_2";
+            this.cbxAlarmMessageTypeArea_2.Size = new System.Drawing.Size(84, 20);
+            this.cbxAlarmMessageTypeArea_2.TabIndex = 22;
+            // 
+            // grpIO
+            // 
+            this.grpIO.Controls.Add(this.cbxiEnable);
+            this.grpIO.Controls.Add(this.cbxiIO);
+            this.grpIO.Controls.Add(this.label45);
+            this.grpIO.Controls.Add(this.label44);
+            this.grpIO.Enabled = false;
+            this.grpIO.Location = new System.Drawing.Point(363, 311);
+            this.grpIO.Name = "grpIO";
+            this.grpIO.Size = new System.Drawing.Size(200, 100);
+            this.grpIO.TabIndex = 11;
+            this.grpIO.TabStop = false;
+            this.grpIO.Text = "报警IO口设置";
+            this.grpIO.Visible = false;
+            // 
+            // cbxiEnable
+            // 
+            this.cbxiEnable.FormattingEnabled = true;
+            this.cbxiEnable.Items.AddRange(new object[] {
+            "停止报警",
+            "启用报警"});
+            this.cbxiEnable.Location = new System.Drawing.Point(110, 57);
+            this.cbxiEnable.Name = "cbxiEnable";
+            this.cbxiEnable.Size = new System.Drawing.Size(60, 20);
+            this.cbxiEnable.TabIndex = 7;
+            // 
+            // cbxiIO
+            // 
+            this.cbxiIO.FormattingEnabled = true;
+            this.cbxiIO.Items.AddRange(new object[] {
+            "2",
+            "3"});
+            this.cbxiIO.Location = new System.Drawing.Point(33, 57);
+            this.cbxiIO.Name = "cbxiIO";
+            this.cbxiIO.Size = new System.Drawing.Size(48, 20);
+            this.cbxiIO.TabIndex = 6;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(105, 32);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(65, 12);
+            this.label45.TabIndex = 9;
+            this.label45.Text = "打开或关闭";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(31, 32);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(41, 12);
+            this.label44.TabIndex = 9;
+            this.label44.Text = "端口号";
+            // 
+            // ckbIO
+            // 
+            this.ckbIO.AutoSize = true;
+            this.ckbIO.Location = new System.Drawing.Point(569, 379);
+            this.ckbIO.Name = "ckbIO";
+            this.ckbIO.Size = new System.Drawing.Size(48, 16);
+            this.ckbIO.TabIndex = 10;
+            this.ckbIO.Text = "修改";
+            this.ckbIO.UseVisualStyleBackColor = true;
+            this.ckbIO.Visible = false;
+            this.ckbIO.CheckedChanged += new System.EventHandler(this.ckbIO_CheckedChanged);
+            // 
+            // btnUpdateAlarmInfo
+            // 
+            this.btnUpdateAlarmInfo.Location = new System.Drawing.Point(262, 412);
+            this.btnUpdateAlarmInfo.Name = "btnUpdateAlarmInfo";
+            this.btnUpdateAlarmInfo.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateAlarmInfo.TabIndex = 8;
+            this.btnUpdateAlarmInfo.Text = "确认修改";
+            this.btnUpdateAlarmInfo.UseVisualStyleBackColor = true;
+            this.btnUpdateAlarmInfo.Click += new System.EventHandler(this.btnUpdateAlarmInfo_Click);
+            // 
+            // cbxAlarmColor
+            // 
+            this.cbxAlarmColor.FormattingEnabled = true;
+            this.cbxAlarmColor.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColor.Location = new System.Drawing.Point(82, 77);
             this.cbxAlarmColor.Name = "cbxAlarmColor";
             this.cbxAlarmColor.Size = new System.Drawing.Size(98, 20);
             this.cbxAlarmColor.TabIndex = 4;
@@ -1470,7 +2648,7 @@
             this.cbxAlarm.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarm.Location = new System.Drawing.Point(182, 70);
+            this.cbxAlarm.Location = new System.Drawing.Point(82, 24);
             this.cbxAlarm.Name = "cbxAlarm";
             this.cbxAlarm.Size = new System.Drawing.Size(97, 20);
             this.cbxAlarm.TabIndex = 3;
@@ -1478,7 +2656,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(111, 73);
+            this.label13.Location = new System.Drawing.Point(11, 27);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 12);
             this.label13.TabIndex = 2;
@@ -1486,15 +2664,16 @@
             // 
             // tbxAlarmTemp
             // 
-            this.tbxAlarmTemp.Location = new System.Drawing.Point(180, 111);
+            this.tbxAlarmTemp.Location = new System.Drawing.Point(82, 50);
             this.tbxAlarmTemp.Name = "tbxAlarmTemp";
             this.tbxAlarmTemp.Size = new System.Drawing.Size(100, 21);
             this.tbxAlarmTemp.TabIndex = 1;
+            this.tbxAlarmTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(109, 164);
+            this.label14.Location = new System.Drawing.Point(9, 80);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(53, 12);
             this.label14.TabIndex = 0;
@@ -1503,7 +2682,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(109, 114);
+            this.label12.Location = new System.Drawing.Point(9, 53);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 12);
             this.label12.TabIndex = 0;
@@ -1517,22 +2696,34 @@
             this.pbxScreen.Size = new System.Drawing.Size(640, 480);
             this.pbxScreen.TabIndex = 1;
             this.pbxScreen.TabStop = false;
-            this.pbxScreen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbxScreen_MouseDown);
-            this.pbxScreen.MouseEnter += new System.EventHandler(this.pbxScreen_MouseEnter);
-            this.pbxScreen.MouseLeave += new System.EventHandler(this.pbxScreen_MouseLeave);
-            this.pbxScreen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbxScreen_MouseMove);
-            this.pbxScreen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbxScreen_MouseUp);
             // 
-            // FrmTemperParamConfig
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.tbxAlarmTemp);
+            this.groupBox1.Controls.Add(this.cbxAlarmColor);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.cbxAlarm);
+            this.groupBox1.Location = new System.Drawing.Point(27, 298);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(149, 137);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Visible = false;
+            // 
+            // pnl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1149, 607);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(1298, 607);
             this.Controls.Add(this.tabTemprParam);
             this.Controls.Add(this.pbxScreen);
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FrmTemperParamConfig";
+            this.Name = "pnl";
             this.Text = "FrmTemperParamConfig";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmTemperParamConfig_FormClosing);
             this.Load += new System.EventHandler(this.FrmTemperParamConfig_Load);
@@ -1542,17 +2733,26 @@
             this.tabPage1.ResumeLayout(false);
             this.grpArea.ResumeLayout(false);
             this.grpArea.PerformLayout();
+            this.pnlBtnArea.ResumeLayout(false);
             this.grpLine.ResumeLayout(false);
             this.grpLine.PerformLayout();
-            this.grbSpot.ResumeLayout(false);
-            this.grbSpot.PerformLayout();
+            this.pnlBtnLine.ResumeLayout(false);
+            this.grpSpot.ResumeLayout(false);
+            this.grpSpot.PerformLayout();
+            this.pnlBtnSpot.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.gpbRefeTemp.ResumeLayout(false);
-            this.gpbRefeTemp.PerformLayout();
+            this.grpRefeTemp.ResumeLayout(false);
+            this.grpRefeTemp.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.grpAlarmInfo.ResumeLayout(false);
+            this.grpAlarmInfo.PerformLayout();
+            this.grpIO.ResumeLayout(false);
+            this.grpIO.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1570,7 +2770,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbxRefeType;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox gpbRefeTemp;
+        private System.Windows.Forms.GroupBox grpRefeTemp;
         private System.Windows.Forms.TextBox tbxRefeTemp;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -1585,21 +2785,11 @@
         private System.Windows.Forms.TextBox tbxdwValue2;
         private System.Windows.Forms.TextBox tbxdwValue1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Button btnUpdateAlarmParam;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TextBox tbxAlarmTemp;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox cbxAlarm;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox cbxAlarmColor;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox grpLine;
-        private System.Windows.Forms.GroupBox grbSpot;
+        private System.Windows.Forms.GroupBox grpSpot;
         private System.Windows.Forms.GroupBox grpArea;
         private System.Windows.Forms.Button btnAdd_Spot_4;
         private System.Windows.Forms.Button btnAdd_Spot_3;
@@ -1647,7 +2837,7 @@
         private System.Windows.Forms.TextBox tbxArea_2_Emiss;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox ttbxArea_4_X2;
+        private System.Windows.Forms.TextBox tbxArea_4_X2;
         private System.Windows.Forms.TextBox tbxArea_4_X1;
         private System.Windows.Forms.TextBox tbxArea_1_X2;
         private System.Windows.Forms.TextBox tbxArea_1_X1;
@@ -1681,5 +2871,103 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button btnClear_Area_4;
+        private System.Windows.Forms.Button btnClear_Area_3;
+        private System.Windows.Forms.Button btnClear_Area_2;
+        private System.Windows.Forms.Button btnClear_Area_1;
+        private System.Windows.Forms.Button btnClear_Line_1;
+        private System.Windows.Forms.Button btnClear_Spot_4;
+        private System.Windows.Forms.Button btnClear_Spot_1;
+        private System.Windows.Forms.Button btnClear_Spot_2;
+        private System.Windows.Forms.Button btnClear_Spot_3;
+        private System.Windows.Forms.Panel pnlBtnSpot;
+        private System.Windows.Forms.Panel pnlBtnArea;
+        private System.Windows.Forms.Panel pnlBtnLine;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.GroupBox grpIO;
+        private System.Windows.Forms.ComboBox cbxiEnable;
+        private System.Windows.Forms.ComboBox cbxiIO;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.CheckBox ckbIO;
+        private System.Windows.Forms.Button btnUpdateAlarmInfo;
+        private System.Windows.Forms.ComboBox cbxAlarmColor;
+        private System.Windows.Forms.ComboBox cbxAlarm;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tbxAlarmTemp;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeSpot_1;
+        private System.Windows.Forms.TextBox tbxAlarmTempSpot_1;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeLine_1;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeArea_4;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeArea_3;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeSpot_4;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeArea_2;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeSpot_3;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeArea_1;
+        private System.Windows.Forms.ComboBox cbxAlarmTypeSpot_2;
+        private System.Windows.Forms.TextBox tbxAlarmTempLine_1;
+        private System.Windows.Forms.TextBox tbxAlarmTempArea_4;
+        private System.Windows.Forms.TextBox tbxAlarmTempArea_3;
+        private System.Windows.Forms.TextBox tbxAlarmTempArea_2;
+        private System.Windows.Forms.TextBox tbxAlarmTempArea_1;
+        private System.Windows.Forms.TextBox tbxAlarmTempSpot_4;
+        private System.Windows.Forms.TextBox tbxAlarmTempSpot_3;
+        private System.Windows.Forms.TextBox tbxAlarmTempSpot_2;
+        private System.Windows.Forms.ComboBox cbxAlarmColorSpot_1;
+        private System.Windows.Forms.ComboBox cbxAlarmColorLine_1;
+        private System.Windows.Forms.ComboBox cbxAlarmColorArea_4;
+        private System.Windows.Forms.ComboBox cbxAlarmColorArea_3;
+        private System.Windows.Forms.ComboBox cbxAlarmColorArea_2;
+        private System.Windows.Forms.ComboBox cbxAlarmColorArea_1;
+        private System.Windows.Forms.ComboBox cbxAlarmColorSpot_4;
+        private System.Windows.Forms.ComboBox cbxAlarmColorSpot_3;
+        private System.Windows.Forms.ComboBox cbxAlarmColorSpot_2;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerSpot_1;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerLine_1;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerArea_4;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerArea_3;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerArea_2;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerArea_1;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerSpot_4;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerSpot_3;
+        private System.Windows.Forms.ComboBox cbxAlarmPowerSpot_2;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeSpot_1;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeLine_1;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeArea_4;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeArea_3;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeArea_2;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeArea_1;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeSpot_4;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeSpot_3;
+        private System.Windows.Forms.ComboBox cbxAlarmMessageTypeSpot_2;
+        private System.Windows.Forms.GroupBox grpAlarmInfo;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

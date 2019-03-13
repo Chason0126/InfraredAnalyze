@@ -100,7 +100,7 @@ namespace InfraredAnalyze
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=" + SM_InfraredCamera + "");
                 con_DB.Open();
-                cmd = new SqlCommand("create table TemperArea(AreaId int,Type nvarchar(MAX),X1 int,Y1 int,X2 int,Y2 int,X3 int,Y3 int,Emiss int,MeasureType int)", con_DB);
+                cmd = new SqlCommand("create table TemperArea(Type nvarchar(MAX),X1 int,Y1 int,X2 int,Y2 int,X3 int,Y3 int,Emiss int,MeasureType int)", con_DB);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -345,19 +345,19 @@ namespace InfraredAnalyze
             }
         }
 
-        public ArrayList Select_Spot(int CameraId)
+        public ArrayList Select_Spot(int CameraId,string type)
         {
             arrayList = new ArrayList();
-            DMSDK.temperAreaSpot areaSpot = new DMSDK.temperAreaSpot();
+            DMSDK.temperSpot areaSpot = new DMSDK.temperSpot();
             try
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
                 con_DB.Open();
-                cmd = new SqlCommand("select AreaId,X1,Y1,Emiss from TemperArea where Type='S' order by AreaId", con_DB);
+                cmd = new SqlCommand("select type,X1,Y1,Emiss from TemperArea where Type='" + type + "'", con_DB);
                 SqlDataReader sqlDataReader = cmd.ExecuteReader();
                 while (sqlDataReader.Read())
                 {
-                    areaSpot.AreaId = (int)sqlDataReader.GetValue(0);
+                    areaSpot.type = (string)sqlDataReader.GetValue(0);
                     areaSpot.X1 = (int)sqlDataReader.GetValue(1);
                     areaSpot.Y1 = (int)sqlDataReader.GetValue(2);
                     areaSpot.Emiss = (int)sqlDataReader.GetValue(3);
@@ -375,50 +375,288 @@ namespace InfraredAnalyze
             return arrayList;
         }
 
-        public StructType ConverBytesToStructure<StructType>(byte[] bytesBuffer)
+        public ArrayList Select_Area(int CameraId, string type)
         {
-            // 检查长度  
-            if (bytesBuffer.Length != Marshal.SizeOf(typeof(StructType)))
+            arrayList = new ArrayList();
+            DMSDK.temperArea areaArea = new DMSDK.temperArea();
+            try
             {
-                throw new ArgumentException("bytesBuffer参数和structObject参数字节长度不一致。");
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("select type,X1,Y1,X2,Y2,Emiss,MeasureType from TemperArea where Type='" + type + "'", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    areaArea.type = (string)sqlDataReader.GetValue(0);
+                    areaArea.X1 = (int)sqlDataReader.GetValue(1);
+                    areaArea.Y1 = (int)sqlDataReader.GetValue(2);
+                    areaArea.X2 = (int)sqlDataReader.GetValue(3);
+                    areaArea.Y2 = (int)sqlDataReader.GetValue(4);
+                    areaArea.Emiss = (int)sqlDataReader.GetValue(5);
+                    areaArea.MeasureType=(int)sqlDataReader.GetValue(6);
+                    arrayList.Add(areaArea);
+                }
             }
-            //分配一个未托管类型变量  
-            IntPtr bufferHandler = Marshal.AllocHGlobal(bytesBuffer.Length);
-            //逐个复制，也可以直接用copy()方法  
-            for (int index = 0; index < bytesBuffer.Length; index++)
+            catch (Exception ex)
             {
-                Marshal.WriteByte(bufferHandler, index, bytesBuffer[index]);
+                MessageBox.Show("测温区域参数异常：" + ex.Message);
             }
-            //从非托管类型转化为托管类型变量  
-            StructType structObject = (StructType)Marshal.PtrToStructure(bufferHandler, typeof(StructType));
-            //释放非托管类型变量  
-            Marshal.FreeHGlobal(bufferHandler);
-            return structObject;
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList;
         }
 
-        public static object BytesToStruct(byte[] bytes, Type strType)
+        public ArrayList Select_Line(int CameraId, string type)
         {
-            //获取结构体的大小（以字节为单位）  
-            int size = Marshal.SizeOf(strType);
-            //简单的判断（可以去掉）  
-            if (size > bytes.Length)
+            arrayList = new ArrayList();
+            DMSDK.temperLine areaALine = new DMSDK.temperLine();
+            try
             {
-                return null;
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("select type,X1,Y1,X2,Y2,X3,Y3,Emiss from TemperArea where Type='" + type + "'", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    areaALine.type = (string)sqlDataReader.GetValue(0);
+                    areaALine.X1 = (int)sqlDataReader.GetValue(1);
+                    areaALine.Y1 = (int)sqlDataReader.GetValue(2);
+                    areaALine.X2 = (int)sqlDataReader.GetValue(3);
+                    areaALine.Y2 = (int)sqlDataReader.GetValue(4);
+                    areaALine.X3 = (int)sqlDataReader.GetValue(5);
+                    areaALine.Y3 = (int)sqlDataReader.GetValue(6);
+                    areaALine.Emiss = (int)sqlDataReader.GetValue(7);
+                    arrayList.Add(areaALine);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温线参数异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList;
+        }
 
-            //从进程的非托管堆中分配内存给structPtr  
-            IntPtr strPtr = Marshal.AllocHGlobal(size);
+        DMSDK.temperSpot temperSpot;
+        ArrayList arrayList_All_Spot;
+        public ArrayList Select_All_Spot(int CameraId,string S)//总数据库中查询所有点的参数数据
+        {
+            arrayList_All_Spot = new ArrayList();
+            temperSpot = new DMSDK.temperSpot();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("select Type,X1,Y1,Emiss from TemperArea where Type like 'S%' order by Type  ", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    temperSpot.type = (string)sqlDataReader.GetValue(0);
+                    temperSpot.X1 = (int)sqlDataReader.GetValue(1);
+                    temperSpot.Y1 = (int)sqlDataReader.GetValue(2);
+                    temperSpot.Emiss = (int)sqlDataReader.GetValue(3);
+                    arrayList_All_Spot.Add(temperSpot);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温点参数异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList_All_Spot;
+        }
 
-            //将数据从一维托管数组bytes复制到非托管内存指针strPtr  
-            Marshal.Copy(bytes, 0, strPtr, size);
+        DMSDK.temperArea temperArea;
+        ArrayList arrayList_All_Area;
+        public ArrayList Select_All_Area(int CameraId, string A)//总数据库中查询所有点的参数数据
+        {
+            arrayList_All_Area = new ArrayList();
+            temperArea = new DMSDK.temperArea();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("select Type,X1,Y1,X2,Y2 ,Emiss,MeasureType from TemperArea where Type like 'A%' order by Type  ", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    temperArea.type = (string)sqlDataReader.GetValue(0);
+                    temperArea.X1 = Convert.ToInt32(sqlDataReader.GetValue(1));
+                    temperArea.Y1 = Convert.ToInt32(sqlDataReader.GetValue(2));
+                    temperArea.X2 = Convert.ToInt32(sqlDataReader.GetValue(3));
+                    temperArea.Y2 = Convert.ToInt32(sqlDataReader.GetValue(4));
+                    temperArea.Emiss = Convert.ToInt32(sqlDataReader.GetValue(5));
+                    temperArea.MeasureType = Convert.ToInt32(sqlDataReader.GetValue(6));
+                    arrayList_All_Area.Add(temperArea);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温区域参数异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList_All_Area;
+        }
 
-            //将数据从非托管内存块封送到新分配的指定类型的托管对象  
-            //将内存空间转换为目标结构体  
-            object obj = Marshal.PtrToStructure(strPtr, strType);
+        DMSDK.temperLine temperLine;
+        ArrayList arrayList_All_Line;
+        public ArrayList Select_All_Line(int CameraId, string L)//总数据库中查询所有点的参数数据
+        {
+            arrayList_All_Line = new ArrayList();
+            temperLine = new DMSDK.temperLine();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("select Type,X1,Y1,X2,Y2 ,X3,Y3,Emiss from TemperArea where Type like 'L%' order by Type  ", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    temperLine.type = (string)sqlDataReader.GetValue(0);
+                    temperLine.X1 = (int)sqlDataReader.GetValue(1);
+                    temperLine.Y1 = (int)sqlDataReader.GetValue(2);
+                    temperLine.X2 = (int)sqlDataReader.GetValue(3);
+                    temperLine.Y2 = (int)sqlDataReader.GetValue(4);
+                    temperLine.X3 = (int)sqlDataReader.GetValue(5);
+                    temperLine.Y3 = (int)sqlDataReader.GetValue(6);
+                    temperLine.Emiss = (int)sqlDataReader.GetValue(7);
+                    arrayList_All_Line.Add(temperLine);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温线参数异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList_All_Line;
+        }
 
-            //释放以前使用 AllocHGlobal 从进程的非托管内存中分配的内存  
-            Marshal.FreeHGlobal(strPtr);
-            return obj;
+        public void Update_Spot(int CameraId,string type, int x1,int y1,int emiss)//更新数据库中 点参数的设置
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("update TemperArea set X1=" + x1 + ",Y1=" + y1 + ",Emiss=" + emiss + " where Type='" + type + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温点数据库插入异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void Delete_Spot(int CameraId, string type)//更新数据库中 点参数的设置
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("update TemperArea set X1='0',Y1='0'where Type='" + type + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("删除测温点异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void Update_Area(int CameraId, string type, int x1, int y1, int x2, int y2,int emiss,int measurerype)//更新数据库中 测温区域参数的设置
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("update TemperArea set X1=" + x1 + ",Y1=" + y1 + ", X2=" + x2 + ",Y2=" + y2 + ",Emiss=" + emiss + ", MeasureType='" + measurerype + "' where Type='" + type + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温区域数据库插入异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void Delete_Area(int CameraId, string type)//更新数据库中 测温区域参数的设置
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("update TemperArea set X1='0',Y1='0', X2='0',Y2='0' where Type='" + type + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温区域数据库删除异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void Update_Line(int CameraId, string type, int x1, int y1, int x2, int y2, int x3, int y3, int emiss)//更新数据库中 测温区域参数的设置
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("update TemperArea set X1=" + x1 + ",Y1=" + y1 + ", X2=" + x2 + ",Y2=" + y2 + ", X3=" + x3 + ",Y3=" + y3 + ",Emiss='" + emiss + "' where Type='" + type + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温线数据库插入异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public void Delete_Line(int CameraId, string type)//
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("update TemperArea set X1='0',Y1='0', X2='0',Y2='0', X3='0',Y3='0' where Type='" + type + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温线数据库删除异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
         }
     }
 }

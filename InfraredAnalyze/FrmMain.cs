@@ -21,6 +21,7 @@ namespace InfraredAnalyze
     {
         SqlCreate sqlCreate = new SqlCreate();
         int ScreenNum = 1;
+        Thread thread_CallBack;
 
         #region//构造函数
         public FrmMain()
@@ -594,15 +595,22 @@ namespace InfraredAnalyze
         #region//系统参数设置
         private void 测温参数ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmTemperParamConfig frmTemperParamConfig = new FrmTemperParamConfig();
-            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
-            if (tvwSensor.SelectedNode != null)
+            try
             {
-                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
-                frmTemperParamConfig.Ip = structSM7003Tag.IP;
-                frmTemperParamConfig.CameraId = structSM7003Tag.CameraID;
-                frmTemperParamConfig.ShowDialog();
+                pnl frmTemperParamConfig = new pnl();
+                tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+                StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+                if (tvwSensor.SelectedNode != null)
+                {
+                    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                    frmTemperParamConfig.Ip = structSM7003Tag.IP;
+                    frmTemperParamConfig.CameraId = structSM7003Tag.CameraID;
+                    frmTemperParamConfig.ShowDialog();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         #endregion

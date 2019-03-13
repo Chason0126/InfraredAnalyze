@@ -99,6 +99,37 @@ namespace InfraredAnalyze
             public int Emiss;
         }
 
+        public struct temperLine
+        {
+            public string type;
+            public int X1;
+            public int Y1;
+            public int X2;
+            public int Y2;
+            public int X3;
+            public int Y3;
+            public int Emiss;
+        }
+
+        public struct temperArea
+        {
+            public string type;
+            public int X1;
+            public int Y1;
+            public int X2;
+            public int Y2;
+            public int Emiss;
+            public int MeasureType;
+        }
+
+        public struct temperSpot
+        {
+            public string type;
+            public int X1;
+            public int Y1;
+            public int Emiss;
+        }
+
         public struct tagTemperaturePos//4*9
         {
             int type;
@@ -110,6 +141,12 @@ namespace InfraredAnalyze
             int MinTemperPosX;
             int MinTemperPosY;
             int AveTemper;
+        }
+
+
+        public struct tagAlarm
+        {
+            public int AlarmID;
         }
 
         [StructLayout(LayoutKind.Sequential)]
