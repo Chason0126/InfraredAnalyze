@@ -48,6 +48,18 @@ namespace InfraredAnalyze
 
         public static IntPtr[] intPtrs_UCPbx = new IntPtr[16];
         public static int[] intPtrs_Connect = new int[16];
+        public static int[] intPtrs_Operate = new int[16];
+
+        public struct StructTemperData
+        {
+            public int CameraID;
+            public string IPAddress;
+            public DateTime dateTime;
+            public int Type;
+            public int Number;
+            public decimal Temper;
+            public string Status;
+        }
 
     }
 }

@@ -2616,7 +2616,7 @@ namespace InfraredAnalyze
         *返回值:正数表示在线, 负数表示不在线			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_CheckOnline")]
-        public static extern int DM_CheckOnline(ref string IPAddr, int Port);
+        public static extern int DM_CheckOnline(string IPAddr, int Port);
 
         /*
             函数名称:	DM_ClearAllJpeg

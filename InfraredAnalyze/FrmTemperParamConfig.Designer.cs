@@ -2615,7 +2615,7 @@
             // 
             // btnUpdateAlarmInfo
             // 
-            this.btnUpdateAlarmInfo.Location = new System.Drawing.Point(262, 412);
+            this.btnUpdateAlarmInfo.Location = new System.Drawing.Point(260, 375);
             this.btnUpdateAlarmInfo.Name = "btnUpdateAlarmInfo";
             this.btnUpdateAlarmInfo.Size = new System.Drawing.Size(75, 23);
             this.btnUpdateAlarmInfo.TabIndex = 8;

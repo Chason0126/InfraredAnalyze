@@ -17,17 +17,23 @@ using System.Threading;
 namespace InfraredAnalyze
 {
 
+    interface IFrmStyle//窗体样式控制  无边框  拖动 改变位置  不方便  算了
+    {
+        void FrmBorderStyle(Form form);//传入窗体改变 窗题的borderstyle
+        void FrmMove(Panel panel);//按住panle 改变窗体的位置
+    }
     public partial class FrmMain : Form
     {
         SqlCreate sqlCreate = new SqlCreate();
         int ScreenNum = 1;
+        ThreadStart DealCallBack;
         Thread thread_CallBack;
 
         #region//构造函数
         public FrmMain()
         {
             InitializeComponent();
-            DMSDK.DM_Init();
+            DMSDK.DM_Init();//关闭时需要释放资源
             try
             {
                 //for (int i = 0; i < 16; i++)
@@ -72,6 +78,7 @@ namespace InfraredAnalyze
 
         private void btnClose_Click(object sender, EventArgs e)//关闭窗体 退出程序
         {
+            DMSDK.DM_PlayerCleanup();
             this.Close();
         }
 
@@ -754,6 +761,37 @@ namespace InfraredAnalyze
         }
         #endregion
 
+        #region//历史数据
+        private void 历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmHistoricalTemperData frmHistoricalTemperData = new FrmHistoricalTemperData();
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                frmHistoricalTemperData.CameraID = structSM7003Tag.CameraID;
+                frmHistoricalTemperData.ShowDialog();
+            }
+        }
+        #endregion
+
+        #region
+        private void 实时数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRealTimeTemperData frmRealTimeTemperData = new FrmRealTimeTemperData();
+            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                frmRealTimeTemperData.CameraID = structSM7003Tag.CameraID;
+                frmRealTimeTemperData.ShowDialog();
+            }
+        }
+        #endregion
+
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             LoadTreeView();
@@ -806,64 +844,216 @@ namespace InfraredAnalyze
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(btnStart, "一键链接");
         }
-       
+
+        ArrayList temp_arrayList;
         private void btnStart_Click(object sender, EventArgs e)
         {
-            StringBuilder builder_ConnFailed = new StringBuilder();
-            StringBuilder builder_ConnDisable = new StringBuilder();
+           
+            Thread thread = new Thread(showIsRunning);
+            thread.Start();
+             DealCallBack = new ThreadStart(CallBack);
+            thread_CallBack = new Thread(DealCallBack);
+            thread_TemperData = new Thread(TemperData);
             try
             {
-                ArrayList temp_arrayList = sqlCreate.Select_All_SMInfraredConfig();//按NodeId降序排列
+                temp_arrayList = sqlCreate.Select_All_SMInfraredConfig();//按NodeId降序排列
                 if (btnStart.Tag.ToString() == "Start")
                 {
-                    foreach(StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    thread_CallBack.Start();//线程事件开始
+                    thread_TemperData.Start();
+                    foreach (StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
                     {
                         int Numbering = structIAnalyzeConfig.NodeID - 1;
-                        if (structIAnalyzeConfig.Enable==true)//启用
+                        if (DMSDK.DM_CheckOnline(structIAnalyzeConfig.IP, 5000) > 0)
                         {
-                            DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx[Numbering]);
-                            StaticClass.intPtrs_Connect[Numbering] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[Numbering], structIAnalyzeConfig.IP, 5000);// 返回值为视频操作句柄
-                            if (StaticClass.intPtrs_Connect[Numbering] < 0)//连接失败
+                            if (structIAnalyzeConfig.Enable == true)//启用
                             {
-                              Control[] controls= Controls.Find(("ucPbx" + structIAnalyzeConfig.NodeID).ToString(), true);
+                                DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx[Numbering]);//初始化视频
+                                DMSDK.DM_Init();//初始化连接
+                                StaticClass.intPtrs_Connect[Numbering] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[Numbering], structIAnalyzeConfig.IP, 5000);// 返回值为视频操作句柄
+                                StaticClass.intPtrs_Operate[Numbering] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[Numbering], structIAnalyzeConfig.IP, 80);
+                                if (StaticClass.intPtrs_Connect[Numbering] < 0 || StaticClass.intPtrs_Operate[Numbering] <= 0)//连接失败
+                                {
+                                    Control[] controls = Controls.Find(("ucPbx" + structIAnalyzeConfig.NodeID).ToString(), true);
+                                    if (controls != null)
+                                    {
+                                        UCPbx uCPbx = controls[0] as UCPbx;
+                                        uCPbx.BackgroundImage = Properties.Resources.disconnectCamera;
+                                        UCStatusPanel statusPanel = new UCStatusPanel();
+                                        statusPanel.Status = "连接失败";
+                                        //flpRunningStatus.Controls.Add(statusPanel);
+                                    }
+                                }
+                                else//连接成功
+                                {
+                                    UCStatusPanel statusPanel = new UCStatusPanel();
+                                    statusPanel.Status = "连接成功";
+                                    //flpRunningStatus.Controls.Add(statusPanel);
+                                }
+                            }
+                            else//未启用
+                            {
+                                Control[] controls = Controls.Find(("ucPbx" + structIAnalyzeConfig.NodeID).ToString(), true);
                                 if (controls != null)
                                 {
                                     UCPbx uCPbx = controls[0] as UCPbx;
-                                    uCPbx.BackgroundImage = Properties.Resources.disconnectCamera;
+                                    uCPbx.BackgroundImage = Properties.Resources.disableCamera;
                                 }
                             }
                         }
-                        else//未启用
+                        else//主机离线
                         {
-                            Control[] controls = Controls.Find(("ucPbx" + structIAnalyzeConfig.NodeID).ToString(), true);
-                            if(controls!=null)
-                            {
-                                UCPbx uCPbx = controls[0] as UCPbx;
-                                uCPbx.BackgroundImage = Properties.Resources.disableCamera;
-                            }
+                            UCStatusPanel statusPanel = new UCStatusPanel();
+                            statusPanel.Status = "主机离线";
+                            statusPanel.Dock = DockStyle.Top;
+                            pnlRunningStatus.Controls.Add(statusPanel);
                         }
                     }
                     btnStart.BackgroundImage = Properties.Resources.Pause;
                     btnStart.Tag = "Pause";
+                    fMessCallBack_1 = new DMSDK.fMessCallBack(dmMessCallBack_1);//回调函数实例
+                    DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[0], 1);//连续获取测温对象的数据
+                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_1, 0);
+
+                    //fMessCallBack_2 = new DMSDK.fMessCallBack(dmMessCallBack_2);//回调函数实例
+                    //DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[1], 1);//连续获取测温对象的数据
+                    //DMSDK.DM_SetAllMessCallBack(fMessCallBack_2, 0);
                 }
                 else if (btnStart.Tag.ToString() == "Pause")
                 {
                     foreach (StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
                     {
                         int Numbering = structIAnalyzeConfig.NodeID - 1;
-                        DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[Numbering]);
+                        DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[Numbering]);//关闭视频连接
+                        DMSDK.DM_Disconnect(StaticClass.intPtrs_Operate[Numbering]);//关闭操作连接
                         btnStart.Tag = "Start";
                         btnStart.BackgroundImage = Properties.Resources.start;
                     }
-                    //DMSDK.DM_PlayerCleanup();
+                    thread_CallBack.Abort();
+                    thread_TemperData.Abort();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                thread.Abort();
+            }
         }
 
-       
+        private void showIsRunning()
+        {
+            FrmIsRunning frmIsRunning = new FrmIsRunning();
+            frmIsRunning.ShowDialog();
+        }
+
+        private DMSDK.fMessCallBack fMessCallBack_1;
+        private DMSDK.fMessCallBack fMessCallBack_2;
+        private void CallBack()
+        {
+            while (false)
+            {
+                fMessCallBack_1 = new DMSDK.fMessCallBack(dmMessCallBack_1);//回调函数实例
+                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[0], 1);//连续获取测温对象的数据
+                DMSDK.DM_SetAllMessCallBack(fMessCallBack_1, 0);
+                Thread.Sleep(1000);
+            }
+            //while (true)
+            //{
+            //    foreach (StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)//主机启用
+            //    {
+            //        if (structIAnalyzeConfig.Enable == true)
+            //        {
+            //            if (DMSDK.DM_CheckOnline(structIAnalyzeConfig.IP, 5000) < 0)//检查主机是否在线
+            //            {
+            //                MessageBox.Show("主机掉线！");
+            //            }
+            //        }
+            //    }
+            //}
+        }
+
+        int len;
+        DMSDK.tagTemperature tagTemperature;
+        DMSDK.tagTempMessage tempMessage;
+        DMSDK.tagAlarm tagAlarm;
+        ArrayList arrayList_Area = new ArrayList();
+        string CameraIP;
+        Thread thread_TemperData;
+        SqlInsert sqlInsert = new SqlInsert();
+        private void dmMessCallBack_1(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
+        {
+            msg = msg - 0x8000;
+            switch (msg)
+            {
+                case 0x3051://错误
+
+                    break;
+                case 0x3053://温度数据
+                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
+                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
+                    break;
+                case 0x3054://报警消息
+                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
+                    int ErrId = tagAlarm.AlarmID;
+                    BeginInvoke(new MethodInvoker(delegate
+                    {
+                        //dgvWarning.Rows.Add(DateTime.Now, "报警类型", CameraIP, "名称");
+                    }));
+                    break;
+            }
+            Thread.Sleep(2000);
+        }
+        ArrayList arrayList_TemperData;
+        private void TemperData()
+        {
+            arrayList_TemperData = new ArrayList();
+
+        }
+
+      
+
+
+        //private void dmMessCallBack_2(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
+        //{
+        //    msg = msg - 0x8000;
+        //    switch (msg)
+        //    {
+        //        case 0x3051://错误
+
+        //            break;
+        //        case 0x3053://温度数据
+        //            tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
+        //            CameraIP = tempMessage.dvrIP;
+        //            len = tempMessage.len;
+        //            for (int i = 0; i < len; i++)
+        //            {
+        //                tagTemperature = new DMSDK.tagTemperature();
+        //                tagTemperature = tempMessage.temperInfo[i];
+        //                switch (tagTemperature.type)
+        //                {
+        //                    case 0://点
+        //                        int SpotID = tagTemperature.number + 1;
+        //                        break;
+        //                    case 1://线
+        //                        int LineID = tagTemperature.number + 1;
+        //                        break;
+        //                    case 2://区域
+        //                        break;
+        //                }
+        //            }
+        //            break;
+        //        case 0x3054://报警消息
+        //            tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
+        //            int ErrId = tagAlarm.AlarmID;
+        //            BeginInvoke(new MethodInvoker(delegate
+        //            {
+        //                //dgvWarning.Rows.Add(DateTime.Now, "报警类型", CameraIP, "名称");
+        //            }));
+        //            break;
+        //    }
+        //}
     }
 }

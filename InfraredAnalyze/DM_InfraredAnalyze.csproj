@@ -102,6 +102,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -126,11 +127,23 @@
     <Compile Include="FrmCameraNetConfig.Designer.cs">
       <DependentUpon>FrmCameraNetConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmHistoricalTemperData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHistoricalTemperData.Designer.cs">
+      <DependentUpon>FrmHistoricalTemperData.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmImageConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmImageConfig.Designer.cs">
       <DependentUpon>FrmImageConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIsRunning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIsRunning.Designer.cs">
+      <DependentUpon>FrmIsRunning.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
@@ -149,6 +162,12 @@
     </Compile>
     <Compile Include="FrmMointorArea.Designer.cs">
       <DependentUpon>FrmMointorArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRealTimeTemperData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRealTimeTemperData.Designer.cs">
+      <DependentUpon>FrmRealTimeTemperData.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmTemperParamConfig.cs">
       <SubType>Form</SubType>
@@ -172,18 +191,13 @@
       <DependentUpon>FrmAddSensor.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlCreate.cs" />
+    <Compile Include="SqlInsert.cs" />
     <Compile Include="StaticClass.cs" />
     <Compile Include="IpAddressTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="IpAddressTextBox.Designer.cs">
       <DependentUpon>IpAddressTextBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCIsOrNot.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCIsOrNot.Designer.cs">
-      <DependentUpon>UCIsOrNot.cs</DependentUpon>
     </Compile>
     <Compile Include="UCPbx.cs">
       <SubType>UserControl</SubType>
@@ -197,14 +211,26 @@
     <Compile Include="UCPictureBox.Designer.cs">
       <DependentUpon>UCPictureBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCStatusPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCStatusPanel.Designer.cs">
+      <DependentUpon>UCStatusPanel.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FrmAddIPCamera.resx">
       <DependentUpon>FrmAddIPCamera.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCameraNetConfig.resx">
       <DependentUpon>FrmCameraNetConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmHistoricalTemperData.resx">
+      <DependentUpon>FrmHistoricalTemperData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmImageConfig.resx">
       <DependentUpon>FrmImageConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmIsRunning.resx">
+      <DependentUpon>FrmIsRunning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
@@ -214,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMointorArea.resx">
       <DependentUpon>FrmMointorArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRealTimeTemperData.resx">
+      <DependentUpon>FrmRealTimeTemperData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTemperParamConfig.resx">
       <DependentUpon>FrmTemperParamConfig.cs</DependentUpon>
@@ -237,14 +266,14 @@
     <EmbeddedResource Include="IpAddressTextBox.resx">
       <DependentUpon>IpAddressTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCIsOrNot.resx">
-      <DependentUpon>UCIsOrNot.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UCPbx.resx">
       <DependentUpon>UCPbx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCPictureBox.resx">
       <DependentUpon>UCPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCStatusPanel.resx">
+      <DependentUpon>UCStatusPanel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

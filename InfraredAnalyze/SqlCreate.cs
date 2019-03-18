@@ -98,9 +98,11 @@ namespace InfraredAnalyze
         {
             try
             {
-                con_DB = new SqlConnection(@"server =.; integrated security = true;database=" + SM_InfraredCamera + "");
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database='" + SM_InfraredCamera + "'");
                 con_DB.Open();
                 cmd = new SqlCommand("create table TemperArea(Type nvarchar(MAX),X1 int,Y1 int,X2 int,Y2 int,X3 int,Y3 int,Emiss int,MeasureType int)", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("create table TemperData(CameraId int,IPAddress varchar(15),DateTime datetime,Type int,Number int,Temper float,Status  nvarchar(MAX))", con_DB);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -112,10 +114,10 @@ namespace InfraredAnalyze
                 con_DB.Close();
             }
         }
-        ArrayList arrayList;
+
         public ArrayList Select_All_SMInfraredConfig()//按nodeid降序排列
         {
-            arrayList = new ArrayList();
+            ArrayList arrayList = new ArrayList();
             StaticClass.StructIAnalyzeConfig structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
             try
             {
@@ -146,15 +148,15 @@ namespace InfraredAnalyze
             return arrayList;
         }
 
-        public ArrayList Select_SMInfraredConfig(int CameraID)
+        public ArrayList Select_SMInfraredConfig(int CameraID)//按CameraIp查找相机信息。
         {
-            arrayList = new ArrayList();
+            ArrayList arrayList = new ArrayList();
             StaticClass.StructIAnalyzeConfig structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
             try
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
                 con_DB.Open();
-                cmd = new SqlCommand("select * from SMInfraredAnalyze where CameraID= " + CameraID + "", con_DB);
+                cmd = new SqlCommand("select * from SMInfraredAnalyze where CameraID= '" + CameraID + "'", con_DB);
                 SqlDataReader sqlDataReader = cmd.ExecuteReader();
                 while (sqlDataReader.Read())
                 {
@@ -171,6 +173,40 @@ namespace InfraredAnalyze
             catch (Exception ex)
             {
                 MessageBox.Show("数据库创建异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList;
+        }
+
+
+        public ArrayList Select_SMInfraredConfig(string IP)//按CameraIp查找相机信息。
+        {
+            ArrayList arrayList = new ArrayList();
+            StaticClass.StructIAnalyzeConfig structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("select * from SMInfraredAnalyze where IPAddress= '" + IP + "'", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    structIAnalyzeConfig.CameraID = (int)sqlDataReader.GetValue(0);
+                    structIAnalyzeConfig.CameraName = (string)sqlDataReader.GetValue(1);
+                    structIAnalyzeConfig.IP = (string)sqlDataReader.GetValue(2);
+                    structIAnalyzeConfig.Port = (int)sqlDataReader.GetValue(3);
+                    structIAnalyzeConfig.NodeID = (int)sqlDataReader.GetValue(4);
+                    structIAnalyzeConfig.Reamrks = (string)sqlDataReader.GetValue(5);
+                    structIAnalyzeConfig.Enable = (bool)sqlDataReader.GetValue(6);
+                    arrayList.Add(structIAnalyzeConfig);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("获取数据库信息失败：" + ex.Message);
             }
             finally
             {
@@ -347,7 +383,7 @@ namespace InfraredAnalyze
 
         public ArrayList Select_Spot(int CameraId,string type)
         {
-            arrayList = new ArrayList();
+            ArrayList arrayList = new ArrayList();
             DMSDK.temperSpot areaSpot = new DMSDK.temperSpot();
             try
             {
@@ -377,7 +413,7 @@ namespace InfraredAnalyze
 
         public ArrayList Select_Area(int CameraId, string type)
         {
-            arrayList = new ArrayList();
+            ArrayList arrayList = new ArrayList();
             DMSDK.temperArea areaArea = new DMSDK.temperArea();
             try
             {
@@ -410,7 +446,7 @@ namespace InfraredAnalyze
 
         public ArrayList Select_Line(int CameraId, string type)
         {
-            arrayList = new ArrayList();
+            ArrayList arrayList = new ArrayList();
             DMSDK.temperLine areaALine = new DMSDK.temperLine();
             try
             {
@@ -443,10 +479,9 @@ namespace InfraredAnalyze
         }
 
         DMSDK.temperSpot temperSpot;
-        ArrayList arrayList_All_Spot;
         public ArrayList Select_All_Spot(int CameraId,string S)//总数据库中查询所有点的参数数据
         {
-            arrayList_All_Spot = new ArrayList();
+            ArrayList arrayList_All_Spot = new ArrayList();
             temperSpot = new DMSDK.temperSpot();
             try
             {
@@ -475,10 +510,9 @@ namespace InfraredAnalyze
         }
 
         DMSDK.temperArea temperArea;
-        ArrayList arrayList_All_Area;
         public ArrayList Select_All_Area(int CameraId, string A)//总数据库中查询所有点的参数数据
         {
-            arrayList_All_Area = new ArrayList();
+            ArrayList arrayList_All_Area = new ArrayList();
             temperArea = new DMSDK.temperArea();
             try
             {
@@ -510,10 +544,9 @@ namespace InfraredAnalyze
         }
 
         DMSDK.temperLine temperLine;
-        ArrayList arrayList_All_Line;
         public ArrayList Select_All_Line(int CameraId, string L)//总数据库中查询所有点的参数数据
         {
-            arrayList_All_Line = new ArrayList();
+            ArrayList arrayList_All_Line = new ArrayList();
             temperLine = new DMSDK.temperLine();
             try
             {
@@ -657,6 +690,107 @@ namespace InfraredAnalyze
             {
                 con_DB.Close();
             }
+        }
+
+        public void Insert_TemperData(int CameraId,string IPAddress,DateTime Datetime,int Type,int Number,int Temper,string Status)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("Insert Into TemperData(CameraId,IPAddress,Datetime,Type,Number,Temper,Status) Values('"+ CameraId + "','" + IPAddress + "','" + Datetime + "','" + Type + "','" + Number + "','" + Temper + "','" + Status + "')", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("测温数据插入异常：" + CameraId + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        StaticClass.StructTemperData temperData;
+        public  ArrayList Select_TemperData(int CameraId,DateTime StartdateTime,DateTime EnddateTime)
+        {
+            ArrayList arrayList = new ArrayList();
+            temperData = new StaticClass.StructTemperData();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("Select * from TemperData where convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    temperData.CameraID = (int)sqlDataReader.GetValue(0);
+                    temperData.IPAddress = (string)sqlDataReader.GetValue(1);
+                    temperData.dateTime = (DateTime)sqlDataReader.GetValue(2);
+                    temperData.Type = (int)sqlDataReader.GetValue(3);
+                    temperData.Number = (int)sqlDataReader.GetValue(4);
+                    temperData.Temper = (decimal)sqlDataReader.GetValue(5);
+                    temperData.Status = (string)sqlDataReader.GetValue(6);
+                    arrayList.Add(temperData);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("获取数据库温度数据异常：" + CameraId + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList;
+        }
+
+        public ArrayList Select_TemperData(int CameraId,int type,int number, DateTime StartdateTime, DateTime EnddateTime)
+        {
+            ArrayList arrayList = new ArrayList();
+            temperData = new StaticClass.StructTemperData();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                if (type == 3 && number != 4)
+                {
+                    cmd = new SqlCommand("Select * from TemperData where number='" + number + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+
+                }else if(type != 3 && number != 4)
+                {
+                    cmd = new SqlCommand("Select * from TemperData where number='" + number + "' and type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                }
+                else if (type != 3 && number == 4)
+                {
+                    cmd = new SqlCommand("Select * from TemperData where type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                }
+                else if (type == 3 && number == 4)
+                {
+                    cmd = new SqlCommand("Select * from TemperData where convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                }
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    temperData.CameraID = (int)sqlDataReader.GetValue(0);
+                    temperData.IPAddress = (string)sqlDataReader.GetValue(1);
+                    temperData.dateTime = (DateTime)sqlDataReader.GetValue(2);
+                    temperData.Type = (int)sqlDataReader.GetValue(3);
+                    temperData.Number = (int)sqlDataReader.GetValue(4);
+                    temperData.Temper = (decimal)sqlDataReader.GetValue(5);
+                    temperData.Status = (string)sqlDataReader.GetValue(6);
+                    arrayList.Add(temperData);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("获取数据库温度数据异常：" + CameraId + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList;
         }
     }
 }
