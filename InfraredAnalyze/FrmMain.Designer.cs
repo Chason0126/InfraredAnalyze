@@ -38,6 +38,10 @@
             this.ss = new System.Windows.Forms.StatusStrip();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblLogo = new System.Windows.Forms.Label();
+            this.pbxLogo = new System.Windows.Forms.PictureBox();
+            this.btnMin = new System.Windows.Forms.Button();
+            this.btnWindow = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.mnsMeuns = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,28 +53,47 @@
             this.十六画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.语言ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.配置IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpTools = new System.Windows.Forms.TableLayoutPanel();
-            this.btn1 = new System.Windows.Forms.Button();
+            this.btnFullScreen = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnPwd = new System.Windows.Forms.Button();
+            this.btnCameraConfig = new System.Windows.Forms.Button();
+            this.btnDisConnect = new System.Windows.Forms.Button();
             this.spcMain = new System.Windows.Forms.SplitContainer();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.pnlMonitorArea = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pnlTVSensor = new System.Windows.Forms.Panel();
+            this.spcSensorConfig = new System.Windows.Forms.SplitContainer();
             this.tvwSensor = new System.Windows.Forms.TreeView();
             this.imgCamera = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAddSensor = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.spcRunningStatus = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.tlpRunningStatus = new System.Windows.Forms.TableLayoutPanel();
+            this.ucStatusPanel1 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel2 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel3 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel4 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel5 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel6 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel7 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel8 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel9 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel10 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel11 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel12 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel13 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel14 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel15 = new InfraredAnalyze.UCStatusPanel();
+            this.ucStatusPanel16 = new InfraredAnalyze.UCStatusPanel();
             this.img = new System.Windows.Forms.ImageList(this.components);
             this.spcScreen = new System.Windows.Forms.SplitContainer();
             this.cmsShowNum = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -79,6 +102,22 @@
             this.cmsShowNum_3 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_4 = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpScreen = new System.Windows.Forms.TableLayoutPanel();
+            this.ucPbx1 = new InfraredAnalyze.UCPbx();
+            this.ucPbx2 = new InfraredAnalyze.UCPbx();
+            this.ucPbx3 = new InfraredAnalyze.UCPbx();
+            this.ucPbx4 = new InfraredAnalyze.UCPbx();
+            this.ucPbx5 = new InfraredAnalyze.UCPbx();
+            this.ucPbx6 = new InfraredAnalyze.UCPbx();
+            this.ucPbx7 = new InfraredAnalyze.UCPbx();
+            this.ucPbx8 = new InfraredAnalyze.UCPbx();
+            this.ucPbx9 = new InfraredAnalyze.UCPbx();
+            this.ucPbx10 = new InfraredAnalyze.UCPbx();
+            this.ucPbx11 = new InfraredAnalyze.UCPbx();
+            this.ucPbx12 = new InfraredAnalyze.UCPbx();
+            this.ucPbx13 = new InfraredAnalyze.UCPbx();
+            this.ucPbx14 = new InfraredAnalyze.UCPbx();
+            this.ucPbx15 = new InfraredAnalyze.UCPbx();
+            this.ucPbx16 = new InfraredAnalyze.UCPbx();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvWarning = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,34 +141,8 @@
             this.图像设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.历史数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.实时数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlRunningStatus = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnAddSensor = new System.Windows.Forms.Button();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.btnPwd = new System.Windows.Forms.Button();
-            this.btnCameraConfig = new System.Windows.Forms.Button();
-            this.btnDisConnect = new System.Windows.Forms.Button();
-            this.pbxLogo = new System.Windows.Forms.PictureBox();
-            this.btnMin = new System.Windows.Forms.Button();
-            this.btnWindow = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.ucPbx1 = new InfraredAnalyze.UCPbx();
-            this.ucPbx2 = new InfraredAnalyze.UCPbx();
-            this.ucPbx3 = new InfraredAnalyze.UCPbx();
-            this.ucPbx4 = new InfraredAnalyze.UCPbx();
-            this.ucPbx5 = new InfraredAnalyze.UCPbx();
-            this.ucPbx6 = new InfraredAnalyze.UCPbx();
-            this.ucPbx7 = new InfraredAnalyze.UCPbx();
-            this.ucPbx8 = new InfraredAnalyze.UCPbx();
-            this.ucPbx9 = new InfraredAnalyze.UCPbx();
-            this.ucPbx10 = new InfraredAnalyze.UCPbx();
-            this.ucPbx11 = new InfraredAnalyze.UCPbx();
-            this.ucPbx12 = new InfraredAnalyze.UCPbx();
-            this.ucPbx13 = new InfraredAnalyze.UCPbx();
-            this.ucPbx14 = new InfraredAnalyze.UCPbx();
-            this.ucPbx15 = new InfraredAnalyze.UCPbx();
-            this.ucPbx16 = new InfraredAnalyze.UCPbx();
             this.pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.mnsMeuns.SuspendLayout();
             this.tlpTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcMain)).BeginInit();
@@ -138,13 +151,19 @@
             this.spcMain.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.pnlTVSensor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spcSensorConfig)).BeginInit();
+            this.spcSensorConfig.Panel1.SuspendLayout();
+            this.spcSensorConfig.Panel2.SuspendLayout();
+            this.spcSensorConfig.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spcRunningStatus)).BeginInit();
+            this.spcRunningStatus.Panel1.SuspendLayout();
+            this.spcRunningStatus.Panel2.SuspendLayout();
+            this.spcRunningStatus.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.tlpRunningStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcScreen)).BeginInit();
             this.spcScreen.Panel1.SuspendLayout();
             this.spcScreen.Panel2.SuspendLayout();
@@ -158,7 +177,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarning)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvError)).BeginInit();
             this.cmsIPCameraConfig.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // ss
@@ -199,6 +217,66 @@
             this.lblLogo.Size = new System.Drawing.Size(168, 16);
             this.lblLogo.TabIndex = 2;
             this.lblLogo.Text = "红外火灾监控预警系统";
+            // 
+            // pbxLogo
+            // 
+            this.pbxLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pbxLogo.Image = global::InfraredAnalyze.Properties.Resources.logo1;
+            this.pbxLogo.Location = new System.Drawing.Point(0, 0);
+            this.pbxLogo.Name = "pbxLogo";
+            this.pbxLogo.Size = new System.Drawing.Size(105, 35);
+            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxLogo.TabIndex = 1;
+            this.pbxLogo.TabStop = false;
+            // 
+            // btnMin
+            // 
+            this.btnMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMin.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最小化;
+            this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMin.FlatAppearance.BorderSize = 0;
+            this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMin.Location = new System.Drawing.Point(1168, 0);
+            this.btnMin.Name = "btnMin";
+            this.btnMin.Size = new System.Drawing.Size(35, 35);
+            this.btnMin.TabIndex = 0;
+            this.btnMin.UseVisualStyleBackColor = true;
+            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
+            this.btnMin.MouseEnter += new System.EventHandler(this.btnMin_MouseEnter);
+            this.btnMin.MouseLeave += new System.EventHandler(this.btnMin_MouseLeave);
+            // 
+            // btnWindow
+            // 
+            this.btnWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnWindow.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最大化;
+            this.btnWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnWindow.FlatAppearance.BorderSize = 0;
+            this.btnWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWindow.Location = new System.Drawing.Point(1203, 0);
+            this.btnWindow.Name = "btnWindow";
+            this.btnWindow.Size = new System.Drawing.Size(35, 35);
+            this.btnWindow.TabIndex = 0;
+            this.btnWindow.Tag = "";
+            this.btnWindow.UseVisualStyleBackColor = true;
+            this.btnWindow.Click += new System.EventHandler(this.btnWindow_Click);
+            this.btnWindow.MouseEnter += new System.EventHandler(this.btnWindow_MouseEnter);
+            this.btnWindow.MouseLeave += new System.EventHandler(this.btnWindow_MouseLeave);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Location = new System.Drawing.Point(1238, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(35, 35);
+            this.btnClose.TabIndex = 0;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
+            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
             // 
             // mnsMeuns
             // 
@@ -283,23 +361,33 @@
             // 
             // 帮助ToolStripMenuItem
             // 
+            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.配置IPToolStripMenuItem});
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.帮助ToolStripMenuItem.Text = "帮助";
+            // 
+            // 配置IPToolStripMenuItem
+            // 
+            this.配置IPToolStripMenuItem.Name = "配置IPToolStripMenuItem";
+            this.配置IPToolStripMenuItem.Size = new System.Drawing.Size(127, 26);
+            this.配置IPToolStripMenuItem.Text = "配置IP";
+            this.配置IPToolStripMenuItem.Click += new System.EventHandler(this.配置IPToolStripMenuItem_Click);
             // 
             // tlpTools
             // 
             this.tlpTools.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpTools.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
-            this.tlpTools.ColumnCount = 6;
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpTools.ColumnCount = 7;
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1354F));
-            this.tlpTools.Controls.Add(this.btn1, 0, 0);
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 978F));
+            this.tlpTools.Controls.Add(this.btnFullScreen, 0, 0);
             this.tlpTools.Controls.Add(this.button2, 1, 0);
             this.tlpTools.Controls.Add(this.btnStart, 2, 0);
             this.tlpTools.Controls.Add(this.btnPwd, 3, 0);
@@ -312,23 +400,90 @@
             this.tlpTools.Size = new System.Drawing.Size(1273, 50);
             this.tlpTools.TabIndex = 6;
             // 
-            // btn1
+            // btnFullScreen
             // 
-            this.btn1.Location = new System.Drawing.Point(5, 5);
-            this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(34, 34);
-            this.btn1.TabIndex = 7;
-            this.btn1.Text = "button1";
-            this.btn1.UseVisualStyleBackColor = true;
+            this.btnFullScreen.BackgroundImage = global::InfraredAnalyze.Properties.Resources.fullscreen;
+            this.btnFullScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFullScreen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnFullScreen.FlatAppearance.BorderSize = 0;
+            this.btnFullScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFullScreen.Location = new System.Drawing.Point(5, 5);
+            this.btnFullScreen.Name = "btnFullScreen";
+            this.btnFullScreen.Size = new System.Drawing.Size(42, 40);
+            this.btnFullScreen.TabIndex = 7;
+            this.btnFullScreen.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(47, 5);
+            this.button2.BackgroundImage = global::InfraredAnalyze.Properties.Resources.historicaldata;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(55, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(34, 34);
+            this.button2.Size = new System.Drawing.Size(42, 40);
             this.button2.TabIndex = 7;
-            this.button2.Text = "button1";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btnStart
+            // 
+            this.btnStart.BackgroundImage = global::InfraredAnalyze.Properties.Resources.start;
+            this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStart.FlatAppearance.BorderSize = 0;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.Location = new System.Drawing.Point(105, 5);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(42, 40);
+            this.btnStart.TabIndex = 7;
+            this.btnStart.Tag = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStart.MouseEnter += new System.EventHandler(this.btnStart_MouseEnter);
+            // 
+            // btnPwd
+            // 
+            this.btnPwd.BackgroundImage = global::InfraredAnalyze.Properties.Resources.password;
+            this.btnPwd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPwd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPwd.FlatAppearance.BorderSize = 0;
+            this.btnPwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPwd.Location = new System.Drawing.Point(155, 5);
+            this.btnPwd.Name = "btnPwd";
+            this.btnPwd.Size = new System.Drawing.Size(42, 40);
+            this.btnPwd.TabIndex = 7;
+            this.btnPwd.UseVisualStyleBackColor = true;
+            // 
+            // btnCameraConfig
+            // 
+            this.btnCameraConfig.BackgroundImage = global::InfraredAnalyze.Properties.Resources.cameraConfig;
+            this.btnCameraConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCameraConfig.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCameraConfig.FlatAppearance.BorderSize = 0;
+            this.btnCameraConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCameraConfig.Location = new System.Drawing.Point(205, 5);
+            this.btnCameraConfig.Name = "btnCameraConfig";
+            this.btnCameraConfig.Size = new System.Drawing.Size(40, 40);
+            this.btnCameraConfig.TabIndex = 7;
+            this.btnCameraConfig.UseVisualStyleBackColor = true;
+            this.btnCameraConfig.Click += new System.EventHandler(this.btnCameraConfig_Click);
+            // 
+            // btnDisConnect
+            // 
+            this.btnDisConnect.BackgroundImage = global::InfraredAnalyze.Properties.Resources.disconnect;
+            this.btnDisConnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDisConnect.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDisConnect.Enabled = false;
+            this.btnDisConnect.FlatAppearance.BorderSize = 0;
+            this.btnDisConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDisConnect.Location = new System.Drawing.Point(255, 5);
+            this.btnDisConnect.Name = "btnDisConnect";
+            this.btnDisConnect.Size = new System.Drawing.Size(40, 40);
+            this.btnDisConnect.TabIndex = 8;
+            this.btnDisConnect.UseVisualStyleBackColor = true;
+            this.btnDisConnect.Click += new System.EventHandler(this.btnDisConnect_Click);
+            this.btnDisConnect.MouseEnter += new System.EventHandler(this.btnDisConnect_MouseEnter);
             // 
             // spcMain
             // 
@@ -367,10 +522,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.pnlMonitorArea);
-            this.tabPage1.Controls.Add(this.panel3);
-            this.tabPage1.Controls.Add(this.pnlTVSensor);
-            this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Controls.Add(this.spcSensorConfig);
             this.tabPage1.ImageKey = "setting_.png";
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
@@ -379,56 +531,35 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // pnlMonitorArea
+            // spcSensorConfig
             // 
-            this.pnlMonitorArea.Location = new System.Drawing.Point(-4, 326);
-            this.pnlMonitorArea.Name = "pnlMonitorArea";
-            this.pnlMonitorArea.Size = new System.Drawing.Size(151, 284);
-            this.pnlMonitorArea.TabIndex = 3;
+            this.spcSensorConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spcSensorConfig.Location = new System.Drawing.Point(0, 0);
+            this.spcSensorConfig.Margin = new System.Windows.Forms.Padding(0);
+            this.spcSensorConfig.Name = "spcSensorConfig";
+            this.spcSensorConfig.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // panel3
+            // spcSensorConfig.Panel1
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(0, 289);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(147, 28);
-            this.panel3.TabIndex = 2;
+            this.spcSensorConfig.Panel1.Controls.Add(this.tvwSensor);
+            this.spcSensorConfig.Panel1.Controls.Add(this.panel1);
             // 
-            // label3
+            // spcSensorConfig.Panel2
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label3.Location = new System.Drawing.Point(41, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 17);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "监测区域";
-            // 
-            // pnlTVSensor
-            // 
-            this.pnlTVSensor.Controls.Add(this.tvwSensor);
-            this.pnlTVSensor.Location = new System.Drawing.Point(-5, 34);
-            this.pnlTVSensor.Name = "pnlTVSensor";
-            this.pnlTVSensor.Padding = new System.Windows.Forms.Padding(2);
-            this.pnlTVSensor.Size = new System.Drawing.Size(153, 252);
-            this.pnlTVSensor.TabIndex = 1;
+            this.spcSensorConfig.Panel2.Controls.Add(this.panel3);
+            this.spcSensorConfig.Size = new System.Drawing.Size(147, 600);
+            this.spcSensorConfig.SplitterDistance = 269;
+            this.spcSensorConfig.TabIndex = 0;
             // 
             // tvwSensor
             // 
-            this.tvwSensor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tvwSensor.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tvwSensor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvwSensor.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tvwSensor.ForeColor = System.Drawing.SystemColors.WindowText;
             this.tvwSensor.ImageIndex = 0;
             this.tvwSensor.ImageList = this.imgCamera;
-            this.tvwSensor.Location = new System.Drawing.Point(2, 2);
+            this.tvwSensor.Location = new System.Drawing.Point(0, 28);
+            this.tvwSensor.Margin = new System.Windows.Forms.Padding(0);
             this.tvwSensor.Name = "tvwSensor";
             treeNode1.BackColor = System.Drawing.Color.Transparent;
             treeNode1.ForeColor = System.Drawing.Color.Gray;
@@ -445,7 +576,7 @@
             treeNode2,
             treeNode3});
             this.tvwSensor.SelectedImageIndex = 0;
-            this.tvwSensor.Size = new System.Drawing.Size(149, 248);
+            this.tvwSensor.Size = new System.Drawing.Size(147, 241);
             this.tvwSensor.TabIndex = 0;
             this.tvwSensor.DoubleClick += new System.EventHandler(this.tvwSensor_DoubleClick);
             this.tvwSensor.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvwSensor_MouseDown);
@@ -467,6 +598,19 @@
             this.panel1.Size = new System.Drawing.Size(147, 28);
             this.panel1.TabIndex = 0;
             // 
+            // btnAddSensor
+            // 
+            this.btnAddSensor.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
+            this.btnAddSensor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddSensor.FlatAppearance.BorderSize = 0;
+            this.btnAddSensor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddSensor.Location = new System.Drawing.Point(0, 4);
+            this.btnAddSensor.Name = "btnAddSensor";
+            this.btnAddSensor.Size = new System.Drawing.Size(20, 20);
+            this.btnAddSensor.TabIndex = 1;
+            this.btnAddSensor.UseVisualStyleBackColor = true;
+            this.btnAddSensor.Click += new System.EventHandler(this.btnAddSensor_Click);
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -479,12 +623,44 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "探测器";
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(147, 28);
+            this.panel3.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(0, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(20, 20);
+            this.button1.TabIndex = 1;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label3.Location = new System.Drawing.Point(41, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 17);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "监测区域";
+            // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.panel6);
-            this.tabPage2.Controls.Add(this.panel5);
-            this.tabPage2.Controls.Add(this.pnlRunningStatus);
-            this.tabPage2.Controls.Add(this.panel2);
+            this.tabPage2.Controls.Add(this.spcRunningStatus);
             this.tabPage2.ImageKey = "monitor.png";
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
@@ -493,68 +669,35 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // panel6
+            // spcRunningStatus
             // 
-            this.panel6.Location = new System.Drawing.Point(-4, 328);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(152, 282);
-            this.panel6.TabIndex = 4;
+            this.spcRunningStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spcRunningStatus.IsSplitterFixed = true;
+            this.spcRunningStatus.Location = new System.Drawing.Point(3, 3);
+            this.spcRunningStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.spcRunningStatus.Name = "spcRunningStatus";
+            this.spcRunningStatus.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // panel5
+            // spcRunningStatus.Panel1
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel5.Controls.Add(this.label5);
-            this.panel5.Location = new System.Drawing.Point(3, 294);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(141, 28);
-            this.panel5.TabIndex = 3;
+            this.spcRunningStatus.Panel1.Controls.Add(this.panel2);
             // 
-            // label5
+            // spcRunningStatus.Panel2
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label5.Location = new System.Drawing.Point(38, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 17);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "监测数据";
+            this.spcRunningStatus.Panel2.Controls.Add(this.tlpRunningStatus);
+            this.spcRunningStatus.Size = new System.Drawing.Size(141, 594);
+            this.spcRunningStatus.SplitterDistance = 25;
+            this.spcRunningStatus.TabIndex = 0;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel2.Controls.Add(this.panel4);
+            this.panel2.BackColor = System.Drawing.Color.LightGray;
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(141, 28);
+            this.panel2.Size = new System.Drawing.Size(141, 25);
             this.panel2.TabIndex = 1;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(141, 28);
-            this.panel4.TabIndex = 2;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label4.Location = new System.Drawing.Point(38, 6);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 17);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "运行状态";
             // 
             // label2
             // 
@@ -562,11 +705,255 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label2.Location = new System.Drawing.Point(38, 6);
+            this.label2.Location = new System.Drawing.Point(38, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "运行状态";
+            // 
+            // tlpRunningStatus
+            // 
+            this.tlpRunningStatus.ColumnCount = 1;
+            this.tlpRunningStatus.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel1, 0, 0);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel2, 0, 1);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel3, 0, 2);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel4, 0, 3);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel5, 0, 4);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel6, 0, 5);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel7, 0, 6);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel8, 0, 7);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel9, 0, 8);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel10, 0, 9);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel11, 0, 10);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel12, 0, 11);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel13, 0, 12);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel14, 0, 13);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel15, 0, 14);
+            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel16, 0, 15);
+            this.tlpRunningStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpRunningStatus.Location = new System.Drawing.Point(0, 0);
+            this.tlpRunningStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpRunningStatus.Name = "tlpRunningStatus";
+            this.tlpRunningStatus.RowCount = 16;
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRunningStatus.Size = new System.Drawing.Size(141, 565);
+            this.tlpRunningStatus.TabIndex = 0;
+            // 
+            // ucStatusPanel1
+            // 
+            this.ucStatusPanel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel1.Id = 0;
+            this.ucStatusPanel1.Location = new System.Drawing.Point(0, 0);
+            this.ucStatusPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel1.Name = "ucStatusPanel1";
+            this.ucStatusPanel1.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel1.Status = "探测器X:未连接";
+            this.ucStatusPanel1.TabIndex = 0;
+            // 
+            // ucStatusPanel2
+            // 
+            this.ucStatusPanel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel2.Id = 0;
+            this.ucStatusPanel2.Location = new System.Drawing.Point(0, 35);
+            this.ucStatusPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel2.Name = "ucStatusPanel2";
+            this.ucStatusPanel2.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel2.Status = "探测器X:未连接";
+            this.ucStatusPanel2.TabIndex = 1;
+            // 
+            // ucStatusPanel3
+            // 
+            this.ucStatusPanel3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel3.Id = 0;
+            this.ucStatusPanel3.Location = new System.Drawing.Point(0, 70);
+            this.ucStatusPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel3.Name = "ucStatusPanel3";
+            this.ucStatusPanel3.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel3.Status = "探测器X:未连接";
+            this.ucStatusPanel3.TabIndex = 2;
+            // 
+            // ucStatusPanel4
+            // 
+            this.ucStatusPanel4.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel4.Id = 0;
+            this.ucStatusPanel4.Location = new System.Drawing.Point(0, 105);
+            this.ucStatusPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel4.Name = "ucStatusPanel4";
+            this.ucStatusPanel4.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel4.Status = "探测器X:未连接";
+            this.ucStatusPanel4.TabIndex = 3;
+            // 
+            // ucStatusPanel5
+            // 
+            this.ucStatusPanel5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel5.Id = 0;
+            this.ucStatusPanel5.Location = new System.Drawing.Point(0, 140);
+            this.ucStatusPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel5.Name = "ucStatusPanel5";
+            this.ucStatusPanel5.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel5.Status = "探测器X:未连接";
+            this.ucStatusPanel5.TabIndex = 4;
+            // 
+            // ucStatusPanel6
+            // 
+            this.ucStatusPanel6.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel6.Id = 0;
+            this.ucStatusPanel6.Location = new System.Drawing.Point(0, 175);
+            this.ucStatusPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel6.Name = "ucStatusPanel6";
+            this.ucStatusPanel6.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel6.Status = "探测器X:未连接";
+            this.ucStatusPanel6.TabIndex = 5;
+            // 
+            // ucStatusPanel7
+            // 
+            this.ucStatusPanel7.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel7.Id = 0;
+            this.ucStatusPanel7.Location = new System.Drawing.Point(0, 210);
+            this.ucStatusPanel7.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel7.Name = "ucStatusPanel7";
+            this.ucStatusPanel7.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel7.Status = "探测器X:未连接";
+            this.ucStatusPanel7.TabIndex = 6;
+            // 
+            // ucStatusPanel8
+            // 
+            this.ucStatusPanel8.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel8.Id = 0;
+            this.ucStatusPanel8.Location = new System.Drawing.Point(0, 245);
+            this.ucStatusPanel8.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel8.Name = "ucStatusPanel8";
+            this.ucStatusPanel8.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel8.Status = "探测器X:未连接";
+            this.ucStatusPanel8.TabIndex = 7;
+            // 
+            // ucStatusPanel9
+            // 
+            this.ucStatusPanel9.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel9.Id = 0;
+            this.ucStatusPanel9.Location = new System.Drawing.Point(0, 280);
+            this.ucStatusPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel9.Name = "ucStatusPanel9";
+            this.ucStatusPanel9.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel9.Status = "探测器X:未连接";
+            this.ucStatusPanel9.TabIndex = 8;
+            // 
+            // ucStatusPanel10
+            // 
+            this.ucStatusPanel10.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel10.Id = 0;
+            this.ucStatusPanel10.Location = new System.Drawing.Point(0, 315);
+            this.ucStatusPanel10.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel10.Name = "ucStatusPanel10";
+            this.ucStatusPanel10.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel10.Status = "探测器X:未连接";
+            this.ucStatusPanel10.TabIndex = 9;
+            // 
+            // ucStatusPanel11
+            // 
+            this.ucStatusPanel11.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel11.Id = 0;
+            this.ucStatusPanel11.Location = new System.Drawing.Point(0, 350);
+            this.ucStatusPanel11.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel11.Name = "ucStatusPanel11";
+            this.ucStatusPanel11.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel11.Status = "探测器X:未连接";
+            this.ucStatusPanel11.TabIndex = 10;
+            // 
+            // ucStatusPanel12
+            // 
+            this.ucStatusPanel12.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel12.Id = 0;
+            this.ucStatusPanel12.Location = new System.Drawing.Point(0, 385);
+            this.ucStatusPanel12.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel12.Name = "ucStatusPanel12";
+            this.ucStatusPanel12.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel12.Status = "探测器X:未连接";
+            this.ucStatusPanel12.TabIndex = 11;
+            // 
+            // ucStatusPanel13
+            // 
+            this.ucStatusPanel13.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel13.Id = 0;
+            this.ucStatusPanel13.Location = new System.Drawing.Point(0, 420);
+            this.ucStatusPanel13.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel13.Name = "ucStatusPanel13";
+            this.ucStatusPanel13.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel13.Status = "探测器X:未连接";
+            this.ucStatusPanel13.TabIndex = 12;
+            // 
+            // ucStatusPanel14
+            // 
+            this.ucStatusPanel14.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel14.Id = 0;
+            this.ucStatusPanel14.Location = new System.Drawing.Point(0, 455);
+            this.ucStatusPanel14.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel14.Name = "ucStatusPanel14";
+            this.ucStatusPanel14.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel14.Status = "探测器X:未连接";
+            this.ucStatusPanel14.TabIndex = 13;
+            // 
+            // ucStatusPanel15
+            // 
+            this.ucStatusPanel15.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel15.Id = 0;
+            this.ucStatusPanel15.Location = new System.Drawing.Point(0, 490);
+            this.ucStatusPanel15.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel15.Name = "ucStatusPanel15";
+            this.ucStatusPanel15.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel15.Status = "探测器X:未连接";
+            this.ucStatusPanel15.TabIndex = 14;
+            // 
+            // ucStatusPanel16
+            // 
+            this.ucStatusPanel16.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ucStatusPanel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucStatusPanel16.Id = 0;
+            this.ucStatusPanel16.Location = new System.Drawing.Point(0, 525);
+            this.ucStatusPanel16.Margin = new System.Windows.Forms.Padding(0);
+            this.ucStatusPanel16.Name = "ucStatusPanel16";
+            this.ucStatusPanel16.Size = new System.Drawing.Size(141, 33);
+            this.ucStatusPanel16.Status = "探测器X:未连接";
+            this.ucStatusPanel16.TabIndex = 15;
             // 
             // img
             // 
@@ -669,362 +1056,6 @@
             this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpScreen.Size = new System.Drawing.Size(1113, 533);
             this.tlpScreen.TabIndex = 5;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.dgvWarning);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.dgvError);
-            this.splitContainer2.Size = new System.Drawing.Size(1113, 97);
-            this.splitContainer2.SplitterDistance = 555;
-            this.splitContainer2.SplitterWidth = 1;
-            this.splitContainer2.TabIndex = 0;
-            // 
-            // dgvWarning
-            // 
-            this.dgvWarning.AllowUserToAddRows = false;
-            this.dgvWarning.AllowUserToDeleteRows = false;
-            this.dgvWarning.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWarning.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvWarning.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvWarning.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.dgvWarning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvWarning.Location = new System.Drawing.Point(0, 0);
-            this.dgvWarning.Name = "dgvWarning";
-            this.dgvWarning.RowTemplate.Height = 23;
-            this.dgvWarning.Size = new System.Drawing.Size(555, 97);
-            this.dgvWarning.TabIndex = 0;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "报警时间";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "报警类型";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "探测器地址";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "探测器信息";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dgvError
-            // 
-            this.dgvError.AllowUserToAddRows = false;
-            this.dgvError.AllowUserToDeleteRows = false;
-            this.dgvError.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvError.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvError.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
-            this.dgvError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvError.Location = new System.Drawing.Point(0, 0);
-            this.dgvError.Name = "dgvError";
-            this.dgvError.RowTemplate.Height = 23;
-            this.dgvError.Size = new System.Drawing.Size(557, 97);
-            this.dgvError.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "故障时间";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "故障类型";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "探测器地址";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "探测器信息";
-            this.Column4.Name = "Column4";
-            // 
-            // cmsIPCameraConfig
-            // 
-            this.cmsIPCameraConfig.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.网络参数设置ToolStripMenuItem,
-            this.测温参数ToolStripMenuItem,
-            this.视频设置ToolStripMenuItem,
-            this.删除ToolStripMenuItem,
-            this.上移ToolStripMenuItem,
-            this.下移ToolStripMenuItem,
-            this.连接ToolStripMenuItem,
-            this.断开ToolStripMenuItem,
-            this.图像设置ToolStripMenuItem,
-            this.历史数据ToolStripMenuItem,
-            this.实时数据ToolStripMenuItem});
-            this.cmsIPCameraConfig.Name = "cmsIPCameraConfig";
-            this.cmsIPCameraConfig.Size = new System.Drawing.Size(149, 246);
-            // 
-            // 网络参数设置ToolStripMenuItem
-            // 
-            this.网络参数设置ToolStripMenuItem.Name = "网络参数设置ToolStripMenuItem";
-            this.网络参数设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.网络参数设置ToolStripMenuItem.Text = "网络参数";
-            this.网络参数设置ToolStripMenuItem.Click += new System.EventHandler(this.网络参数设置ToolStripMenuItem_Click);
-            // 
-            // 测温参数ToolStripMenuItem
-            // 
-            this.测温参数ToolStripMenuItem.Name = "测温参数ToolStripMenuItem";
-            this.测温参数ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.测温参数ToolStripMenuItem.Text = "测温报警设置";
-            this.测温参数ToolStripMenuItem.Click += new System.EventHandler(this.测温参数ToolStripMenuItem_Click);
-            // 
-            // 视频设置ToolStripMenuItem
-            // 
-            this.视频设置ToolStripMenuItem.Name = "视频设置ToolStripMenuItem";
-            this.视频设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.视频设置ToolStripMenuItem.Text = "视频设置";
-            this.视频设置ToolStripMenuItem.Click += new System.EventHandler(this.视频设置ToolStripMenuItem_Click);
-            // 
-            // 删除ToolStripMenuItem
-            // 
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
-            // 
-            // 上移ToolStripMenuItem
-            // 
-            this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
-            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.上移ToolStripMenuItem.Text = "上移";
-            this.上移ToolStripMenuItem.Click += new System.EventHandler(this.上移ToolStripMenuItem_Click);
-            // 
-            // 下移ToolStripMenuItem
-            // 
-            this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
-            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.下移ToolStripMenuItem.Text = "下移";
-            this.下移ToolStripMenuItem.Click += new System.EventHandler(this.下移ToolStripMenuItem_Click);
-            // 
-            // 连接ToolStripMenuItem
-            // 
-            this.连接ToolStripMenuItem.Name = "连接ToolStripMenuItem";
-            this.连接ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.连接ToolStripMenuItem.Text = "连接";
-            this.连接ToolStripMenuItem.Click += new System.EventHandler(this.连接ToolStripMenuItem_Click);
-            // 
-            // 断开ToolStripMenuItem
-            // 
-            this.断开ToolStripMenuItem.Name = "断开ToolStripMenuItem";
-            this.断开ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.断开ToolStripMenuItem.Text = "断开";
-            this.断开ToolStripMenuItem.Click += new System.EventHandler(this.断开ToolStripMenuItem_Click);
-            // 
-            // 图像设置ToolStripMenuItem
-            // 
-            this.图像设置ToolStripMenuItem.Name = "图像设置ToolStripMenuItem";
-            this.图像设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.图像设置ToolStripMenuItem.Text = "图像设置";
-            this.图像设置ToolStripMenuItem.Click += new System.EventHandler(this.图像设置ToolStripMenuItem_Click);
-            // 
-            // 历史数据ToolStripMenuItem
-            // 
-            this.历史数据ToolStripMenuItem.Name = "历史数据ToolStripMenuItem";
-            this.历史数据ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.历史数据ToolStripMenuItem.Text = "历史数据";
-            this.历史数据ToolStripMenuItem.Click += new System.EventHandler(this.历史数据ToolStripMenuItem_Click);
-            // 
-            // 实时数据ToolStripMenuItem
-            // 
-            this.实时数据ToolStripMenuItem.Name = "实时数据ToolStripMenuItem";
-            this.实时数据ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.实时数据ToolStripMenuItem.Text = "实时数据";
-            this.实时数据ToolStripMenuItem.Click += new System.EventHandler(this.实时数据ToolStripMenuItem_Click);
-            // 
-            // pnlRunningStatus
-            // 
-            this.pnlRunningStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRunningStatus.Location = new System.Drawing.Point(3, 31);
-            this.pnlRunningStatus.Name = "pnlRunningStatus";
-            this.pnlRunningStatus.Size = new System.Drawing.Size(141, 566);
-            this.pnlRunningStatus.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(0, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(20, 20);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnAddSensor
-            // 
-            this.btnAddSensor.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
-            this.btnAddSensor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAddSensor.FlatAppearance.BorderSize = 0;
-            this.btnAddSensor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddSensor.Location = new System.Drawing.Point(0, 4);
-            this.btnAddSensor.Name = "btnAddSensor";
-            this.btnAddSensor.Size = new System.Drawing.Size(20, 20);
-            this.btnAddSensor.TabIndex = 1;
-            this.btnAddSensor.UseVisualStyleBackColor = true;
-            this.btnAddSensor.Click += new System.EventHandler(this.btnAddSensor_Click);
-            // 
-            // btnStart
-            // 
-            this.btnStart.BackgroundImage = global::InfraredAnalyze.Properties.Resources.start;
-            this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStart.FlatAppearance.BorderSize = 0;
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Location = new System.Drawing.Point(89, 5);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(42, 40);
-            this.btnStart.TabIndex = 7;
-            this.btnStart.Tag = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            this.btnStart.MouseEnter += new System.EventHandler(this.btnStart_MouseEnter);
-            // 
-            // btnPwd
-            // 
-            this.btnPwd.BackgroundImage = global::InfraredAnalyze.Properties.Resources.password;
-            this.btnPwd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPwd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPwd.FlatAppearance.BorderSize = 0;
-            this.btnPwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPwd.Location = new System.Drawing.Point(139, 5);
-            this.btnPwd.Name = "btnPwd";
-            this.btnPwd.Size = new System.Drawing.Size(49, 40);
-            this.btnPwd.TabIndex = 7;
-            this.btnPwd.UseVisualStyleBackColor = true;
-            // 
-            // btnCameraConfig
-            // 
-            this.btnCameraConfig.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addsScreen;
-            this.btnCameraConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCameraConfig.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCameraConfig.FlatAppearance.BorderSize = 0;
-            this.btnCameraConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCameraConfig.Location = new System.Drawing.Point(196, 5);
-            this.btnCameraConfig.Name = "btnCameraConfig";
-            this.btnCameraConfig.Size = new System.Drawing.Size(40, 40);
-            this.btnCameraConfig.TabIndex = 7;
-            this.btnCameraConfig.UseVisualStyleBackColor = true;
-            this.btnCameraConfig.Click += new System.EventHandler(this.btnCameraConfig_Click);
-            // 
-            // btnDisConnect
-            // 
-            this.btnDisConnect.BackgroundImage = global::InfraredAnalyze.Properties.Resources.disconnect;
-            this.btnDisConnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDisConnect.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnDisConnect.Enabled = false;
-            this.btnDisConnect.FlatAppearance.BorderSize = 0;
-            this.btnDisConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDisConnect.Location = new System.Drawing.Point(248, 5);
-            this.btnDisConnect.Name = "btnDisConnect";
-            this.btnDisConnect.Size = new System.Drawing.Size(40, 40);
-            this.btnDisConnect.TabIndex = 8;
-            this.btnDisConnect.UseVisualStyleBackColor = true;
-            this.btnDisConnect.Click += new System.EventHandler(this.btnDisConnect_Click);
-            this.btnDisConnect.MouseEnter += new System.EventHandler(this.btnDisConnect_MouseEnter);
-            // 
-            // pbxLogo
-            // 
-            this.pbxLogo.BackColor = System.Drawing.Color.Transparent;
-            this.pbxLogo.Image = global::InfraredAnalyze.Properties.Resources.logo1;
-            this.pbxLogo.Location = new System.Drawing.Point(0, 0);
-            this.pbxLogo.Name = "pbxLogo";
-            this.pbxLogo.Size = new System.Drawing.Size(105, 35);
-            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxLogo.TabIndex = 1;
-            this.pbxLogo.TabStop = false;
-            // 
-            // btnMin
-            // 
-            this.btnMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMin.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最小化;
-            this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMin.FlatAppearance.BorderSize = 0;
-            this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMin.Location = new System.Drawing.Point(1168, 0);
-            this.btnMin.Name = "btnMin";
-            this.btnMin.Size = new System.Drawing.Size(35, 35);
-            this.btnMin.TabIndex = 0;
-            this.btnMin.UseVisualStyleBackColor = true;
-            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
-            this.btnMin.MouseEnter += new System.EventHandler(this.btnMin_MouseEnter);
-            this.btnMin.MouseLeave += new System.EventHandler(this.btnMin_MouseLeave);
-            // 
-            // btnWindow
-            // 
-            this.btnWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWindow.BackgroundImage = global::InfraredAnalyze.Properties.Resources.最大化;
-            this.btnWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnWindow.FlatAppearance.BorderSize = 0;
-            this.btnWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWindow.Location = new System.Drawing.Point(1203, 0);
-            this.btnWindow.Name = "btnWindow";
-            this.btnWindow.Size = new System.Drawing.Size(35, 35);
-            this.btnWindow.TabIndex = 0;
-            this.btnWindow.Tag = "";
-            this.btnWindow.UseVisualStyleBackColor = true;
-            this.btnWindow.Click += new System.EventHandler(this.btnWindow_Click);
-            this.btnWindow.MouseEnter += new System.EventHandler(this.btnWindow_MouseEnter);
-            this.btnWindow.MouseLeave += new System.EventHandler(this.btnWindow_MouseLeave);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
-            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(1238, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(35, 35);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
-            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
             // 
             // ucPbx1
             // 
@@ -1234,6 +1265,210 @@
             this.ucPbx16.Size = new System.Drawing.Size(279, 134);
             this.ucPbx16.TabIndex = 15;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.dgvWarning);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.dgvError);
+            this.splitContainer2.Size = new System.Drawing.Size(1113, 97);
+            this.splitContainer2.SplitterDistance = 555;
+            this.splitContainer2.SplitterWidth = 1;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // dgvWarning
+            // 
+            this.dgvWarning.AllowUserToAddRows = false;
+            this.dgvWarning.AllowUserToDeleteRows = false;
+            this.dgvWarning.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWarning.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvWarning.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWarning.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.dgvWarning.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvWarning.Location = new System.Drawing.Point(0, 0);
+            this.dgvWarning.Name = "dgvWarning";
+            this.dgvWarning.RowTemplate.Height = 23;
+            this.dgvWarning.Size = new System.Drawing.Size(555, 97);
+            this.dgvWarning.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "报警时间";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "报警类型";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "探测器地址";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "探测器信息";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dgvError
+            // 
+            this.dgvError.AllowUserToAddRows = false;
+            this.dgvError.AllowUserToDeleteRows = false;
+            this.dgvError.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvError.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvError.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dgvError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvError.Location = new System.Drawing.Point(0, 0);
+            this.dgvError.Name = "dgvError";
+            this.dgvError.RowTemplate.Height = 23;
+            this.dgvError.Size = new System.Drawing.Size(557, 97);
+            this.dgvError.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "故障时间";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "故障类型";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "探测器地址";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "探测器信息";
+            this.Column4.Name = "Column4";
+            // 
+            // cmsIPCameraConfig
+            // 
+            this.cmsIPCameraConfig.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.网络参数设置ToolStripMenuItem,
+            this.测温参数ToolStripMenuItem,
+            this.视频设置ToolStripMenuItem,
+            this.删除ToolStripMenuItem,
+            this.上移ToolStripMenuItem,
+            this.下移ToolStripMenuItem,
+            this.连接ToolStripMenuItem,
+            this.断开ToolStripMenuItem,
+            this.图像设置ToolStripMenuItem,
+            this.历史数据ToolStripMenuItem,
+            this.实时数据ToolStripMenuItem});
+            this.cmsIPCameraConfig.Name = "cmsIPCameraConfig";
+            this.cmsIPCameraConfig.Size = new System.Drawing.Size(149, 246);
+            // 
+            // 网络参数设置ToolStripMenuItem
+            // 
+            this.网络参数设置ToolStripMenuItem.Name = "网络参数设置ToolStripMenuItem";
+            this.网络参数设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.网络参数设置ToolStripMenuItem.Text = "网络参数";
+            this.网络参数设置ToolStripMenuItem.Click += new System.EventHandler(this.网络参数设置ToolStripMenuItem_Click);
+            // 
+            // 测温参数ToolStripMenuItem
+            // 
+            this.测温参数ToolStripMenuItem.Name = "测温参数ToolStripMenuItem";
+            this.测温参数ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.测温参数ToolStripMenuItem.Text = "测温报警设置";
+            this.测温参数ToolStripMenuItem.Click += new System.EventHandler(this.测温参数ToolStripMenuItem_Click);
+            // 
+            // 视频设置ToolStripMenuItem
+            // 
+            this.视频设置ToolStripMenuItem.Name = "视频设置ToolStripMenuItem";
+            this.视频设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.视频设置ToolStripMenuItem.Text = "视频设置";
+            this.视频设置ToolStripMenuItem.Click += new System.EventHandler(this.视频设置ToolStripMenuItem_Click);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
+            // 
+            // 上移ToolStripMenuItem
+            // 
+            this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
+            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.上移ToolStripMenuItem.Text = "上移";
+            this.上移ToolStripMenuItem.Click += new System.EventHandler(this.上移ToolStripMenuItem_Click);
+            // 
+            // 下移ToolStripMenuItem
+            // 
+            this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
+            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.下移ToolStripMenuItem.Text = "下移";
+            this.下移ToolStripMenuItem.Click += new System.EventHandler(this.下移ToolStripMenuItem_Click);
+            // 
+            // 连接ToolStripMenuItem
+            // 
+            this.连接ToolStripMenuItem.Name = "连接ToolStripMenuItem";
+            this.连接ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.连接ToolStripMenuItem.Text = "连接";
+            this.连接ToolStripMenuItem.Click += new System.EventHandler(this.连接ToolStripMenuItem_Click);
+            // 
+            // 断开ToolStripMenuItem
+            // 
+            this.断开ToolStripMenuItem.Name = "断开ToolStripMenuItem";
+            this.断开ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.断开ToolStripMenuItem.Text = "断开";
+            this.断开ToolStripMenuItem.Click += new System.EventHandler(this.断开ToolStripMenuItem_Click);
+            // 
+            // 图像设置ToolStripMenuItem
+            // 
+            this.图像设置ToolStripMenuItem.Name = "图像设置ToolStripMenuItem";
+            this.图像设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.图像设置ToolStripMenuItem.Text = "图像设置";
+            this.图像设置ToolStripMenuItem.Click += new System.EventHandler(this.图像设置ToolStripMenuItem_Click);
+            // 
+            // 历史数据ToolStripMenuItem
+            // 
+            this.历史数据ToolStripMenuItem.Name = "历史数据ToolStripMenuItem";
+            this.历史数据ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.历史数据ToolStripMenuItem.Text = "历史数据";
+            this.历史数据ToolStripMenuItem.Click += new System.EventHandler(this.历史数据ToolStripMenuItem_Click);
+            // 
+            // 实时数据ToolStripMenuItem
+            // 
+            this.实时数据ToolStripMenuItem.Name = "实时数据ToolStripMenuItem";
+            this.实时数据ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.实时数据ToolStripMenuItem.Text = "实时数据";
+            this.实时数据ToolStripMenuItem.Click += new System.EventHandler(this.实时数据ToolStripMenuItem_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1255,6 +1490,7 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmMain_MouseUp);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.mnsMeuns.ResumeLayout(false);
             this.mnsMeuns.PerformLayout();
             this.tlpTools.ResumeLayout(false);
@@ -1264,18 +1500,22 @@
             this.spcMain.ResumeLayout(false);
             this.tabMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.pnlTVSensor.ResumeLayout(false);
+            this.spcSensorConfig.Panel1.ResumeLayout(false);
+            this.spcSensorConfig.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spcSensorConfig)).EndInit();
+            this.spcSensorConfig.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.spcRunningStatus.Panel1.ResumeLayout(false);
+            this.spcRunningStatus.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spcRunningStatus)).EndInit();
+            this.spcRunningStatus.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.tlpRunningStatus.ResumeLayout(false);
             this.spcScreen.Panel1.ResumeLayout(false);
             this.spcScreen.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcScreen)).EndInit();
@@ -1289,7 +1529,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarning)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvError)).EndInit();
             this.cmsIPCameraConfig.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1311,7 +1550,7 @@
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tlpTools;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btn1;
+        private System.Windows.Forms.Button btnFullScreen;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnPwd;
         private System.Windows.Forms.Button btnCameraConfig;
@@ -1325,16 +1564,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddSensor;
-        private System.Windows.Forms.Panel pnlMonitorArea;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel pnlTVSensor;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.SplitContainer spcScreen;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.DataGridView dgvWarning;
@@ -1390,7 +1622,26 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.ToolStripMenuItem 历史数据ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 实时数据ToolStripMenuItem;
-        private System.Windows.Forms.Panel pnlRunningStatus;
+        private System.Windows.Forms.SplitContainer spcSensorConfig;
+        private System.Windows.Forms.SplitContainer spcRunningStatus;
+        private System.Windows.Forms.TableLayoutPanel tlpRunningStatus;
+        private UCStatusPanel ucStatusPanel1;
+        private UCStatusPanel ucStatusPanel2;
+        private UCStatusPanel ucStatusPanel3;
+        private UCStatusPanel ucStatusPanel4;
+        private UCStatusPanel ucStatusPanel5;
+        private UCStatusPanel ucStatusPanel6;
+        private UCStatusPanel ucStatusPanel7;
+        private UCStatusPanel ucStatusPanel8;
+        private UCStatusPanel ucStatusPanel9;
+        private UCStatusPanel ucStatusPanel10;
+        private UCStatusPanel ucStatusPanel11;
+        private UCStatusPanel ucStatusPanel12;
+        private UCStatusPanel ucStatusPanel13;
+        private UCStatusPanel ucStatusPanel14;
+        private UCStatusPanel ucStatusPanel15;
+        private UCStatusPanel ucStatusPanel16;
+        private System.Windows.Forms.ToolStripMenuItem 配置IPToolStripMenuItem;
     }
 }
 

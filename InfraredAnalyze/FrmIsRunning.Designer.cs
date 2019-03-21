@@ -38,9 +38,9 @@
             this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(249, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 16);
+            this.label1.Size = new System.Drawing.Size(195, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "运行中。。。";
+            this.label1.Text = "请勿进行其他操作。。。";
             // 
             // FrmIsRunning
             // 

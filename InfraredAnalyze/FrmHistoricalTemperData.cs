@@ -97,15 +97,15 @@ namespace InfraredAnalyze
 
         SqlCreate sqlCreate = new SqlCreate();
         string[] AreaType ={ "测温点", "测温线", "测温区域" };
-        Series seriesPoint_1 = new Series("测温点1");
-        Series seriesPoint_2 = new Series("测温点2");
-        Series seriesPoint_3 = new Series("测温点3");
-        Series seriesPoint_4 = new Series("测温点4");
-        Series seriesLine = new Series("测温线");
-        Series seriesArea_1 = new Series("测温区域1");
-        Series seriesArea_2 = new Series("测温区域2");
-        Series seriesArea_3 = new Series("测温区域3");
-        Series seriesArea_4 = new Series("测温区域4");
+        Series seriesPoint_1 = new Series("测温点2");
+        Series seriesPoint_2 = new Series("测温点3");
+        Series seriesPoint_3 = new Series("测温点4");
+        Series seriesPoint_4 = new Series("测温点5");
+        Series seriesLine = new Series("测温线1");
+        Series seriesArea_1 = new Series("测温区域6");
+        Series seriesArea_2 = new Series("测温区域7");
+        Series seriesArea_3 = new Series("测温区域8");
+        Series seriesArea_4 = new Series("测温区域9");
 
         private void ChartType()
         {
@@ -125,19 +125,19 @@ namespace InfraredAnalyze
         private void ChartHisrotricalData(StaticClass.StructTemperData structTemper)
         {
             
-            if (structTemper.Type == 0 && structTemper.Number == 0)
+            if (structTemper.Type == 0 && structTemper.Number == 1)
             {
                 seriesPoint_1.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
-            else if (structTemper.Type == 0 && structTemper.Number == 1)
+            else if (structTemper.Type == 0 && structTemper.Number == 2)
             {
                 seriesPoint_2.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
-            else if (structTemper.Type == 0 && structTemper.Number == 2)
+            else if (structTemper.Type == 0 && structTemper.Number == 3)
             {
                 seriesPoint_3.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
-            else if (structTemper.Type == 0 && structTemper.Number == 3)
+            else if (structTemper.Type == 0 && structTemper.Number == 4)
             {
                 seriesPoint_4.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
@@ -145,19 +145,19 @@ namespace InfraredAnalyze
             {
                 seriesLine.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
-            else if (structTemper.Type == 2 && structTemper.Number == 0)
+            else if (structTemper.Type == 2 && structTemper.Number == 5)
             {
                 seriesArea_1.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
-            else if (structTemper.Type == 2 && structTemper.Number == 1)
+            else if (structTemper.Type == 2 && structTemper.Number == 6)
             {
                 seriesArea_2.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
-            else if (structTemper.Type == 2 && structTemper.Number == 2)
+            else if (structTemper.Type == 2 && structTemper.Number == 7)
             {
                 seriesArea_3.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
-            else if (structTemper.Type == 2 && structTemper.Number == 3)
+            else if (structTemper.Type == 2 && structTemper.Number == 8)
             {
                 seriesArea_4.Points.AddXY(structTemper.dateTime, Convert.ToDouble(Convert.ToDecimal(structTemper.Temper) / 100));
             }
@@ -207,9 +207,37 @@ namespace InfraredAnalyze
 
         private void cbxAreaType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbxAreaType.SelectedIndex == 3)
+            cbxAreaNum.Text = "";
+            switch (cbxAreaType.SelectedIndex)
             {
-                cbxAreaNum.SelectedIndex = 4;
+                case 0:
+                    cbxAreaNum.Items.Clear();
+                    for (int i = 2; i <= 5; i++)
+                    {
+                        cbxAreaNum.Items.Add(i);
+                    }
+                    cbxAreaNum.Items.Add("所有");
+                    cbxAreaNum.SelectedIndex = 0;
+                    break;
+                case 1:
+                    cbxAreaNum.Items.Clear();
+                    cbxAreaNum.Items.Add(1);
+                    cbxAreaNum.SelectedIndex = 0;
+                    break;
+                case 2:
+                    cbxAreaNum.Items.Clear();
+                    for (int i = 6; i <= 8; i++)
+                    {
+                        cbxAreaNum.Items.Add(i);
+                    }
+                    cbxAreaNum.Items.Add("所有");
+                    cbxAreaNum.SelectedIndex = 0;
+                    break;
+                case 3:
+                    cbxAreaNum.Items.Clear();
+                    cbxAreaNum.Items.Add("所有");
+                    cbxAreaNum.SelectedIndex = 0;
+                    break;
             }
         }
 

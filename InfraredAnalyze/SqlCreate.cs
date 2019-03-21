@@ -753,21 +753,34 @@ namespace InfraredAnalyze
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
                 con_DB.Open();
-                if (type == 3 && number != 4)
+                switch (type)
                 {
-                    cmd = new SqlCommand("Select * from TemperData where number='" + number + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
-
-                }else if(type != 3 && number != 4)
-                {
-                    cmd = new SqlCommand("Select * from TemperData where number='" + number + "' and type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
-                }
-                else if (type != 3 && number == 4)
-                {
-                    cmd = new SqlCommand("Select * from TemperData where type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
-                }
-                else if (type == 3 && number == 4)
-                {
-                    cmd = new SqlCommand("Select * from TemperData where convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                    case 0:
+                        if (number != 4)
+                        {
+                            cmd = new SqlCommand("Select * from TemperData where number='" + (number + 1) + "' and type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                        }
+                        else
+                        {
+                            cmd = new SqlCommand("Select * from TemperData where  type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                        }
+                        break;
+                    case 1:
+                        cmd = new SqlCommand("Select * from TemperData where  type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                        break;
+                    case 2:
+                        if (number != 3)
+                        {
+                            cmd = new SqlCommand("Select * from TemperData where number='" + (number + 5) + "' and type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                        }
+                        else
+                        {
+                            cmd = new SqlCommand("Select * from TemperData where  type='" + type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                        }
+                        break;
+                    case 3:
+                        cmd = new SqlCommand("Select * from TemperData where convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                        break;
                 }
                 SqlDataReader sqlDataReader = cmd.ExecuteReader();
                 while (sqlDataReader.Read())

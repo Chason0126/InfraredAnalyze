@@ -176,6 +176,11 @@ namespace InfraredAnalyze
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)] public tagTemperaturePos[] temperInfo;//36*32
         }
 
+        public struct tagError
+        {
+            public int ErrorType;
+            public int ErrorID;
+        }
 
         [DllImport("DMSDK.dll", EntryPoint = "DM_Init")]
         public static extern void DM_Init();

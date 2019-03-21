@@ -22,12 +22,13 @@ namespace InfraredAnalyze
             //}
         }
         private string status;
+        private int id;
 
         public string Status
         {
             get => lblStatus.Text;
             set => lblStatus.Text = value;
         }
-        
+        public int Id { get => id; set => id = value; }
     }
 }

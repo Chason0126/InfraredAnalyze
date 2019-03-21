@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnMin = new System.Windows.Forms.Button();
             this.btnWindow = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.spcRealTimeData = new System.Windows.Forms.SplitContainer();
+            this.btnConfirm = new System.Windows.Forms.Button();
             this.tbxCameraID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.cbxAreaType = new System.Windows.Forms.ComboBox();
             this.chartRealTimeData = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnConfirm = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcRealTimeData)).BeginInit();
             this.spcRealTimeData.Panel1.SuspendLayout();
@@ -157,6 +157,17 @@
             this.spcRealTimeData.SplitterDistance = 43;
             this.spcRealTimeData.TabIndex = 1;
             // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnConfirm.Location = new System.Drawing.Point(940, 11);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.TabIndex = 11;
+            this.btnConfirm.Text = "确认";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            // 
             // tbxCameraID
             // 
             this.tbxCameraID.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -225,20 +236,21 @@
             this.cbxAreaType.Name = "cbxAreaType";
             this.cbxAreaType.Size = new System.Drawing.Size(83, 20);
             this.cbxAreaType.TabIndex = 6;
+            this.cbxAreaType.SelectedIndexChanged += new System.EventHandler(this.cbxAreaType_SelectedIndexChanged);
             // 
             // chartRealTimeData
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartRealTimeData.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.chartRealTimeData.ChartAreas.Add(chartArea1);
             this.chartRealTimeData.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.chartRealTimeData.Legends.Add(legend3);
+            legend1.Name = "Legend1";
+            this.chartRealTimeData.Legends.Add(legend1);
             this.chartRealTimeData.Location = new System.Drawing.Point(0, 0);
             this.chartRealTimeData.Name = "chartRealTimeData";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartRealTimeData.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartRealTimeData.Series.Add(series1);
             this.chartRealTimeData.Size = new System.Drawing.Size(1059, 556);
             this.chartRealTimeData.TabIndex = 0;
             this.chartRealTimeData.Text = "chart1";
@@ -247,17 +259,6 @@
             // 
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnConfirm.Location = new System.Drawing.Point(940, 11);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
-            this.btnConfirm.TabIndex = 11;
-            this.btnConfirm.Text = "确认";
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // FrmRealTimeTemperData
             // 

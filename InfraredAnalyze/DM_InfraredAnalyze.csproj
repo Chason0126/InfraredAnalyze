@@ -139,6 +139,12 @@
     <Compile Include="FrmImageConfig.Designer.cs">
       <DependentUpon>FrmImageConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmIpConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIpConfig.Designer.cs">
+      <DependentUpon>FrmIpConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmIsRunning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,12 @@
     </Compile>
     <Compile Include="FrmRealTimeTemperData.Designer.cs">
       <DependentUpon>FrmRealTimeTemperData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSample.Designer.cs">
+      <DependentUpon>FrmSample.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmTemperParamConfig.cs">
       <SubType>Form</SubType>
@@ -229,6 +241,9 @@
     <EmbeddedResource Include="FrmImageConfig.resx">
       <DependentUpon>FrmImageConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmIpConfig.resx">
+      <DependentUpon>FrmIpConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmIsRunning.resx">
       <DependentUpon>FrmIsRunning.cs</DependentUpon>
     </EmbeddedResource>
@@ -243,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmRealTimeTemperData.resx">
       <DependentUpon>FrmRealTimeTemperData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSample.resx">
+      <DependentUpon>FrmSample.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTemperParamConfig.resx">
       <DependentUpon>FrmTemperParamConfig.cs</DependentUpon>
@@ -417,6 +435,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\disableCamera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cameraConfig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\historicaldata.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fullscreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

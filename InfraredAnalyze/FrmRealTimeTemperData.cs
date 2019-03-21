@@ -177,6 +177,12 @@ namespace InfraredAnalyze
         private void FrmRealTimeTemperData_Load(object sender, EventArgs e)
         {
             cameraID = 1;
+            if (StaticClass.intPtrs_Operate[cameraID - 1] <= 0)
+            {
+                MessageBox.Show("设备未连接！");
+                this.Dispose();
+                return;
+            }
             cbxAreaNum.SelectedIndex = 4;
             cbxAreaType.SelectedIndex = 3;
             tbxCameraID.Text = cameraID.ToString();
@@ -208,46 +214,35 @@ namespace InfraredAnalyze
                     {
                         tagTemperature = new DMSDK.tagTemperature();
                         tagTemperature = tempMessage.temperInfo[i];
-                        switch (tagTemperature.type)
+                        int ID = tagTemperature.number + 1;
+                        switch (ID)
                         {
-                            case 0://点
-                                int SpotID = tagTemperature.number + 1;
-                                switch (SpotID)
-                                {
-                                    case 1:
-                                        queuePoint_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);// Convert.ToDouble(Convert.ToDecimal(tagTemperature.Temper) / 100)
-                                        break;
-                                    case 2:
-                                        queuePoint_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                        break;
-                                    case 3:
-                                        queuePoint_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                        break;
-                                    case 4:
-                                        queuePoint_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                        break;
-                                }
-                                break;
                             case 1://线
                                 queueLine.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
                                 break;
-                            case 2://区域
-                                int AreaID = tagTemperature.number + 1;
-                                switch (AreaID)
-                                {
-                                    case 1:
-                                        queueArea_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);//
-                                        break;
-                                    case 2:
-                                        queueArea_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                        break;
-                                    case 3:
-                                        queueArea_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                        break;
-                                    case 4:
-                                        queueArea_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                        break;
-                                }
+                            case 2:
+                                queuePoint_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                break;
+                            case 3:
+                                queuePoint_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                break;
+                            case 4:
+                                queuePoint_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                break;
+                            case 5:
+                                queuePoint_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                break;
+                            case 6:
+                                queueArea_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);//
+                                break;
+                            case 7:
+                                queueArea_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                break;
+                            case 8:
+                                queueArea_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                break;
+                            case 9:
+                                queueArea_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
                                 break;
                         }
                     }
@@ -376,6 +371,26 @@ namespace InfraredAnalyze
             else if (cbxAreaType.SelectedIndex == 2 && cbxAreaNum.SelectedIndex == 3)
             {
                 seriesArea_4.Enabled = true;
+            }
+            else if (cbxAreaType.SelectedIndex == 3 && cbxAreaNum.SelectedIndex == 4)
+            {
+                seriesPoint_1.Enabled = true;
+                seriesPoint_2.Enabled = true;
+                seriesPoint_3.Enabled = true;
+                seriesPoint_4.Enabled = true;
+                seriesLine.Enabled = true;
+                seriesArea_1.Enabled = true;
+                seriesArea_2.Enabled = true;
+                seriesArea_3.Enabled = true;
+                seriesArea_4.Enabled = true;
+            }
+        }
+
+        private void cbxAreaType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxAreaType.SelectedIndex == 3)
+            {
+                cbxAreaNum.SelectedIndex = 4;
             }
         }
     }

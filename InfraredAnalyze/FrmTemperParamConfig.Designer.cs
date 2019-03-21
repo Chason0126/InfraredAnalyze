@@ -152,6 +152,19 @@
             this.cbxMeasureClass = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.grpIO = new System.Windows.Forms.GroupBox();
+            this.cbxiEnable = new System.Windows.Forms.ComboBox();
+            this.cbxiIO = new System.Windows.Forms.ComboBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tbxAlarmTemp = new System.Windows.Forms.TextBox();
+            this.cbxAlarmColor = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbxAlarm = new System.Windows.Forms.ComboBox();
+            this.ckbIO = new System.Windows.Forms.CheckBox();
             this.grpAlarmInfo = new System.Windows.Forms.GroupBox();
             this.tbxAlarmTempLine_1 = new System.Windows.Forms.TextBox();
             this.cbxAlarmColorSpot_4 = new System.Windows.Forms.ComboBox();
@@ -223,21 +236,9 @@
             this.cbxAlarmMessageTypeArea_3 = new System.Windows.Forms.ComboBox();
             this.cbxAlarmMessageTypeArea_1 = new System.Windows.Forms.ComboBox();
             this.cbxAlarmMessageTypeArea_2 = new System.Windows.Forms.ComboBox();
-            this.grpIO = new System.Windows.Forms.GroupBox();
-            this.cbxiEnable = new System.Windows.Forms.ComboBox();
-            this.cbxiIO = new System.Windows.Forms.ComboBox();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.ckbIO = new System.Windows.Forms.CheckBox();
             this.btnUpdateAlarmInfo = new System.Windows.Forms.Button();
-            this.cbxAlarmColor = new System.Windows.Forms.ComboBox();
-            this.cbxAlarm = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbxAlarmTemp = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.pbxScreen = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClearAll = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.tabTemprParam.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -250,10 +251,10 @@
             this.tabPage2.SuspendLayout();
             this.grpRefeTemp.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            this.grpAlarmInfo.SuspendLayout();
             this.grpIO.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.grpAlarmInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -309,6 +310,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnClearAll);
             this.tabPage1.Controls.Add(this.grpArea);
             this.tabPage1.Controls.Add(this.grpLine);
             this.tabPage1.Controls.Add(this.grpSpot);
@@ -358,9 +360,9 @@
             this.grpArea.Controls.Add(this.tbxArea_3_X1);
             this.grpArea.Controls.Add(this.tbxArea_2_X1);
             this.grpArea.Controls.Add(this.tbxArea_1_Emiss);
-            this.grpArea.Location = new System.Drawing.Point(6, 172);
+            this.grpArea.Location = new System.Drawing.Point(21, 250);
             this.grpArea.Name = "grpArea";
-            this.grpArea.Size = new System.Drawing.Size(537, 162);
+            this.grpArea.Size = new System.Drawing.Size(553, 162);
             this.grpArea.TabIndex = 0;
             this.grpArea.TabStop = false;
             this.grpArea.Text = "测温区域";
@@ -375,7 +377,7 @@
             this.pnlBtnArea.Controls.Add(this.btnAdd_Area_3);
             this.pnlBtnArea.Controls.Add(this.btnAdd_Area_4);
             this.pnlBtnArea.Controls.Add(this.btnClear_Area_3);
-            this.pnlBtnArea.Location = new System.Drawing.Point(388, 33);
+            this.pnlBtnArea.Location = new System.Drawing.Point(392, 27);
             this.pnlBtnArea.Name = "pnlBtnArea";
             this.pnlBtnArea.Size = new System.Drawing.Size(131, 123);
             this.pnlBtnArea.TabIndex = 3;
@@ -428,6 +430,7 @@
             this.btnClear_Area_4.TabIndex = 4;
             this.btnClear_Area_4.Text = "清除";
             this.btnClear_Area_4.UseVisualStyleBackColor = true;
+            this.btnClear_Area_4.Visible = false;
             this.btnClear_Area_4.Click += new System.EventHandler(this.btnClear_Area_4_Click);
             // 
             // btnAdd_Area_3
@@ -448,6 +451,7 @@
             this.btnAdd_Area_4.TabIndex = 4;
             this.btnAdd_Area_4.Text = "编辑";
             this.btnAdd_Area_4.UseVisualStyleBackColor = true;
+            this.btnAdd_Area_4.Visible = false;
             this.btnAdd_Area_4.Click += new System.EventHandler(this.btnAdd_Area_4_Click);
             // 
             // btnClear_Area_3
@@ -468,10 +472,11 @@
             "最高",
             "最低",
             "平均"});
-            this.cbxMeasureType_4.Location = new System.Drawing.Point(292, 127);
+            this.cbxMeasureType_4.Location = new System.Drawing.Point(292, 123);
             this.cbxMeasureType_4.Name = "cbxMeasureType_4";
             this.cbxMeasureType_4.Size = new System.Drawing.Size(51, 20);
             this.cbxMeasureType_4.TabIndex = 5;
+            this.cbxMeasureType_4.Visible = false;
             // 
             // cbxMeasureType_3
             // 
@@ -481,7 +486,7 @@
             "最高",
             "最低",
             "平均"});
-            this.cbxMeasureType_3.Location = new System.Drawing.Point(292, 100);
+            this.cbxMeasureType_3.Location = new System.Drawing.Point(292, 95);
             this.cbxMeasureType_3.Name = "cbxMeasureType_3";
             this.cbxMeasureType_3.Size = new System.Drawing.Size(51, 20);
             this.cbxMeasureType_3.TabIndex = 5;
@@ -494,7 +499,7 @@
             "最高",
             "最低",
             "平均"});
-            this.cbxMeasureType_2.Location = new System.Drawing.Point(292, 68);
+            this.cbxMeasureType_2.Location = new System.Drawing.Point(292, 67);
             this.cbxMeasureType_2.Name = "cbxMeasureType_2";
             this.cbxMeasureType_2.Size = new System.Drawing.Size(51, 20);
             this.cbxMeasureType_2.TabIndex = 5;
@@ -507,7 +512,7 @@
             "最高",
             "最低",
             "平均"});
-            this.cbxMeasureType_1.Location = new System.Drawing.Point(292, 42);
+            this.cbxMeasureType_1.Location = new System.Drawing.Point(292, 39);
             this.cbxMeasureType_1.Name = "cbxMeasureType_1";
             this.cbxMeasureType_1.Size = new System.Drawing.Size(51, 20);
             this.cbxMeasureType_1.TabIndex = 5;
@@ -528,7 +533,7 @@
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(11, 12);
             this.label25.TabIndex = 0;
-            this.label25.Text = "1";
+            this.label25.Text = "6";
             // 
             // label26
             // 
@@ -537,7 +542,7 @@
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(11, 12);
             this.label26.TabIndex = 0;
-            this.label26.Text = "2";
+            this.label26.Text = "7";
             // 
             // tbxArea_4_Emiss
             // 
@@ -550,6 +555,7 @@
             this.tbxArea_4_Emiss.TabIndex = 3;
             this.tbxArea_4_Emiss.Text = "90";
             this.tbxArea_4_Emiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxArea_4_Emiss.Visible = false;
             // 
             // label27
             // 
@@ -558,7 +564,7 @@
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(11, 12);
             this.label27.TabIndex = 0;
-            this.label27.Text = "3";
+            this.label27.Text = "8";
             // 
             // tbxArea_4_Y2
             // 
@@ -570,6 +576,7 @@
             this.tbxArea_4_Y2.Size = new System.Drawing.Size(25, 21);
             this.tbxArea_4_Y2.TabIndex = 3;
             this.tbxArea_4_Y2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxArea_4_Y2.Visible = false;
             // 
             // tbxArea_4_Y1
             // 
@@ -581,6 +588,7 @@
             this.tbxArea_4_Y1.Size = new System.Drawing.Size(25, 21);
             this.tbxArea_4_Y1.TabIndex = 3;
             this.tbxArea_4_Y1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxArea_4_Y1.Visible = false;
             // 
             // label28
             // 
@@ -589,7 +597,8 @@
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(11, 12);
             this.label28.TabIndex = 0;
-            this.label28.Text = "4";
+            this.label28.Text = "9";
+            this.label28.Visible = false;
             // 
             // tbxArea_3_Emiss
             // 
@@ -701,6 +710,7 @@
             this.tbxArea_4_X2.Size = new System.Drawing.Size(25, 21);
             this.tbxArea_4_X2.TabIndex = 3;
             this.tbxArea_4_X2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxArea_4_X2.Visible = false;
             // 
             // tbxArea_4_X1
             // 
@@ -712,6 +722,7 @@
             this.tbxArea_4_X1.Size = new System.Drawing.Size(25, 21);
             this.tbxArea_4_X1.TabIndex = 3;
             this.tbxArea_4_X1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxArea_4_X1.Visible = false;
             // 
             // tbxArea_1_X2
             // 
@@ -854,9 +865,9 @@
             this.grpLine.Controls.Add(this.label42);
             this.grpLine.Controls.Add(this.label38);
             this.grpLine.Controls.Add(this.label39);
-            this.grpLine.Location = new System.Drawing.Point(3, 349);
+            this.grpLine.Location = new System.Drawing.Point(21, 8);
             this.grpLine.Name = "grpLine";
-            this.grpLine.Size = new System.Drawing.Size(540, 101);
+            this.grpLine.Size = new System.Drawing.Size(540, 79);
             this.grpLine.TabIndex = 0;
             this.grpLine.TabStop = false;
             this.grpLine.Text = "测温线（只能有一条）";
@@ -1016,10 +1027,10 @@
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label40.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label40.Location = new System.Drawing.Point(25, 55);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(14, 14);
+            this.label40.Size = new System.Drawing.Size(11, 12);
             this.label40.TabIndex = 0;
             this.label40.Text = "1";
             // 
@@ -1073,9 +1084,9 @@
             this.grpSpot.Controls.Add(this.tbxSpot_3_Emiss);
             this.grpSpot.Controls.Add(this.tbxSpot_3_Y);
             this.grpSpot.Controls.Add(this.label21);
-            this.grpSpot.Location = new System.Drawing.Point(9, 15);
+            this.grpSpot.Location = new System.Drawing.Point(21, 93);
             this.grpSpot.Name = "grpSpot";
-            this.grpSpot.Size = new System.Drawing.Size(534, 151);
+            this.grpSpot.Size = new System.Drawing.Size(549, 151);
             this.grpSpot.TabIndex = 0;
             this.grpSpot.TabStop = false;
             this.grpSpot.Text = "测温点";
@@ -1091,7 +1102,7 @@
             this.pnlBtnSpot.Controls.Add(this.btnAdd_Spot_2);
             this.pnlBtnSpot.Controls.Add(this.btnAdd_Spot_3);
             this.pnlBtnSpot.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlBtnSpot.Location = new System.Drawing.Point(378, 17);
+            this.pnlBtnSpot.Location = new System.Drawing.Point(393, 17);
             this.pnlBtnSpot.Name = "pnlBtnSpot";
             this.pnlBtnSpot.Size = new System.Drawing.Size(153, 131);
             this.pnlBtnSpot.TabIndex = 4;
@@ -1202,7 +1213,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(51, 19);
+            this.label16.Location = new System.Drawing.Point(15, 19);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(41, 12);
             this.label16.TabIndex = 0;
@@ -1222,11 +1233,11 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(66, 40);
+            this.label17.Location = new System.Drawing.Point(30, 40);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(11, 12);
             this.label17.TabIndex = 0;
-            this.label17.Text = "1";
+            this.label17.Text = "2";
             // 
             // tbxSpot_1_Y
             // 
@@ -1253,11 +1264,11 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(66, 68);
+            this.label18.Location = new System.Drawing.Point(30, 68);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(11, 12);
             this.label18.TabIndex = 0;
-            this.label18.Text = "2";
+            this.label18.Text = "3";
             // 
             // tbxSpot_1_X
             // 
@@ -1296,11 +1307,11 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(66, 96);
+            this.label19.Location = new System.Drawing.Point(30, 96);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(11, 12);
             this.label19.TabIndex = 0;
-            this.label19.Text = "3";
+            this.label19.Text = "4";
             // 
             // label23
             // 
@@ -1337,11 +1348,11 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(66, 124);
+            this.label20.Location = new System.Drawing.Point(30, 124);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(11, 12);
             this.label20.TabIndex = 0;
-            this.label20.Text = "4";
+            this.label20.Text = "5";
             // 
             // label22
             // 
@@ -1640,6 +1651,154 @@
             this.tabPage6.Text = "报警设置";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // grpIO
+            // 
+            this.grpIO.Controls.Add(this.cbxiEnable);
+            this.grpIO.Controls.Add(this.cbxiIO);
+            this.grpIO.Controls.Add(this.label45);
+            this.grpIO.Controls.Add(this.label44);
+            this.grpIO.Enabled = false;
+            this.grpIO.Location = new System.Drawing.Point(363, 311);
+            this.grpIO.Name = "grpIO";
+            this.grpIO.Size = new System.Drawing.Size(200, 100);
+            this.grpIO.TabIndex = 11;
+            this.grpIO.TabStop = false;
+            this.grpIO.Text = "报警IO口设置";
+            this.grpIO.Visible = false;
+            // 
+            // cbxiEnable
+            // 
+            this.cbxiEnable.FormattingEnabled = true;
+            this.cbxiEnable.Items.AddRange(new object[] {
+            "停止报警",
+            "启用报警"});
+            this.cbxiEnable.Location = new System.Drawing.Point(110, 57);
+            this.cbxiEnable.Name = "cbxiEnable";
+            this.cbxiEnable.Size = new System.Drawing.Size(60, 20);
+            this.cbxiEnable.TabIndex = 7;
+            // 
+            // cbxiIO
+            // 
+            this.cbxiIO.FormattingEnabled = true;
+            this.cbxiIO.Items.AddRange(new object[] {
+            "2",
+            "3"});
+            this.cbxiIO.Location = new System.Drawing.Point(33, 57);
+            this.cbxiIO.Name = "cbxiIO";
+            this.cbxiIO.Size = new System.Drawing.Size(48, 20);
+            this.cbxiIO.TabIndex = 6;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(105, 32);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(65, 12);
+            this.label45.TabIndex = 9;
+            this.label45.Text = "打开或关闭";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(31, 32);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(41, 12);
+            this.label44.TabIndex = 9;
+            this.label44.Text = "端口号";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.tbxAlarmTemp);
+            this.groupBox1.Controls.Add(this.cbxAlarmColor);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.cbxAlarm);
+            this.groupBox1.Location = new System.Drawing.Point(27, 298);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(149, 137);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Visible = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(9, 53);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(65, 12);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "报警温度：";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(9, 80);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "报警色：";
+            // 
+            // tbxAlarmTemp
+            // 
+            this.tbxAlarmTemp.Location = new System.Drawing.Point(82, 50);
+            this.tbxAlarmTemp.Name = "tbxAlarmTemp";
+            this.tbxAlarmTemp.Size = new System.Drawing.Size(100, 21);
+            this.tbxAlarmTemp.TabIndex = 1;
+            this.tbxAlarmTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cbxAlarmColor
+            // 
+            this.cbxAlarmColor.FormattingEnabled = true;
+            this.cbxAlarmColor.Items.AddRange(new object[] {
+            "无",
+            "黑",
+            "白",
+            "红",
+            "橙",
+            "黄",
+            "绿",
+            "蓝",
+            "灰",
+            "紫"});
+            this.cbxAlarmColor.Location = new System.Drawing.Point(82, 77);
+            this.cbxAlarmColor.Name = "cbxAlarmColor";
+            this.cbxAlarmColor.Size = new System.Drawing.Size(98, 20);
+            this.cbxAlarmColor.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(11, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "报警功能：";
+            // 
+            // cbxAlarm
+            // 
+            this.cbxAlarm.FormattingEnabled = true;
+            this.cbxAlarm.Items.AddRange(new object[] {
+            "关闭",
+            "打开"});
+            this.cbxAlarm.Location = new System.Drawing.Point(82, 24);
+            this.cbxAlarm.Name = "cbxAlarm";
+            this.cbxAlarm.Size = new System.Drawing.Size(97, 20);
+            this.cbxAlarm.TabIndex = 3;
+            // 
+            // ckbIO
+            // 
+            this.ckbIO.AutoSize = true;
+            this.ckbIO.Location = new System.Drawing.Point(569, 379);
+            this.ckbIO.Name = "ckbIO";
+            this.ckbIO.Size = new System.Drawing.Size(48, 16);
+            this.ckbIO.TabIndex = 10;
+            this.ckbIO.Text = "修改";
+            this.ckbIO.UseVisualStyleBackColor = true;
+            this.ckbIO.Visible = false;
+            this.ckbIO.CheckedChanged += new System.EventHandler(this.ckbIO_CheckedChanged);
+            // 
             // grpAlarmInfo
             // 
             this.grpAlarmInfo.Controls.Add(this.tbxAlarmTempLine_1);
@@ -1721,7 +1880,7 @@
             // tbxAlarmTempLine_1
             // 
             this.tbxAlarmTempLine_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempLine_1.Location = new System.Drawing.Point(179, 246);
+            this.tbxAlarmTempLine_1.Location = new System.Drawing.Point(183, 53);
             this.tbxAlarmTempLine_1.Name = "tbxAlarmTempLine_1";
             this.tbxAlarmTempLine_1.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempLine_1.TabIndex = 23;
@@ -1742,7 +1901,7 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorSpot_4.Location = new System.Drawing.Point(256, 124);
+            this.cbxAlarmColorSpot_4.Location = new System.Drawing.Point(260, 149);
             this.cbxAlarmColorSpot_4.Name = "cbxAlarmColorSpot_4";
             this.cbxAlarmColorSpot_4.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorSpot_4.TabIndex = 22;
@@ -1750,11 +1909,12 @@
             // tbxAlarmTempArea_4
             // 
             this.tbxAlarmTempArea_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempArea_4.Location = new System.Drawing.Point(179, 222);
+            this.tbxAlarmTempArea_4.Location = new System.Drawing.Point(183, 247);
             this.tbxAlarmTempArea_4.Name = "tbxAlarmTempArea_4";
             this.tbxAlarmTempArea_4.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempArea_4.TabIndex = 23;
             this.tbxAlarmTempArea_4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxAlarmTempArea_4.Visible = false;
             // 
             // label15
             // 
@@ -1768,7 +1928,7 @@
             // tbxAlarmTempArea_3
             // 
             this.tbxAlarmTempArea_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempArea_3.Location = new System.Drawing.Point(179, 198);
+            this.tbxAlarmTempArea_3.Location = new System.Drawing.Point(183, 223);
             this.tbxAlarmTempArea_3.Name = "tbxAlarmTempArea_3";
             this.tbxAlarmTempArea_3.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempArea_3.TabIndex = 23;
@@ -1786,7 +1946,7 @@
             // tbxAlarmTempArea_2
             // 
             this.tbxAlarmTempArea_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempArea_2.Location = new System.Drawing.Point(179, 174);
+            this.tbxAlarmTempArea_2.Location = new System.Drawing.Point(183, 199);
             this.tbxAlarmTempArea_2.Name = "tbxAlarmTempArea_2";
             this.tbxAlarmTempArea_2.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempArea_2.TabIndex = 23;
@@ -1804,7 +1964,7 @@
             // tbxAlarmTempArea_1
             // 
             this.tbxAlarmTempArea_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempArea_1.Location = new System.Drawing.Point(179, 150);
+            this.tbxAlarmTempArea_1.Location = new System.Drawing.Point(183, 175);
             this.tbxAlarmTempArea_1.Name = "tbxAlarmTempArea_1";
             this.tbxAlarmTempArea_1.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempArea_1.TabIndex = 23;
@@ -1822,7 +1982,7 @@
             // tbxAlarmTempSpot_4
             // 
             this.tbxAlarmTempSpot_4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempSpot_4.Location = new System.Drawing.Point(179, 126);
+            this.tbxAlarmTempSpot_4.Location = new System.Drawing.Point(183, 151);
             this.tbxAlarmTempSpot_4.Name = "tbxAlarmTempSpot_4";
             this.tbxAlarmTempSpot_4.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempSpot_4.TabIndex = 23;
@@ -1840,7 +2000,7 @@
             // tbxAlarmTempSpot_3
             // 
             this.tbxAlarmTempSpot_3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempSpot_3.Location = new System.Drawing.Point(179, 102);
+            this.tbxAlarmTempSpot_3.Location = new System.Drawing.Point(183, 127);
             this.tbxAlarmTempSpot_3.Name = "tbxAlarmTempSpot_3";
             this.tbxAlarmTempSpot_3.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempSpot_3.TabIndex = 23;
@@ -1858,7 +2018,7 @@
             // tbxAlarmTempSpot_2
             // 
             this.tbxAlarmTempSpot_2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempSpot_2.Location = new System.Drawing.Point(179, 78);
+            this.tbxAlarmTempSpot_2.Location = new System.Drawing.Point(183, 103);
             this.tbxAlarmTempSpot_2.Name = "tbxAlarmTempSpot_2";
             this.tbxAlarmTempSpot_2.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempSpot_2.TabIndex = 23;
@@ -1876,7 +2036,7 @@
             // tbxAlarmTempSpot_1
             // 
             this.tbxAlarmTempSpot_1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxAlarmTempSpot_1.Location = new System.Drawing.Point(179, 54);
+            this.tbxAlarmTempSpot_1.Location = new System.Drawing.Point(183, 79);
             this.tbxAlarmTempSpot_1.Name = "tbxAlarmTempSpot_1";
             this.tbxAlarmTempSpot_1.Size = new System.Drawing.Size(51, 21);
             this.tbxAlarmTempSpot_1.TabIndex = 23;
@@ -1885,7 +2045,7 @@
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(14, 58);
+            this.label51.Location = new System.Drawing.Point(18, 83);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(17, 12);
             this.label51.TabIndex = 18;
@@ -1898,7 +2058,7 @@
             this.cbxAlarmTypeLine_1.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeLine_1.Location = new System.Drawing.Point(104, 250);
+            this.cbxAlarmTypeLine_1.Location = new System.Drawing.Point(108, 54);
             this.cbxAlarmTypeLine_1.Name = "cbxAlarmTypeLine_1";
             this.cbxAlarmTypeLine_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeLine_1.TabIndex = 22;
@@ -1906,7 +2066,7 @@
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(14, 82);
+            this.label52.Location = new System.Drawing.Point(18, 107);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(17, 12);
             this.label52.TabIndex = 18;
@@ -1919,15 +2079,16 @@
             this.cbxAlarmTypeArea_4.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeArea_4.Location = new System.Drawing.Point(104, 226);
+            this.cbxAlarmTypeArea_4.Location = new System.Drawing.Point(108, 251);
             this.cbxAlarmTypeArea_4.Name = "cbxAlarmTypeArea_4";
             this.cbxAlarmTypeArea_4.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeArea_4.TabIndex = 22;
+            this.cbxAlarmTypeArea_4.Visible = false;
             // 
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(8, 154);
+            this.label55.Location = new System.Drawing.Point(12, 179);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(29, 12);
             this.label55.TabIndex = 18;
@@ -1940,7 +2101,7 @@
             this.cbxAlarmTypeArea_3.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeArea_3.Location = new System.Drawing.Point(104, 202);
+            this.cbxAlarmTypeArea_3.Location = new System.Drawing.Point(108, 227);
             this.cbxAlarmTypeArea_3.Name = "cbxAlarmTypeArea_3";
             this.cbxAlarmTypeArea_3.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeArea_3.TabIndex = 22;
@@ -1948,7 +2109,7 @@
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(14, 106);
+            this.label53.Location = new System.Drawing.Point(18, 131);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(17, 12);
             this.label53.TabIndex = 18;
@@ -1961,7 +2122,7 @@
             this.cbxAlarmTypeSpot_4.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeSpot_4.Location = new System.Drawing.Point(104, 129);
+            this.cbxAlarmTypeSpot_4.Location = new System.Drawing.Point(108, 154);
             this.cbxAlarmTypeSpot_4.Name = "cbxAlarmTypeSpot_4";
             this.cbxAlarmTypeSpot_4.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeSpot_4.TabIndex = 22;
@@ -1969,7 +2130,7 @@
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(8, 178);
+            this.label56.Location = new System.Drawing.Point(12, 203);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(29, 12);
             this.label56.TabIndex = 18;
@@ -1982,7 +2143,7 @@
             this.cbxAlarmTypeArea_2.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeArea_2.Location = new System.Drawing.Point(104, 178);
+            this.cbxAlarmTypeArea_2.Location = new System.Drawing.Point(108, 203);
             this.cbxAlarmTypeArea_2.Name = "cbxAlarmTypeArea_2";
             this.cbxAlarmTypeArea_2.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeArea_2.TabIndex = 22;
@@ -1990,7 +2151,7 @@
             // label54
             // 
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(14, 130);
+            this.label54.Location = new System.Drawing.Point(18, 155);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(17, 12);
             this.label54.TabIndex = 18;
@@ -2003,7 +2164,7 @@
             this.cbxAlarmTypeSpot_3.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeSpot_3.Location = new System.Drawing.Point(104, 105);
+            this.cbxAlarmTypeSpot_3.Location = new System.Drawing.Point(108, 130);
             this.cbxAlarmTypeSpot_3.Name = "cbxAlarmTypeSpot_3";
             this.cbxAlarmTypeSpot_3.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeSpot_3.TabIndex = 22;
@@ -2011,7 +2172,7 @@
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(8, 202);
+            this.label57.Location = new System.Drawing.Point(12, 227);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(29, 12);
             this.label57.TabIndex = 18;
@@ -2024,7 +2185,7 @@
             this.cbxAlarmTypeArea_1.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeArea_1.Location = new System.Drawing.Point(104, 152);
+            this.cbxAlarmTypeArea_1.Location = new System.Drawing.Point(108, 177);
             this.cbxAlarmTypeArea_1.Name = "cbxAlarmTypeArea_1";
             this.cbxAlarmTypeArea_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeArea_1.TabIndex = 22;
@@ -2032,11 +2193,12 @@
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(8, 226);
+            this.label58.Location = new System.Drawing.Point(12, 251);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(29, 12);
             this.label58.TabIndex = 18;
             this.label58.Text = "区域";
+            this.label58.Visible = false;
             // 
             // cbxAlarmColorLine_1
             // 
@@ -2053,7 +2215,7 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorLine_1.Location = new System.Drawing.Point(256, 244);
+            this.cbxAlarmColorLine_1.Location = new System.Drawing.Point(258, 51);
             this.cbxAlarmColorLine_1.Name = "cbxAlarmColorLine_1";
             this.cbxAlarmColorLine_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorLine_1.TabIndex = 22;
@@ -2061,7 +2223,7 @@
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(14, 250);
+            this.label59.Location = new System.Drawing.Point(18, 56);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(17, 12);
             this.label59.TabIndex = 19;
@@ -2082,19 +2244,20 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorArea_4.Location = new System.Drawing.Point(256, 220);
+            this.cbxAlarmColorArea_4.Location = new System.Drawing.Point(260, 247);
             this.cbxAlarmColorArea_4.Name = "cbxAlarmColorArea_4";
             this.cbxAlarmColorArea_4.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorArea_4.TabIndex = 22;
+            this.cbxAlarmColorArea_4.Visible = false;
             // 
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(63, 58);
+            this.label60.Location = new System.Drawing.Point(67, 83);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(11, 12);
             this.label60.TabIndex = 20;
-            this.label60.Text = "1";
+            this.label60.Text = "2";
             // 
             // cbxAlarmColorArea_3
             // 
@@ -2111,7 +2274,7 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorArea_3.Location = new System.Drawing.Point(256, 196);
+            this.cbxAlarmColorArea_3.Location = new System.Drawing.Point(260, 221);
             this.cbxAlarmColorArea_3.Name = "cbxAlarmColorArea_3";
             this.cbxAlarmColorArea_3.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorArea_3.TabIndex = 22;
@@ -2119,11 +2282,11 @@
             // label61
             // 
             this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(63, 82);
+            this.label61.Location = new System.Drawing.Point(67, 107);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(11, 12);
             this.label61.TabIndex = 20;
-            this.label61.Text = "2";
+            this.label61.Text = "3";
             // 
             // cbxAlarmColorArea_2
             // 
@@ -2140,7 +2303,7 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorArea_2.Location = new System.Drawing.Point(256, 172);
+            this.cbxAlarmColorArea_2.Location = new System.Drawing.Point(260, 197);
             this.cbxAlarmColorArea_2.Name = "cbxAlarmColorArea_2";
             this.cbxAlarmColorArea_2.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorArea_2.TabIndex = 22;
@@ -2148,11 +2311,11 @@
             // label64
             // 
             this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(63, 154);
+            this.label64.Location = new System.Drawing.Point(67, 179);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(11, 12);
             this.label64.TabIndex = 20;
-            this.label64.Text = "1";
+            this.label64.Text = "6";
             // 
             // cbxAlarmColorArea_1
             // 
@@ -2169,7 +2332,7 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorArea_1.Location = new System.Drawing.Point(256, 148);
+            this.cbxAlarmColorArea_1.Location = new System.Drawing.Point(260, 173);
             this.cbxAlarmColorArea_1.Name = "cbxAlarmColorArea_1";
             this.cbxAlarmColorArea_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorArea_1.TabIndex = 22;
@@ -2177,20 +2340,20 @@
             // label62
             // 
             this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(63, 106);
+            this.label62.Location = new System.Drawing.Point(67, 131);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(11, 12);
             this.label62.TabIndex = 20;
-            this.label62.Text = "3";
+            this.label62.Text = "4";
             // 
             // label65
             // 
             this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(63, 178);
+            this.label65.Location = new System.Drawing.Point(67, 203);
             this.label65.Name = "label65";
             this.label65.Size = new System.Drawing.Size(11, 12);
             this.label65.TabIndex = 20;
-            this.label65.Text = "2";
+            this.label65.Text = "7";
             // 
             // cbxAlarmColorSpot_3
             // 
@@ -2207,7 +2370,7 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorSpot_3.Location = new System.Drawing.Point(256, 100);
+            this.cbxAlarmColorSpot_3.Location = new System.Drawing.Point(260, 125);
             this.cbxAlarmColorSpot_3.Name = "cbxAlarmColorSpot_3";
             this.cbxAlarmColorSpot_3.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorSpot_3.TabIndex = 22;
@@ -2215,11 +2378,11 @@
             // label63
             // 
             this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(63, 130);
+            this.label63.Location = new System.Drawing.Point(67, 155);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(11, 12);
             this.label63.TabIndex = 20;
-            this.label63.Text = "4";
+            this.label63.Text = "5";
             // 
             // cbxAlarmColorSpot_2
             // 
@@ -2236,7 +2399,7 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorSpot_2.Location = new System.Drawing.Point(256, 76);
+            this.cbxAlarmColorSpot_2.Location = new System.Drawing.Point(260, 101);
             this.cbxAlarmColorSpot_2.Name = "cbxAlarmColorSpot_2";
             this.cbxAlarmColorSpot_2.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorSpot_2.TabIndex = 22;
@@ -2244,11 +2407,11 @@
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(63, 202);
+            this.label66.Location = new System.Drawing.Point(67, 227);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(11, 12);
             this.label66.TabIndex = 20;
-            this.label66.Text = "3";
+            this.label66.Text = "8";
             // 
             // cbxAlarmPowerLine_1
             // 
@@ -2257,7 +2420,7 @@
             this.cbxAlarmPowerLine_1.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerLine_1.Location = new System.Drawing.Point(328, 244);
+            this.cbxAlarmPowerLine_1.Location = new System.Drawing.Point(332, 51);
             this.cbxAlarmPowerLine_1.Name = "cbxAlarmPowerLine_1";
             this.cbxAlarmPowerLine_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerLine_1.TabIndex = 22;
@@ -2266,11 +2429,12 @@
             // label67
             // 
             this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(63, 226);
+            this.label67.Location = new System.Drawing.Point(67, 251);
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(11, 12);
             this.label67.TabIndex = 20;
-            this.label67.Text = "4";
+            this.label67.Text = "9";
+            this.label67.Visible = false;
             // 
             // cbxAlarmPowerArea_4
             // 
@@ -2279,16 +2443,17 @@
             this.cbxAlarmPowerArea_4.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerArea_4.Location = new System.Drawing.Point(328, 220);
+            this.cbxAlarmPowerArea_4.Location = new System.Drawing.Point(332, 245);
             this.cbxAlarmPowerArea_4.Name = "cbxAlarmPowerArea_4";
             this.cbxAlarmPowerArea_4.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerArea_4.TabIndex = 22;
+            this.cbxAlarmPowerArea_4.Visible = false;
             this.cbxAlarmPowerArea_4.SelectedIndexChanged += new System.EventHandler(this.cbxAlarmPowerArea_4_SelectedIndexChanged);
             // 
             // label68
             // 
             this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(63, 250);
+            this.label68.Location = new System.Drawing.Point(67, 59);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(11, 12);
             this.label68.TabIndex = 21;
@@ -2301,7 +2466,7 @@
             this.cbxAlarmPowerArea_3.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerArea_3.Location = new System.Drawing.Point(328, 196);
+            this.cbxAlarmPowerArea_3.Location = new System.Drawing.Point(332, 221);
             this.cbxAlarmPowerArea_3.Name = "cbxAlarmPowerArea_3";
             this.cbxAlarmPowerArea_3.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerArea_3.TabIndex = 22;
@@ -2314,7 +2479,7 @@
             this.cbxAlarmTypeSpot_1.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeSpot_1.Location = new System.Drawing.Point(104, 55);
+            this.cbxAlarmTypeSpot_1.Location = new System.Drawing.Point(108, 80);
             this.cbxAlarmTypeSpot_1.Name = "cbxAlarmTypeSpot_1";
             this.cbxAlarmTypeSpot_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeSpot_1.TabIndex = 22;
@@ -2326,7 +2491,7 @@
             this.cbxAlarmPowerArea_2.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerArea_2.Location = new System.Drawing.Point(328, 172);
+            this.cbxAlarmPowerArea_2.Location = new System.Drawing.Point(332, 197);
             this.cbxAlarmPowerArea_2.Name = "cbxAlarmPowerArea_2";
             this.cbxAlarmPowerArea_2.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerArea_2.TabIndex = 22;
@@ -2339,7 +2504,7 @@
             this.cbxAlarmTypeSpot_2.Items.AddRange(new object[] {
             "大于",
             "小于"});
-            this.cbxAlarmTypeSpot_2.Location = new System.Drawing.Point(104, 81);
+            this.cbxAlarmTypeSpot_2.Location = new System.Drawing.Point(108, 106);
             this.cbxAlarmTypeSpot_2.Name = "cbxAlarmTypeSpot_2";
             this.cbxAlarmTypeSpot_2.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmTypeSpot_2.TabIndex = 22;
@@ -2351,7 +2516,7 @@
             this.cbxAlarmPowerArea_1.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerArea_1.Location = new System.Drawing.Point(328, 148);
+            this.cbxAlarmPowerArea_1.Location = new System.Drawing.Point(332, 173);
             this.cbxAlarmPowerArea_1.Name = "cbxAlarmPowerArea_1";
             this.cbxAlarmPowerArea_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerArea_1.TabIndex = 22;
@@ -2372,7 +2537,7 @@
             "蓝",
             "灰",
             "紫"});
-            this.cbxAlarmColorSpot_1.Location = new System.Drawing.Point(256, 52);
+            this.cbxAlarmColorSpot_1.Location = new System.Drawing.Point(260, 77);
             this.cbxAlarmColorSpot_1.Name = "cbxAlarmColorSpot_1";
             this.cbxAlarmColorSpot_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmColorSpot_1.TabIndex = 22;
@@ -2384,7 +2549,7 @@
             this.cbxAlarmPowerSpot_4.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerSpot_4.Location = new System.Drawing.Point(328, 124);
+            this.cbxAlarmPowerSpot_4.Location = new System.Drawing.Point(332, 149);
             this.cbxAlarmPowerSpot_4.Name = "cbxAlarmPowerSpot_4";
             this.cbxAlarmPowerSpot_4.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerSpot_4.TabIndex = 22;
@@ -2397,7 +2562,7 @@
             this.cbxAlarmPowerSpot_1.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerSpot_1.Location = new System.Drawing.Point(328, 52);
+            this.cbxAlarmPowerSpot_1.Location = new System.Drawing.Point(332, 77);
             this.cbxAlarmPowerSpot_1.Name = "cbxAlarmPowerSpot_1";
             this.cbxAlarmPowerSpot_1.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerSpot_1.TabIndex = 22;
@@ -2410,7 +2575,7 @@
             this.cbxAlarmPowerSpot_3.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerSpot_3.Location = new System.Drawing.Point(328, 100);
+            this.cbxAlarmPowerSpot_3.Location = new System.Drawing.Point(332, 125);
             this.cbxAlarmPowerSpot_3.Name = "cbxAlarmPowerSpot_3";
             this.cbxAlarmPowerSpot_3.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerSpot_3.TabIndex = 22;
@@ -2424,7 +2589,7 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeSpot_1.Location = new System.Drawing.Point(406, 52);
+            this.cbxAlarmMessageTypeSpot_1.Location = new System.Drawing.Point(410, 77);
             this.cbxAlarmMessageTypeSpot_1.Name = "cbxAlarmMessageTypeSpot_1";
             this.cbxAlarmMessageTypeSpot_1.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeSpot_1.TabIndex = 22;
@@ -2436,7 +2601,7 @@
             this.cbxAlarmPowerSpot_2.Items.AddRange(new object[] {
             "关闭",
             "打开"});
-            this.cbxAlarmPowerSpot_2.Location = new System.Drawing.Point(328, 76);
+            this.cbxAlarmPowerSpot_2.Location = new System.Drawing.Point(332, 101);
             this.cbxAlarmPowerSpot_2.Name = "cbxAlarmPowerSpot_2";
             this.cbxAlarmPowerSpot_2.Size = new System.Drawing.Size(51, 20);
             this.cbxAlarmPowerSpot_2.TabIndex = 22;
@@ -2450,7 +2615,7 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeSpot_2.Location = new System.Drawing.Point(406, 76);
+            this.cbxAlarmMessageTypeSpot_2.Location = new System.Drawing.Point(410, 101);
             this.cbxAlarmMessageTypeSpot_2.Name = "cbxAlarmMessageTypeSpot_2";
             this.cbxAlarmMessageTypeSpot_2.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeSpot_2.TabIndex = 22;
@@ -2463,7 +2628,7 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeLine_1.Location = new System.Drawing.Point(406, 244);
+            this.cbxAlarmMessageTypeLine_1.Location = new System.Drawing.Point(410, 51);
             this.cbxAlarmMessageTypeLine_1.Name = "cbxAlarmMessageTypeLine_1";
             this.cbxAlarmMessageTypeLine_1.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeLine_1.TabIndex = 22;
@@ -2476,7 +2641,7 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeSpot_3.Location = new System.Drawing.Point(406, 100);
+            this.cbxAlarmMessageTypeSpot_3.Location = new System.Drawing.Point(410, 125);
             this.cbxAlarmMessageTypeSpot_3.Name = "cbxAlarmMessageTypeSpot_3";
             this.cbxAlarmMessageTypeSpot_3.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeSpot_3.TabIndex = 22;
@@ -2489,10 +2654,11 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeArea_4.Location = new System.Drawing.Point(406, 220);
+            this.cbxAlarmMessageTypeArea_4.Location = new System.Drawing.Point(410, 245);
             this.cbxAlarmMessageTypeArea_4.Name = "cbxAlarmMessageTypeArea_4";
             this.cbxAlarmMessageTypeArea_4.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeArea_4.TabIndex = 22;
+            this.cbxAlarmMessageTypeArea_4.Visible = false;
             // 
             // cbxAlarmMessageTypeSpot_4
             // 
@@ -2502,7 +2668,7 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeSpot_4.Location = new System.Drawing.Point(406, 124);
+            this.cbxAlarmMessageTypeSpot_4.Location = new System.Drawing.Point(410, 149);
             this.cbxAlarmMessageTypeSpot_4.Name = "cbxAlarmMessageTypeSpot_4";
             this.cbxAlarmMessageTypeSpot_4.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeSpot_4.TabIndex = 22;
@@ -2515,7 +2681,7 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeArea_3.Location = new System.Drawing.Point(406, 196);
+            this.cbxAlarmMessageTypeArea_3.Location = new System.Drawing.Point(410, 221);
             this.cbxAlarmMessageTypeArea_3.Name = "cbxAlarmMessageTypeArea_3";
             this.cbxAlarmMessageTypeArea_3.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeArea_3.TabIndex = 22;
@@ -2528,7 +2694,7 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeArea_1.Location = new System.Drawing.Point(406, 148);
+            this.cbxAlarmMessageTypeArea_1.Location = new System.Drawing.Point(410, 173);
             this.cbxAlarmMessageTypeArea_1.Name = "cbxAlarmMessageTypeArea_1";
             this.cbxAlarmMessageTypeArea_1.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeArea_1.TabIndex = 22;
@@ -2541,77 +2707,10 @@
             "不联动",
             "联动方式1",
             "联动方式2"});
-            this.cbxAlarmMessageTypeArea_2.Location = new System.Drawing.Point(406, 172);
+            this.cbxAlarmMessageTypeArea_2.Location = new System.Drawing.Point(410, 197);
             this.cbxAlarmMessageTypeArea_2.Name = "cbxAlarmMessageTypeArea_2";
             this.cbxAlarmMessageTypeArea_2.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeArea_2.TabIndex = 22;
-            // 
-            // grpIO
-            // 
-            this.grpIO.Controls.Add(this.cbxiEnable);
-            this.grpIO.Controls.Add(this.cbxiIO);
-            this.grpIO.Controls.Add(this.label45);
-            this.grpIO.Controls.Add(this.label44);
-            this.grpIO.Enabled = false;
-            this.grpIO.Location = new System.Drawing.Point(363, 311);
-            this.grpIO.Name = "grpIO";
-            this.grpIO.Size = new System.Drawing.Size(200, 100);
-            this.grpIO.TabIndex = 11;
-            this.grpIO.TabStop = false;
-            this.grpIO.Text = "报警IO口设置";
-            this.grpIO.Visible = false;
-            // 
-            // cbxiEnable
-            // 
-            this.cbxiEnable.FormattingEnabled = true;
-            this.cbxiEnable.Items.AddRange(new object[] {
-            "停止报警",
-            "启用报警"});
-            this.cbxiEnable.Location = new System.Drawing.Point(110, 57);
-            this.cbxiEnable.Name = "cbxiEnable";
-            this.cbxiEnable.Size = new System.Drawing.Size(60, 20);
-            this.cbxiEnable.TabIndex = 7;
-            // 
-            // cbxiIO
-            // 
-            this.cbxiIO.FormattingEnabled = true;
-            this.cbxiIO.Items.AddRange(new object[] {
-            "2",
-            "3"});
-            this.cbxiIO.Location = new System.Drawing.Point(33, 57);
-            this.cbxiIO.Name = "cbxiIO";
-            this.cbxiIO.Size = new System.Drawing.Size(48, 20);
-            this.cbxiIO.TabIndex = 6;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(105, 32);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(65, 12);
-            this.label45.TabIndex = 9;
-            this.label45.Text = "打开或关闭";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(31, 32);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(41, 12);
-            this.label44.TabIndex = 9;
-            this.label44.Text = "端口号";
-            // 
-            // ckbIO
-            // 
-            this.ckbIO.AutoSize = true;
-            this.ckbIO.Location = new System.Drawing.Point(569, 379);
-            this.ckbIO.Name = "ckbIO";
-            this.ckbIO.Size = new System.Drawing.Size(48, 16);
-            this.ckbIO.TabIndex = 10;
-            this.ckbIO.Text = "修改";
-            this.ckbIO.UseVisualStyleBackColor = true;
-            this.ckbIO.Visible = false;
-            this.ckbIO.CheckedChanged += new System.EventHandler(this.ckbIO_CheckedChanged);
             // 
             // btnUpdateAlarmInfo
             // 
@@ -2623,71 +2722,6 @@
             this.btnUpdateAlarmInfo.UseVisualStyleBackColor = true;
             this.btnUpdateAlarmInfo.Click += new System.EventHandler(this.btnUpdateAlarmInfo_Click);
             // 
-            // cbxAlarmColor
-            // 
-            this.cbxAlarmColor.FormattingEnabled = true;
-            this.cbxAlarmColor.Items.AddRange(new object[] {
-            "无",
-            "黑",
-            "白",
-            "红",
-            "橙",
-            "黄",
-            "绿",
-            "蓝",
-            "灰",
-            "紫"});
-            this.cbxAlarmColor.Location = new System.Drawing.Point(82, 77);
-            this.cbxAlarmColor.Name = "cbxAlarmColor";
-            this.cbxAlarmColor.Size = new System.Drawing.Size(98, 20);
-            this.cbxAlarmColor.TabIndex = 4;
-            // 
-            // cbxAlarm
-            // 
-            this.cbxAlarm.FormattingEnabled = true;
-            this.cbxAlarm.Items.AddRange(new object[] {
-            "关闭",
-            "打开"});
-            this.cbxAlarm.Location = new System.Drawing.Point(82, 24);
-            this.cbxAlarm.Name = "cbxAlarm";
-            this.cbxAlarm.Size = new System.Drawing.Size(97, 20);
-            this.cbxAlarm.TabIndex = 3;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 27);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 12);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "报警功能：";
-            // 
-            // tbxAlarmTemp
-            // 
-            this.tbxAlarmTemp.Location = new System.Drawing.Point(82, 50);
-            this.tbxAlarmTemp.Name = "tbxAlarmTemp";
-            this.tbxAlarmTemp.Size = new System.Drawing.Size(100, 21);
-            this.tbxAlarmTemp.TabIndex = 1;
-            this.tbxAlarmTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 80);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 12);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "报警色：";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 53);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 12);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "报警温度：";
-            // 
             // pbxScreen
             // 
             this.pbxScreen.BackColor = System.Drawing.Color.Black;
@@ -2697,21 +2731,15 @@
             this.pbxScreen.TabIndex = 1;
             this.pbxScreen.TabStop = false;
             // 
-            // groupBox1
+            // btnClearAll
             // 
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.tbxAlarmTemp);
-            this.groupBox1.Controls.Add(this.cbxAlarmColor);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.cbxAlarm);
-            this.groupBox1.Location = new System.Drawing.Point(27, 298);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(149, 137);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            this.groupBox1.Visible = false;
+            this.btnClearAll.Location = new System.Drawing.Point(258, 424);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(75, 23);
+            this.btnClearAll.TabIndex = 1;
+            this.btnClearAll.Text = "全部清除";
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // pnl
             // 
@@ -2746,13 +2774,13 @@
             this.grpRefeTemp.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
-            this.grpAlarmInfo.ResumeLayout(false);
-            this.grpAlarmInfo.PerformLayout();
             this.grpIO.ResumeLayout(false);
             this.grpIO.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.grpAlarmInfo.ResumeLayout(false);
+            this.grpAlarmInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2969,5 +2997,6 @@
         private System.Windows.Forms.ComboBox cbxAlarmMessageTypeSpot_2;
         private System.Windows.Forms.GroupBox grpAlarmInfo;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnClearAll;
     }
 }

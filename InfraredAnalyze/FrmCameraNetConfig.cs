@@ -70,7 +70,7 @@ namespace InfraredAnalyze
                 IPAddressIP.tbx3.Text = str[2];
                 IPAddressIP.tbx4.Text = str[3];
                 DMSDK.DM_Init();
-                tempOperateIntptr = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[iPCameraID - 1], structSM7003Tag.IP, 80);// 操作端口号6.0默认9989端口 ,7.0默认80端口
+                tempOperateIntptr = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[iPCameraID - 1], structSM7003Tag.IP, 80);//
                 if (tempOperateIntptr <= 0)
                 {
                     MessageBox.Show("连接失败，请检查线路,或修改参数后新连接试！");
