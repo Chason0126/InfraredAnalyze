@@ -56,39 +56,10 @@ namespace InfraredAnalyze
                 StaticClass.intPtrs_UCPbx[13] = ucPbx14.Handle;
                 StaticClass.intPtrs_UCPbx[14] = ucPbx15.Handle;
                 StaticClass.intPtrs_UCPbx[15] = ucPbx16.Handle;
-
-                StaticClass.intPtrs_UCStatusPanel[0] = ucStatusPanel1.Handle;
-                StaticClass.intPtrs_UCStatusPanel[1] = ucStatusPanel2.Handle;
-                StaticClass.intPtrs_UCStatusPanel[2] = ucStatusPanel3.Handle;
-                StaticClass.intPtrs_UCStatusPanel[3] = ucStatusPanel4.Handle;
-                StaticClass.intPtrs_UCStatusPanel[4] = ucStatusPanel5.Handle;
-                StaticClass.intPtrs_UCStatusPanel[5] = ucStatusPanel6.Handle;
-                StaticClass.intPtrs_UCStatusPanel[6] = ucStatusPanel7.Handle;
-                StaticClass.intPtrs_UCStatusPanel[7] = ucStatusPanel8.Handle;
-                StaticClass.intPtrs_UCStatusPanel[8] = ucStatusPanel9.Handle;
-                StaticClass.intPtrs_UCStatusPanel[9] = ucStatusPanel10.Handle;
-                StaticClass.intPtrs_UCStatusPanel[10] = ucStatusPanel11.Handle;
-                StaticClass.intPtrs_UCStatusPanel[11] = ucStatusPanel12.Handle;
-                StaticClass.intPtrs_UCStatusPanel[12] = ucStatusPanel13.Handle;
-                StaticClass.intPtrs_UCStatusPanel[13] = ucStatusPanel14.Handle;
-                StaticClass.intPtrs_UCStatusPanel[14] = ucStatusPanel15.Handle;
-                StaticClass.intPtrs_UCStatusPanel[15] = ucStatusPanel16.Handle;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-        #endregion
-
-        #region//调增 运行显示状态的大小
-        private void Resize_uCStatusPane()
-        {
-            foreach (UCStatusPanel uCStatusPanel in tlpRunningStatus.Controls)
-            {
-                uCStatusPanel.Height = tlpRunningStatus.Height / 16;
-                uCStatusPanel.Width = tlpRunningStatus.Width;
             }
         }
         #endregion
@@ -143,7 +114,6 @@ namespace InfraredAnalyze
                 this.WindowState = FormWindowState.Maximized;
                 btnWindow.BackgroundImage = Properties.Resources.窗口化;
                 Refresh_Screen(ScreenNum);
-                Resize_uCStatusPane();
             }
             else if (this.WindowState==FormWindowState.Maximized)
             {
@@ -490,9 +460,6 @@ namespace InfraredAnalyze
                         {
                             temp_Node.ForeColor = Color.Gray;
                             temp_Node.NodeFont = new Font("微软雅黑", 10, FontStyle.Strikeout);
-                        }else
-                        {
-                           
                         }
                         temp_Node.Tag = structSM7003Tag;
                         temp_Node.ContextMenuStrip = cmsIPCameraConfig;
@@ -508,10 +475,13 @@ namespace InfraredAnalyze
         #endregion
 
         #region// 树视图点击事件
+        StaticClass.StructSM7003Tag structSM7003Tag;
+       
         Point tvwPoint;
         private void tvwSensor_MouseDown(object sender, MouseEventArgs e)
         {
             tvwPoint = new Point(e.X, e.Y);
+            structSM7003Tag = new StaticClass.StructSM7003Tag();
             try
             {
                 if(e.Button==MouseButtons.Left)
@@ -520,16 +490,20 @@ namespace InfraredAnalyze
                     if(tvwSensor.SelectedNode==null)
                     {
                         tvwSensor.SelectedNode = null;//取消选中的树视图节点
+                        StaticClass.SelectedNode = 0;
                     }
                     else
                     {
-                       
+                        structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                        StaticClass.SelectedNode = structSM7003Tag.CameraID;
                     }
                 }else if(e.Button==MouseButtons.Right)
                 {
                     tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
                     if (tvwSensor.SelectedNode != null)
                     {
+                        structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                        StaticClass.SelectedNode = structSM7003Tag.CameraID;
                         if (tvwSensor.SelectedNode.Index == 0)
                         {
                             cmsIPCameraConfig.Items[4].Visible = false;
@@ -645,7 +619,7 @@ namespace InfraredAnalyze
             {
                 pnl frmTemperParamConfig = new pnl();
                 tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
-                StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+                structSM7003Tag = new StaticClass.StructSM7003Tag();
                 if (tvwSensor.SelectedNode != null)
                 {
                     structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
@@ -665,7 +639,7 @@ namespace InfraredAnalyze
         private void 网络参数设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StaticClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
@@ -680,7 +654,7 @@ namespace InfraredAnalyze
         private void 图像设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmImageConfig frmImageConfig = new FrmImageConfig();
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StaticClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
@@ -696,7 +670,7 @@ namespace InfraredAnalyze
         #region//连接
         private void 连接ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StaticClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             try
             {
@@ -728,7 +702,7 @@ namespace InfraredAnalyze
         private void 视频设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmVideoConfig frmVideoConfig = new FrmVideoConfig();
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StaticClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if(tvwSensor.SelectedNode!=null)
             {
@@ -748,7 +722,7 @@ namespace InfraredAnalyze
         #region//断开连接
         private void 断开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StaticClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
@@ -819,7 +793,7 @@ namespace InfraredAnalyze
         private void 实时数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmRealTimeTemperData frmRealTimeTemperData = new FrmRealTimeTemperData();
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StaticClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
@@ -838,6 +812,16 @@ namespace InfraredAnalyze
         }
         #endregion
 
+        #region//清空数据库
+        private void 清空数据库ToolStripMenuItem_Click(object sender, EventArgs e)//谨慎操作（仅当数据库异常时供操作）
+        {
+            if (MessageBox.Show("确定要清空数据库吗？这将删除所有数据，并且不可恢复，请谨慎操作！", "不可恢复的操作", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                //sqlCreate.Drop_AllDatabase();
+            }
+        }
+        #endregion
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             LoadTreeView();
@@ -845,26 +829,30 @@ namespace InfraredAnalyze
             Refresh_Screen(ScreenNum);
         }
 
-        private void btnAddSensor_Click(object sender, EventArgs e)//添加探测器
+
+        private void btnCameraConfig_Click(object sender, EventArgs e)
         {
-            int num = sqlCreate.Select_Num_SMInfraredConfig();
-            if(num>=16)
+            if (StaticClass.SelectedNode == 0)
             {
-                MessageBox.Show("探测器数量不足，该版本最多只支持16台探测器！");
-            }else
+                MessageBox.Show("请先选择需要设置的探测器节点");
+            }
+            else
             {
                 FrmAddIPCamera frmAddIPCamera = new FrmAddIPCamera();
-                frmAddIPCamera.Num = num;
-                if(frmAddIPCamera.ShowDialog()==DialogResult.OK)
+                StaticClass.StructIAnalyzeConfig temp_structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
+                ArrayList arrayList= sqlCreate.Select_SMInfraredConfig(StaticClass.SelectedNode);
+                foreach(StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in arrayList)
+                {
+                    temp_structIAnalyzeConfig = structIAnalyzeConfig;
+                }
+                frmAddIPCamera.IP = temp_structIAnalyzeConfig.IP;
+                frmAddIPCamera.Num = StaticClass.SelectedNode;
+                frmAddIPCamera.CameraName = temp_structIAnalyzeConfig.CameraName;
+                if (frmAddIPCamera.ShowDialog() == DialogResult.OK)
                 {
                     LoadTreeView();
                 }
             }
-        }
-
-        private void btnCameraConfig_Click(object sender, EventArgs e)
-        {
-           
         }
 
         private void btnDisConnect_MouseEnter(object sender, EventArgs e)
@@ -873,17 +861,6 @@ namespace InfraredAnalyze
             toolTip.SetToolTip(btnDisConnect, "全部断开");
         }
 
-        private void btnDisConnect_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i <= (tlpScreen.Controls.Count-1); i++)
-            {
-                int ReturnValue = DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[i]);
-                if (ReturnValue < 0)
-                {
-                    MessageBox.Show("断开失败！");
-                }
-            }
-        }
 
         private void btnStart_MouseEnter(object sender, EventArgs e)
         {
@@ -892,52 +869,55 @@ namespace InfraredAnalyze
         }
 
         ArrayList temp_arrayList;
-        Thread thread;
-        Thread threadStatus;
-        Thread threadCheckOnline;
+        Thread thread;//提示请勿操作线程
+        Thread threadStatus;//检测状态数组线程
+        Thread threadCheckOnline;//掉线检测线程
+        Thread threadCheckTemper;//温度判断线程 用于报警检测  很关键
         private void btnStart_Click(object sender, EventArgs e)
         {
-            thread = new Thread(showIsRunning);
+            thread = new Thread(showIsRunning);//显示请勿操作界面 防止误操作
             thread.IsBackground = true;
             thread.Start();
             try
             {
-                temp_arrayList = sqlCreate.Select_All_SMInfraredConfig();//按NodeId降序排列
-                if (btnStart.Tag.ToString() == "Start")
+                if (btnStart.Tag.ToString() == "Start")//开始
                 {
+                    temp_arrayList = sqlCreate.Select_All_SMInfraredConfig();//按CameraId降序排列
+                    foreach (StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    {
+                        StaticClass.intPtrs_Enable[structIAnalyzeConfig.CameraID - 1] = structIAnalyzeConfig.Enable;//启用数组
+                        StaticClass.intPtrs_CameraName[structIAnalyzeConfig.CameraID - 1] = structIAnalyzeConfig.CameraName;//名称数组
+                        StaticClass.intPtrs_Ip[structIAnalyzeConfig.CameraID - 1] = structIAnalyzeConfig.IP;//IP数组
+                        StaticClass.intPtrs_NodeId[structIAnalyzeConfig.NodeID - 1] = structIAnalyzeConfig.CameraID - 1;//NodeID数组 原本打算为 显示顺序预留 现在不需要
+                    }
                     threadStatus = new Thread(StatusJudgment);
                     threadCheckOnline = new Thread(CheckOnline);
                     threadStatus.IsBackground = true;
                     threadStatus.Start();
                     threadCheckOnline.IsBackground = true;
                     threadCheckOnline.Start();
-                    foreach (StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    
+                    for(int i = 0; i < 16; i++)
                     {
-                        StaticClass.intPtrs_Enable[structIAnalyzeConfig.CameraID - 1] = structIAnalyzeConfig.Enable;
-                        StaticClass.intPtrs_CameraName[structIAnalyzeConfig.CameraID - 1] = structIAnalyzeConfig.CameraName;
-                        StaticClass.intPtrs_Ip[structIAnalyzeConfig.CameraID - 1] = structIAnalyzeConfig.IP;
-                        StaticClass.intPtrs_NodeId[structIAnalyzeConfig.NodeID - 1] = structIAnalyzeConfig.CameraID - 1;
-
-                        int Numbering = structIAnalyzeConfig.CameraID - 1;//与画面的顺序有关(暂时先不考虑顺序)  连接句柄与视屏句柄顺序有影响
-                        if (structIAnalyzeConfig.Enable == true)//启用
+                        if (StaticClass.intPtrs_Enable[i])//如果该相机启用了
                         {
-                            DMSDK.DM_Init();//初始化连接
-                            StaticClass.intPtrs_Connect[Numbering] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[Numbering], structIAnalyzeConfig.IP, 5000);// 返回值为视频操作句柄
-                            StaticClass.intPtrs_Operate[Numbering] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[Numbering], structIAnalyzeConfig.IP, 80);
-                            if (StaticClass.intPtrs_Connect[Numbering] < 0 || StaticClass.intPtrs_Operate[Numbering] <= 0)//连接失败
+                            StaticClass.intPtrs_Connect[i] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 5000);// 返回值为视频操作句柄
+                            StaticClass.intPtrs_Operate[i] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 80);
+                            if (StaticClass.intPtrs_Connect[i] < 0 || StaticClass.intPtrs_Operate[i] <= 0)//连接失败
                             {
-                                StaticClass.intPtrs_Status[Numbering] = (int)RunningStatus.故障;
+                                StaticClass.intPtrs_Status[i] = (int)RunningStatus.故障;
                             }
                             else//连接成功
                             {
-                                StaticClass.intPtrs_Status[Numbering] = (int)RunningStatus.正常;
-                                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[Numbering], 1);//连续获取测温对象的数据
-                                CallBack(Numbering + 1);
+                                StaticClass.intPtrs_Status[i] = (int)RunningStatus.正常;
+                                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);//连续获取测温对象的数据
+                                fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
+                                DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
                             }
                         }
                         else//未启用
                         {
-                            StaticClass.intPtrs_Status[Numbering] = (int)RunningStatus.未启用;
+                            StaticClass.intPtrs_Status[i] = (int)RunningStatus.未启用;
                         }
                     }
                     btnStart.BackgroundImage = Properties.Resources.Pause;
@@ -959,7 +939,6 @@ namespace InfraredAnalyze
                     }
                     btnStart.Tag = "Start";
                     btnStart.BackgroundImage = Properties.Resources.start;
-                    threadStatus.Abort();
                     threadCheckOnline.Abort();
                 }
             }
@@ -985,7 +964,6 @@ namespace InfraredAnalyze
             {
                 
             }
-           
         }
 
         private void StatusJudgment()//状态判断
@@ -994,27 +972,24 @@ namespace InfraredAnalyze
             {
                 for (int i = 0; i < 16; i++)
                 {
-                    UCPbx uCPbx = (UCPbx)FromHandle(StaticClass.intPtrs_UCPbx[i]);
-                    UCStatusPanel uCStatus = (UCStatusPanel)FromHandle(StaticClass.intPtrs_UCStatusPanel[i]);
+                   
                     switch (StaticClass.intPtrs_Status[i])
                     {
                         case 0://未启用 
-                            uCPbx.BackgroundImage = Properties.Resources.nopicture;
-                            uCStatus.BackColor = Color.Gray;
+                            Change_Status(i, 0);
                             break;
                         case 1://告警
-                            uCStatus.BackColor = Color.Red;
+                            Change_Status(i, 1);
                             break;
                         case 2://故障
-                            uCPbx.BackgroundImage = Properties.Resources.disableCamera;
+                            Change_Status(i, 2);
                             break;
                         case 3://正常
-                            uCStatus.BackColor = Color.Blue;
+                            Change_Status(i, 3);
                             break;
                         case 4://离线  疯狂重连 
-                            uCStatus.BackColor = Color.Yellow;
+                            Change_Status(i, 4);
                             DMSDK.DM_StopTemp(StaticClass.intPtrs_Operate[i]);//停止回调函数
-                            uCPbx.BackgroundImage = Properties.Resources.nopicture;
                             StaticClass.intPtrs_Connect[i] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 5000);
                             StaticClass.intPtrs_Operate[i] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 80);
                             if (StaticClass.intPtrs_Connect[i] >= 0 || StaticClass.intPtrs_Operate[i] > 0)//重连成功
@@ -1026,12 +1001,35 @@ namespace InfraredAnalyze
                                 {
                                     dgvError.Rows.Add(DateTime.Now, "连接恢复", ip, cname);
                                 }));
-                                CallBack(i + 1);//启用回调函数  获取数据
+                                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);
+                                fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
+                                DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
                             }
                             break;
                     }
-                    Thread.Sleep(200);
+                    Thread.Sleep(100);
                 }
+            }
+        }
+
+        private void Change_Status(int i,int status)
+        {
+            UCPbx uCPbx = (UCPbx)FromHandle(StaticClass.intPtrs_UCPbx[i]);
+            switch (status)
+            {
+                case 0:
+                    uCPbx.BackgroundImage = Properties.Resources.nopicture;
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    uCPbx.BackgroundImage = Properties.Resources.disableCamera;
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    uCPbx.BackgroundImage = Properties.Resources.nopicture;
+                    break;
             }
         }
 
@@ -1074,110 +1072,19 @@ namespace InfraredAnalyze
 
         #region//回调函数
         /*
-         * 当仪器告警时，利用回调函数获取到的告警信息中只有alarmID这一个信息，当测温点、测温区域的编号都从0开始时，则无法通过alarmID判断到底是具体的哪个测温目标发出的告警 
-         * 所有 对添加的测温区域、测温点的编号进行限制，使得编号唯一 可以解析出具体的告警类型。使用一个8位的数 来记录告警状态 0表示无告警 1表示 测温告警
-         * 但是这样限制了测温目标的数量 （先1测温线、2345测温点 678测温区域 可继续扩展 但是告警信息没办法解析出来具体是哪个的），设置报警的时候，区域9/10分别为全屏最冷点 全屏最热点（那就只能减少点的设置）
+         * 多台仪器的告警信息无法获取（判断是那一台的告警信息），需要程序自己判断（大立公司人员语录）
          * */
-        private DMSDK.fMessCallBack fMessCallBack_1;//没得办法  测温告警的返回信息里只有一个ERRID信息  没办法判断 是哪一台仪器的告警信息 只能调用多个回调函数 丑了一点
-        private DMSDK.fMessCallBack fMessCallBack_2;
-        private DMSDK.fMessCallBack fMessCallBack_3;
-        private DMSDK.fMessCallBack fMessCallBack_4;
-        private DMSDK.fMessCallBack fMessCallBack_5;
-        private DMSDK.fMessCallBack fMessCallBack_6;
-        private DMSDK.fMessCallBack fMessCallBack_7;
-        private DMSDK.fMessCallBack fMessCallBack_8;
-        private DMSDK.fMessCallBack fMessCallBack_9;
-        private DMSDK.fMessCallBack fMessCallBack_10;
-        private DMSDK.fMessCallBack fMessCallBack_11;
-        private DMSDK.fMessCallBack fMessCallBack_12;
-        private DMSDK.fMessCallBack fMessCallBack_13;
-        private DMSDK.fMessCallBack fMessCallBack_14;
-        private DMSDK.fMessCallBack fMessCallBack_15;
-        private DMSDK.fMessCallBack fMessCallBack_16;
+        DMSDK.fMessCallBack fMessCallBack;
         DMSDK.tagTempMessage tempMessage;
         DMSDK.tagAlarm tagAlarm;
         DMSDK.tagError tagError;
         ArrayList arrayList_Area = new ArrayList();
         SqlInsert sqlInsert = new SqlInsert();
 
-        private void CallBack(int Numbering)
+        private void dmMessCallBack(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)//当为测温告警的时候 温度数据可以回调获取  
         {
-            #region//回调函数
-            switch (Numbering)
-            {
-                case 1:
-                    fMessCallBack_1 = new DMSDK.fMessCallBack(dmMessCallBack_1);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_1, 0);
-                    break;
-                case 2:
-                    fMessCallBack_2 = new DMSDK.fMessCallBack(dmMessCallBack_2);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_2, 0);
-                    break;
-                case 3:
-                    fMessCallBack_3 = new DMSDK.fMessCallBack(dmMessCallBack_3);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_1, 0);
-                    break;
-                case 4:
-                    fMessCallBack_4 = new DMSDK.fMessCallBack(dmMessCallBack_4);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_4, 0);
-                    break;
-                case 5:
-                    fMessCallBack_5 = new DMSDK.fMessCallBack(dmMessCallBack_5);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_5, 0);
-                    break;
-                case 6:
-                    fMessCallBack_6 = new DMSDK.fMessCallBack(dmMessCallBack_6);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_6, 0);
-                    break;
-                case 7:
-                    fMessCallBack_7 = new DMSDK.fMessCallBack(dmMessCallBack_7);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_7, 0);
-                    break;
-                case 8:
-                    fMessCallBack_8 = new DMSDK.fMessCallBack(dmMessCallBack_8);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_8, 0);
-                    break;
-                case 9:
-                    fMessCallBack_9 = new DMSDK.fMessCallBack(dmMessCallBack_9);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_9, 0);
-                    break;
-                case 10:
-                    fMessCallBack_10 = new DMSDK.fMessCallBack(dmMessCallBack_10);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_10, 0);
-                    break;
-                case 11:
-                    fMessCallBack_11 = new DMSDK.fMessCallBack(dmMessCallBack_11);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_11, 0);
-                    break;
-                case 12:
-                    fMessCallBack_12 = new DMSDK.fMessCallBack(dmMessCallBack_12);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_12, 0);
-                    break;
-                case 13:
-                    fMessCallBack_13 = new DMSDK.fMessCallBack(dmMessCallBack_13);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_13, 0);
-                    break;
-                case 14:
-                    fMessCallBack_14 = new DMSDK.fMessCallBack(dmMessCallBack_14);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_14, 0);
-                    break;
-                case 15:
-                    fMessCallBack_15 = new DMSDK.fMessCallBack(dmMessCallBack_15);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_15, 0);
-                    break;
-                case 16:
-                    fMessCallBack_16 = new DMSDK.fMessCallBack(dmMessCallBack_16);//回调函数实例
-                    DMSDK.DM_SetAllMessCallBack(fMessCallBack_16, 0);
-                    break;
-            }
-            #endregion
-
-        }
-
-        private void dmMessCallBack_1(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)//当为测温告警的时候 温度数据可以回调获取  
-        {
-            msg = msg - 0x8000;
-            switch (msg)
+            int Msg = msg - 0x8000;
+            switch (Msg)
             {
                 case 0x3051://错误
                     tagError = (DMSDK.tagError)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagError));
@@ -1188,382 +1095,20 @@ namespace InfraredAnalyze
                     tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
                     sqlInsert.InsertTemperDataToArrayList(tempMessage);
                     break;
-                case 0x3054://报警消息 将alarmID对应的byte置为1
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[0] = (byte)(StaticClass.intPtrs_AlarmId[0] | (0x80>>AlaemId));// 将10000000右移 对应的ID位数 即将对应位置的置为1
-                    StaticClass.intPtrs_Status[0] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[0], StaticClass.intPtrs_CameraName[0] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-
-        private void dmMessCallBack_2(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[1] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[1] = (byte)(StaticClass.intPtrs_AlarmId[1] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[1] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[1], StaticClass.intPtrs_CameraName[1] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_3(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[2] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[2] = (byte)(StaticClass.intPtrs_AlarmId[2] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[2] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[2], StaticClass.intPtrs_CameraName[2] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-
-        private void dmMessCallBack_4(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[3] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[3] = (byte)(StaticClass.intPtrs_AlarmId[3] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[3] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[3], StaticClass.intPtrs_CameraName[3] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_5(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[4] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[4] = (byte)(StaticClass.intPtrs_AlarmId[4] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[4] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[4], StaticClass.intPtrs_CameraName[4] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_6(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[5] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[5] = (byte)(StaticClass.intPtrs_AlarmId[5] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[5] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[5], StaticClass.intPtrs_CameraName[5] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_7(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[6] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[6] = (byte)(StaticClass.intPtrs_AlarmId[6] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[6] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[6], StaticClass.intPtrs_CameraName[6] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_8(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[7] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[7] = (byte)(StaticClass.intPtrs_AlarmId[7] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[7] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[7], StaticClass.intPtrs_CameraName[7] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_9(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[8] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[8] = (byte)(StaticClass.intPtrs_AlarmId[8] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[8] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[8], StaticClass.intPtrs_CameraName[8] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_10(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[9] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[9] = (byte)(StaticClass.intPtrs_AlarmId[9] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[9] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[9], StaticClass.intPtrs_CameraName[9] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_11(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[10] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[10] = (byte)(StaticClass.intPtrs_AlarmId[10] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[10] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[10], StaticClass.intPtrs_CameraName[10] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_12(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[11] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[11] = (byte)(StaticClass.intPtrs_AlarmId[0] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[11] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[11], StaticClass.intPtrs_CameraName[11] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_13(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[12] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[12] = (byte)(StaticClass.intPtrs_AlarmId[12] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[12] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[12], StaticClass.intPtrs_CameraName[12] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_14(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[13] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[13] = (byte)(StaticClass.intPtrs_AlarmId[13] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[13] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[13], StaticClass.intPtrs_CameraName[13] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_15(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[14] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[14] = (byte)(StaticClass.intPtrs_AlarmId[14] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[14] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[14], StaticClass.intPtrs_CameraName[14] + AlaemId.ToString());
-                    }));
-                    break;
-            }
-        }
-        private void dmMessCallBack_16(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
-        {
-            msg = msg - 0x8000;
-            switch (msg)
-            {
-                case 0x3051://错误
-                    StaticClass.intPtrs_Status[15] = (int)RunningStatus.故障;
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    StaticClass.intPtrs_AlarmId[15] = (byte)(StaticClass.intPtrs_AlarmId[15] | (0x80 >> AlaemId));
-                    StaticClass.intPtrs_Status[15] = (int)RunningStatus.温度告警;
-                    BeginInvoke(new MethodInvoker(delegate
-                    {
-                        dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[15], StaticClass.intPtrs_CameraName[15] + AlaemId.ToString());
-                    }));
+                case 0x3054://报警消息 将alarmID对应的byte置为1    针对单台仪器可以使用该方法  木得问题 测温目标设置限制，  //现在直接搞个数记录采集的温度 然后获取报警温度 自行判断（超温5秒 告警）
+                    //tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
+                    //byte AlaemId = (byte)(tagAlarm.AlarmID);
+                    //StaticClass.intPtrs_AlarmId[0] = (byte)(StaticClass.intPtrs_AlarmId[0] | (0x80 >> AlaemId));// 将10000000右移 对应的ID位数 即将对应位置的置为1
+                    //StaticClass.intPtrs_Status[0] = (int)RunningStatus.温度告警;
+                    //BeginInvoke(new MethodInvoker(delegate
+                    //{
+                    //    dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[0], StaticClass.intPtrs_CameraName[0] + "区域编号" + AlaemId.ToString());
+                    //}));
                     break;
             }
         }
         #endregion
 
-        
+       
     }
 }

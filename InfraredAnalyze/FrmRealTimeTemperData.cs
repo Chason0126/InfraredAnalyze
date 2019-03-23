@@ -106,7 +106,7 @@ namespace InfraredAnalyze
         Series seriesArea_3 = new Series("测温区域3");
         Series seriesArea_4 = new Series("测温区域4");
 
-        Queue<double> queuePoint_1 = new Queue<double>(250);//一秒钟两次数据  两分钟的数据量
+        Queue<double> queuePoint_1 = new Queue<double>(250);//一秒钟两次数据(大概)  两分钟的数据量
         Queue<double> queuePoint_2 = new Queue<double>(250);
         Queue<double> queuePoint_3 = new Queue<double>(250);
         Queue<double> queuePoint_4 = new Queue<double>(250);
@@ -176,7 +176,6 @@ namespace InfraredAnalyze
         private DMSDK.fMessCallBack fMessCallBack;
         private void FrmRealTimeTemperData_Load(object sender, EventArgs e)
         {
-            cameraID = 1;
             if (StaticClass.intPtrs_Operate[cameraID - 1] <= 0)
             {
                 MessageBox.Show("设备未连接！");
@@ -191,7 +190,7 @@ namespace InfraredAnalyze
             ChartHis_AddSeries();
             ChartType();
             fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
-            DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[0], 1);//连续获取测温对象的数据
+            DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[cameraID - 1], 1);//连续获取测温对象的数据
             DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
         }
 
@@ -201,8 +200,8 @@ namespace InfraredAnalyze
         int len;
         private void dmMessCallBack(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
         {
-            msg = msg - 0x8000;
-            switch (msg)
+            int Msg = msg - 0x8000;
+            switch (Msg)
             {
                 case 0x3051://错误
 
@@ -210,40 +209,43 @@ namespace InfraredAnalyze
                 case 0x3053://温度数据
                     tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
                     len = tempMessage.len;
-                    for (int i = 0; i < len; i++)
+                    if (tempMessage.dvrIP == StaticClass.intPtrs_Ip[cameraID - 1])
                     {
-                        tagTemperature = new DMSDK.tagTemperature();
-                        tagTemperature = tempMessage.temperInfo[i];
-                        int ID = tagTemperature.number + 1;
-                        switch (ID)
+                        for (int i = 0; i < len; i++)
                         {
-                            case 1://线
-                                queueLine.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                break;
-                            case 2:
-                                queuePoint_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                break;
-                            case 3:
-                                queuePoint_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                break;
-                            case 4:
-                                queuePoint_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                break;
-                            case 5:
-                                queuePoint_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                break;
-                            case 6:
-                                queueArea_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);//
-                                break;
-                            case 7:
-                                queueArea_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                break;
-                            case 8:
-                                queueArea_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                break;
-                            case 9:
-                                queueArea_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
-                                break;
+                            tagTemperature = new DMSDK.tagTemperature();
+                            tagTemperature = tempMessage.temperInfo[i];
+                            int ID = tagTemperature.number + 1;
+                            switch (ID)
+                            {
+                                case 1://线
+                                    queueLine.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    break;
+                                case 2:
+                                    queuePoint_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    break;
+                                case 3:
+                                    queuePoint_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    break;
+                                case 4:
+                                    queuePoint_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    break;
+                                case 5:
+                                    queuePoint_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    break;
+                                case 6:
+                                    queueArea_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);//
+                                    break;
+                                case 7:
+                                    queueArea_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    break;
+                                case 8:
+                                    queueArea_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    break;
+                                case 9:
+                                    queueArea_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    break;
+                            }
                         }
                     }
                     break;
@@ -257,61 +259,68 @@ namespace InfraredAnalyze
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            seriesPoint_1.Points.Clear(); 
-            seriesPoint_2.Points.Clear();
-            seriesPoint_3.Points.Clear();
-            seriesPoint_4.Points.Clear();
-            seriesLine.Points.Clear();
-            seriesArea_1.Points.Clear();
-            seriesArea_2.Points.Clear();
-            seriesArea_3.Points.Clear();
-            seriesArea_4.Points.Clear();
-            for (int i = 0; i < queueArea_1.Count; i++)
+            try
             {
-                seriesArea_1.Points.AddXY(i + 1, queueArea_1.ElementAt(i));//DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss")
-            }
-            for (int i = 0; i < queueArea_2.Count; i++)
-            {
-                seriesArea_2.Points.AddXY(i + 1, queueArea_2.ElementAt(i));
-            }
-            for (int i = 0; i < queueArea_3.Count; i++)
-            {
-                seriesArea_3.Points.AddXY(i + 1, queueArea_3.ElementAt(i));
-            }
-            for (int i = 0; i < queueArea_4.Count; i++)
-            {
-                seriesArea_4.Points.AddXY(i + 1, queueArea_4.ElementAt(i));
-            }
-            for (int i = 0; i < queuePoint_1.Count; i++)
-            {
-                seriesPoint_1.Points.AddXY(i + 1, queuePoint_1.ElementAt(i));
-            }
-            for (int i = 0; i < queuePoint_2.Count; i++)
-            {
-                seriesPoint_2.Points.AddXY(i + 1, queuePoint_2.ElementAt(i));
+                seriesPoint_1.Points.Clear();
+                seriesPoint_2.Points.Clear();
+                seriesPoint_3.Points.Clear();
+                seriesPoint_4.Points.Clear();
+                seriesLine.Points.Clear();
+                seriesArea_1.Points.Clear();
+                seriesArea_2.Points.Clear();
+                seriesArea_3.Points.Clear();
+                seriesArea_4.Points.Clear();
+                for (int i = 0; i < queueArea_1.Count; i++)
+                {
+                    seriesArea_1.Points.AddXY(i + 1, queueArea_1.ElementAt(i));//DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss")
+                }
+                for (int i = 0; i < queueArea_2.Count; i++)
+                {
+                    seriesArea_2.Points.AddXY(i + 1, queueArea_2.ElementAt(i));
+                }
+                for (int i = 0; i < queueArea_3.Count; i++)
+                {
+                    seriesArea_3.Points.AddXY(i + 1, queueArea_3.ElementAt(i));
+                }
+                for (int i = 0; i < queueArea_4.Count; i++)
+                {
+                    seriesArea_4.Points.AddXY(i + 1, queueArea_4.ElementAt(i));
+                }
+                for (int i = 0; i < queuePoint_1.Count; i++)
+                {
+                    seriesPoint_1.Points.AddXY(i + 1, queuePoint_1.ElementAt(i));
+                }
+                for (int i = 0; i < queuePoint_2.Count; i++)
+                {
+                    seriesPoint_2.Points.AddXY(i + 1, queuePoint_2.ElementAt(i));
 
+                }
+                for (int i = 0; i < queuePoint_3.Count; i++)
+                {
+                    seriesPoint_3.Points.AddXY(i + 1, queuePoint_3.ElementAt(i));
+                }
+                for (int i = 0; i < queuePoint_4.Count; i++)
+                {
+                    seriesPoint_4.Points.AddXY(i + 1, queuePoint_4.ElementAt(i));
+                }
+                for (int i = 0; i < queueLine.Count; i++)
+                {
+                    seriesLine.Points.AddXY(i + 1, queueLine.ElementAt(i));
+                }
+                Dequ(queuePoint_1);
+                Dequ(queuePoint_2);
+                Dequ(queuePoint_3);
+                Dequ(queuePoint_4);
+                Dequ(queueArea_1);
+                Dequ(queueArea_2);
+                Dequ(queueArea_3);
+                Dequ(queueArea_4);
+                Dequ(queueLine);
             }
-            for (int i = 0; i < queuePoint_3.Count; i++)
+            catch(Exception ex)
             {
-                seriesPoint_3.Points.AddXY(i + 1, queuePoint_3.ElementAt(i));
+                MessageBox.Show(ex.Message);
             }
-            for (int i = 0; i < queuePoint_4.Count; i++)
-            {
-                seriesPoint_4.Points.AddXY(i + 1, queuePoint_4.ElementAt(i));
-            }
-            for (int i = 0; i < queueLine.Count; i++)
-            {
-                seriesLine.Points.AddXY(i + 1, queueLine.ElementAt(i));
-            }
-            Dequ(queuePoint_1);
-            Dequ(queuePoint_2);
-            Dequ(queuePoint_3);
-            Dequ(queuePoint_4);
-            Dequ(queueArea_1);
-            Dequ(queueArea_2);
-            Dequ(queueArea_3);
-            Dequ(queueArea_4);
-            Dequ(queueLine);
         }
 
         private void Dequ(Queue<double> que)//数量超过250 压出五个

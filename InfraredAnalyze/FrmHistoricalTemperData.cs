@@ -187,7 +187,7 @@ namespace InfraredAnalyze
 
         private void FrmHistoricalTemperData_Load(object sender, EventArgs e)
         {
-            cameraID = 1;
+            //cameraID = 1;
             cbxAreaNum.SelectedIndex = 4;
             cbxAreaType.SelectedIndex = 3;
             chartHisrotricalData.Series.Clear();//清除默认的series

@@ -54,6 +54,7 @@
             this.语言ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.配置IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.清空数据库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpTools = new System.Windows.Forms.TableLayoutPanel();
             this.btnFullScreen = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -68,32 +69,10 @@
             this.tvwSensor = new System.Windows.Forms.TreeView();
             this.imgCamera = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAddSensor = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.spcRunningStatus = new System.Windows.Forms.SplitContainer();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tlpRunningStatus = new System.Windows.Forms.TableLayoutPanel();
-            this.ucStatusPanel1 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel2 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel3 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel4 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel5 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel6 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel7 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel8 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel9 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel10 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel11 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel12 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel13 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel14 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel15 = new InfraredAnalyze.UCStatusPanel();
-            this.ucStatusPanel16 = new InfraredAnalyze.UCStatusPanel();
             this.img = new System.Windows.Forms.ImageList(this.components);
             this.spcScreen = new System.Windows.Forms.SplitContainer();
             this.cmsShowNum = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -157,13 +136,6 @@
             this.spcSensorConfig.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spcRunningStatus)).BeginInit();
-            this.spcRunningStatus.Panel1.SuspendLayout();
-            this.spcRunningStatus.Panel2.SuspendLayout();
-            this.spcRunningStatus.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.tlpRunningStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcScreen)).BeginInit();
             this.spcScreen.Panel1.SuspendLayout();
             this.spcScreen.Panel2.SuspendLayout();
@@ -362,7 +334,8 @@
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.配置IPToolStripMenuItem});
+            this.配置IPToolStripMenuItem,
+            this.清空数据库ToolStripMenuItem});
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.帮助ToolStripMenuItem.Text = "帮助";
@@ -370,9 +343,16 @@
             // 配置IPToolStripMenuItem
             // 
             this.配置IPToolStripMenuItem.Name = "配置IPToolStripMenuItem";
-            this.配置IPToolStripMenuItem.Size = new System.Drawing.Size(127, 26);
+            this.配置IPToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.配置IPToolStripMenuItem.Text = "配置IP";
             this.配置IPToolStripMenuItem.Click += new System.EventHandler(this.配置IPToolStripMenuItem_Click);
+            // 
+            // 清空数据库ToolStripMenuItem
+            // 
+            this.清空数据库ToolStripMenuItem.Name = "清空数据库ToolStripMenuItem";
+            this.清空数据库ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.清空数据库ToolStripMenuItem.Text = "清空数据库";
+            this.清空数据库ToolStripMenuItem.Click += new System.EventHandler(this.清空数据库ToolStripMenuItem_Click);
             // 
             // tlpTools
             // 
@@ -386,7 +366,7 @@
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 978F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 980F));
             this.tlpTools.Controls.Add(this.btnFullScreen, 0, 0);
             this.tlpTools.Controls.Add(this.button2, 1, 0);
             this.tlpTools.Controls.Add(this.btnStart, 2, 0);
@@ -482,7 +462,6 @@
             this.btnDisConnect.Size = new System.Drawing.Size(40, 40);
             this.btnDisConnect.TabIndex = 8;
             this.btnDisConnect.UseVisualStyleBackColor = true;
-            this.btnDisConnect.Click += new System.EventHandler(this.btnDisConnect_Click);
             this.btnDisConnect.MouseEnter += new System.EventHandler(this.btnDisConnect_MouseEnter);
             // 
             // spcMain
@@ -503,21 +482,20 @@
             this.spcMain.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.spcMain.Panel2.Controls.Add(this.spcScreen);
             this.spcMain.Size = new System.Drawing.Size(1273, 633);
-            this.spcMain.SplitterDistance = 157;
+            this.spcMain.SplitterDistance = 131;
             this.spcMain.SplitterWidth = 1;
             this.spcMain.TabIndex = 7;
             // 
             // tabMain
             // 
             this.tabMain.Controls.Add(this.tabPage1);
-            this.tabMain.Controls.Add(this.tabPage2);
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.ImageList = this.img;
             this.tabMain.Location = new System.Drawing.Point(0, 0);
             this.tabMain.Margin = new System.Windows.Forms.Padding(2);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(155, 631);
+            this.tabMain.Size = new System.Drawing.Size(129, 631);
             this.tabMain.TabIndex = 0;
             // 
             // tabPage1
@@ -527,7 +505,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(147, 600);
+            this.tabPage1.Size = new System.Drawing.Size(121, 600);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -547,7 +525,7 @@
             // spcSensorConfig.Panel2
             // 
             this.spcSensorConfig.Panel2.Controls.Add(this.panel3);
-            this.spcSensorConfig.Size = new System.Drawing.Size(147, 600);
+            this.spcSensorConfig.Size = new System.Drawing.Size(121, 600);
             this.spcSensorConfig.SplitterDistance = 269;
             this.spcSensorConfig.TabIndex = 0;
             // 
@@ -576,7 +554,7 @@
             treeNode2,
             treeNode3});
             this.tvwSensor.SelectedImageIndex = 0;
-            this.tvwSensor.Size = new System.Drawing.Size(147, 241);
+            this.tvwSensor.Size = new System.Drawing.Size(121, 241);
             this.tvwSensor.TabIndex = 0;
             this.tvwSensor.DoubleClick += new System.EventHandler(this.tvwSensor_DoubleClick);
             this.tvwSensor.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvwSensor_MouseDown);
@@ -590,26 +568,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.Controls.Add(this.btnAddSensor);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(147, 28);
+            this.panel1.Size = new System.Drawing.Size(121, 28);
             this.panel1.TabIndex = 0;
-            // 
-            // btnAddSensor
-            // 
-            this.btnAddSensor.BackgroundImage = global::InfraredAnalyze.Properties.Resources.addSensor;
-            this.btnAddSensor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAddSensor.FlatAppearance.BorderSize = 0;
-            this.btnAddSensor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddSensor.Location = new System.Drawing.Point(0, 4);
-            this.btnAddSensor.Name = "btnAddSensor";
-            this.btnAddSensor.Size = new System.Drawing.Size(20, 20);
-            this.btnAddSensor.TabIndex = 1;
-            this.btnAddSensor.UseVisualStyleBackColor = true;
-            this.btnAddSensor.Click += new System.EventHandler(this.btnAddSensor_Click);
             // 
             // label1
             // 
@@ -617,7 +581,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label1.Location = new System.Drawing.Point(41, 6);
+            this.label1.Location = new System.Drawing.Point(28, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 17);
             this.label1.TabIndex = 0;
@@ -631,7 +595,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(147, 28);
+            this.panel3.Size = new System.Drawing.Size(121, 28);
             this.panel3.TabIndex = 2;
             // 
             // button1
@@ -652,308 +616,11 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label3.Location = new System.Drawing.Point(41, 6);
+            this.label3.Location = new System.Drawing.Point(28, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "监测区域";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.spcRunningStatus);
-            this.tabPage2.ImageKey = "monitor.png";
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(147, 600);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // spcRunningStatus
-            // 
-            this.spcRunningStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spcRunningStatus.IsSplitterFixed = true;
-            this.spcRunningStatus.Location = new System.Drawing.Point(3, 3);
-            this.spcRunningStatus.Margin = new System.Windows.Forms.Padding(0);
-            this.spcRunningStatus.Name = "spcRunningStatus";
-            this.spcRunningStatus.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // spcRunningStatus.Panel1
-            // 
-            this.spcRunningStatus.Panel1.Controls.Add(this.panel2);
-            // 
-            // spcRunningStatus.Panel2
-            // 
-            this.spcRunningStatus.Panel2.Controls.Add(this.tlpRunningStatus);
-            this.spcRunningStatus.Size = new System.Drawing.Size(141, 594);
-            this.spcRunningStatus.SplitterDistance = 25;
-            this.spcRunningStatus.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.LightGray;
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(141, 25);
-            this.panel2.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label2.Location = new System.Drawing.Point(38, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "运行状态";
-            // 
-            // tlpRunningStatus
-            // 
-            this.tlpRunningStatus.ColumnCount = 1;
-            this.tlpRunningStatus.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel1, 0, 0);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel2, 0, 1);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel3, 0, 2);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel4, 0, 3);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel5, 0, 4);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel6, 0, 5);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel7, 0, 6);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel8, 0, 7);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel9, 0, 8);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel10, 0, 9);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel11, 0, 10);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel12, 0, 11);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel13, 0, 12);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel14, 0, 13);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel15, 0, 14);
-            this.tlpRunningStatus.Controls.Add(this.ucStatusPanel16, 0, 15);
-            this.tlpRunningStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpRunningStatus.Location = new System.Drawing.Point(0, 0);
-            this.tlpRunningStatus.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpRunningStatus.Name = "tlpRunningStatus";
-            this.tlpRunningStatus.RowCount = 16;
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRunningStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpRunningStatus.Size = new System.Drawing.Size(141, 565);
-            this.tlpRunningStatus.TabIndex = 0;
-            // 
-            // ucStatusPanel1
-            // 
-            this.ucStatusPanel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel1.Id = 0;
-            this.ucStatusPanel1.Location = new System.Drawing.Point(0, 0);
-            this.ucStatusPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel1.Name = "ucStatusPanel1";
-            this.ucStatusPanel1.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel1.Status = "探测器X:未连接";
-            this.ucStatusPanel1.TabIndex = 0;
-            // 
-            // ucStatusPanel2
-            // 
-            this.ucStatusPanel2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel2.Id = 0;
-            this.ucStatusPanel2.Location = new System.Drawing.Point(0, 35);
-            this.ucStatusPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel2.Name = "ucStatusPanel2";
-            this.ucStatusPanel2.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel2.Status = "探测器X:未连接";
-            this.ucStatusPanel2.TabIndex = 1;
-            // 
-            // ucStatusPanel3
-            // 
-            this.ucStatusPanel3.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel3.Id = 0;
-            this.ucStatusPanel3.Location = new System.Drawing.Point(0, 70);
-            this.ucStatusPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel3.Name = "ucStatusPanel3";
-            this.ucStatusPanel3.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel3.Status = "探测器X:未连接";
-            this.ucStatusPanel3.TabIndex = 2;
-            // 
-            // ucStatusPanel4
-            // 
-            this.ucStatusPanel4.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel4.Id = 0;
-            this.ucStatusPanel4.Location = new System.Drawing.Point(0, 105);
-            this.ucStatusPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel4.Name = "ucStatusPanel4";
-            this.ucStatusPanel4.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel4.Status = "探测器X:未连接";
-            this.ucStatusPanel4.TabIndex = 3;
-            // 
-            // ucStatusPanel5
-            // 
-            this.ucStatusPanel5.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel5.Id = 0;
-            this.ucStatusPanel5.Location = new System.Drawing.Point(0, 140);
-            this.ucStatusPanel5.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel5.Name = "ucStatusPanel5";
-            this.ucStatusPanel5.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel5.Status = "探测器X:未连接";
-            this.ucStatusPanel5.TabIndex = 4;
-            // 
-            // ucStatusPanel6
-            // 
-            this.ucStatusPanel6.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel6.Id = 0;
-            this.ucStatusPanel6.Location = new System.Drawing.Point(0, 175);
-            this.ucStatusPanel6.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel6.Name = "ucStatusPanel6";
-            this.ucStatusPanel6.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel6.Status = "探测器X:未连接";
-            this.ucStatusPanel6.TabIndex = 5;
-            // 
-            // ucStatusPanel7
-            // 
-            this.ucStatusPanel7.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel7.Id = 0;
-            this.ucStatusPanel7.Location = new System.Drawing.Point(0, 210);
-            this.ucStatusPanel7.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel7.Name = "ucStatusPanel7";
-            this.ucStatusPanel7.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel7.Status = "探测器X:未连接";
-            this.ucStatusPanel7.TabIndex = 6;
-            // 
-            // ucStatusPanel8
-            // 
-            this.ucStatusPanel8.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel8.Id = 0;
-            this.ucStatusPanel8.Location = new System.Drawing.Point(0, 245);
-            this.ucStatusPanel8.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel8.Name = "ucStatusPanel8";
-            this.ucStatusPanel8.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel8.Status = "探测器X:未连接";
-            this.ucStatusPanel8.TabIndex = 7;
-            // 
-            // ucStatusPanel9
-            // 
-            this.ucStatusPanel9.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel9.Id = 0;
-            this.ucStatusPanel9.Location = new System.Drawing.Point(0, 280);
-            this.ucStatusPanel9.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel9.Name = "ucStatusPanel9";
-            this.ucStatusPanel9.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel9.Status = "探测器X:未连接";
-            this.ucStatusPanel9.TabIndex = 8;
-            // 
-            // ucStatusPanel10
-            // 
-            this.ucStatusPanel10.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel10.Id = 0;
-            this.ucStatusPanel10.Location = new System.Drawing.Point(0, 315);
-            this.ucStatusPanel10.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel10.Name = "ucStatusPanel10";
-            this.ucStatusPanel10.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel10.Status = "探测器X:未连接";
-            this.ucStatusPanel10.TabIndex = 9;
-            // 
-            // ucStatusPanel11
-            // 
-            this.ucStatusPanel11.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel11.Id = 0;
-            this.ucStatusPanel11.Location = new System.Drawing.Point(0, 350);
-            this.ucStatusPanel11.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel11.Name = "ucStatusPanel11";
-            this.ucStatusPanel11.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel11.Status = "探测器X:未连接";
-            this.ucStatusPanel11.TabIndex = 10;
-            // 
-            // ucStatusPanel12
-            // 
-            this.ucStatusPanel12.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel12.Id = 0;
-            this.ucStatusPanel12.Location = new System.Drawing.Point(0, 385);
-            this.ucStatusPanel12.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel12.Name = "ucStatusPanel12";
-            this.ucStatusPanel12.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel12.Status = "探测器X:未连接";
-            this.ucStatusPanel12.TabIndex = 11;
-            // 
-            // ucStatusPanel13
-            // 
-            this.ucStatusPanel13.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel13.Id = 0;
-            this.ucStatusPanel13.Location = new System.Drawing.Point(0, 420);
-            this.ucStatusPanel13.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel13.Name = "ucStatusPanel13";
-            this.ucStatusPanel13.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel13.Status = "探测器X:未连接";
-            this.ucStatusPanel13.TabIndex = 12;
-            // 
-            // ucStatusPanel14
-            // 
-            this.ucStatusPanel14.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel14.Id = 0;
-            this.ucStatusPanel14.Location = new System.Drawing.Point(0, 455);
-            this.ucStatusPanel14.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel14.Name = "ucStatusPanel14";
-            this.ucStatusPanel14.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel14.Status = "探测器X:未连接";
-            this.ucStatusPanel14.TabIndex = 13;
-            // 
-            // ucStatusPanel15
-            // 
-            this.ucStatusPanel15.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel15.Id = 0;
-            this.ucStatusPanel15.Location = new System.Drawing.Point(0, 490);
-            this.ucStatusPanel15.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel15.Name = "ucStatusPanel15";
-            this.ucStatusPanel15.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel15.Status = "探测器X:未连接";
-            this.ucStatusPanel15.TabIndex = 14;
-            // 
-            // ucStatusPanel16
-            // 
-            this.ucStatusPanel16.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ucStatusPanel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucStatusPanel16.Id = 0;
-            this.ucStatusPanel16.Location = new System.Drawing.Point(0, 525);
-            this.ucStatusPanel16.Margin = new System.Windows.Forms.Padding(0);
-            this.ucStatusPanel16.Name = "ucStatusPanel16";
-            this.ucStatusPanel16.Size = new System.Drawing.Size(141, 33);
-            this.ucStatusPanel16.Status = "探测器X:未连接";
-            this.ucStatusPanel16.TabIndex = 15;
             // 
             // img
             // 
@@ -979,7 +646,7 @@
             // spcScreen.Panel2
             // 
             this.spcScreen.Panel2.Controls.Add(this.splitContainer2);
-            this.spcScreen.Size = new System.Drawing.Size(1113, 631);
+            this.spcScreen.Size = new System.Drawing.Size(1139, 631);
             this.spcScreen.SplitterDistance = 533;
             this.spcScreen.SplitterWidth = 1;
             this.spcScreen.TabIndex = 5;
@@ -1054,7 +721,7 @@
             this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.Size = new System.Drawing.Size(1113, 533);
+            this.tlpScreen.Size = new System.Drawing.Size(1139, 533);
             this.tlpScreen.TabIndex = 5;
             // 
             // ucPbx1
@@ -1077,7 +744,7 @@
             this.ucPbx2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx2.Id = 0;
-            this.ucPbx2.Location = new System.Drawing.Point(278, 0);
+            this.ucPbx2.Location = new System.Drawing.Point(284, 0);
             this.ucPbx2.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx2.Name = "ucPbx2";
             this.ucPbx2.Size = new System.Drawing.Size(278, 133);
@@ -1090,7 +757,7 @@
             this.ucPbx3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx3.Id = 0;
-            this.ucPbx3.Location = new System.Drawing.Point(556, 0);
+            this.ucPbx3.Location = new System.Drawing.Point(568, 0);
             this.ucPbx3.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx3.Name = "ucPbx3";
             this.ucPbx3.Size = new System.Drawing.Size(278, 133);
@@ -1103,7 +770,7 @@
             this.ucPbx4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx4.Id = 0;
-            this.ucPbx4.Location = new System.Drawing.Point(834, 0);
+            this.ucPbx4.Location = new System.Drawing.Point(852, 0);
             this.ucPbx4.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx4.Name = "ucPbx4";
             this.ucPbx4.Size = new System.Drawing.Size(279, 133);
@@ -1129,7 +796,7 @@
             this.ucPbx6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx6.Id = 0;
-            this.ucPbx6.Location = new System.Drawing.Point(278, 133);
+            this.ucPbx6.Location = new System.Drawing.Point(284, 133);
             this.ucPbx6.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx6.Name = "ucPbx6";
             this.ucPbx6.Size = new System.Drawing.Size(278, 133);
@@ -1142,7 +809,7 @@
             this.ucPbx7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx7.Id = 0;
-            this.ucPbx7.Location = new System.Drawing.Point(556, 133);
+            this.ucPbx7.Location = new System.Drawing.Point(568, 133);
             this.ucPbx7.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx7.Name = "ucPbx7";
             this.ucPbx7.Size = new System.Drawing.Size(278, 133);
@@ -1155,7 +822,7 @@
             this.ucPbx8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx8.Id = 0;
-            this.ucPbx8.Location = new System.Drawing.Point(834, 133);
+            this.ucPbx8.Location = new System.Drawing.Point(852, 133);
             this.ucPbx8.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx8.Name = "ucPbx8";
             this.ucPbx8.Size = new System.Drawing.Size(279, 133);
@@ -1181,7 +848,7 @@
             this.ucPbx10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx10.Id = 0;
-            this.ucPbx10.Location = new System.Drawing.Point(278, 266);
+            this.ucPbx10.Location = new System.Drawing.Point(284, 266);
             this.ucPbx10.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx10.Name = "ucPbx10";
             this.ucPbx10.Size = new System.Drawing.Size(278, 133);
@@ -1194,7 +861,7 @@
             this.ucPbx11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx11.Id = 0;
-            this.ucPbx11.Location = new System.Drawing.Point(556, 266);
+            this.ucPbx11.Location = new System.Drawing.Point(568, 266);
             this.ucPbx11.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx11.Name = "ucPbx11";
             this.ucPbx11.Size = new System.Drawing.Size(278, 133);
@@ -1207,7 +874,7 @@
             this.ucPbx12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx12.Id = 0;
-            this.ucPbx12.Location = new System.Drawing.Point(834, 266);
+            this.ucPbx12.Location = new System.Drawing.Point(852, 266);
             this.ucPbx12.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx12.Name = "ucPbx12";
             this.ucPbx12.Size = new System.Drawing.Size(279, 133);
@@ -1233,7 +900,7 @@
             this.ucPbx14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx14.Id = 0;
-            this.ucPbx14.Location = new System.Drawing.Point(278, 399);
+            this.ucPbx14.Location = new System.Drawing.Point(284, 399);
             this.ucPbx14.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx14.Name = "ucPbx14";
             this.ucPbx14.Size = new System.Drawing.Size(278, 134);
@@ -1246,7 +913,7 @@
             this.ucPbx15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx15.Id = 0;
-            this.ucPbx15.Location = new System.Drawing.Point(556, 399);
+            this.ucPbx15.Location = new System.Drawing.Point(568, 399);
             this.ucPbx15.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx15.Name = "ucPbx15";
             this.ucPbx15.Size = new System.Drawing.Size(278, 134);
@@ -1259,7 +926,7 @@
             this.ucPbx16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ucPbx16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucPbx16.Id = 0;
-            this.ucPbx16.Location = new System.Drawing.Point(834, 399);
+            this.ucPbx16.Location = new System.Drawing.Point(852, 399);
             this.ucPbx16.Margin = new System.Windows.Forms.Padding(0);
             this.ucPbx16.Name = "ucPbx16";
             this.ucPbx16.Size = new System.Drawing.Size(279, 134);
@@ -1278,8 +945,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dgvError);
-            this.splitContainer2.Size = new System.Drawing.Size(1113, 97);
-            this.splitContainer2.SplitterDistance = 555;
+            this.splitContainer2.Size = new System.Drawing.Size(1139, 97);
+            this.splitContainer2.SplitterDistance = 567;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -1306,7 +973,7 @@
             this.dgvWarning.Location = new System.Drawing.Point(0, 0);
             this.dgvWarning.Name = "dgvWarning";
             this.dgvWarning.RowTemplate.Height = 23;
-            this.dgvWarning.Size = new System.Drawing.Size(555, 97);
+            this.dgvWarning.Size = new System.Drawing.Size(567, 97);
             this.dgvWarning.TabIndex = 0;
             // 
             // dataGridViewTextBoxColumn1
@@ -1352,7 +1019,7 @@
             this.dgvError.Location = new System.Drawing.Point(0, 0);
             this.dgvError.Name = "dgvError";
             this.dgvError.RowTemplate.Height = 23;
-            this.dgvError.Size = new System.Drawing.Size(557, 97);
+            this.dgvError.Size = new System.Drawing.Size(571, 97);
             this.dgvError.TabIndex = 0;
             // 
             // Column1
@@ -1508,14 +1175,6 @@
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.spcRunningStatus.Panel1.ResumeLayout(false);
-            this.spcRunningStatus.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.spcRunningStatus)).EndInit();
-            this.spcRunningStatus.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.tlpRunningStatus.ResumeLayout(false);
             this.spcScreen.Panel1.ResumeLayout(false);
             this.spcScreen.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcScreen)).EndInit();
@@ -1557,13 +1216,9 @@
         private System.Windows.Forms.SplitContainer spcMain;
         private System.Windows.Forms.TabControl tabMain;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ImageList img;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnAddSensor;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
@@ -1623,25 +1278,8 @@
         private System.Windows.Forms.ToolStripMenuItem 历史数据ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 实时数据ToolStripMenuItem;
         private System.Windows.Forms.SplitContainer spcSensorConfig;
-        private System.Windows.Forms.SplitContainer spcRunningStatus;
-        private System.Windows.Forms.TableLayoutPanel tlpRunningStatus;
-        private UCStatusPanel ucStatusPanel1;
-        private UCStatusPanel ucStatusPanel2;
-        private UCStatusPanel ucStatusPanel3;
-        private UCStatusPanel ucStatusPanel4;
-        private UCStatusPanel ucStatusPanel5;
-        private UCStatusPanel ucStatusPanel6;
-        private UCStatusPanel ucStatusPanel7;
-        private UCStatusPanel ucStatusPanel8;
-        private UCStatusPanel ucStatusPanel9;
-        private UCStatusPanel ucStatusPanel10;
-        private UCStatusPanel ucStatusPanel11;
-        private UCStatusPanel ucStatusPanel12;
-        private UCStatusPanel ucStatusPanel13;
-        private UCStatusPanel ucStatusPanel14;
-        private UCStatusPanel ucStatusPanel15;
-        private UCStatusPanel ucStatusPanel16;
         private System.Windows.Forms.ToolStripMenuItem 配置IPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 清空数据库ToolStripMenuItem;
     }
 }
 

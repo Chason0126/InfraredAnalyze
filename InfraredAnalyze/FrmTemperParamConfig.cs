@@ -278,6 +278,7 @@ namespace InfraredAnalyze
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerSpot_" + j + "", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeSpot_" + j + "", false)[0])).SelectedIndex;
                             DMSDK.DM_SetAlarmInfo(tempOperateIntptr, i, j + 1, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测温点 编号+1 从1开始算
+                            sqlCreate.Update_Alarmconfig(cameraId, "S" + (j + 1), AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));//向数据库写入 告警设置信息 供 判断告警时使用
                             break;
                         case 2://设置区域温度告警
                             AlarmType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmTypeArea_" + j + "", false)[0])).SelectedIndex;
@@ -286,6 +287,7 @@ namespace InfraredAnalyze
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerArea_" + j + "", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeArea_" + j + "", false)[0])).SelectedIndex;
                             DMSDK.DM_SetAlarmInfo(tempOperateIntptr, i, j + 5, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测区域 编号 +5 从6开始算起
+                            sqlCreate.Update_Alarmconfig(cameraId, "A" + (j + 5), AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));
                             break;
                         case 1://设置线 温度告警
                             AlarmType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmTypeLine_1", false)[0])).SelectedIndex;
@@ -294,6 +296,7 @@ namespace InfraredAnalyze
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerLine_1", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeLine_1", false)[0])).SelectedIndex;
                             DMSDK.DM_SetAlarmInfo(tempOperateIntptr, i, j, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测温线  仅一条
+                            sqlCreate.Update_Alarmconfig(cameraId, "L1", AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));
                             break;
                     }
                 }
@@ -1150,7 +1153,7 @@ namespace InfraredAnalyze
 
         #endregion
 
-        private void btnClearAll_Click(object sender, EventArgs e)
+        private void btnClearAll_Click(object sender, EventArgs e)//全部清除 测温目标
         {
             DMSDK.DM_ClearAllArea(tempOperateIntptr);
             DMSDK.DM_ClearAllLine(tempOperateIntptr);

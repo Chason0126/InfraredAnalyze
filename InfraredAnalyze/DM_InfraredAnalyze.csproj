@@ -223,12 +223,6 @@
     <Compile Include="UCPictureBox.Designer.cs">
       <DependentUpon>UCPictureBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCStatusPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCStatusPanel.Designer.cs">
-      <DependentUpon>UCStatusPanel.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="FrmAddIPCamera.resx">
       <DependentUpon>FrmAddIPCamera.cs</DependentUpon>
     </EmbeddedResource>
@@ -289,9 +283,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCPictureBox.resx">
       <DependentUpon>UCPictureBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCStatusPanel.resx">
-      <DependentUpon>UCStatusPanel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

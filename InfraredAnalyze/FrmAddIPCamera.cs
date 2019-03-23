@@ -20,6 +20,8 @@ namespace InfraredAnalyze
 
         SqlCreate sqlCreate = new SqlCreate();
         private int num;
+        private string iP;
+        private string cameraName;
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -37,8 +39,9 @@ namespace InfraredAnalyze
         }
 
         Point point;
-
         public int Num { get => num; set => num = value; }
+        public string IP { get => iP; set => iP = value; }
+        public string CameraName { get => cameraName; set => cameraName = value; }
 
         private void pnlHeader_MouseDown(object sender, MouseEventArgs e)
         {
@@ -75,36 +78,46 @@ namespace InfraredAnalyze
             }
         }
 
-        private void btnConfirm_Click(object sender, EventArgs e)//确认添加
+        private void btnConfirm_Click(object sender, EventArgs e)//确认设置
         {
             try
             {
                 string CameraName = tbxCameraName.Text;
-                int CameraId = num + 1;
                 string IPAddress = ipAddressText.IPAdd.ToString();
-                int Port = 5000;
-                int NodeID = num + 1;
                 string Remarks = tbxRemarks.Text;
                 bool Enable = false;
                 if (rdbEnable.Checked == true)
                 {
                     Enable = true;
                 }
-                sqlCreate.Insert_SMInfraredAnalyze(CameraId, CameraName, IPAddress, Port, NodeID, Remarks, Enable);
+                sqlCreate.UpDate_CameraEnable(num, Remarks, Enable);
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+           if(MessageBox.Show("设置完成") == DialogResult.OK)
+           {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+           }
         }
 
+        int tempOperateIntptr;
         private void FrmAddIPCamera_Load(object sender, EventArgs e)
         {
-            int count = num + 1;
-            label7.Text = "(编号：" + count + ")";
-            tbxCameraName.Text = "探测器" + count;
+            tempOperateIntptr = DMSDK.DM_Connect(tbxCameraName.Handle, iP, 80);
+            if (tempOperateIntptr <= 0)
+            {
+                MessageBox.Show("设备连接失败！请检查后重试！");
+                this.Close();
+                this.Dispose();
+            }
+            label7.Text = "(编号：" + num + ")";
+            tbxCameraName.Text = cameraName;
+            ipAddressText.tbx4.Text = num.ToString();
+
+
         }
     }
 }

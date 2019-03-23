@@ -46,7 +46,7 @@ namespace InfraredAnalyze
                     structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
                     tempMessage = (DMSDK.tagTempMessage)TemperDataArrList[0];
                     int handle = tempMessage.handle;
-                    arrayList = sqlCreate.Select_SMInfraredConfig(tempMessage.dvrIP);//根据IP地址判断 
+                    arrayList = sqlCreate.Select_SMInfraredConfig(tempMessage.dvrIP);//根据IP地址判断 插入哪个数据库
                     structIAnalyzeConfig = (StaticClass.StructIAnalyzeConfig)arrayList[0];
                     int CameraID = structIAnalyzeConfig.CameraID;
                     for (int i=0;i<tempMessage.len;i++)
