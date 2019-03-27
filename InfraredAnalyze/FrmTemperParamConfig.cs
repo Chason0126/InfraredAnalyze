@@ -42,7 +42,7 @@ namespace InfraredAnalyze
         int AlarmMessageType;
         Point[] points = new Point[2];
         Point[] pointss = new Point[8];
-        private DMSDK.fMessCallBack fMessCallBack;//回调函数实例
+        //private DMSDK.fMessCallBack fMessCallBack;//回调函数实例
         public int CameraId { get => cameraId; set => cameraId = value; }
         public string Ip { get => ip; set => ip = value; }
 
@@ -72,9 +72,9 @@ namespace InfraredAnalyze
             }
             else
             {
-                fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
-                DMSDK.DM_GetTemp(tempOperateIntptr, 0);//获取所有的测温目标的测温结果
-                DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
+                //fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
+                //DMSDK.DM_GetTemp(tempOperateIntptr, 0);//获取所有的测温目标的测温结果
+                //DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
                 GetAlarmParam();
                 Get_Area_Param();
             }

@@ -111,7 +111,7 @@ namespace InfraredAnalyze
                 cmd.ExecuteNonQuery();
                 cmd = new SqlCommand("create table TemperData(CameraId int,IPAddress varchar(15),DateTime datetime,Type int,Number int,Temper decimal,Status  nvarchar(MAX))", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("create table AlarmConfig(Type nvarchar(MAX),Spark int,AlarmTemper decimal,Enable bit)", con_DB);
+                cmd = new SqlCommand("create table AlarmConfig(AreaId int,Type nvarchar(MAX),Spark int,AlarmTemper decimal,Enable bit)", con_DB);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -169,21 +169,21 @@ namespace InfraredAnalyze
                 cmd.ExecuteNonQuery();
                 cmd = new SqlCommand("insert into TemperArea(Type,X1,Y1,X2,Y2,Emiss,MeasureType) values ('A8','0','0','0','0','90','-1')", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("insert into AlarmConfig(Type,Spark,AlarmTemper,Enable) values ('L1','0','50','0')", con_DB);
+                cmd = new SqlCommand("insert into AlarmConfig(AreaId,Type,Spark,AlarmTemper,Enable) values ('1','L1','0','50','0')", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("insert into AlarmConfig(Type,Spark,AlarmTemper,Enable) values ('S2','0','50','0')", con_DB);
+                cmd = new SqlCommand("insert into AlarmConfig(AreaId,Type,Spark,AlarmTemper,Enable) values ('2','S2','0','50','0')", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("insert into AlarmConfig(Type,Spark,AlarmTemper,Enable) values ('S3','0','50','0')", con_DB);
+                cmd = new SqlCommand("insert into AlarmConfig(AreaId,Type,Spark,AlarmTemper,Enable) values ('3','S3','0','50','0')", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("insert into AlarmConfig(Type,Spark,AlarmTemper,Enable) values ('S4','0','50','0')", con_DB);
+                cmd = new SqlCommand("insert into AlarmConfig(AreaId,Type,Spark,AlarmTemper,Enable) values ('4','S4','0','50','0')", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("insert into AlarmConfig(Type,Spark,AlarmTemper,Enable) values ('S5','0','50','0')", con_DB);
+                cmd = new SqlCommand("insert into AlarmConfig(AreaId,Type,Spark,AlarmTemper,Enable) values ('5','S5','0','50','0')", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("insert into AlarmConfig(Type,Spark,AlarmTemper,Enable) values ('A6','0','50','0')", con_DB);
+                cmd = new SqlCommand("insert into AlarmConfig(AreaId,Type,Spark,AlarmTemper,Enable) values ('6','A6','0','50','0')", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("insert into AlarmConfig(Type,Spark,AlarmTemper,Enable) values ('A7','0','50','0')", con_DB);
+                cmd = new SqlCommand("insert into AlarmConfig(AreaId,Type,Spark,AlarmTemper,Enable) values ('7','A7','0','50','0')", con_DB);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand("insert into AlarmConfig(Type,Spark,AlarmTemper,Enable) values ('A8','0','50','0')", con_DB);
+                cmd = new SqlCommand("insert into AlarmConfig(AreaId,Type,Spark,AlarmTemper,Enable) values ('8','A8','0','50','0')", con_DB);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -227,7 +227,7 @@ namespace InfraredAnalyze
         public ArrayList Select_All_SMInfraredConfig()//按nodeid降序排列
         {
             ArrayList arrayList = new ArrayList();
-            StaticClass.StructIAnalyzeConfig structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
+            StructClass.StructIAnalyzeConfig structIAnalyzeConfig = new StructClass.StructIAnalyzeConfig();
             try
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
@@ -260,7 +260,7 @@ namespace InfraredAnalyze
         public ArrayList Select_SMInfraredConfig(int CameraID)//按CameraIp查找相机信息。
         {
             ArrayList arrayList = new ArrayList();
-            StaticClass.StructIAnalyzeConfig structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
+            StructClass.StructIAnalyzeConfig structIAnalyzeConfig = new StructClass.StructIAnalyzeConfig();
             try
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
@@ -294,7 +294,7 @@ namespace InfraredAnalyze
         public ArrayList Select_SMInfraredConfig(string IP)//按CameraIp查找相机信息。
         {
             ArrayList arrayList = new ArrayList();
-            StaticClass.StructIAnalyzeConfig structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
+            StructClass.StructIAnalyzeConfig structIAnalyzeConfig = new StructClass.StructIAnalyzeConfig();
             try
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
@@ -821,11 +821,63 @@ namespace InfraredAnalyze
             }
         }
 
-        StaticClass.StructTemperData temperData;
+
+        //public StructClass.StructDataFilter Select_TemperData_Top1(int CameraId,int num)
+        //{
+        //    StructClass.StructDataFilter structDataFilter = new StructClass.StructDataFilter();
+        //    try
+        //    {
+        //        con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+        //        con_DB.Open();
+        //        cmd = new SqlCommand("select top 1 * from TemperData order by datetime desc ", con_DB);
+        //        SqlDataReader sqlDataReader = cmd.ExecuteReader();
+        //        while (sqlDataReader.Read())
+        //        {
+        //            structDataFilter.dateTime = (DateTime)sqlDataReader.GetValue(2);
+        //            structDataFilter.num = (int)sqlDataReader.GetValue(4);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("一秒钟一次：" + CameraId + ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        con_DB.Close();
+        //    }
+        //    return structDataFilter;
+        //}
+
+        public DateTime Select_TemperData_Top1(int CameraId, int num)
+        {
+            DateTime dateTime = new DateTime();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
+                con_DB.Open();
+                cmd = new SqlCommand("select top 1 * from TemperData where number ='" + num + "' order by datetime desc ", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    dateTime = (DateTime)sqlDataReader.GetValue(2);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("根据时间判断插入频率：" + CameraId + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return dateTime;
+        }
+
+        StructClass.StructTemperData temperData;
         public  ArrayList Select_TemperData(int CameraId,DateTime StartdateTime,DateTime EnddateTime)
         {
             ArrayList arrayList = new ArrayList();
-            temperData = new StaticClass.StructTemperData();
+            temperData = new StructClass.StructTemperData();
             try
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
@@ -858,7 +910,7 @@ namespace InfraredAnalyze
         public ArrayList Select_TemperData(int CameraId,int type,int number, DateTime StartdateTime, DateTime EnddateTime)
         {
             ArrayList arrayList = new ArrayList();
-            temperData = new StaticClass.StructTemperData();
+            temperData = new StructClass.StructTemperData();
             try
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
@@ -922,7 +974,7 @@ namespace InfraredAnalyze
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
                 con_DB.Open();
-                cmd = new SqlCommand("update AlarmConfig set Spark='" + spark + "',AlarmTemper='" + alarmtemper + "', Enalbe='" + enable + "' where Type='" + type + "'", con_DB);
+                cmd = new SqlCommand("update AlarmConfig set Spark='" + spark + "',AlarmTemper='" + alarmtemper + "', Enable='" + enable + "' where Type='" + type + "'", con_DB);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -935,31 +987,35 @@ namespace InfraredAnalyze
             }
         }
 
-        public StaticClass.StructAlarm Select_AlarmConfig(int CameraId)//根据CameraID返回 该相机设置的报警信息
+        StructClass.StructAlarm structAlarm;
+        StructClass.StructAlarmconfig structAlarmconfig;
+        StructClass.StructAlarmconfig[] structAlarmconfigs;
+        public StructClass.StructAlarm Select_AlarmConfig(int CameraId)//根据CameraID返回 该相机设置的报警信息
         {
-            StaticClass.StructAlarm structAlarm = new StaticClass.StructAlarm();
+            structAlarm = new StructClass.StructAlarm();
+            structAlarmconfigs = new StructClass.StructAlarmconfig[8];
+            structAlarm.structAlarmconfigs = structAlarmconfigs;
             structAlarm.CameraId = CameraId;
-            StaticClass.StructAlarmconfig structAlarmconfig = new StaticClass.StructAlarmconfig();
             try
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
                 con_DB.Open();
-                cmd = new SqlCommand("select *  from AlarmConfig", con_DB);
+                cmd = new SqlCommand("select *  from AlarmConfig order by AreaId", con_DB);
                 SqlDataReader sqlDataReader = cmd.ExecuteReader();
                 int i = 0;
-                while (sqlDataReader.Read())
+                while (sqlDataReader.Read())//每个探测器8个数据
                 {
-                    structAlarmconfig.AreaType = (string)sqlDataReader.GetValue(0);
-                    structAlarmconfig.Spark = (int)sqlDataReader.GetValue(1);
-                    structAlarmconfig.AlarmTemper = (int)sqlDataReader.GetValue(2);
-                    structAlarmconfig.Enable = (bool)sqlDataReader.GetValue(3);
+                    structAlarmconfig.AreaType = (int)sqlDataReader.GetValue(0);
+                    structAlarmconfig.Spark = (int)sqlDataReader.GetValue(2);
+                    structAlarmconfig.AlarmTemper = Convert.ToInt32(sqlDataReader.GetValue(3));
+                    structAlarmconfig.Enable = (bool)sqlDataReader.GetValue(4);
                     structAlarm.structAlarmconfigs[i] = structAlarmconfig;
                     i++;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("报警参数数据库插入异常：" + ex.Message);
+                MessageBox.Show("读取报警参数数据库异常：" + ex.Message);
             }
             finally
             {

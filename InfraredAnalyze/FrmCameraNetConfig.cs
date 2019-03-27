@@ -63,7 +63,7 @@ namespace InfraredAnalyze
             GateWay = new StringBuilder();
             if (arrayList.Count > 0)
             {
-                StaticClass.StructIAnalyzeConfig structSM7003Tag = (StaticClass.StructIAnalyzeConfig)arrayList[0];
+                StructClass.StructIAnalyzeConfig structSM7003Tag = (StructClass.StructIAnalyzeConfig)arrayList[0];
                 string[] str = structSM7003Tag.IP.Split('.');
                 IPAddressIP.tbx1.Text = str[0];
                 IPAddressIP.tbx2.Text = str[1];

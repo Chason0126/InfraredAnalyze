@@ -211,6 +211,7 @@
     <Compile Include="IpAddressTextBox.Designer.cs">
       <DependentUpon>IpAddressTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="StructClass.cs" />
     <Compile Include="UCPbx.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -435,6 +436,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\灯光.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\红灯光.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黄灯光.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

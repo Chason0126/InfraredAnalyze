@@ -35,7 +35,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.ss = new System.Windows.Forms.StatusStrip();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblLogo = new System.Windows.Forms.Label();
             this.pbxLogo = new System.Windows.Forms.PictureBox();
@@ -61,7 +64,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnPwd = new System.Windows.Forms.Button();
             this.btnCameraConfig = new System.Windows.Forms.Button();
-            this.btnDisConnect = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             this.spcMain = new System.Windows.Forms.SplitContainer();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -81,22 +84,6 @@
             this.cmsShowNum_3 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsShowNum_4 = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpScreen = new System.Windows.Forms.TableLayoutPanel();
-            this.ucPbx1 = new InfraredAnalyze.UCPbx();
-            this.ucPbx2 = new InfraredAnalyze.UCPbx();
-            this.ucPbx3 = new InfraredAnalyze.UCPbx();
-            this.ucPbx4 = new InfraredAnalyze.UCPbx();
-            this.ucPbx5 = new InfraredAnalyze.UCPbx();
-            this.ucPbx6 = new InfraredAnalyze.UCPbx();
-            this.ucPbx7 = new InfraredAnalyze.UCPbx();
-            this.ucPbx8 = new InfraredAnalyze.UCPbx();
-            this.ucPbx9 = new InfraredAnalyze.UCPbx();
-            this.ucPbx10 = new InfraredAnalyze.UCPbx();
-            this.ucPbx11 = new InfraredAnalyze.UCPbx();
-            this.ucPbx12 = new InfraredAnalyze.UCPbx();
-            this.ucPbx13 = new InfraredAnalyze.UCPbx();
-            this.ucPbx14 = new InfraredAnalyze.UCPbx();
-            this.ucPbx15 = new InfraredAnalyze.UCPbx();
-            this.ucPbx16 = new InfraredAnalyze.UCPbx();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvWarning = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -120,6 +107,29 @@
             this.图像设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.历史数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.实时数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pnlBottom = new System.Windows.Forms.Panel();
+            this.lblErrCount = new System.Windows.Forms.Label();
+            this.lblFireCount = new System.Windows.Forms.Label();
+            this.pbxErrCount = new System.Windows.Forms.PictureBox();
+            this.pbxFireCount = new System.Windows.Forms.PictureBox();
+            this.ucPbx1 = new InfraredAnalyze.UCPbx();
+            this.ucPbx2 = new InfraredAnalyze.UCPbx();
+            this.ucPbx3 = new InfraredAnalyze.UCPbx();
+            this.ucPbx4 = new InfraredAnalyze.UCPbx();
+            this.ucPbx5 = new InfraredAnalyze.UCPbx();
+            this.ucPbx6 = new InfraredAnalyze.UCPbx();
+            this.ucPbx7 = new InfraredAnalyze.UCPbx();
+            this.ucPbx8 = new InfraredAnalyze.UCPbx();
+            this.ucPbx9 = new InfraredAnalyze.UCPbx();
+            this.ucPbx10 = new InfraredAnalyze.UCPbx();
+            this.ucPbx11 = new InfraredAnalyze.UCPbx();
+            this.ucPbx12 = new InfraredAnalyze.UCPbx();
+            this.ucPbx13 = new InfraredAnalyze.UCPbx();
+            this.ucPbx14 = new InfraredAnalyze.UCPbx();
+            this.ucPbx15 = new InfraredAnalyze.UCPbx();
+            this.ucPbx16 = new InfraredAnalyze.UCPbx();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.mnsMeuns.SuspendLayout();
@@ -149,31 +159,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarning)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvError)).BeginInit();
             this.cmsIPCameraConfig.SuspendLayout();
+            this.pnlBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxErrCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFireCount)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ss
-            // 
-            this.ss.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ss.Location = new System.Drawing.Point(0, 756);
-            this.ss.Name = "ss";
-            this.ss.Size = new System.Drawing.Size(1273, 22);
-            this.ss.SizingGrip = false;
-            this.ss.TabIndex = 0;
-            this.ss.Text = "statusStrip1";
             // 
             // pnlHeader
             // 
-            this.pnlHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlHeader.BackColor = System.Drawing.Color.SteelBlue;
             this.pnlHeader.Controls.Add(this.lblLogo);
             this.pnlHeader.Controls.Add(this.pbxLogo);
             this.pnlHeader.Controls.Add(this.btnMin);
             this.pnlHeader.Controls.Add(this.btnWindow);
             this.pnlHeader.Controls.Add(this.btnClose);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(1273, 35);
+            this.pnlHeader.Size = new System.Drawing.Size(1250, 35);
             this.pnlHeader.TabIndex = 1;
             this.pnlHeader.DoubleClick += new System.EventHandler(this.pnlHeader_DoubleClick);
             this.pnlHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseDown);
@@ -208,7 +210,7 @@
             this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnMin.FlatAppearance.BorderSize = 0;
             this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMin.Location = new System.Drawing.Point(1168, 0);
+            this.btnMin.Location = new System.Drawing.Point(1141, 0);
             this.btnMin.Name = "btnMin";
             this.btnMin.Size = new System.Drawing.Size(35, 35);
             this.btnMin.TabIndex = 0;
@@ -224,7 +226,7 @@
             this.btnWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnWindow.FlatAppearance.BorderSize = 0;
             this.btnWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWindow.Location = new System.Drawing.Point(1203, 0);
+            this.btnWindow.Location = new System.Drawing.Point(1176, 0);
             this.btnWindow.Name = "btnWindow";
             this.btnWindow.Size = new System.Drawing.Size(35, 35);
             this.btnWindow.TabIndex = 0;
@@ -241,7 +243,7 @@
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(1238, 0);
+            this.btnClose.Location = new System.Drawing.Point(1211, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 35);
             this.btnClose.TabIndex = 0;
@@ -366,19 +368,21 @@
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 980F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1210F));
             this.tlpTools.Controls.Add(this.btnFullScreen, 0, 0);
             this.tlpTools.Controls.Add(this.button2, 1, 0);
             this.tlpTools.Controls.Add(this.btnStart, 2, 0);
             this.tlpTools.Controls.Add(this.btnPwd, 3, 0);
             this.tlpTools.Controls.Add(this.btnCameraConfig, 4, 0);
-            this.tlpTools.Controls.Add(this.btnDisConnect, 5, 0);
+            this.tlpTools.Controls.Add(this.btnReset, 5, 0);
             this.tlpTools.Location = new System.Drawing.Point(0, 64);
+            this.tlpTools.Margin = new System.Windows.Forms.Padding(0);
             this.tlpTools.Name = "tlpTools";
             this.tlpTools.RowCount = 1;
             this.tlpTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpTools.Size = new System.Drawing.Size(1273, 50);
+            this.tlpTools.Size = new System.Drawing.Size(1249, 50);
             this.tlpTools.TabIndex = 6;
+            this.tlpTools.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpTools_Paint);
             // 
             // btnFullScreen
             // 
@@ -392,6 +396,7 @@
             this.btnFullScreen.Size = new System.Drawing.Size(42, 40);
             this.btnFullScreen.TabIndex = 7;
             this.btnFullScreen.UseVisualStyleBackColor = true;
+            this.btnFullScreen.Click += new System.EventHandler(this.btnFullScreen_Click);
             // 
             // button2
             // 
@@ -449,20 +454,20 @@
             this.btnCameraConfig.UseVisualStyleBackColor = true;
             this.btnCameraConfig.Click += new System.EventHandler(this.btnCameraConfig_Click);
             // 
-            // btnDisConnect
+            // btnReset
             // 
-            this.btnDisConnect.BackgroundImage = global::InfraredAnalyze.Properties.Resources.disconnect;
-            this.btnDisConnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDisConnect.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnDisConnect.Enabled = false;
-            this.btnDisConnect.FlatAppearance.BorderSize = 0;
-            this.btnDisConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDisConnect.Location = new System.Drawing.Point(255, 5);
-            this.btnDisConnect.Name = "btnDisConnect";
-            this.btnDisConnect.Size = new System.Drawing.Size(40, 40);
-            this.btnDisConnect.TabIndex = 8;
-            this.btnDisConnect.UseVisualStyleBackColor = true;
-            this.btnDisConnect.MouseEnter += new System.EventHandler(this.btnDisConnect_MouseEnter);
+            this.btnReset.BackgroundImage = global::InfraredAnalyze.Properties.Resources.refresh;
+            this.btnReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Location = new System.Drawing.Point(255, 5);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(40, 40);
+            this.btnReset.TabIndex = 8;
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.btnReset.MouseEnter += new System.EventHandler(this.btnReset_MouseEnter);
             // 
             // spcMain
             // 
@@ -481,8 +486,8 @@
             // 
             this.spcMain.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.spcMain.Panel2.Controls.Add(this.spcScreen);
-            this.spcMain.Size = new System.Drawing.Size(1273, 633);
-            this.spcMain.SplitterDistance = 131;
+            this.spcMain.Size = new System.Drawing.Size(1250, 611);
+            this.spcMain.SplitterDistance = 128;
             this.spcMain.SplitterWidth = 1;
             this.spcMain.TabIndex = 7;
             // 
@@ -495,7 +500,7 @@
             this.tabMain.Margin = new System.Windows.Forms.Padding(2);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(129, 631);
+            this.tabMain.Size = new System.Drawing.Size(126, 609);
             this.tabMain.TabIndex = 0;
             // 
             // tabPage1
@@ -505,7 +510,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(121, 600);
+            this.tabPage1.Size = new System.Drawing.Size(118, 578);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -525,8 +530,8 @@
             // spcSensorConfig.Panel2
             // 
             this.spcSensorConfig.Panel2.Controls.Add(this.panel3);
-            this.spcSensorConfig.Size = new System.Drawing.Size(121, 600);
-            this.spcSensorConfig.SplitterDistance = 269;
+            this.spcSensorConfig.Size = new System.Drawing.Size(118, 578);
+            this.spcSensorConfig.SplitterDistance = 257;
             this.spcSensorConfig.TabIndex = 0;
             // 
             // tvwSensor
@@ -554,7 +559,7 @@
             treeNode2,
             treeNode3});
             this.tvwSensor.SelectedImageIndex = 0;
-            this.tvwSensor.Size = new System.Drawing.Size(121, 241);
+            this.tvwSensor.Size = new System.Drawing.Size(118, 229);
             this.tvwSensor.TabIndex = 0;
             this.tvwSensor.DoubleClick += new System.EventHandler(this.tvwSensor_DoubleClick);
             this.tvwSensor.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvwSensor_MouseDown);
@@ -572,7 +577,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(121, 28);
+            this.panel1.Size = new System.Drawing.Size(118, 28);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -595,7 +600,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(121, 28);
+            this.panel3.Size = new System.Drawing.Size(118, 28);
             this.panel3.TabIndex = 2;
             // 
             // button1
@@ -635,6 +640,7 @@
             // 
             this.spcScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spcScreen.Location = new System.Drawing.Point(0, 0);
+            this.spcScreen.Margin = new System.Windows.Forms.Padding(0);
             this.spcScreen.Name = "spcScreen";
             this.spcScreen.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -646,8 +652,8 @@
             // spcScreen.Panel2
             // 
             this.spcScreen.Panel2.Controls.Add(this.splitContainer2);
-            this.spcScreen.Size = new System.Drawing.Size(1139, 631);
-            this.spcScreen.SplitterDistance = 533;
+            this.spcScreen.Size = new System.Drawing.Size(1119, 609);
+            this.spcScreen.SplitterDistance = 504;
             this.spcScreen.SplitterWidth = 1;
             this.spcScreen.TabIndex = 5;
             // 
@@ -721,216 +727,8 @@
             this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpScreen.Size = new System.Drawing.Size(1139, 533);
+            this.tlpScreen.Size = new System.Drawing.Size(1119, 504);
             this.tlpScreen.TabIndex = 5;
-            // 
-            // ucPbx1
-            // 
-            this.ucPbx1.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.nopicture;
-            this.ucPbx1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx1.Id = 0;
-            this.ucPbx1.Location = new System.Drawing.Point(0, 0);
-            this.ucPbx1.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx1.Name = "ucPbx1";
-            this.ucPbx1.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx1.TabIndex = 0;
-            // 
-            // ucPbx2
-            // 
-            this.ucPbx2.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx2.BackgroundImage")));
-            this.ucPbx2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx2.Id = 0;
-            this.ucPbx2.Location = new System.Drawing.Point(284, 0);
-            this.ucPbx2.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx2.Name = "ucPbx2";
-            this.ucPbx2.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx2.TabIndex = 1;
-            // 
-            // ucPbx3
-            // 
-            this.ucPbx3.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx3.BackgroundImage")));
-            this.ucPbx3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx3.Id = 0;
-            this.ucPbx3.Location = new System.Drawing.Point(568, 0);
-            this.ucPbx3.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx3.Name = "ucPbx3";
-            this.ucPbx3.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx3.TabIndex = 2;
-            // 
-            // ucPbx4
-            // 
-            this.ucPbx4.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx4.BackgroundImage")));
-            this.ucPbx4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx4.Id = 0;
-            this.ucPbx4.Location = new System.Drawing.Point(852, 0);
-            this.ucPbx4.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx4.Name = "ucPbx4";
-            this.ucPbx4.Size = new System.Drawing.Size(279, 133);
-            this.ucPbx4.TabIndex = 3;
-            // 
-            // ucPbx5
-            // 
-            this.ucPbx5.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx5.BackgroundImage")));
-            this.ucPbx5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx5.Id = 0;
-            this.ucPbx5.Location = new System.Drawing.Point(0, 133);
-            this.ucPbx5.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx5.Name = "ucPbx5";
-            this.ucPbx5.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx5.TabIndex = 4;
-            // 
-            // ucPbx6
-            // 
-            this.ucPbx6.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx6.BackgroundImage")));
-            this.ucPbx6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx6.Id = 0;
-            this.ucPbx6.Location = new System.Drawing.Point(284, 133);
-            this.ucPbx6.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx6.Name = "ucPbx6";
-            this.ucPbx6.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx6.TabIndex = 5;
-            // 
-            // ucPbx7
-            // 
-            this.ucPbx7.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx7.BackgroundImage")));
-            this.ucPbx7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx7.Id = 0;
-            this.ucPbx7.Location = new System.Drawing.Point(568, 133);
-            this.ucPbx7.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx7.Name = "ucPbx7";
-            this.ucPbx7.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx7.TabIndex = 6;
-            // 
-            // ucPbx8
-            // 
-            this.ucPbx8.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx8.BackgroundImage")));
-            this.ucPbx8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx8.Id = 0;
-            this.ucPbx8.Location = new System.Drawing.Point(852, 133);
-            this.ucPbx8.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx8.Name = "ucPbx8";
-            this.ucPbx8.Size = new System.Drawing.Size(279, 133);
-            this.ucPbx8.TabIndex = 7;
-            // 
-            // ucPbx9
-            // 
-            this.ucPbx9.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx9.BackgroundImage")));
-            this.ucPbx9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx9.Id = 0;
-            this.ucPbx9.Location = new System.Drawing.Point(0, 266);
-            this.ucPbx9.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx9.Name = "ucPbx9";
-            this.ucPbx9.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx9.TabIndex = 8;
-            // 
-            // ucPbx10
-            // 
-            this.ucPbx10.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx10.BackgroundImage")));
-            this.ucPbx10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx10.Id = 0;
-            this.ucPbx10.Location = new System.Drawing.Point(284, 266);
-            this.ucPbx10.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx10.Name = "ucPbx10";
-            this.ucPbx10.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx10.TabIndex = 9;
-            // 
-            // ucPbx11
-            // 
-            this.ucPbx11.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx11.BackgroundImage")));
-            this.ucPbx11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx11.Id = 0;
-            this.ucPbx11.Location = new System.Drawing.Point(568, 266);
-            this.ucPbx11.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx11.Name = "ucPbx11";
-            this.ucPbx11.Size = new System.Drawing.Size(278, 133);
-            this.ucPbx11.TabIndex = 10;
-            // 
-            // ucPbx12
-            // 
-            this.ucPbx12.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx12.BackgroundImage")));
-            this.ucPbx12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx12.Id = 0;
-            this.ucPbx12.Location = new System.Drawing.Point(852, 266);
-            this.ucPbx12.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx12.Name = "ucPbx12";
-            this.ucPbx12.Size = new System.Drawing.Size(279, 133);
-            this.ucPbx12.TabIndex = 11;
-            // 
-            // ucPbx13
-            // 
-            this.ucPbx13.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx13.BackgroundImage")));
-            this.ucPbx13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx13.Id = 0;
-            this.ucPbx13.Location = new System.Drawing.Point(0, 399);
-            this.ucPbx13.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx13.Name = "ucPbx13";
-            this.ucPbx13.Size = new System.Drawing.Size(278, 134);
-            this.ucPbx13.TabIndex = 12;
-            // 
-            // ucPbx14
-            // 
-            this.ucPbx14.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx14.BackgroundImage")));
-            this.ucPbx14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx14.Id = 0;
-            this.ucPbx14.Location = new System.Drawing.Point(284, 399);
-            this.ucPbx14.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx14.Name = "ucPbx14";
-            this.ucPbx14.Size = new System.Drawing.Size(278, 134);
-            this.ucPbx14.TabIndex = 13;
-            // 
-            // ucPbx15
-            // 
-            this.ucPbx15.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx15.BackgroundImage")));
-            this.ucPbx15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx15.Id = 0;
-            this.ucPbx15.Location = new System.Drawing.Point(568, 399);
-            this.ucPbx15.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx15.Name = "ucPbx15";
-            this.ucPbx15.Size = new System.Drawing.Size(278, 134);
-            this.ucPbx15.TabIndex = 14;
-            // 
-            // ucPbx16
-            // 
-            this.ucPbx16.BackColor = System.Drawing.Color.LightGray;
-            this.ucPbx16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx16.BackgroundImage")));
-            this.ucPbx16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ucPbx16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucPbx16.Id = 0;
-            this.ucPbx16.Location = new System.Drawing.Point(852, 399);
-            this.ucPbx16.Margin = new System.Windows.Forms.Padding(0);
-            this.ucPbx16.Name = "ucPbx16";
-            this.ucPbx16.Size = new System.Drawing.Size(279, 134);
-            this.ucPbx16.TabIndex = 15;
             // 
             // splitContainer2
             // 
@@ -945,8 +743,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dgvError);
-            this.splitContainer2.Size = new System.Drawing.Size(1139, 97);
-            this.splitContainer2.SplitterDistance = 567;
+            this.splitContainer2.Size = new System.Drawing.Size(1119, 104);
+            this.splitContainer2.SplitterDistance = 557;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -955,6 +753,7 @@
             this.dgvWarning.AllowUserToAddRows = false;
             this.dgvWarning.AllowUserToDeleteRows = false;
             this.dgvWarning.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvWarning.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -972,8 +771,19 @@
             this.dgvWarning.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvWarning.Location = new System.Drawing.Point(0, 0);
             this.dgvWarning.Name = "dgvWarning";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWarning.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvWarning.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvWarning.RowTemplate.Height = 23;
-            this.dgvWarning.Size = new System.Drawing.Size(567, 97);
+            this.dgvWarning.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvWarning.Size = new System.Drawing.Size(557, 104);
             this.dgvWarning.TabIndex = 0;
             // 
             // dataGridViewTextBoxColumn1
@@ -1001,14 +811,15 @@
             this.dgvError.AllowUserToAddRows = false;
             this.dgvError.AllowUserToDeleteRows = false;
             this.dgvError.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvError.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvError.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvError.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvError.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -1018,8 +829,19 @@
             this.dgvError.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvError.Location = new System.Drawing.Point(0, 0);
             this.dgvError.Name = "dgvError";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvError.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvError.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvError.RowTemplate.Height = 23;
-            this.dgvError.Size = new System.Drawing.Size(571, 97);
+            this.dgvError.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvError.Size = new System.Drawing.Size(561, 104);
             this.dgvError.TabIndex = 0;
             // 
             // Column1
@@ -1136,15 +958,302 @@
             this.实时数据ToolStripMenuItem.Text = "实时数据";
             this.实时数据ToolStripMenuItem.Click += new System.EventHandler(this.实时数据ToolStripMenuItem_Click);
             // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTime.ForeColor = System.Drawing.Color.White;
+            this.lblTime.Location = new System.Drawing.Point(34, 16);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(63, 14);
+            this.lblTime.TabIndex = 9;
+            this.lblTime.Text = "当前时间";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 200;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // pnlBottom
+            // 
+            this.pnlBottom.BackColor = System.Drawing.Color.SteelBlue;
+            this.pnlBottom.Controls.Add(this.lblErrCount);
+            this.pnlBottom.Controls.Add(this.lblFireCount);
+            this.pnlBottom.Controls.Add(this.pbxErrCount);
+            this.pnlBottom.Controls.Add(this.pbxFireCount);
+            this.pnlBottom.Controls.Add(this.lblTime);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(0, 733);
+            this.pnlBottom.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(1250, 45);
+            this.pnlBottom.TabIndex = 8;
+            // 
+            // lblErrCount
+            // 
+            this.lblErrCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblErrCount.AutoSize = true;
+            this.lblErrCount.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblErrCount.ForeColor = System.Drawing.Color.White;
+            this.lblErrCount.Location = new System.Drawing.Point(551, 12);
+            this.lblErrCount.Name = "lblErrCount";
+            this.lblErrCount.Size = new System.Drawing.Size(79, 20);
+            this.lblErrCount.TabIndex = 11;
+            this.lblErrCount.Text = "故障数量：";
+            // 
+            // lblFireCount
+            // 
+            this.lblFireCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblFireCount.AutoSize = true;
+            this.lblFireCount.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblFireCount.ForeColor = System.Drawing.Color.White;
+            this.lblFireCount.Location = new System.Drawing.Point(288, 12);
+            this.lblFireCount.Name = "lblFireCount";
+            this.lblFireCount.Size = new System.Drawing.Size(79, 20);
+            this.lblFireCount.TabIndex = 11;
+            this.lblFireCount.Text = "火警数量：";
+            // 
+            // pbxErrCount
+            // 
+            this.pbxErrCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbxErrCount.BackgroundImage = global::InfraredAnalyze.Properties.Resources.灯光;
+            this.pbxErrCount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbxErrCount.Location = new System.Drawing.Point(502, 5);
+            this.pbxErrCount.Margin = new System.Windows.Forms.Padding(0);
+            this.pbxErrCount.Name = "pbxErrCount";
+            this.pbxErrCount.Size = new System.Drawing.Size(35, 35);
+            this.pbxErrCount.TabIndex = 10;
+            this.pbxErrCount.TabStop = false;
+            // 
+            // pbxFireCount
+            // 
+            this.pbxFireCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbxFireCount.BackgroundImage = global::InfraredAnalyze.Properties.Resources.灯光;
+            this.pbxFireCount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbxFireCount.Location = new System.Drawing.Point(250, 5);
+            this.pbxFireCount.Margin = new System.Windows.Forms.Padding(0);
+            this.pbxFireCount.Name = "pbxFireCount";
+            this.pbxFireCount.Size = new System.Drawing.Size(35, 35);
+            this.pbxFireCount.TabIndex = 10;
+            this.pbxFireCount.TabStop = false;
+            // 
+            // ucPbx1
+            // 
+            this.ucPbx1.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx1.BackgroundImage = global::InfraredAnalyze.Properties.Resources.nopicture;
+            this.ucPbx1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx1.Id = 0;
+            this.ucPbx1.Location = new System.Drawing.Point(0, 0);
+            this.ucPbx1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx1.Name = "ucPbx1";
+            this.ucPbx1.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx1.TabIndex = 0;
+            // 
+            // ucPbx2
+            // 
+            this.ucPbx2.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx2.BackgroundImage")));
+            this.ucPbx2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx2.Id = 0;
+            this.ucPbx2.Location = new System.Drawing.Point(279, 0);
+            this.ucPbx2.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx2.Name = "ucPbx2";
+            this.ucPbx2.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx2.TabIndex = 1;
+            // 
+            // ucPbx3
+            // 
+            this.ucPbx3.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx3.BackgroundImage")));
+            this.ucPbx3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx3.Id = 0;
+            this.ucPbx3.Location = new System.Drawing.Point(558, 0);
+            this.ucPbx3.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx3.Name = "ucPbx3";
+            this.ucPbx3.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx3.TabIndex = 2;
+            // 
+            // ucPbx4
+            // 
+            this.ucPbx4.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx4.BackgroundImage")));
+            this.ucPbx4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx4.Id = 0;
+            this.ucPbx4.Location = new System.Drawing.Point(837, 0);
+            this.ucPbx4.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx4.Name = "ucPbx4";
+            this.ucPbx4.Size = new System.Drawing.Size(279, 126);
+            this.ucPbx4.TabIndex = 3;
+            // 
+            // ucPbx5
+            // 
+            this.ucPbx5.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx5.BackgroundImage")));
+            this.ucPbx5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx5.Id = 0;
+            this.ucPbx5.Location = new System.Drawing.Point(0, 126);
+            this.ucPbx5.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx5.Name = "ucPbx5";
+            this.ucPbx5.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx5.TabIndex = 4;
+            // 
+            // ucPbx6
+            // 
+            this.ucPbx6.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx6.BackgroundImage")));
+            this.ucPbx6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx6.Id = 0;
+            this.ucPbx6.Location = new System.Drawing.Point(279, 126);
+            this.ucPbx6.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx6.Name = "ucPbx6";
+            this.ucPbx6.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx6.TabIndex = 5;
+            // 
+            // ucPbx7
+            // 
+            this.ucPbx7.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx7.BackgroundImage")));
+            this.ucPbx7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx7.Id = 0;
+            this.ucPbx7.Location = new System.Drawing.Point(558, 126);
+            this.ucPbx7.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx7.Name = "ucPbx7";
+            this.ucPbx7.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx7.TabIndex = 6;
+            // 
+            // ucPbx8
+            // 
+            this.ucPbx8.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx8.BackgroundImage")));
+            this.ucPbx8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx8.Id = 0;
+            this.ucPbx8.Location = new System.Drawing.Point(837, 126);
+            this.ucPbx8.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx8.Name = "ucPbx8";
+            this.ucPbx8.Size = new System.Drawing.Size(279, 126);
+            this.ucPbx8.TabIndex = 7;
+            // 
+            // ucPbx9
+            // 
+            this.ucPbx9.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx9.BackgroundImage")));
+            this.ucPbx9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx9.Id = 0;
+            this.ucPbx9.Location = new System.Drawing.Point(0, 252);
+            this.ucPbx9.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx9.Name = "ucPbx9";
+            this.ucPbx9.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx9.TabIndex = 8;
+            // 
+            // ucPbx10
+            // 
+            this.ucPbx10.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx10.BackgroundImage")));
+            this.ucPbx10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx10.Id = 0;
+            this.ucPbx10.Location = new System.Drawing.Point(279, 252);
+            this.ucPbx10.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx10.Name = "ucPbx10";
+            this.ucPbx10.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx10.TabIndex = 9;
+            // 
+            // ucPbx11
+            // 
+            this.ucPbx11.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx11.BackgroundImage")));
+            this.ucPbx11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx11.Id = 0;
+            this.ucPbx11.Location = new System.Drawing.Point(558, 252);
+            this.ucPbx11.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx11.Name = "ucPbx11";
+            this.ucPbx11.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx11.TabIndex = 10;
+            // 
+            // ucPbx12
+            // 
+            this.ucPbx12.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx12.BackgroundImage")));
+            this.ucPbx12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx12.Id = 0;
+            this.ucPbx12.Location = new System.Drawing.Point(837, 252);
+            this.ucPbx12.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx12.Name = "ucPbx12";
+            this.ucPbx12.Size = new System.Drawing.Size(279, 126);
+            this.ucPbx12.TabIndex = 11;
+            // 
+            // ucPbx13
+            // 
+            this.ucPbx13.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx13.BackgroundImage")));
+            this.ucPbx13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx13.Id = 0;
+            this.ucPbx13.Location = new System.Drawing.Point(0, 378);
+            this.ucPbx13.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx13.Name = "ucPbx13";
+            this.ucPbx13.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx13.TabIndex = 12;
+            // 
+            // ucPbx14
+            // 
+            this.ucPbx14.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx14.BackgroundImage")));
+            this.ucPbx14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx14.Id = 0;
+            this.ucPbx14.Location = new System.Drawing.Point(279, 378);
+            this.ucPbx14.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx14.Name = "ucPbx14";
+            this.ucPbx14.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx14.TabIndex = 13;
+            // 
+            // ucPbx15
+            // 
+            this.ucPbx15.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx15.BackgroundImage")));
+            this.ucPbx15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx15.Id = 0;
+            this.ucPbx15.Location = new System.Drawing.Point(558, 378);
+            this.ucPbx15.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx15.Name = "ucPbx15";
+            this.ucPbx15.Size = new System.Drawing.Size(278, 126);
+            this.ucPbx15.TabIndex = 14;
+            // 
+            // ucPbx16
+            // 
+            this.ucPbx16.BackColor = System.Drawing.Color.LightGray;
+            this.ucPbx16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPbx16.BackgroundImage")));
+            this.ucPbx16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ucPbx16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPbx16.Id = 0;
+            this.ucPbx16.Location = new System.Drawing.Point(837, 378);
+            this.ucPbx16.Margin = new System.Windows.Forms.Padding(0);
+            this.ucPbx16.Name = "ucPbx16";
+            this.ucPbx16.Size = new System.Drawing.Size(279, 126);
+            this.ucPbx16.TabIndex = 15;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1273, 778);
+            this.ClientSize = new System.Drawing.Size(1250, 778);
+            this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.spcMain);
             this.Controls.Add(this.tlpTools);
             this.Controls.Add(this.pnlHeader);
-            this.Controls.Add(this.ss);
             this.Controls.Add(this.mnsMeuns);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -1188,14 +1297,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarning)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvError)).EndInit();
             this.cmsIPCameraConfig.ResumeLayout(false);
+            this.pnlBottom.ResumeLayout(false);
+            this.pnlBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxErrCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFireCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.StatusStrip ss;
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnMin;
@@ -1249,7 +1360,7 @@
         private System.Windows.Forms.ToolStripMenuItem 下移ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 连接ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 断开ToolStripMenuItem;
-        private System.Windows.Forms.Button btnDisConnect;
+        private System.Windows.Forms.Button btnReset;
         private UCPbx ucPbx1;
         private UCPbx ucPbx2;
         private UCPbx ucPbx3;
@@ -1280,6 +1391,13 @@
         private System.Windows.Forms.SplitContainer spcSensorConfig;
         private System.Windows.Forms.ToolStripMenuItem 配置IPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 清空数据库ToolStripMenuItem;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel pnlBottom;
+        private System.Windows.Forms.PictureBox pbxErrCount;
+        private System.Windows.Forms.PictureBox pbxFireCount;
+        private System.Windows.Forms.Label lblFireCount;
+        private System.Windows.Forms.Label lblErrCount;
     }
 }
 

@@ -122,7 +122,7 @@ namespace InfraredAnalyze
         }
 
 
-        private void ChartHisrotricalData(StaticClass.StructTemperData structTemper)
+        private void ChartHisrotricalData(StructClass.StructTemperData structTemper)
         {
             
             if (structTemper.Type == 0 && structTemper.Number == 1)
@@ -196,7 +196,7 @@ namespace InfraredAnalyze
             {
                 ArrayList arrayList = sqlCreate.Select_TemperData(cameraID, dtpStart.Value, dtpEnd.Value);
                 dgvHistoricalData.Rows.Clear();
-                foreach(StaticClass.StructTemperData structTemper in arrayList)
+                foreach(StructClass.StructTemperData structTemper in arrayList)
                 {
                     dgvHistoricalData.Rows.Add(structTemper.CameraID, structTemper.IPAddress, structTemper.dateTime, AreaType[structTemper.Type], structTemper.Number + 1, Convert.ToDecimal(structTemper.Temper) / 100, structTemper.Status);
                     ChartHisrotricalData(structTemper);
@@ -259,7 +259,7 @@ namespace InfraredAnalyze
             {
                 series.Points.Clear();
             }
-            foreach (StaticClass.StructTemperData structTemper in arrayList)
+            foreach (StructClass.StructTemperData structTemper in arrayList)
             {
                 dgvHistoricalData.Rows.Add(structTemper.CameraID, structTemper.IPAddress, structTemper.dateTime, AreaType[structTemper.Type], structTemper.Number + 1, Convert.ToDecimal(structTemper.Temper) / 100, structTemper.Status);
                 ChartHisrotricalData(structTemper);

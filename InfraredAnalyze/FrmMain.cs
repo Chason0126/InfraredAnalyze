@@ -13,6 +13,7 @@ using Microsoft.DirectX.PrivateImplementationDetails;
 using System.Configuration;
 using System.Collections;
 using System.Threading;
+using System.Diagnostics;
 
 namespace InfraredAnalyze
 {
@@ -27,19 +28,59 @@ namespace InfraredAnalyze
         SqlCreate sqlCreate = new SqlCreate();
         int ScreenNum = 1;
 
+        StructClass.StructAlarm structAlarm;
+        StructClass.StructAlarmconfig structAlarmconfig;
+        StructClass.StructAlarmconfig[] structAlarmconfigs;
+
+        StructClass.realTimeStructTemper realTimeStructTemper;//实时温度数据
+        StructClass.realTimeTemper realTimeTemper;//某一台探测器的实时温度（最多8个区域）
+        StructClass.realTimeTemper[] realTimeTempers;
+
+        StructClass.AreaAlarmCount areaAlarmCount;
+        StructClass.alarmStructCount alarmStructCount;
+        StructClass.AreaAlarmCount[] areaAlarmCounts;
+
         #region//构造函数
         public FrmMain()
         {
             InitializeComponent();
+            timer1.Start();
             DMSDK.DM_Init();//关闭时需要释放资源
             DMSDK.DM_PlayerInit(spcScreen.Handle);//初始化视频  只能调用一次
-            try
+            try//为list赋初值
             {
-                //for (int i = 0; i < 16; i++)
-                //{
-                //    UCPbx uCPbx = new UCPbx();
-                //    StaticClass.intPtrs_UCPbx[i] = uCPbx.Handle;//会返回null值
-                //}
+                structAlarm = new StructClass.StructAlarm();
+                structAlarmconfig = new StructClass.StructAlarmconfig();
+               
+
+                realTimeStructTemper = new StructClass.realTimeStructTemper();
+                realTimeTemper = new StructClass.realTimeTemper();
+                
+                areaAlarmCount = new StructClass.AreaAlarmCount();
+                alarmStructCount = new StructClass.alarmStructCount();
+              
+
+
+
+                for (int i = 0; i < 16; i++)
+                {
+                    //UCPbx uCPbx = new UCPbx();
+                    //StaticClass.intPtrs_UCPbx[i] = uCPbx.Handle;//会返回null值
+                    structAlarmconfigs = new StructClass.StructAlarmconfig[8];
+                    structAlarm.structAlarmconfigs = structAlarmconfigs;
+                    structAlarm.CameraId = i + 1;
+                    StaticClass.intPtrs_AlarmConfig.Add(structAlarm);
+
+                    realTimeTempers = new StructClass.realTimeTemper[8];
+                    realTimeStructTemper.realTimeTemper = realTimeTempers;
+                    realTimeStructTemper.CameraId = i + 1;
+                    StaticClass.intPtrs_RealtimeTemper.Add(realTimeStructTemper);
+
+                    areaAlarmCounts = new StructClass.AreaAlarmCount[8];
+                    alarmStructCount.areaAlarmCounts = areaAlarmCounts;
+                    alarmStructCount.CameraId = i + 1;
+                    StaticClass.intPtrs_structCameraAlarmCounts.Add(alarmStructCount);
+                }
                 StaticClass.intPtrs_UCPbx[0] = ucPbx1.Handle;
                 StaticClass.intPtrs_UCPbx[1] = ucPbx2.Handle;
                 StaticClass.intPtrs_UCPbx[2] = ucPbx3.Handle;
@@ -136,6 +177,7 @@ namespace InfraredAnalyze
                 this.WindowState = FormWindowState.Normal;
                 btnWindow.BackgroundImage = Properties.Resources.最大化;
             }
+            Refresh_Screen(ScreenNum);
         }
         #endregion
 
@@ -445,10 +487,10 @@ namespace InfraredAnalyze
                 tvwSensor.Nodes.Clear();
                 if(temp_arrayList.Count>0)
                 {
-                    foreach(StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    foreach(StructClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
                     {
                         TreeNode temp_Node = new TreeNode();
-                        StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+                        StructClass.StructSM7003Tag structSM7003Tag = new StructClass.StructSM7003Tag();
                         temp_Node.Text = structIAnalyzeConfig.CameraName;
                         structSM7003Tag.CameraID = structIAnalyzeConfig.CameraID;
                         structSM7003Tag.IP = structIAnalyzeConfig.IP;
@@ -475,13 +517,13 @@ namespace InfraredAnalyze
         #endregion
 
         #region// 树视图点击事件
-        StaticClass.StructSM7003Tag structSM7003Tag;
+        StructClass.StructSM7003Tag structSM7003Tag;
        
         Point tvwPoint;
         private void tvwSensor_MouseDown(object sender, MouseEventArgs e)
         {
             tvwPoint = new Point(e.X, e.Y);
-            structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
             try
             {
                 if(e.Button==MouseButtons.Left)
@@ -494,7 +536,7 @@ namespace InfraredAnalyze
                     }
                     else
                     {
-                        structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                        structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                         StaticClass.SelectedNode = structSM7003Tag.CameraID;
                     }
                 }else if(e.Button==MouseButtons.Right)
@@ -502,7 +544,7 @@ namespace InfraredAnalyze
                     tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
                     if (tvwSensor.SelectedNode != null)
                     {
-                        structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                        structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                         StaticClass.SelectedNode = structSM7003Tag.CameraID;
                         if (tvwSensor.SelectedNode.Index == 0)
                         {
@@ -534,7 +576,7 @@ namespace InfraredAnalyze
             FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
             if (treeNode != null)
             {
-                StaticClass.StructSM7003Tag sM7003Tag = (StaticClass.StructSM7003Tag)treeNode.Tag;//将所双击的树视图的节点的 cameraID赋值给弹出窗体的ID属性
+                StructClass.StructSM7003Tag sM7003Tag = (StructClass.StructSM7003Tag)treeNode.Tag;//将所双击的树视图的节点的 cameraID赋值给弹出窗体的ID属性
                 frmCameraConfig.IPCameraID = sM7003Tag.CameraID;
                 frmCameraConfig.ShowDialog();
             }
@@ -547,11 +589,11 @@ namespace InfraredAnalyze
         {
             try
             {
-                StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+                StructClass.StructSM7003Tag structSM7003Tag = new StructClass.StructSM7003Tag();
                 tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
                 if (tvwSensor.SelectedNode != null)
                 {
-                    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                    structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                     int CameraId = structSM7003Tag.CameraID;
                     int NodeId = structSM7003Tag.NodeID;
                     sqlCreate.Delete_Node_SMInfraredConfig(CameraId, NodeId);//修改大于选项的CameraId
@@ -619,10 +661,10 @@ namespace InfraredAnalyze
             {
                 pnl frmTemperParamConfig = new pnl();
                 tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
-                structSM7003Tag = new StaticClass.StructSM7003Tag();
+                structSM7003Tag = new StructClass.StructSM7003Tag();
                 if (tvwSensor.SelectedNode != null)
                 {
-                    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                    structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                     frmTemperParamConfig.Ip = structSM7003Tag.IP;
                     frmTemperParamConfig.CameraId = structSM7003Tag.CameraID;
                     frmTemperParamConfig.ShowDialog();
@@ -639,11 +681,11 @@ namespace InfraredAnalyze
         private void 网络参数设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
-            structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
-                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                 frmCameraConfig.IPCameraID = structSM7003Tag.CameraID;
                 frmCameraConfig.ShowDialog();
             }
@@ -654,11 +696,11 @@ namespace InfraredAnalyze
         private void 图像设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmImageConfig frmImageConfig = new FrmImageConfig();
-            structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
-                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                 frmImageConfig.CameraId = structSM7003Tag.CameraID;
                 frmImageConfig.Ip = structSM7003Tag.IP;
                 frmImageConfig.ShowDialog();
@@ -670,13 +712,13 @@ namespace InfraredAnalyze
         #region//连接
         private void 连接ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             try
             {
                 if (tvwSensor.SelectedNode != null)
                 {
-                    structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                    structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
 
                     int InitValue = DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1]);
                     if (InitValue < 0)
@@ -702,11 +744,11 @@ namespace InfraredAnalyze
         private void 视频设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmVideoConfig frmVideoConfig = new FrmVideoConfig();
-            structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if(tvwSensor.SelectedNode!=null)
             {
-                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                 frmVideoConfig.IPCameraId = structSM7003Tag.CameraID;
                 frmVideoConfig.IPAddress = structSM7003Tag.IP;
                 frmVideoConfig.CName = tvwSensor.SelectedNode.Text;
@@ -722,11 +764,11 @@ namespace InfraredAnalyze
         #region//断开连接
         private void 断开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
-                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                 DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1]);
             }
         }
@@ -778,11 +820,11 @@ namespace InfraredAnalyze
         private void 历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmHistoricalTemperData frmHistoricalTemperData = new FrmHistoricalTemperData();
-            StaticClass.StructSM7003Tag structSM7003Tag = new StaticClass.StructSM7003Tag();
+            StructClass.StructSM7003Tag structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
-                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                 frmHistoricalTemperData.CameraID = structSM7003Tag.CameraID;
                 frmHistoricalTemperData.ShowDialog();
             }
@@ -793,11 +835,11 @@ namespace InfraredAnalyze
         private void 实时数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmRealTimeTemperData frmRealTimeTemperData = new FrmRealTimeTemperData();
-            structSM7003Tag = new StaticClass.StructSM7003Tag();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
             {
-                structSM7003Tag = (StaticClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                 frmRealTimeTemperData.CameraID = structSM7003Tag.CameraID;
                 frmRealTimeTemperData.ShowDialog();
             }
@@ -822,6 +864,70 @@ namespace InfraredAnalyze
         }
         #endregion
 
+        #region//显示时间 火警数量 故障数量
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int firecount = 0;
+            int errcount = 0;
+          
+            for(int i = 0; i < 16; i++)
+            {
+                if (StaticClass.intPtrs_Status[i] == 1)//告警
+                {
+                    firecount++;
+                }else if(StaticClass.intPtrs_Status[i] == 2)
+                {
+                    errcount++;
+                }
+            }
+            StaticClass.FireCount = firecount;
+            StaticClass.ErrCount = errcount;
+            if (StaticClass.FireCount > 0)
+            {
+                pbxFireCount.BackgroundImage = Properties.Resources.红灯光;
+            }
+            else
+            {
+                pbxFireCount.BackgroundImage = Properties.Resources.灯光;
+            }
+            if (StaticClass.ErrCount > 0)
+            {
+                pbxErrCount.BackgroundImage = Properties.Resources.黄灯光;
+            }
+            else
+            {
+                pbxErrCount.BackgroundImage = Properties.Resources.灯光;
+            }
+            lblTime.Text = DateTime.Now.ToString("F");
+            lblFireCount.Text = "火警数量：" + StaticClass.FireCount.ToString();
+            lblErrCount.Text = "故障数量：" + StaticClass.ErrCount.ToString();
+        }
+        #endregion
+
+        #region//复位
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            StaticClass.FireCount = 0;
+            StaticClass.ErrCount = 0;
+            for (int i = 0; i < 16; i++)
+            {
+                if (StaticClass.intPtrs_Enable[i])
+                {
+                    StaticClass.intPtrs_Status[i] = (int)RunningStatus.正常;
+                }
+            }
+            dgvError.Rows.Clear();
+            dgvWarning.Rows.Clear();
+        }
+        #endregion
+
+        #region//全屏显示
+        private void btnFullScreen_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             LoadTreeView();
@@ -839,9 +945,9 @@ namespace InfraredAnalyze
             else
             {
                 FrmAddIPCamera frmAddIPCamera = new FrmAddIPCamera();
-                StaticClass.StructIAnalyzeConfig temp_structIAnalyzeConfig = new StaticClass.StructIAnalyzeConfig();
+                StructClass.StructIAnalyzeConfig temp_structIAnalyzeConfig = new StructClass.StructIAnalyzeConfig();
                 ArrayList arrayList= sqlCreate.Select_SMInfraredConfig(StaticClass.SelectedNode);
-                foreach(StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in arrayList)
+                foreach(StructClass.StructIAnalyzeConfig structIAnalyzeConfig in arrayList)
                 {
                     temp_structIAnalyzeConfig = structIAnalyzeConfig;
                 }
@@ -855,10 +961,10 @@ namespace InfraredAnalyze
             }
         }
 
-        private void btnDisConnect_MouseEnter(object sender, EventArgs e)
+        private void btnReset_MouseEnter(object sender, EventArgs e)
         {
             ToolTip toolTip = new ToolTip();
-            toolTip.SetToolTip(btnDisConnect, "全部断开");
+            toolTip.SetToolTip(btnReset, "软件复位");
         }
 
 
@@ -872,7 +978,8 @@ namespace InfraredAnalyze
         Thread thread;//提示请勿操作线程
         Thread threadStatus;//检测状态数组线程
         Thread threadCheckOnline;//掉线检测线程
-        Thread threadCheckTemper;//温度判断线程 用于报警检测  很关键
+        Thread threadCheckAlarm;//温度判断线程 用于报警检测  很关键
+        Thread threadGetTemper;//获取温度数据（连续获取 数据量太多了）
         private void btnStart_Click(object sender, EventArgs e)
         {
             thread = new Thread(showIsRunning);//显示请勿操作界面 防止误操作
@@ -883,7 +990,11 @@ namespace InfraredAnalyze
                 if (btnStart.Tag.ToString() == "Start")//开始
                 {
                     temp_arrayList = sqlCreate.Select_All_SMInfraredConfig();//按CameraId降序排列
-                    foreach (StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    for(int i = 0; i < 16; i++)
+                    {
+                        StaticClass.intPtrs_AlarmConfig[i] = sqlCreate.Select_AlarmConfig(i + 1);//告警区域设置数组（从数据库中获取 温度数据 用于告警判断）
+                    }
+                    foreach (StructClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
                     {
                         StaticClass.intPtrs_Enable[structIAnalyzeConfig.CameraID - 1] = structIAnalyzeConfig.Enable;//启用数组
                         StaticClass.intPtrs_CameraName[structIAnalyzeConfig.CameraID - 1] = structIAnalyzeConfig.CameraName;//名称数组
@@ -892,12 +1003,13 @@ namespace InfraredAnalyze
                     }
                     threadStatus = new Thread(StatusJudgment);
                     threadCheckOnline = new Thread(CheckOnline);
+                    threadCheckAlarm = new Thread(CheckAlarm);
+                    threadGetTemper = new Thread(GetTemper);
                     threadStatus.IsBackground = true;
-                    threadStatus.Start();
                     threadCheckOnline.IsBackground = true;
-                    threadCheckOnline.Start();
-                    
-                    for(int i = 0; i < 16; i++)
+                    threadCheckAlarm.IsBackground = true;
+                    threadGetTemper.IsBackground = true;
+                    for (int i = 0; i < 16; i++)
                     {
                         if (StaticClass.intPtrs_Enable[i])//如果该相机启用了
                         {
@@ -910,7 +1022,7 @@ namespace InfraredAnalyze
                             else//连接成功
                             {
                                 StaticClass.intPtrs_Status[i] = (int)RunningStatus.正常;
-                                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);//连续获取测温对象的数据
+                                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);//获取一次温度数据
                                 fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
                                 DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
                             }
@@ -920,15 +1032,19 @@ namespace InfraredAnalyze
                             StaticClass.intPtrs_Status[i] = (int)RunningStatus.未启用;
                         }
                     }
+                    threadStatus.Start();
+                    threadCheckOnline.Start();
+                    threadCheckAlarm.Start();
+                    //threadGetTemper.Start();
                     btnStart.BackgroundImage = Properties.Resources.Pause;
                     btnStart.Tag = "Pause";
                 }
                 else if (btnStart.Tag.ToString() == "Pause")
                 {
-                    foreach (StaticClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    foreach (StructClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
                     {
                         int Numbering = structIAnalyzeConfig.NodeID - 1;
-                        if (StaticClass.intPtrs_Connect[Numbering] >=0&& StaticClass.intPtrs_Operate[Numbering] > 0) 
+                        if (StaticClass.intPtrs_Connect[Numbering] >= 0 && StaticClass.intPtrs_Operate[Numbering] > 0)
                         {
                             DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[Numbering]);//关闭视频连接
                             DMSDK.DM_Disconnect(StaticClass.intPtrs_Operate[Numbering]);//关闭操作连接
@@ -940,11 +1056,13 @@ namespace InfraredAnalyze
                     btnStart.Tag = "Start";
                     btnStart.BackgroundImage = Properties.Resources.start;
                     threadCheckOnline.Abort();
+                    threadCheckAlarm.Abort();
+                    //threadGetTemper.Abort();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("系统启动异常！"+ex.Message);
             }
             finally
             {
@@ -962,52 +1080,50 @@ namespace InfraredAnalyze
             }
             catch (Exception ex)
             {
-                
+                //错误 线程正在终止
             }
         }
 
-        private void StatusJudgment()//状态判断
+        private void StatusJudgment()//状态判断 调用回调函数 获取数据
         {
             while (true)
             {
                 for (int i = 0; i < 16; i++)
                 {
-                   
-                    switch (StaticClass.intPtrs_Status[i])
+                    if (StaticClass.intPtrs_Enable[i])
                     {
-                        case 0://未启用 
-                            Change_Status(i, 0);
-                            break;
-                        case 1://告警
-                            Change_Status(i, 1);
-                            break;
-                        case 2://故障
-                            Change_Status(i, 2);
-                            break;
-                        case 3://正常
-                            Change_Status(i, 3);
-                            break;
-                        case 4://离线  疯狂重连 
-                            Change_Status(i, 4);
-                            DMSDK.DM_StopTemp(StaticClass.intPtrs_Operate[i]);//停止回调函数
-                            StaticClass.intPtrs_Connect[i] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 5000);
-                            StaticClass.intPtrs_Operate[i] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 80);
-                            if (StaticClass.intPtrs_Connect[i] >= 0 || StaticClass.intPtrs_Operate[i] > 0)//重连成功
-                            {
-                                StaticClass.intPtrs_Status[i] = (int)RunningStatus.正常;
-                                string ip = StaticClass.intPtrs_Ip[i];
-                                string cname = StaticClass.intPtrs_CameraName[i];
-                                BeginInvoke(new MethodInvoker(delegate
+                        
+                        switch (StaticClass.intPtrs_Status[i])
+                        {
+                            case 0://未启用 
+                                Change_Status(i, 0);
+                                break;
+                            case 1://火警
+                                Change_Status(i, 1);
+                                break;
+                            case 2://故障 （掉线）
+                                Change_Status(i, 2);
+                                DMSDK.DM_StopTemp(StaticClass.intPtrs_Operate[i]);//停止回调函数
+                                StaticClass.intPtrs_Connect[i] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 5000);//疯狂重连
+                                StaticClass.intPtrs_Operate[i] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 80);
+                                if (StaticClass.intPtrs_Connect[i] >= 0 || StaticClass.intPtrs_Operate[i] > 0)//重连成功
                                 {
-                                    dgvError.Rows.Add(DateTime.Now, "连接恢复", ip, cname);
-                                }));
-                                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);
-                                fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
-                                DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
-                            }
-                            break;
+                                    StaticClass.intPtrs_Status[i] = (int)RunningStatus.正常;
+                                    BeginInvoke(new MethodInvoker(delegate
+                                    {
+                                        dgvError.Rows.Add(DateTime.Now, "连接恢复", StaticClass.intPtrs_Ip[i], StaticClass.intPtrs_CameraName[i]);
+                                    }));
+                                    DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);
+                                    fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
+                                    DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
+                                }
+                                break;
+                            case 3://正常
+                                Change_Status(i, 3);
+                                break;
+                        }
+                        Thread.Sleep(1000);
                     }
-                    Thread.Sleep(100);
                 }
             }
         }
@@ -1027,9 +1143,6 @@ namespace InfraredAnalyze
                     break;
                 case 3:
                     break;
-                case 4:
-                    uCPbx.BackgroundImage = Properties.Resources.nopicture;
-                    break;
             }
         }
 
@@ -1041,11 +1154,10 @@ namespace InfraredAnalyze
                 {
                     if (StaticClass.intPtrs_Enable[j])
                     {
-                        if (StaticClass.intPtrs_Ip[j] != null)
+                        if (StaticClass.intPtrs_Ip[j] != null)//这里需要等一等  等到把IP地址信息扔进去再开始
                         {
                             if (DMSDK.DM_CheckOnline(StaticClass.intPtrs_Ip[j], 5000) < 0)//离线
                             {
-                               
                                 DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[j]);
                                 DMSDK.DM_Disconnect(StaticClass.intPtrs_Operate[j]);
                                 string ip = StaticClass.intPtrs_Ip[j];
@@ -1057,22 +1169,109 @@ namespace InfraredAnalyze
                                     dgvError.Rows.Add(DateTime.Now, "连接断开", ip, cname);
                                 }));
                                 }
-                                StaticClass.intPtrs_Status[j] = (int)RunningStatus.离线;
+                                StaticClass.intPtrs_Status[j] = (int)RunningStatus.故障;
                             }
                             else if (StaticClass.intPtrs_Connect[j]<0 && StaticClass.intPtrs_Operate[j] <= 0)
                             {
-                                StaticClass.intPtrs_Status[j] = (int)RunningStatus.离线;
+                                StaticClass.intPtrs_Status[j] = (int)RunningStatus.故障;
                             }
                         }
+                        Thread.Sleep(200);
                     }
                 }
-                Thread.Sleep(100);
             }
         }
 
+
+        private void CheckAlarm()//判断火警使用
+        {
+            while (true)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+                for(int i = 0; i < 16; i++)
+                {
+                    if (StaticClass.intPtrs_Enable[i] && StaticClass.intPtrs_Status[i] != 1)//该探测器启用  无火警
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Enable)//该区域启用 
+                            {
+                                StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaId = j + 1;
+                                if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Spark == 0)//触发方式 大于
+                                {
+                                    if (StaticClass.intPtrs_RealtimeTemper[i].realTimeTemper[j].temper >= StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].AlarmTemper)//大于一次
+                                    {
+                                        StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount++;
+                                    }
+                                    else//小于一次  就清空告警计数
+                                    {
+                                        StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount = 0;
+                                    }
+                                }
+                                else if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Spark == 1)//触发方式  小于
+                                {
+                                    if (StaticClass.intPtrs_RealtimeTemper[i].realTimeTemper[j].temper <= StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].AlarmTemper)//小于一次
+                                    {
+                                        StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount++;
+                                    }
+                                    else//大于一次就清空计数
+                                    {
+                                        StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount = 0;
+                                    }
+                                }
+                                if (StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount >= 3)//超过3次 就告警
+                                {
+                                    if (StaticClass.intPtrs_Status[i] != (int)RunningStatus.温度告警)//原来不是报警 
+                                    {
+                                        if (StaticClass.FireCount == 0)//全局火警计数
+                                        {
+                                            BeginInvoke(new MethodInvoker(delegate
+                                            {
+                                                dgvWarning.Rows.Add(DateTime.Now, "首警", StaticClass.intPtrs_Ip[i], StaticClass.intPtrs_CameraName[i]);
+                                            }));
+                                        }
+                                        else if (StaticClass.FireCount >= 1)
+                                        {
+                                            BeginInvoke(new MethodInvoker(delegate
+                                            {
+                                                dgvWarning.Rows.Add(DateTime.Now, "火警", StaticClass.intPtrs_Ip[i], StaticClass.intPtrs_CameraName[i]);
+                                            }));
+                                        }
+                                        StaticClass.intPtrs_Status[i] = (int)RunningStatus.温度告警;//改变状态记录数组
+                                    }
+                                    areaAlarmCount.AreaCount = 3;
+                                }
+                            }
+                        }
+                }
+                Thread.Sleep(50);
+            }
+                //stopwatch.Stop();
+                //string time = stopwatch.ElapsedMilliseconds.ToString();
+            }
+        }
+
+        private void GetTemper()
+        {
+            while (true)
+            {
+                for(int i = 0; i < 16; i++)
+                {
+                    if (StaticClass.intPtrs_Operate[i] > 0 && StaticClass.intPtrs_Connect[i] >= 0)
+                    {
+                        DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 0);//获取一次温度数据
+                        fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
+                        DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
+                        int j = DMSDK.DM_GetUpdateMeaTemp(StaticClass.intPtrs_Operate[i]);
+                    }
+                    Thread.Sleep(5000);
+                }
+            }
+        }
         #region//回调函数
         /*
-         * 多台仪器的告警信息无法获取（判断是那一台的告警信息），需要程序自己判断（大立公司人员语录）
+         * 多台仪器的告警信息无法获取（判断是那一台的告警信息），需要程序自己判断（大立公司人员确认过了）
          * */
         DMSDK.fMessCallBack fMessCallBack;
         DMSDK.tagTempMessage tempMessage;
@@ -1081,34 +1280,49 @@ namespace InfraredAnalyze
         ArrayList arrayList_Area = new ArrayList();
         SqlInsert sqlInsert = new SqlInsert();
 
-        private void dmMessCallBack(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)//当为测温告警的时候 温度数据可以回调获取  
+        private void dmMessCallBack(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)//当为测温告警的时候 温度数据可以回调获取   频率在一秒钟20次上 （ 不能更改 跟大立人员确认过了）
         {
+            
             int Msg = msg - 0x8000;
             switch (Msg)
             {
                 case 0x3051://错误
                     tagError = (DMSDK.tagError)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagError));
                     int ErrID = tagError.ErrorID;
+                    if(ErrID == 0x00004000)
+                    {
+                        //MessageBox.Show("系统异常：请尝试关闭防火墙！");
+                    }
                     //StaticClass.intPtrs_Status[0] = (int)RunningStatus.故障;
                     break;
                 case 0x3053://温度数据
                     tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    sqlInsert.InsertTemperDataToArrayList(tempMessage);
+                    sqlInsert.InsertTemperDataToArrayList(DateTime.Now, tempMessage);//带时间戳 数据扔过去
                     break;
                 case 0x3054://报警消息 将alarmID对应的byte置为1    针对单台仪器可以使用该方法  木得问题 测温目标设置限制，  //现在直接搞个数记录采集的温度 然后获取报警温度 自行判断（超温5秒 告警）
-                    //tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    //byte AlaemId = (byte)(tagAlarm.AlarmID);
-                    //StaticClass.intPtrs_AlarmId[0] = (byte)(StaticClass.intPtrs_AlarmId[0] | (0x80 >> AlaemId));// 将10000000右移 对应的ID位数 即将对应位置的置为1
-                    //StaticClass.intPtrs_Status[0] = (int)RunningStatus.温度告警;
-                    //BeginInvoke(new MethodInvoker(delegate
-                    //{
-                    //    dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[0], StaticClass.intPtrs_CameraName[0] + "区域编号" + AlaemId.ToString());
-                    //}));
+                            //tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
+                            //byte AlaemId = (byte)(tagAlarm.AlarmID);
+                            //StaticClass.intPtrs_AlarmId[0] = (byte)(StaticClass.intPtrs_AlarmId[0] | (0x80 >> AlaemId));// 将10000000右移 对应的ID位数 即将对应位置的置为1
+                            //StaticClass.intPtrs_Status[0] = (int)RunningStatus.温度告警;
+                            //BeginInvoke(new MethodInvoker(delegate
+                            //{
+                            //    dgvWarning.Rows.Add(DateTime.Now, "测温告警", StaticClass.intPtrs_Ip[0], StaticClass.intPtrs_CameraName[0] + "区域编号" + AlaemId.ToString());
+                            //}));
                     break;
             }
         }
+
+
         #endregion
 
-       
+        bool IsCallBack = false;
+
+        private void tlpTools_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+      
     }
 }
