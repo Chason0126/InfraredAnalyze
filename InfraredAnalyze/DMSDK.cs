@@ -662,7 +662,7 @@ namespace InfraredAnalyze
         *返回值:			
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_SetVideoOutType")]
-        public static extern int DM_SetVideoOutType(int handle, VIDEO_OUT_TYPE VideoOutType);
+        public static extern int DM_SetVideoOutType(int handle, int VideoOutType);
 
         /*
             函数名称:	DM_GetVideoOutType
@@ -1664,6 +1664,28 @@ namespace InfraredAnalyze
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetStorageInfo")]
         public static extern int DM_GetStorageInfo(int handle, ref int iEnable, ref int iOverWrite, ref int iFullAlarm, ref int iFullGrade, ref char cSize, ref char cAvailableSpace);
 
+
+        /*
+        函数名称:	DM_SetNASInfo
+        *函数说明:	网络存储器设置
+        *输入参数:  
+                handle:　	句柄	
+                iEnable:	是否启用。0: 关闭；1: 开启
+                IP:			网络存储器的IP地址
+                ID:			网络存储器的登录用户名
+                Password:	网络存储器的登录密码
+                Path:		网络存储器中的存储路径
+                iOverWrite:	磁盘满后是否自动覆盖
+                iFullAlarm: 磁盘满是否告警
+                iFullGrade: 磁盘盘判断阈值。可选参数：20 ~ 90，表示20% ~ 90%
+
+        *返回值:	>0 成功 
+                <0 失败
+        */
+        [DllImport("DMSDK.dll", EntryPoint = "DM_SetNASInfo")]
+        public static extern int DM_SetNASInfo(int handle, int iEnable, string IP, string ID, string Password, string Path, int iOverWrite, int iFullAlarm, int iFullGrade);
+
+
         /*
             函数名称:	DM_GetNASInfo
         *函数说明:	获得网络存储器设置信息
@@ -1685,7 +1707,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetNASInfo")]
-        public static extern int DM_GetNASInfo(int handle, ref int iEnable, ref string IP, ref string ID, ref string Password, ref string Path, ref int iOverWrite, ref int iFullAlarm, ref int iFullGrade, ref string cSize, ref string cAvailableSpace);
+        public static extern int DM_GetNASInfo(int handle, ref int iEnable, string IP, string ID, string Password, string Path, ref int iOverWrite, ref int iFullAlarm, ref int iFullGrade, string cSize, string cAvailableSpace);
 
         /*
             函数名称:	DM_GetUnexpectedInfo_Network
@@ -1802,7 +1824,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Record")]
-        public static extern int DM_Record(int handle, ref string path);
+        public static extern int DM_Record(int handle, string path);
 
         /*
         *函数名称:	DM_StopRecord
@@ -1824,7 +1846,7 @@ namespace InfraredAnalyze
                     <0 失败
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_Capture")]
-        public static extern int DM_Capture(int handle, ref string path);
+        public static extern int DM_Capture(int handle, string path);
 
         /*
         *函数名称:	DM_PlayBack

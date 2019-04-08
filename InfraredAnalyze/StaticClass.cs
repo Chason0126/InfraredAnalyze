@@ -10,7 +10,7 @@ namespace InfraredAnalyze
 {
     enum RunningStatus
     {
-        未启用,温度告警, 故障, 正常
+        未启用,火警, 故障,先火警再故障 ,正常,停止
     }
     static class  StaticClass
     {
@@ -35,7 +35,7 @@ namespace InfraredAnalyze
         public static IntPtr[] intPtrs_UCPbx = new IntPtr[16];
         public static int[] intPtrs_Connect = new int[16];
         public static int[] intPtrs_Operate = new int[16];
-        public static int[] intPtrs_Status = new int[16];//状态显示数组 0火警 1故障 2正常3离线
+        public static int[] intPtrs_Status = new int[16];//状态显示数组 
         public static string[] intPtrs_Ip = new string[16];//存储IP地址  用于在线检测 报警提示 IP地址
         public static string[] intPtrs_CameraName = new string[16];//存储相机名称
         public static int[] intPtrs_NodeId = new int[16];//存储nodeid地址  用于显示顺序
@@ -47,6 +47,12 @@ namespace InfraredAnalyze
         public static List<StructClass.alarmStructCount> intPtrs_structCameraAlarmCounts = new List<StructClass.alarmStructCount>(16);//告警次数 记录list
         public static int FireCount = 0;
         public static int ErrCount = 0;
-       
+        public static ArrayList arrayList_FireData = new ArrayList();
+        public static ArrayList arrayList_ErrData = new ArrayList();
+
+        public static int Temper_Monitor;//临时操作（设置时使用）
+        public static int Temper_Connect;
+        public static string Temper_Ip;
+        public static int Temper_CameraId;
     }
 }

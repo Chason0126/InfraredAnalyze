@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.tabTemprParam = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnClearAll = new System.Windows.Forms.Button();
             this.grpArea = new System.Windows.Forms.GroupBox();
             this.pnlBtnArea = new System.Windows.Forms.Panel();
             this.btnClear_Area_2 = new System.Windows.Forms.Button();
@@ -238,8 +236,6 @@
             this.cbxAlarmMessageTypeArea_2 = new System.Windows.Forms.ComboBox();
             this.btnUpdateAlarmInfo = new System.Windows.Forms.Button();
             this.pbxScreen = new System.Windows.Forms.PictureBox();
-            this.btnClearAll = new System.Windows.Forms.Button();
-            this.pnlHeader.SuspendLayout();
             this.tabTemprParam.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.grpArea.SuspendLayout();
@@ -257,52 +253,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlHeader
-            // 
-            this.pnlHeader.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pnlHeader.Controls.Add(this.label1);
-            this.pnlHeader.Controls.Add(this.btnClose);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(1298, 35);
-            this.pnlHeader.TabIndex = 0;
-            this.pnlHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseDown);
-            this.pnlHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseMove);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(69, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "测温设置";
-            // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.Transparent;
-            this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
-            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(1263, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(35, 35);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
-            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
-            // 
             // tabTemprParam
             // 
             this.tabTemprParam.Controls.Add(this.tabPage1);
             this.tabTemprParam.Controls.Add(this.tabPage2);
             this.tabTemprParam.Controls.Add(this.tabPage6);
-            this.tabTemprParam.Location = new System.Drawing.Point(658, 42);
+            this.tabTemprParam.Location = new System.Drawing.Point(12, 489);
             this.tabTemprParam.Name = "tabTemprParam";
             this.tabTemprParam.SelectedIndex = 0;
             this.tabTemprParam.Size = new System.Drawing.Size(640, 479);
@@ -321,6 +277,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "测温区域";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnClearAll
+            // 
+            this.btnClearAll.Location = new System.Drawing.Point(258, 424);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(75, 23);
+            this.btnClearAll.TabIndex = 1;
+            this.btnClearAll.Text = "全部清除";
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // grpArea
             // 
@@ -2725,38 +2691,25 @@
             // pbxScreen
             // 
             this.pbxScreen.BackColor = System.Drawing.Color.Black;
-            this.pbxScreen.Location = new System.Drawing.Point(12, 41);
+            this.pbxScreen.Location = new System.Drawing.Point(16, 3);
             this.pbxScreen.Name = "pbxScreen";
             this.pbxScreen.Size = new System.Drawing.Size(640, 480);
             this.pbxScreen.TabIndex = 1;
             this.pbxScreen.TabStop = false;
-            // 
-            // btnClearAll
-            // 
-            this.btnClearAll.Location = new System.Drawing.Point(258, 424);
-            this.btnClearAll.Name = "btnClearAll";
-            this.btnClearAll.Size = new System.Drawing.Size(75, 23);
-            this.btnClearAll.TabIndex = 1;
-            this.btnClearAll.Text = "全部清除";
-            this.btnClearAll.UseVisualStyleBackColor = true;
-            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // pnl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1298, 607);
+            this.ClientSize = new System.Drawing.Size(665, 980);
             this.Controls.Add(this.tabTemprParam);
             this.Controls.Add(this.pbxScreen);
-            this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "pnl";
             this.Text = "FrmTemperParamConfig";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmTemperParamConfig_FormClosing);
             this.Load += new System.EventHandler(this.FrmTemperParamConfig_Load);
-            this.pnlHeader.ResumeLayout(false);
-            this.pnlHeader.PerformLayout();
             this.tabTemprParam.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.grpArea.ResumeLayout(false);
@@ -2786,11 +2739,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox pbxScreen;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabTemprParam;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;

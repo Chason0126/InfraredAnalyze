@@ -51,12 +51,10 @@ namespace InfraredAnalyze
 
         int temp_OperateHandle;
         int temp_ConnectHandle;
-        StringBuilder SubMask;
-        StringBuilder GateWay;
+        StringBuilder SubMask = new StringBuilder();
+        StringBuilder GateWay = new StringBuilder();
         private void FrmIpConfig_Load(object sender, EventArgs e)
         {
-            SubMask = new StringBuilder();
-            GateWay = new StringBuilder();
             if (DMSDK.DM_CheckOnline("192.168.1.2", 5000) < 0)
             {
                 MessageBox.Show("未检测到在线仪器，请检查后重试！");
@@ -83,8 +81,6 @@ namespace InfraredAnalyze
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            SubMask = new StringBuilder();
-            GateWay = new StringBuilder();
             if (btnConfirm.Text == "重新连接")
             {
                 if (DMSDK.DM_CheckOnline("192.168.1.2", 5000) < 0)
@@ -104,7 +100,12 @@ namespace InfraredAnalyze
             }
             else if (btnConfirm.Text == "确认修改")
             {
-                DMSDK.DM_SetIPAddr(temp_OperateHandle,ipAddressTextBox1.IPAdd.ToString(), SubMask.ToString(), GateWay.ToString());
+                if(SubMask.ToString()==""|| GateWay.ToString() == "")
+                {
+                    MessageBox.Show("参数异常！请重试！");
+                    return;
+                }
+                DMSDK.DM_SetIPAddr(temp_OperateHandle, ipAddressTextBox1.IPAdd.ToString(), SubMask.ToString(), GateWay.ToString());
                 MessageBox.Show("修改完成");
                 this.Close();
             }

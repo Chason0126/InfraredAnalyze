@@ -55,16 +55,18 @@
             this.九画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.十六画面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.语言ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.配置IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清空数据库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpTools = new System.Windows.Forms.TableLayoutPanel();
             this.btnFullScreen = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnHistoryRecord = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnPwd = new System.Windows.Forms.Button();
             this.btnCameraConfig = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnSaveVideo = new System.Windows.Forms.Button();
             this.spcMain = new System.Windows.Forms.SplitContainer();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -110,10 +112,14 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.lblRunningStatus = new System.Windows.Forms.Label();
             this.lblErrCount = new System.Windows.Forms.Label();
             this.lblFireCount = new System.Windows.Forms.Label();
             this.pbxErrCount = new System.Windows.Forms.PictureBox();
+            this.pbxRunningStatus = new System.Windows.Forms.PictureBox();
             this.pbxFireCount = new System.Windows.Forms.PictureBox();
+            this.设置ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.iconInfrared = new System.Windows.Forms.NotifyIcon(this.components);
             this.ucPbx1 = new InfraredAnalyze.UCPbx();
             this.ucPbx2 = new InfraredAnalyze.UCPbx();
             this.ucPbx3 = new InfraredAnalyze.UCPbx();
@@ -161,6 +167,7 @@
             this.cmsIPCameraConfig.SuspendLayout();
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxErrCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxRunningStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFireCount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -260,10 +267,11 @@
             this.文件ToolStripMenuItem,
             this.查看ToolStripMenuItem,
             this.选项ToolStripMenuItem,
+            this.设置ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
             this.mnsMeuns.Location = new System.Drawing.Point(0, 35);
             this.mnsMeuns.Name = "mnsMeuns";
-            this.mnsMeuns.Size = new System.Drawing.Size(224, 29);
+            this.mnsMeuns.Size = new System.Drawing.Size(278, 29);
             this.mnsMeuns.TabIndex = 5;
             this.mnsMeuns.Text = "menuStrip1";
             // 
@@ -333,6 +341,12 @@
             this.语言ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.语言ToolStripMenuItem.Text = "语言设置";
             // 
+            // 设置ToolStripMenuItem
+            // 
+            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
+            this.设置ToolStripMenuItem.Text = "设置";
+            // 
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -361,20 +375,22 @@
             this.tlpTools.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpTools.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
-            this.tlpTools.ColumnCount = 7;
+            this.tlpTools.ColumnCount = 8;
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1210F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tlpTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpTools.Controls.Add(this.btnFullScreen, 0, 0);
-            this.tlpTools.Controls.Add(this.button2, 1, 0);
+            this.tlpTools.Controls.Add(this.btnHistoryRecord, 1, 0);
             this.tlpTools.Controls.Add(this.btnStart, 2, 0);
             this.tlpTools.Controls.Add(this.btnPwd, 3, 0);
             this.tlpTools.Controls.Add(this.btnCameraConfig, 4, 0);
             this.tlpTools.Controls.Add(this.btnReset, 5, 0);
+            this.tlpTools.Controls.Add(this.btnSaveVideo, 6, 0);
             this.tlpTools.Location = new System.Drawing.Point(0, 64);
             this.tlpTools.Margin = new System.Windows.Forms.Padding(0);
             this.tlpTools.Name = "tlpTools";
@@ -382,7 +398,6 @@
             this.tlpTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTools.Size = new System.Drawing.Size(1249, 50);
             this.tlpTools.TabIndex = 6;
-            this.tlpTools.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpTools_Paint);
             // 
             // btnFullScreen
             // 
@@ -398,18 +413,20 @@
             this.btnFullScreen.UseVisualStyleBackColor = true;
             this.btnFullScreen.Click += new System.EventHandler(this.btnFullScreen_Click);
             // 
-            // button2
+            // btnHistoryRecord
             // 
-            this.button2.BackgroundImage = global::InfraredAnalyze.Properties.Resources.historicaldata;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(55, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(42, 40);
-            this.button2.TabIndex = 7;
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnHistoryRecord.BackgroundImage = global::InfraredAnalyze.Properties.Resources.historicaldata;
+            this.btnHistoryRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnHistoryRecord.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnHistoryRecord.FlatAppearance.BorderSize = 0;
+            this.btnHistoryRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHistoryRecord.Location = new System.Drawing.Point(55, 5);
+            this.btnHistoryRecord.Name = "btnHistoryRecord";
+            this.btnHistoryRecord.Size = new System.Drawing.Size(42, 40);
+            this.btnHistoryRecord.TabIndex = 7;
+            this.btnHistoryRecord.UseVisualStyleBackColor = true;
+            this.btnHistoryRecord.Click += new System.EventHandler(this.btnHistoryRecord_Click);
+            this.btnHistoryRecord.MouseEnter += new System.EventHandler(this.btnHistoryRecord_MouseEnter);
             // 
             // btnStart
             // 
@@ -468,6 +485,19 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             this.btnReset.MouseEnter += new System.EventHandler(this.btnReset_MouseEnter);
+            // 
+            // btnSaveVideo
+            // 
+            this.btnSaveVideo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSaveVideo.FlatAppearance.BorderSize = 0;
+            this.btnSaveVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveVideo.Location = new System.Drawing.Point(305, 5);
+            this.btnSaveVideo.Name = "btnSaveVideo";
+            this.btnSaveVideo.Size = new System.Drawing.Size(42, 40);
+            this.btnSaveVideo.TabIndex = 9;
+            this.btnSaveVideo.Text = "保存视频";
+            this.btnSaveVideo.UseVisualStyleBackColor = true;
+            this.btnSaveVideo.Click += new System.EventHandler(this.btnSaveVideo_Click);
             // 
             // spcMain
             // 
@@ -877,16 +907,16 @@
             this.断开ToolStripMenuItem,
             this.图像设置ToolStripMenuItem,
             this.历史数据ToolStripMenuItem,
-            this.实时数据ToolStripMenuItem});
+            this.实时数据ToolStripMenuItem,
+            this.设置ToolStripMenuItem1});
             this.cmsIPCameraConfig.Name = "cmsIPCameraConfig";
-            this.cmsIPCameraConfig.Size = new System.Drawing.Size(149, 246);
+            this.cmsIPCameraConfig.Size = new System.Drawing.Size(149, 268);
             // 
             // 网络参数设置ToolStripMenuItem
             // 
             this.网络参数设置ToolStripMenuItem.Name = "网络参数设置ToolStripMenuItem";
             this.网络参数设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.网络参数设置ToolStripMenuItem.Text = "网络参数";
-            this.网络参数设置ToolStripMenuItem.Click += new System.EventHandler(this.网络参数设置ToolStripMenuItem_Click);
             // 
             // 测温参数ToolStripMenuItem
             // 
@@ -961,11 +991,11 @@
             // lblTime
             // 
             this.lblTime.AutoSize = true;
-            this.lblTime.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTime.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTime.ForeColor = System.Drawing.Color.White;
             this.lblTime.Location = new System.Drawing.Point(34, 16);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(63, 14);
+            this.lblTime.Size = new System.Drawing.Size(72, 16);
             this.lblTime.TabIndex = 9;
             this.lblTime.Text = "当前时间";
             // 
@@ -977,9 +1007,11 @@
             // pnlBottom
             // 
             this.pnlBottom.BackColor = System.Drawing.Color.SteelBlue;
+            this.pnlBottom.Controls.Add(this.lblRunningStatus);
             this.pnlBottom.Controls.Add(this.lblErrCount);
             this.pnlBottom.Controls.Add(this.lblFireCount);
             this.pnlBottom.Controls.Add(this.pbxErrCount);
+            this.pnlBottom.Controls.Add(this.pbxRunningStatus);
             this.pnlBottom.Controls.Add(this.pbxFireCount);
             this.pnlBottom.Controls.Add(this.lblTime);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -989,13 +1021,25 @@
             this.pnlBottom.Size = new System.Drawing.Size(1250, 45);
             this.pnlBottom.TabIndex = 8;
             // 
+            // lblRunningStatus
+            // 
+            this.lblRunningStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRunningStatus.AutoSize = true;
+            this.lblRunningStatus.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblRunningStatus.ForeColor = System.Drawing.Color.White;
+            this.lblRunningStatus.Location = new System.Drawing.Point(1137, 12);
+            this.lblRunningStatus.Name = "lblRunningStatus";
+            this.lblRunningStatus.Size = new System.Drawing.Size(58, 21);
+            this.lblRunningStatus.TabIndex = 11;
+            this.lblRunningStatus.Text = "未运行";
+            // 
             // lblErrCount
             // 
-            this.lblErrCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblErrCount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblErrCount.AutoSize = true;
             this.lblErrCount.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblErrCount.ForeColor = System.Drawing.Color.White;
-            this.lblErrCount.Location = new System.Drawing.Point(551, 12);
+            this.lblErrCount.Location = new System.Drawing.Point(675, 13);
             this.lblErrCount.Name = "lblErrCount";
             this.lblErrCount.Size = new System.Drawing.Size(79, 20);
             this.lblErrCount.TabIndex = 11;
@@ -1003,11 +1047,11 @@
             // 
             // lblFireCount
             // 
-            this.lblFireCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblFireCount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFireCount.AutoSize = true;
             this.lblFireCount.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblFireCount.ForeColor = System.Drawing.Color.White;
-            this.lblFireCount.Location = new System.Drawing.Point(288, 12);
+            this.lblFireCount.Location = new System.Drawing.Point(412, 13);
             this.lblFireCount.Name = "lblFireCount";
             this.lblFireCount.Size = new System.Drawing.Size(79, 20);
             this.lblFireCount.TabIndex = 11;
@@ -1015,27 +1059,54 @@
             // 
             // pbxErrCount
             // 
-            this.pbxErrCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbxErrCount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pbxErrCount.BackgroundImage = global::InfraredAnalyze.Properties.Resources.灯光;
             this.pbxErrCount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbxErrCount.Location = new System.Drawing.Point(502, 5);
+            this.pbxErrCount.Location = new System.Drawing.Point(626, 6);
             this.pbxErrCount.Margin = new System.Windows.Forms.Padding(0);
             this.pbxErrCount.Name = "pbxErrCount";
             this.pbxErrCount.Size = new System.Drawing.Size(35, 35);
             this.pbxErrCount.TabIndex = 10;
             this.pbxErrCount.TabStop = false;
             // 
+            // pbxRunningStatus
+            // 
+            this.pbxRunningStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbxRunningStatus.BackColor = System.Drawing.Color.Transparent;
+            this.pbxRunningStatus.BackgroundImage = global::InfraredAnalyze.Properties.Resources.Gray;
+            this.pbxRunningStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbxRunningStatus.Location = new System.Drawing.Point(1090, 10);
+            this.pbxRunningStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.pbxRunningStatus.Name = "pbxRunningStatus";
+            this.pbxRunningStatus.Size = new System.Drawing.Size(30, 30);
+            this.pbxRunningStatus.TabIndex = 10;
+            this.pbxRunningStatus.TabStop = false;
+            // 
             // pbxFireCount
             // 
-            this.pbxFireCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbxFireCount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pbxFireCount.BackgroundImage = global::InfraredAnalyze.Properties.Resources.灯光;
             this.pbxFireCount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbxFireCount.Location = new System.Drawing.Point(250, 5);
+            this.pbxFireCount.Location = new System.Drawing.Point(374, 6);
             this.pbxFireCount.Margin = new System.Windows.Forms.Padding(0);
             this.pbxFireCount.Name = "pbxFireCount";
             this.pbxFireCount.Size = new System.Drawing.Size(35, 35);
             this.pbxFireCount.TabIndex = 10;
             this.pbxFireCount.TabStop = false;
+            // 
+            // 设置ToolStripMenuItem1
+            // 
+            this.设置ToolStripMenuItem1.Name = "设置ToolStripMenuItem1";
+            this.设置ToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.设置ToolStripMenuItem1.Text = "设置";
+            this.设置ToolStripMenuItem1.Click += new System.EventHandler(this.设置ToolStripMenuItem1_Click);
+            // 
+            // iconInfrared
+            // 
+            this.iconInfrared.BalloonTipText = "圣敏红外探测";
+            this.iconInfrared.Icon = ((System.Drawing.Icon)(resources.GetObject("iconInfrared.Icon")));
+            this.iconInfrared.Text = "圣敏红外探测";
+            this.iconInfrared.Visible = true;
             // 
             // ucPbx1
             // 
@@ -1257,6 +1328,7 @@
             this.Controls.Add(this.mnsMeuns);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mnsMeuns;
             this.Name = "FrmMain";
             this.Text = "FrmMain";
@@ -1300,6 +1372,7 @@
             this.pnlBottom.ResumeLayout(false);
             this.pnlBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxErrCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxRunningStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFireCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1319,7 +1392,7 @@
         private System.Windows.Forms.ToolStripMenuItem 选项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tlpTools;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnHistoryRecord;
         private System.Windows.Forms.Button btnFullScreen;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnPwd;
@@ -1398,6 +1471,12 @@
         private System.Windows.Forms.PictureBox pbxFireCount;
         private System.Windows.Forms.Label lblFireCount;
         private System.Windows.Forms.Label lblErrCount;
+        private System.Windows.Forms.PictureBox pbxRunningStatus;
+        private System.Windows.Forms.Label lblRunningStatus;
+        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
+        private System.Windows.Forms.Button btnSaveVideo;
+        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem1;
+        private System.Windows.Forms.NotifyIcon iconInfrared;
     }
 }
 

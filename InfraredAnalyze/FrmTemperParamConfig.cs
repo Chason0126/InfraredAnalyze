@@ -22,8 +22,6 @@ namespace InfraredAnalyze
         SqlCreate sqlCreate = new SqlCreate();
         private int cameraId;
         private string ip;
-        int tempOperateIntptr;
-        int tempConnectIntptr;
         int MeasureClass;//测温档位
         int RefeType;//参考温度类型
         int RefeTemp;//自定义参考温度
@@ -54,17 +52,16 @@ namespace InfraredAnalyze
 
         private void FrmTemperParamConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DMSDK.DM_CloseMonitor(tempConnectIntptr);
-            DMSDK.DM_Disconnect(tempOperateIntptr);
+            DMSDK.DM_CloseMonitor(StaticClass.Temper_Monitor);
+            DMSDK.DM_Disconnect(StaticClass.Temper_Connect);
         }
 
         private void FrmTemperParamConfig_Load(object sender, EventArgs e)
         {
             DMSDK.DM_Init();
-            tempOperateIntptr = DMSDK.DM_Connect(pbxScreen.Handle, ip, 80);
-            tempConnectIntptr = DMSDK.DM_OpenMonitor(pbxScreen.Handle, ip, 5000);
-            int InitValue = DMSDK.DM_PlayerInit(pbxScreen.Handle);
-            if (tempOperateIntptr <= 0 || InitValue < 0)
+            StaticClass.Temper_Connect = DMSDK.DM_Connect(pbxScreen.Handle, ip, 80);
+            StaticClass.Temper_Monitor = DMSDK.DM_OpenMonitor(pbxScreen.Handle, ip, 5000);
+            if (StaticClass.Temper_Connect <= 0)
             {
                 MessageBox.Show("连接失败，请检查线路或者修改参数后重试！");
                 this.Close();
@@ -72,15 +69,26 @@ namespace InfraredAnalyze
             }
             else
             {
+                //int iEnable = new int();
+                //string IP = "";
+                //string ID = "";
+                //string Password = "";
+                //string Path = "";
+                //int iOverWrite = new int();
+                //int iFullAlarm = new int();
+                //int iFullGrade = new int();
+                //string cSize = "";
+                //string cAvailableSpace = "";
                 //fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
-                //DMSDK.DM_GetTemp(tempOperateIntptr, 0);//获取所有的测温目标的测温结果
+                //DMSDK.DM_GetTemp(StaticClass.Temper_Connect, 0);//获取所有的测温目标的测温结果
                 //DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
+                //int revalue = DMSDK.DM_GetNASInfo(StaticClass.Temper_Connect, ref iEnable, IP, ID, Password, Path, ref iOverWrite, ref iFullAlarm, ref iFullGrade, cSize, cAvailableSpace);
                 GetAlarmParam();
                 Get_Area_Param();
             }
         }
 
-        #region//回调函数
+        #region//回调函数 测试使用
         int len;
         DMSDK.tagTemperature tagTemperature;
         DMSDK.tagTempMessage tempMessage;
@@ -121,59 +129,35 @@ namespace InfraredAnalyze
         }
         #endregion
 
-        private void btnClose_MouseEnter(object sender, EventArgs e)
-        {
-            btnClose.BackColor = Color.Red;
-        }
-
-        private void btnClose_MouseLeave(object sender, EventArgs e)
-        {
-            btnClose.BackColor = Color.Transparent;
-        }
-
         Point point;
-        private void pnlHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            point = new Point(e.X, e.Y);
-        }
-
-        private void pnlHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                Point tempPoint = MousePosition;
-                tempPoint.Offset(-point.X, -point.Y);
-                this.Location = tempPoint;
-            }
-        }
 
         private void GetAlarmParam()
         {
-            cbxMeasureClass.SelectedIndex = DMSDK.DM_GetMeasureClass(tempOperateIntptr) - 1;//测温档位
+            cbxMeasureClass.SelectedIndex = DMSDK.DM_GetMeasureClass(StaticClass.Temper_Connect) - 1;//测温档位
 
-            cbxRefeType.SelectedIndex = DMSDK.DM_GetRefeType(tempOperateIntptr);//参考温度类型
+            cbxRefeType.SelectedIndex = DMSDK.DM_GetRefeType(StaticClass.Temper_Connect);//参考温度类型
 
-            RefeTemp = DMSDK.DM_GetRefeTemp(tempOperateIntptr) / 100;//自定义参考温度的值
+            RefeTemp = DMSDK.DM_GetRefeTemp(StaticClass.Temper_Connect) / 100;//自定义参考温度的值
 
-            tbxAmbientTemp.Text = (DMSDK.DM_GetAmbientTemp(tempOperateIntptr) / 100).ToString();//环境温度
+            tbxAmbientTemp.Text = (DMSDK.DM_GetAmbientTemp(StaticClass.Temper_Connect) / 100).ToString();//环境温度
 
-            tbxObjDistance.Text = (DMSDK.DM_GetObjDistance(tempOperateIntptr)).ToString();//环境距离
+            tbxObjDistance.Text = (DMSDK.DM_GetObjDistance(StaticClass.Temper_Connect)).ToString();//环境距离
 
-            tbxAmbientHumidity.Text =(DMSDK.DM_GetAmbientHumidity(tempOperateIntptr) / 100).ToString();//环境湿度
+            tbxAmbientHumidity.Text =(DMSDK.DM_GetAmbientHumidity(StaticClass.Temper_Connect) / 100).ToString();//环境湿度
 
-            tbxReviseParam.Text = (DMSDK.DM_GetReviseParam(tempOperateIntptr) / 100).ToString();//修正系数
+            tbxReviseParam.Text = (DMSDK.DM_GetReviseParam(StaticClass.Temper_Connect) / 100).ToString();//修正系数
 
-            tbxReviseTemp.Text = (DMSDK.DM_GetReviseTemp(tempOperateIntptr) / 100).ToString();//修正温度
+            tbxReviseTemp.Text = (DMSDK.DM_GetReviseTemp(StaticClass.Temper_Connect) / 100).ToString();//修正温度
 
-            DMSDK.DM_GetTemperatureScope(tempOperateIntptr, out dwValue1, out dwValue2);//修正温度范围
+            DMSDK.DM_GetTemperatureScope(StaticClass.Temper_Connect, out dwValue1, out dwValue2);//修正温度范围
             tbxdwValue1.Text = dwValue1.ToString();
             tbxdwValue2.Text = dwValue2.ToString();
 
-            tbxAlarmTemp.Text = (DMSDK.DM_GetAlarmTemp(tempOperateIntptr) / 100).ToString();//报警温度
+            tbxAlarmTemp.Text = (DMSDK.DM_GetAlarmTemp(StaticClass.Temper_Connect) / 100).ToString();//报警温度
 
-            cbxAlarm.SelectedIndex = DMSDK.DM_GetRemoteAlarm(tempOperateIntptr);//报警状态
+            cbxAlarm.SelectedIndex = DMSDK.DM_GetRemoteAlarm(StaticClass.Temper_Connect);//报警状态
 
-            cbxAlarmColor.SelectedIndex = DMSDK.DM_GetRemoteAlarmColor(tempOperateIntptr);//仪器端报警色
+            cbxAlarmColor.SelectedIndex = DMSDK.DM_GetRemoteAlarmColor(StaticClass.Temper_Connect);//仪器端报警色
 
             for(int i = 0; i <3; i++)
             {
@@ -182,7 +166,7 @@ namespace InfraredAnalyze
                     switch (i)
                     {
                         case 0://点
-                            DMSDK.DM_GetAlarmInfo(tempOperateIntptr, i, j + 1, out AlarmPower, out AlarmType, out AlarmTemp, out AlarmColorID, out AlarmMessageType);
+                            DMSDK.DM_GetAlarmInfo(StaticClass.Temper_Connect, i, j + 1, out AlarmPower, out AlarmType, out AlarmTemp, out AlarmColorID, out AlarmMessageType);
                             ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmTypeSpot_" + j + "", false)[0])).SelectedIndex = AlarmType;
                             ((TextBox)(grpAlarmInfo.Controls.Find("tbxAlarmTempSpot_" + j + "", false)[0])).Text = (AlarmTemp / 100).ToString();
                             ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmColorSpot_" + j + "", false)[0])).SelectedIndex = AlarmColorID;
@@ -190,7 +174,7 @@ namespace InfraredAnalyze
                             ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeSpot_" + j + "", false)[0])).SelectedIndex = AlarmMessageType;
                             break;
                         case 2://区域
-                            DMSDK.DM_GetAlarmInfo(tempOperateIntptr, i, j + 5, out AlarmPower, out AlarmType, out AlarmTemp, out AlarmColorID, out AlarmMessageType);
+                            DMSDK.DM_GetAlarmInfo(StaticClass.Temper_Connect, i, j + 5, out AlarmPower, out AlarmType, out AlarmTemp, out AlarmColorID, out AlarmMessageType);
                             ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmTypeArea_" + j + "", false)[0])).SelectedIndex = AlarmType;
                             ((TextBox)(grpAlarmInfo.Controls.Find("tbxAlarmTempArea_" + j + "", false)[0])).Text = (AlarmTemp / 100).ToString();
                             ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmColorArea_" + j + "", false)[0])).SelectedIndex = AlarmColorID;
@@ -198,7 +182,7 @@ namespace InfraredAnalyze
                             ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeArea_" + j + "", false)[0])).SelectedIndex = AlarmMessageType;
                             break;
                         case 1://线
-                            DMSDK.DM_GetAlarmInfo(tempOperateIntptr, i, j, out AlarmPower, out AlarmType, out AlarmTemp, out AlarmColorID, out AlarmMessageType);
+                            DMSDK.DM_GetAlarmInfo(StaticClass.Temper_Connect, i, j, out AlarmPower, out AlarmType, out AlarmTemp, out AlarmColorID, out AlarmMessageType);
                             ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmTypeLine_1", false)[0])).SelectedIndex = AlarmType;
                             ((TextBox)(grpAlarmInfo.Controls.Find("tbxAlarmTempLine_1", false)[0])).Text = (AlarmTemp / 100).ToString();
                             ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmColorLine_1", false)[0])).SelectedIndex = AlarmColorID;
@@ -226,18 +210,18 @@ namespace InfraredAnalyze
 
         private void btnUpdateAlarmParam_Click(object sender, EventArgs e)
         {
-            DMSDK.DM_SetMeasureClass(tempOperateIntptr, cbxMeasureClass.SelectedIndex + 1);//设置测温档位
-            DMSDK.DM_SetRefeType(tempOperateIntptr, cbxRefeType.SelectedIndex);//设置参考温度类型
+            DMSDK.DM_SetMeasureClass(StaticClass.Temper_Connect, cbxMeasureClass.SelectedIndex + 1);//设置测温档位
+            DMSDK.DM_SetRefeType(StaticClass.Temper_Connect, cbxRefeType.SelectedIndex);//设置参考温度类型
             if (cbxRefeType.SelectedIndex == 1)
             {
-                DMSDK.DM_SetRefeTemp(tempOperateIntptr, Convert.ToInt32(tbxRefeTemp.Text) * 100);//自定义温度时
+                DMSDK.DM_SetRefeTemp(StaticClass.Temper_Connect, Convert.ToInt32(tbxRefeTemp.Text) * 100);//自定义温度时
             }
-            DMSDK.DM_SetAmbientTemp(tempOperateIntptr, Convert.ToInt32(tbxAmbientTemp.Text) * 100);//设置环境温度
-            DMSDK.DM_SetObjDistance(tempOperateIntptr, Convert.ToInt32(tbxObjDistance.Text));//设置环境距离
-            DMSDK.DM_SetAmbientHumidity(tempOperateIntptr, Convert.ToInt32(tbxAmbientHumidity.Text) * 100);//设置环境湿度
-            DMSDK.DM_SetReviseParam(tempOperateIntptr, Convert.ToInt32(tbxReviseParam.Text) * 100);//修正系数
-            DMSDK.DM_SetReviseTemp(tempOperateIntptr, Convert.ToInt32(tbxReviseTemp.Text) * 100);//修正温度
-            DMSDK.DM_SetTemperatureScope(tempOperateIntptr, Convert.ToInt32(tbxdwValue1.Text), Convert.ToInt32(tbxdwValue2.Text));
+            DMSDK.DM_SetAmbientTemp(StaticClass.Temper_Connect, Convert.ToInt32(tbxAmbientTemp.Text) * 100);//设置环境温度
+            DMSDK.DM_SetObjDistance(StaticClass.Temper_Connect, Convert.ToInt32(tbxObjDistance.Text));//设置环境距离
+            DMSDK.DM_SetAmbientHumidity(StaticClass.Temper_Connect, Convert.ToInt32(tbxAmbientHumidity.Text) * 100);//设置环境湿度
+            DMSDK.DM_SetReviseParam(StaticClass.Temper_Connect, Convert.ToInt32(tbxReviseParam.Text) * 100);//修正系数
+            DMSDK.DM_SetReviseTemp(StaticClass.Temper_Connect, Convert.ToInt32(tbxReviseTemp.Text) * 100);//修正温度
+            DMSDK.DM_SetTemperatureScope(StaticClass.Temper_Connect, Convert.ToInt32(tbxdwValue1.Text), Convert.ToInt32(tbxdwValue2.Text));
             GetAlarmParam();
             MessageBox.Show("设置成功！");
         }
@@ -249,19 +233,19 @@ namespace InfraredAnalyze
             thread.Start();
             if (cbxAlarm.SelectedIndex == 0)//打开或关闭 报警功能
             {
-                DMSDK.DM_CloseRemoteAlarm(tempOperateIntptr);
+                DMSDK.DM_CloseRemoteAlarm(StaticClass.Temper_Connect);
             }
             else if (cbxAlarm.SelectedIndex == 1)
             {
-                DMSDK.DM_OpenAlarm(tempOperateIntptr);
+                DMSDK.DM_OpenAlarm(StaticClass.Temper_Connect);
             }
-            DMSDK.DM_SetRemoteAlarmTemp(tempOperateIntptr, Convert.ToInt32(tbxAlarmTemp.Text) * 100);//设置报警温度
-            DMSDK.DM_SetRemoteAlarmColor(tempOperateIntptr, cbxAlarmColor.SelectedIndex);//设置报警颜色
+            DMSDK.DM_SetRemoteAlarmTemp(StaticClass.Temper_Connect, Convert.ToInt32(tbxAlarmTemp.Text) * 100);//设置报警温度
+            DMSDK.DM_SetRemoteAlarmColor(StaticClass.Temper_Connect, cbxAlarmColor.SelectedIndex);//设置报警颜色
             if (ckbIO.Checked)
             {
                 if (cbxiIO.SelectedIndex == -1 || cbxiEnable.SelectedIndex == -1)
                 {
-                    DMSDK.DM_IOAlarm(tempOperateIntptr, cbxiIO.SelectedIndex + 2, cbxiEnable.SelectedIndex);
+                    DMSDK.DM_IOAlarm(StaticClass.Temper_Connect, cbxiIO.SelectedIndex + 2, cbxiEnable.SelectedIndex);
                 }
             }
             for (int i = 0; i < 3; i++)
@@ -277,7 +261,7 @@ namespace InfraredAnalyze
                             AlarmColorID = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmColorSpot_" + j + "", false)[0])).SelectedIndex;
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerSpot_" + j + "", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeSpot_" + j + "", false)[0])).SelectedIndex;
-                            DMSDK.DM_SetAlarmInfo(tempOperateIntptr, i, j + 1, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测温点 编号+1 从1开始算
+                            DMSDK.DM_SetAlarmInfo(StaticClass.Temper_Connect, i, j + 1, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测温点 编号+1 从1开始算
                             sqlCreate.Update_Alarmconfig(cameraId, "S" + (j + 1), AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));//向数据库写入 告警设置信息 供 判断告警时使用
                             break;
                         case 2://设置区域温度告警
@@ -286,7 +270,7 @@ namespace InfraredAnalyze
                             AlarmColorID = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmColorArea_" + j + "", false)[0])).SelectedIndex;
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerArea_" + j + "", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeArea_" + j + "", false)[0])).SelectedIndex;
-                            DMSDK.DM_SetAlarmInfo(tempOperateIntptr, i, j + 5, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测区域 编号 +5 从6开始算起
+                            DMSDK.DM_SetAlarmInfo(StaticClass.Temper_Connect, i, j + 5, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测区域 编号 +5 从6开始算起
                             sqlCreate.Update_Alarmconfig(cameraId, "A" + (j + 5), AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));
                             break;
                         case 1://设置线 温度告警
@@ -295,7 +279,7 @@ namespace InfraredAnalyze
                             AlarmColorID = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmColorLine_1", false)[0])).SelectedIndex;
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerLine_1", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeLine_1", false)[0])).SelectedIndex;
-                            DMSDK.DM_SetAlarmInfo(tempOperateIntptr, i, j, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测温线  仅一条
+                            DMSDK.DM_SetAlarmInfo(StaticClass.Temper_Connect, i, j, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测温线  仅一条
                             sqlCreate.Update_Alarmconfig(cameraId, "L1", AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));
                             break;
                     }
@@ -641,25 +625,25 @@ namespace InfraredAnalyze
                     if (tbxSpot_1_X.Enabled)
                     {
                         type = "S2";
-                        DMSDK.DM_SetSpot(tempOperateIntptr, 2, x - 2, y - 2, emiss);
+                        DMSDK.DM_SetSpot(StaticClass.Temper_Connect, 2, x - 2, y - 2, emiss);
                         sqlCreate.Update_Spot(cameraId, type, x - 2, y - 2, emiss);
                     }
                     else if (tbxSpot_2_X.Enabled)
                     {
                         type = "S3";
-                        DMSDK.DM_SetSpot(tempOperateIntptr, 3, x - 2, y - 2, emiss);
+                        DMSDK.DM_SetSpot(StaticClass.Temper_Connect, 3, x - 2, y - 2, emiss);
                         sqlCreate.Update_Spot(cameraId, type, x - 2, y - 2, emiss);
                     }
                     else if (tbxSpot_3_X.Enabled)
                     {
                         type = "S4";
-                        DMSDK.DM_SetSpot(tempOperateIntptr, 4, x - 2, y - 2, emiss);
+                        DMSDK.DM_SetSpot(StaticClass.Temper_Connect, 4, x - 2, y - 2, emiss);
                         sqlCreate.Update_Spot(cameraId, type, x - 2, y - 2, emiss);
                     }
                     else if (tbxSpot_4_X.Enabled)
                     {
                         type = "S5";
-                        DMSDK.DM_SetSpot(tempOperateIntptr, 5, x - 2, y - 2, emiss);
+                        DMSDK.DM_SetSpot(StaticClass.Temper_Connect, 5, x - 2, y - 2, emiss);
                         sqlCreate.Update_Spot(cameraId, type, x - 2, y - 2, emiss);
                     }
                     Cancel_SetSpot(type, btnAdd_Spot, tbxSpot_X, tbxSpot_Y, tbxSpot_Emiss, btnClear_Spot);
@@ -719,25 +703,25 @@ namespace InfraredAnalyze
                     if (tbxArea_1_X1.Enabled)
                     {
                         type = "A6";
-                        DMSDK.DM_SetArea(tempOperateIntptr, 6, x1, y1, x2, y2, emiss, messuretype);
+                        DMSDK.DM_SetArea(StaticClass.Temper_Connect, 6, x1, y1, x2, y2, emiss, messuretype);
                         sqlCreate.Update_Area(cameraId, "A6", x1, y1, x2, y2, emiss, messuretype);
                     }
                     else if (tbxArea_2_X1.Enabled)
                     {
                         type = "A7";
-                        DMSDK.DM_SetArea(tempOperateIntptr, 7, x1, y1, x2, y2, emiss, messuretype);
+                        DMSDK.DM_SetArea(StaticClass.Temper_Connect, 7, x1, y1, x2, y2, emiss, messuretype);
                         sqlCreate.Update_Area(cameraId, "A7", x1, y1, x2, y2, emiss, messuretype);
                     }
                     else if (tbxArea_3_X1.Enabled)
                     {
                         type = "A8";
-                        DMSDK.DM_SetArea(tempOperateIntptr, 8, x1, y1, x2, y2, emiss, messuretype);
+                        DMSDK.DM_SetArea(StaticClass.Temper_Connect, 8, x1, y1, x2, y2, emiss, messuretype);
                         sqlCreate.Update_Area(cameraId, "A8", x1, y1, x2, y2, emiss, messuretype);
                     }
                     else if (tbxArea_4_X1.Enabled)
                     {
                         type = "A9";
-                        DMSDK.DM_SetArea(tempOperateIntptr, 9, x1, y1, x2, y2, emiss, messuretype);
+                        DMSDK.DM_SetArea(StaticClass.Temper_Connect, 9, x1, y1, x2, y2, emiss, messuretype);
                         sqlCreate.Update_Area(cameraId, "A9", x1, y1, x2, y2, emiss, messuretype);
                     }
                     Cancel_SetArea(type, btnAdd_Area, tbxArea_X1, tbxArea_Y1, tbxArea_X2, tbxArea_Y2, tbxArea_Emiss, cbxMeasureType, btnClear_Area);
@@ -794,7 +778,7 @@ namespace InfraredAnalyze
                     if (tbxLine_X1.Enabled)
                     {
                         type = "L1";
-                        DMSDK.DM_SetLine(tempOperateIntptr, 1, x1, y1, x2, y2, ((x1 + x2) / 2) - 2, ((y1 + y2) / 2) - 4, emiss);
+                        DMSDK.DM_SetLine(StaticClass.Temper_Connect, 1, x1, y1, x2, y2, ((x1 + x2) / 2) - 2, ((y1 + y2) / 2) - 4, emiss);
                         sqlCreate.Update_Line(cameraId, "L1", x1, y1, x2, y2, (x1 + x2) / 2, (y1 + y2) / 2, emiss);
                     }
                     Cancel_SetLine(type, btnAdd_Line, tbxLine_X1, tbxLine_Y1, tbxLine_X2, tbxLine_Y2, tbxLine_X3, tbxLine_Y3, tbxLine_Emiss, btnClear_Line);
@@ -1003,7 +987,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Spot_1.Text == "清除")
             {
-                DMSDK.DM_ClearSpot(tempOperateIntptr, 2);
+                DMSDK.DM_ClearSpot(StaticClass.Temper_Connect, 2);
                 sqlCreate.Delete_Spot(cameraId, "S2");
                 tbxSpot_1_X.Text = "0";
                 tbxSpot_1_Y.Text = "0";
@@ -1018,7 +1002,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Spot_2.Text == "清除")
             {
-                DMSDK.DM_ClearSpot(tempOperateIntptr, 3);
+                DMSDK.DM_ClearSpot(StaticClass.Temper_Connect, 3);
                 sqlCreate.Delete_Spot(cameraId, "S3");
                 tbxSpot_2_X.Text = "0";
                 tbxSpot_2_Y.Text = "0";
@@ -1033,7 +1017,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Spot_3.Text == "清除")
             {
-                DMSDK.DM_ClearSpot(tempOperateIntptr, 4);
+                DMSDK.DM_ClearSpot(StaticClass.Temper_Connect, 4);
                 sqlCreate.Delete_Spot(cameraId, "S4");
                 tbxSpot_3_X.Text = "0";
                 tbxSpot_3_Y.Text = "0";
@@ -1048,7 +1032,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Spot_4.Text == "清除")
             {
-                DMSDK.DM_ClearSpot(tempOperateIntptr, 5);
+                DMSDK.DM_ClearSpot(StaticClass.Temper_Connect, 5);
                 sqlCreate.Delete_Spot(cameraId, "S5");
                 tbxSpot_4_X.Text = "0";
                 tbxSpot_4_Y.Text = "0";
@@ -1063,7 +1047,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Area_1.Text == "清除")
             {
-                DMSDK.DM_ClearArea(tempOperateIntptr, 6);
+                DMSDK.DM_ClearArea(StaticClass.Temper_Connect, 6);
                 sqlCreate.Delete_Area(cameraId, "A6");
                 tbxArea_1_X1.Text = "0";
                 tbxArea_1_X2.Text = "0";
@@ -1079,7 +1063,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Area_2.Text == "清除")
             {
-                DMSDK.DM_ClearArea(tempOperateIntptr, 7);
+                DMSDK.DM_ClearArea(StaticClass.Temper_Connect, 7);
                 sqlCreate.Delete_Area(cameraId, "A7");
                 tbxArea_2_X1.Text = "0";
                 tbxArea_2_X2.Text = "0";
@@ -1096,7 +1080,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Area_3.Text == "清除")
             {
-                DMSDK.DM_ClearArea(tempOperateIntptr, 8);
+                DMSDK.DM_ClearArea(StaticClass.Temper_Connect, 8);
                 sqlCreate.Delete_Area(cameraId, "A8");
                 tbxArea_3_X1.Text = "0";
                 tbxArea_3_X2.Text = "0";
@@ -1113,7 +1097,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Area_4.Text == "清除")
             {
-                DMSDK.DM_ClearArea(tempOperateIntptr, 9);
+                DMSDK.DM_ClearArea(StaticClass.Temper_Connect, 9);
                 sqlCreate.Delete_Area(cameraId, "A9");
                 tbxArea_4_X1.Text = "0";
                 tbxArea_4_X2.Text = "0";
@@ -1130,7 +1114,7 @@ namespace InfraredAnalyze
         {
             if (btnClear_Line_1.Text == "清除")
             {
-                DMSDK.DM_ClearLine(tempOperateIntptr, 1);
+                DMSDK.DM_ClearLine(StaticClass.Temper_Connect, 1);
                 sqlCreate.Delete_Line(cameraId, "L1");
                 tbxLine_1_X1.Text = "0";
                 tbxLine_1_Y1.Text = "0";
@@ -1155,9 +1139,9 @@ namespace InfraredAnalyze
 
         private void btnClearAll_Click(object sender, EventArgs e)//全部清除 测温目标
         {
-            DMSDK.DM_ClearAllArea(tempOperateIntptr);
-            DMSDK.DM_ClearAllLine(tempOperateIntptr);
-            DMSDK.DM_ClearAllSpot(tempOperateIntptr);
+            DMSDK.DM_ClearAllArea(StaticClass.Temper_Connect);
+            DMSDK.DM_ClearAllLine(StaticClass.Temper_Connect);
+            DMSDK.DM_ClearAllSpot(StaticClass.Temper_Connect);
         }
     }
 }

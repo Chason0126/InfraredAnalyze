@@ -40,6 +40,12 @@ namespace InfraredAnalyze
         StructClass.alarmStructCount alarmStructCount;
         StructClass.AreaAlarmCount[] areaAlarmCounts;
 
+        StructClass.StructErrData errData;
+        StructClass.StructFireData fireData;
+        int fireCount = StaticClass.arrayList_FireData.Count;
+        bool RunStaus = false;
+
+
         #region//构造函数
         public FrmMain()
         {
@@ -109,6 +115,7 @@ namespace InfraredAnalyze
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {
             btnClose.BackColor = Color.Red;
+            this.Cursor = Cursors.Arrow;
         }
 
         private void btnClose_MouseLeave(object sender, EventArgs e)
@@ -126,6 +133,7 @@ namespace InfraredAnalyze
         private void btnWindow_MouseEnter(object sender, EventArgs e)
         {
             btnWindow.BackColor = Color.Green;
+            this.Cursor = Cursors.Arrow;
         }
 
         private void btnWindow_MouseLeave(object sender, EventArgs e)
@@ -136,6 +144,7 @@ namespace InfraredAnalyze
         private void btnMin_MouseEnter(object sender, EventArgs e)
         {
             btnMin.BackColor = Color.Yellow;
+            this.Cursor = Cursors.Arrow;
         }
 
         private void btnMin_MouseLeave(object sender, EventArgs e)
@@ -572,14 +581,14 @@ namespace InfraredAnalyze
         #region//树视图双击事件
         private void tvwSensor_DoubleClick(object sender, EventArgs e)
         {
-            TreeNode treeNode = tvwSensor.GetNodeAt(tvwPoint);
-            FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
-            if (treeNode != null)
-            {
-                StructClass.StructSM7003Tag sM7003Tag = (StructClass.StructSM7003Tag)treeNode.Tag;//将所双击的树视图的节点的 cameraID赋值给弹出窗体的ID属性
-                frmCameraConfig.IPCameraID = sM7003Tag.CameraID;
-                frmCameraConfig.ShowDialog();
-            }
+            //TreeNode treeNode = tvwSensor.GetNodeAt(tvwPoint);
+            //FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
+            //if (treeNode != null)
+            //{
+            //    StructClass.StructSM7003Tag sM7003Tag = (StructClass.StructSM7003Tag)treeNode.Tag;//将所双击的树视图的节点的 cameraID赋值给弹出窗体的ID属性
+            //    frmCameraConfig.IPCameraID = sM7003Tag.CameraID;
+            //    frmCameraConfig.ShowDialog();
+            //}
         }
         #endregion
 
@@ -654,6 +663,22 @@ namespace InfraredAnalyze
         #endregion
         #endregion
 
+        #region//设置
+        private void 设置ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            structSM7003Tag = new StructClass.StructSM7003Tag();
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                FrmConfig frmConfig = new FrmConfig();
+                StaticClass.Temper_CameraId= structSM7003Tag.CameraID;
+                StaticClass.Temper_Ip = structSM7003Tag.IP;
+                frmConfig.ShowDialog();
+            }
+        }
+        #endregion
+
         #region//系统参数设置
         private void 测温参数ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -677,25 +702,11 @@ namespace InfraredAnalyze
         }
         #endregion
 
-        #region//网络参数设置
-        private void 网络参数设置ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmCameraNetConfig frmCameraConfig = new FrmCameraNetConfig();
-            structSM7003Tag = new StructClass.StructSM7003Tag();
-            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
-            if (tvwSensor.SelectedNode != null)
-            {
-                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
-                frmCameraConfig.IPCameraID = structSM7003Tag.CameraID;
-                frmCameraConfig.ShowDialog();
-            }
-        }
-        #endregion
 
         #region//图像设置
         private void 图像设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmImageConfig frmImageConfig = new FrmImageConfig();
+            FrmImgConfig frmImageConfig = new FrmImgConfig();
             structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if (tvwSensor.SelectedNode != null)
@@ -719,13 +730,7 @@ namespace InfraredAnalyze
                 if (tvwSensor.SelectedNode != null)
                 {
                     structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
-
-                    int InitValue = DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1]);
-                    if (InitValue < 0)
-                    {
-                        MessageBox.Show("探测器初始化失败");
-                        return;
-                    }
+                    //int InitValue = DMSDK.DM_PlayerInit(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1]);
                     StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1], structSM7003Tag.IP, 5000);
                     if (StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] < 0)
                     {
@@ -849,6 +854,11 @@ namespace InfraredAnalyze
         #region//配置IP
         private void 配置IPToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if(StaticClass.SelectedNode==0)
+            {
+                MessageBox.Show("请选择需要操作的探测器！");
+                return;
+            }
             FrmIpConfig frmIpConfig = new FrmIpConfig();
             frmIpConfig.ShowDialog();
         }
@@ -857,54 +867,133 @@ namespace InfraredAnalyze
         #region//清空数据库
         private void 清空数据库ToolStripMenuItem_Click(object sender, EventArgs e)//谨慎操作（仅当数据库异常时供操作）
         {
-            if (MessageBox.Show("确定要清空数据库吗？这将删除所有数据，并且不可恢复，请谨慎操作！", "不可恢复的操作", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK)
-            {
-                //sqlCreate.Drop_AllDatabase();
-            }
+            //if (MessageBox.Show("确定要清空数据库吗？这将删除所有数据，并且不可恢复，请谨慎操作！", "不可恢复的操作", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            //{
+            //    thread = new Thread(showIsRunning);//显示请勿操作界面 防止误操作
+            //    thread.IsBackground = true;
+            //    thread.Start();
+            //    sqlCreate.Drop_AllDatabase();
+            //    thread.Abort();
+            //    MessageBox.Show("请重新启动软件来完成初始化数据库！");
+            //}
         }
         #endregion
 
         #region//显示时间 火警数量 故障数量
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int firecount = 0;
-            int errcount = 0;
-          
-            for(int i = 0; i < 16; i++)
+            try
             {
-                if (StaticClass.intPtrs_Status[i] == 1)//告警
+                int firecount = 0;
+                int errcount = 0;
+                if (StaticClass.FireCount > 0)
                 {
-                    firecount++;
-                }else if(StaticClass.intPtrs_Status[i] == 2)
-                {
-                    errcount++;
+                    pbxFireCount.BackgroundImage = Properties.Resources.红灯光;
                 }
+                else
+                {
+                    pbxFireCount.BackgroundImage = Properties.Resources.灯光;
+                }
+                if (StaticClass.ErrCount > 0)
+                {
+                    pbxErrCount.BackgroundImage = Properties.Resources.黄灯光;
+                }
+                else
+                {
+                    pbxErrCount.BackgroundImage = Properties.Resources.灯光;
+                }
+                if (StaticClass.SelectedNode == 0)
+                {
+                    btnCameraConfig.BackgroundImage = Properties.Resources.cameraConfig_disable;
+                }
+                else
+                {
+                    btnCameraConfig.BackgroundImage = Properties.Resources.cameraConfig;
+                }
+                if (dgvWarning.RowCount != StaticClass.arrayList_FireData.Count)
+                {
+                    dgvWarning.Rows.Clear();
+                    for (int i = StaticClass.arrayList_FireData.Count; i > 0; i--)
+                    {
+                        fireData = (StructClass.StructFireData)StaticClass.arrayList_FireData[i - 1];
+                        dgvWarning.Rows.Add(fireData.dateTime, fireData.Type, fireData.IPAddress, fireData.Message);
+                    }
+                    fireCount = StaticClass.arrayList_FireData.Count;
+                }
+                if (dgvError.RowCount != StaticClass.arrayList_ErrData.Count)
+                {
+                    dgvError.Rows.Clear();
+                    for (int i = StaticClass.arrayList_ErrData.Count; i > 0; i--)
+                    {
+                        errData = (StructClass.StructErrData)StaticClass.arrayList_ErrData[i - 1];
+                        dgvError.Rows.Add(errData.dateTime, errData.Type, errData.IPAddress, errData.Message);
+                    }
+                    fireCount = StaticClass.arrayList_FireData.Count;
+                }
+                for (int i = 0; i < 16; i++)
+                {
+                    if (StaticClass.intPtrs_Status[i] == (int)RunningStatus.先火警再故障)//两个都算
+                    {
+                        firecount++;
+                        errcount++;
+                    }
+                    if (StaticClass.intPtrs_Status[i] == (int)RunningStatus.火警)
+                    {
+                        firecount++;
+                        for (int j = 0; j < StaticClass.arrayList_ErrData.Count; j++)
+                        {
+                            errData = (StructClass.StructErrData)StaticClass.arrayList_ErrData[j];
+                            if (errData.IPAddress == StaticClass.intPtrs_Ip[i])//在故障数组里出现了
+                            {
+                                StaticClass.arrayList_ErrData.Remove(errData);
+                            }
+                        }
+                    }
+                    else if (StaticClass.intPtrs_Status[i] == (int)RunningStatus.故障)
+                    {
+                        errcount++;
+                    }
+                    else if (StaticClass.intPtrs_Status[i] == (int)RunningStatus.正常)
+                    {
+                        for (int j = 0; j < StaticClass.arrayList_ErrData.Count; j++)
+                        {
+                            errData = (StructClass.StructErrData)StaticClass.arrayList_ErrData[j];
+                            if (errData.IPAddress == StaticClass.intPtrs_Ip[i])//在故障数组里出现了
+                            {
+                                StaticClass.arrayList_ErrData.Remove(errData);
+                            }
+                        }
+                    }
+                }
+                if (RunStaus)
+                {
+                    lblRunningStatus.Text = "运行中";
+                    pbxRunningStatus.BackgroundImage = Properties.Resources.green;
+                }else
+                {
+                    lblRunningStatus.Text = "未运行";
+                    pbxRunningStatus.BackgroundImage = Properties.Resources.Gray;
+                }
+                StaticClass.FireCount = firecount;
+                StaticClass.ErrCount = errcount;
+                lblTime.Text = DateTime.Now.ToString("F");
+                lblFireCount.Text = "火警数量：" + StaticClass.FireCount.ToString();
+                lblErrCount.Text = "故障数量：" + StaticClass.ErrCount.ToString();
             }
-            StaticClass.FireCount = firecount;
-            StaticClass.ErrCount = errcount;
-            if (StaticClass.FireCount > 0)
+            catch(Exception ex)
             {
-                pbxFireCount.BackgroundImage = Properties.Resources.红灯光;
+                MessageBox.Show(ex.Message + "界面信息更新异常！");
             }
-            else
-            {
-                pbxFireCount.BackgroundImage = Properties.Resources.灯光;
-            }
-            if (StaticClass.ErrCount > 0)
-            {
-                pbxErrCount.BackgroundImage = Properties.Resources.黄灯光;
-            }
-            else
-            {
-                pbxErrCount.BackgroundImage = Properties.Resources.灯光;
-            }
-            lblTime.Text = DateTime.Now.ToString("F");
-            lblFireCount.Text = "火警数量：" + StaticClass.FireCount.ToString();
-            lblErrCount.Text = "故障数量：" + StaticClass.ErrCount.ToString();
         }
         #endregion
 
         #region//复位
+        private void btnReset_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnReset, "软件复位");
+        }
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             StaticClass.FireCount = 0;
@@ -916,6 +1005,8 @@ namespace InfraredAnalyze
                     StaticClass.intPtrs_Status[i] = (int)RunningStatus.正常;
                 }
             }
+            StaticClass.arrayList_FireData.Clear();
+            StaticClass.arrayList_ErrData.Clear();
             dgvError.Rows.Clear();
             dgvWarning.Rows.Clear();
         }
@@ -927,6 +1018,22 @@ namespace InfraredAnalyze
 
         }
         #endregion
+
+        #region//历史记录（包括火警  故障）
+        private void btnHistoryRecord_Click(object sender, EventArgs e)
+        {
+            FrmHisRecords frmHisRecords = new FrmHisRecords();
+            frmHisRecords.CameraId = StaticClass.SelectedNode;
+            frmHisRecords.Show();
+        }
+
+        private void btnHistoryRecord_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnHistoryRecord, "历史记录");
+        }
+        #endregion
+
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
@@ -940,7 +1047,7 @@ namespace InfraredAnalyze
         {
             if (StaticClass.SelectedNode == 0)
             {
-                MessageBox.Show("请先选择需要设置的探测器节点");
+                MessageBox.Show("请先选择需要启用的探测器!");
             }
             else
             {
@@ -961,11 +1068,7 @@ namespace InfraredAnalyze
             }
         }
 
-        private void btnReset_MouseEnter(object sender, EventArgs e)
-        {
-            ToolTip toolTip = new ToolTip();
-            toolTip.SetToolTip(btnReset, "软件复位");
-        }
+       
 
 
         private void btnStart_MouseEnter(object sender, EventArgs e)
@@ -1009,27 +1112,27 @@ namespace InfraredAnalyze
                     threadCheckOnline.IsBackground = true;
                     threadCheckAlarm.IsBackground = true;
                     threadGetTemper.IsBackground = true;
-                    for (int i = 0; i < 16; i++)
+                    for (int y = 0; y < 16; y++)
                     {
-                        if (StaticClass.intPtrs_Enable[i])//如果该相机启用了
+                        if (StaticClass.intPtrs_Enable[y])//如果该相机启用了
                         {
-                            StaticClass.intPtrs_Connect[i] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 5000);// 返回值为视频操作句柄
-                            StaticClass.intPtrs_Operate[i] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 80);
-                            if (StaticClass.intPtrs_Connect[i] < 0 || StaticClass.intPtrs_Operate[i] <= 0)//连接失败
+                            StaticClass.intPtrs_Connect[y] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[y], StaticClass.intPtrs_Ip[y], 5000);// 返回值为视频操作句柄
+                            StaticClass.intPtrs_Operate[y] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[y], StaticClass.intPtrs_Ip[y], 80);
+                            if (StaticClass.intPtrs_Connect[y] < 0 || StaticClass.intPtrs_Operate[y] <= 0)//连接失败
                             {
-                                StaticClass.intPtrs_Status[i] = (int)RunningStatus.故障;
+                                //StaticClass.intPtrs_Status[y] = (int)RunningStatus.故障;// 由在线检测完成对其是否在线的监测
                             }
                             else//连接成功
                             {
-                                StaticClass.intPtrs_Status[i] = (int)RunningStatus.正常;
-                                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);//获取一次温度数据
+                                StaticClass.intPtrs_Status[y] = (int)RunningStatus.正常;
+                                DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[y], 1);//获取一次温度数据
                                 fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
                                 DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
                             }
                         }
                         else//未启用
                         {
-                            StaticClass.intPtrs_Status[i] = (int)RunningStatus.未启用;
+                            StaticClass.intPtrs_Status[y] = (int)RunningStatus.未启用;
                         }
                     }
                     threadStatus.Start();
@@ -1038,26 +1141,24 @@ namespace InfraredAnalyze
                     //threadGetTemper.Start();
                     btnStart.BackgroundImage = Properties.Resources.Pause;
                     btnStart.Tag = "Pause";
+                    RunStaus = true;
                 }
                 else if (btnStart.Tag.ToString() == "Pause")
                 {
-                    foreach (StructClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
+                    threadCheckOnline.Abort();
+                    threadCheckAlarm.Abort();
+                    for (int i = 0; i < 16; i++)
                     {
-                        int Numbering = structIAnalyzeConfig.NodeID - 1;
-                        if (StaticClass.intPtrs_Connect[Numbering] >= 0 && StaticClass.intPtrs_Operate[Numbering] > 0)
+                        if (StaticClass.intPtrs_Enable[i])
                         {
-                            DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[Numbering]);//关闭视频连接
-                            DMSDK.DM_Disconnect(StaticClass.intPtrs_Operate[Numbering]);//关闭操作连接
+                            DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[i]);//关闭视频连接
+                            DMSDK.DM_Disconnect(StaticClass.intPtrs_Operate[i]);//关闭操作连接
                         }
-                        StaticClass.intPtrs_Status[Numbering] = (int)RunningStatus.未启用;
-                        UCPbx uCPbx = (UCPbx)FromHandle(StaticClass.intPtrs_UCPbx[Numbering]);
-                        uCPbx.BackgroundImage = Properties.Resources.nopicture;
+                        StaticClass.intPtrs_Status[i] =(int)RunningStatus.停止;//无图像
                     }
                     btnStart.Tag = "Start";
                     btnStart.BackgroundImage = Properties.Resources.start;
-                    threadCheckOnline.Abort();
-                    threadCheckAlarm.Abort();
-                    //threadGetTemper.Abort();
+                    RunStaus = false;
                 }
             }
             catch (Exception ex)
@@ -1080,7 +1181,14 @@ namespace InfraredAnalyze
             }
             catch (Exception ex)
             {
-                //错误 线程正在终止
+                if (ex.Message == "正在中止线程。")
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message + "状态监测异常");
+                }
             }
         }
 
@@ -1088,13 +1196,15 @@ namespace InfraredAnalyze
         {
             while (true)
             {
-                for (int i = 0; i < 16; i++)
+                try
                 {
-                    if (StaticClass.intPtrs_Enable[i])
+                    for (int i = 0; i < 16; i++)
                     {
-                        
                         switch (StaticClass.intPtrs_Status[i])
                         {
+                            case -1:
+                                Change_Status(i, -1);
+                                break;
                             case 0://未启用 
                                 Change_Status(i, 0);
                                 break;
@@ -1102,27 +1212,54 @@ namespace InfraredAnalyze
                                 Change_Status(i, 1);
                                 break;
                             case 2://故障 （掉线）
-                                Change_Status(i, 2);
-                                DMSDK.DM_StopTemp(StaticClass.intPtrs_Operate[i]);//停止回调函数
                                 StaticClass.intPtrs_Connect[i] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 5000);//疯狂重连
                                 StaticClass.intPtrs_Operate[i] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 80);
-                                if (StaticClass.intPtrs_Connect[i] >= 0 || StaticClass.intPtrs_Operate[i] > 0)//重连成功
+                                if (StaticClass.intPtrs_Connect[i] >= 0 && StaticClass.intPtrs_Operate[i] > 0)//重连成功
                                 {
                                     StaticClass.intPtrs_Status[i] = (int)RunningStatus.正常;
-                                    BeginInvoke(new MethodInvoker(delegate
-                                    {
-                                        dgvError.Rows.Add(DateTime.Now, "连接恢复", StaticClass.intPtrs_Ip[i], StaticClass.intPtrs_CameraName[i]);
-                                    }));
+                                    Data_Err(i + 1, StaticClass.intPtrs_Ip[i], DateTime.Now, "通讯恢复", StaticClass.intPtrs_CameraName[i],false);
                                     DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);
-                                    fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
+                                    fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);
                                     DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
                                 }
+                                else
+                                {
+                                    Change_Status(i, 2);
+                                }
                                 break;
-                            case 3://正常
-                                Change_Status(i, 3);
+                            case 3://火警  + 故障
+                                StaticClass.intPtrs_Connect[i] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 5000);//故障了就疯狂重连
+                                StaticClass.intPtrs_Operate[i] = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[i], StaticClass.intPtrs_Ip[i], 80);
+                                if (StaticClass.intPtrs_Connect[i] >= 0 && StaticClass.intPtrs_Operate[i] > 0)//重连成功
+                                {
+                                    StaticClass.intPtrs_Status[i] = (int)RunningStatus.火警;
+                                    Data_Err(i + 1, StaticClass.intPtrs_Ip[i], DateTime.Now, "通讯恢复", StaticClass.intPtrs_CameraName[i],false);
+                                    DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 1);
+                                    fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);
+                                    DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
+                                }
+                                else
+                                {
+                                    Change_Status(i, 3);
+                                }
+                                break;
+                            case 4://正常
+                                break;
+                            case 5://停止工作
+                                Change_Status(i, 5);
                                 break;
                         }
-                        Thread.Sleep(1000);
+                        Thread.Sleep(50);
+                    }
+                }catch(Exception ex)
+                {
+                    if (ex.Message == "正在中止线程。")
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message + "状态监测异常");
                     }
                 }
             }
@@ -1133,50 +1270,86 @@ namespace InfraredAnalyze
             UCPbx uCPbx = (UCPbx)FromHandle(StaticClass.intPtrs_UCPbx[i]);
             switch (status)
             {
-                case 0:
+                case 0://未启用
+                    uCPbx.BackgroundImage = Properties.Resources.NotEnabled;
+                    break;
+                case 1://火警（不需要操作）
+                    break;
+                case 2://故障
+                    uCPbx.BackgroundImage = Properties.Resources.CameraErr;
+                    break;
+                case 3://火警导致的故障
+                    uCPbx.BackgroundImage = Properties.Resources.CameraErr_Fire;
+                    break;
+                case 4://正常（不需要操作）
+                    break;
+                case 5://停止工作
                     uCPbx.BackgroundImage = Properties.Resources.nopicture;
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    uCPbx.BackgroundImage = Properties.Resources.disableCamera;
-                    break;
-                case 3:
                     break;
             }
         }
 
-        private void CheckOnline()
+        private void CheckOnline()//在线检测
         {
             while (true)
             {
-                for (int j = 0; j < 16; j++)
+                try
                 {
-                    if (StaticClass.intPtrs_Enable[j])
+                    for (int j = 0; j < 16; j++)
                     {
-                        if (StaticClass.intPtrs_Ip[j] != null)//这里需要等一等  等到把IP地址信息扔进去再开始
+                        if (StaticClass.intPtrs_Enable[j])
                         {
-                            if (DMSDK.DM_CheckOnline(StaticClass.intPtrs_Ip[j], 5000) < 0)//离线
+                            if (StaticClass.intPtrs_Ip[j] != null)//这里需要等一等  等到把IP地址信息扔进去再开始
                             {
-                                DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[j]);
-                                DMSDK.DM_Disconnect(StaticClass.intPtrs_Operate[j]);
-                                string ip = StaticClass.intPtrs_Ip[j];
-                                string cname = StaticClass.intPtrs_CameraName[j];
-                                if (StaticClass.intPtrs_Status[j] != 4)
+                                if (DMSDK.DM_CheckOnline(StaticClass.intPtrs_Ip[j], 5000) < 0)//检测结果 离线
                                 {
-                                    BeginInvoke(new MethodInvoker(delegate
-                                {
-                                    dgvError.Rows.Add(DateTime.Now, "连接断开", ip, cname);
-                                }));
+                                    DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[j]);
+                                    DMSDK.DM_Disconnect(StaticClass.intPtrs_Operate[j]);
+                                    if ((StaticClass.intPtrs_Status[j] != (int)RunningStatus.故障) && (StaticClass.intPtrs_Status[j] != (int)RunningStatus.先火警再故障))//不是通讯故障
+                                    {
+                                        if (StaticClass.intPtrs_Status[j] != (int)RunningStatus.火警)//不是火警
+                                        {
+                                            StaticClass.intPtrs_Status[j] = (int)RunningStatus.故障;
+                                        }
+                                        else//有火警
+                                        {
+                                            StaticClass.intPtrs_Status[j] = (int)RunningStatus.先火警再故障;
+                                        }
+                                        Data_Err(j + 1, StaticClass.intPtrs_Ip[j], DateTime.Now, "通讯故障", StaticClass.intPtrs_CameraName[j],true);
+                                    }
                                 }
-                                StaticClass.intPtrs_Status[j] = (int)RunningStatus.故障;
+                                else//在线了
+                                {
+                                    if(StaticClass.intPtrs_Connect[j] < 0 || StaticClass.intPtrs_Operate[j] <= 0)//但是连接返回值与 操作返回值 却是失败的（即为 在线 启用连接失败或者为连接状态）
+                                    {
+                                        if ((StaticClass.intPtrs_Status[j] != (int)RunningStatus.故障) && (StaticClass.intPtrs_Status[j] != (int)RunningStatus.先火警再故障))//不是通讯故障
+                                        {
+                                            if (StaticClass.intPtrs_Status[j] != (int)RunningStatus.火警)//不是火警
+                                            {
+                                                StaticClass.intPtrs_Status[j] = (int)RunningStatus.故障;
+                                            }
+                                            else
+                                            {
+                                                StaticClass.intPtrs_Status[j] = (int)RunningStatus.先火警再故障;
+                                            }
+                                            Data_Err(j + 1, StaticClass.intPtrs_Ip[j], DateTime.Now, "通讯故障", StaticClass.intPtrs_CameraName[j], true);
+                                        }
+                                    }
+                                }
                             }
-                            else if (StaticClass.intPtrs_Connect[j]<0 && StaticClass.intPtrs_Operate[j] <= 0)
-                            {
-                                StaticClass.intPtrs_Status[j] = (int)RunningStatus.故障;
-                            }
+                            Thread.Sleep(200);
                         }
-                        Thread.Sleep(200);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    if (ex.Message == "正在中止线程。")
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message + "主机在线检测异常");
                     }
                 }
             }
@@ -1187,68 +1360,75 @@ namespace InfraredAnalyze
         {
             while (true)
             {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-                for(int i = 0; i < 16; i++)
-                {
-                    if (StaticClass.intPtrs_Enable[i] && StaticClass.intPtrs_Status[i] != 1)//该探测器启用  无火警
+                try {
+                    //Stopwatch stopwatch = new Stopwatch();
+                    //stopwatch.Start();
+                    for (int i = 0; i < 16; i++)
                     {
-                        for (int j = 0; j < 8; j++)
+                        if (StaticClass.intPtrs_Enable[i] && StaticClass.intPtrs_Status[i] != 1)//该探测器启用  无火警
                         {
-                            if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Enable)//该区域启用 
+                            for (int j = 0; j < 8; j++)
                             {
-                                StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaId = j + 1;
-                                if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Spark == 0)//触发方式 大于
+                                if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Enable)//该区域启用 
                                 {
-                                    if (StaticClass.intPtrs_RealtimeTemper[i].realTimeTemper[j].temper >= StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].AlarmTemper)//大于一次
+                                    StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaId = j + 1;
+                                    if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Spark == 0)//触发方式 大于
                                     {
-                                        StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount++;
-                                    }
-                                    else//小于一次  就清空告警计数
-                                    {
-                                        StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount = 0;
-                                    }
-                                }
-                                else if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Spark == 1)//触发方式  小于
-                                {
-                                    if (StaticClass.intPtrs_RealtimeTemper[i].realTimeTemper[j].temper <= StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].AlarmTemper)//小于一次
-                                    {
-                                        StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount++;
-                                    }
-                                    else//大于一次就清空计数
-                                    {
-                                        StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount = 0;
-                                    }
-                                }
-                                if (StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount >= 3)//超过3次 就告警
-                                {
-                                    if (StaticClass.intPtrs_Status[i] != (int)RunningStatus.温度告警)//原来不是报警 
-                                    {
-                                        if (StaticClass.FireCount == 0)//全局火警计数
+                                        if (StaticClass.intPtrs_RealtimeTemper[i].realTimeTemper[j].temper >= StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].AlarmTemper)//大于一次
                                         {
-                                            BeginInvoke(new MethodInvoker(delegate
-                                            {
-                                                dgvWarning.Rows.Add(DateTime.Now, "首警", StaticClass.intPtrs_Ip[i], StaticClass.intPtrs_CameraName[i]);
-                                            }));
+                                            StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount++;
                                         }
-                                        else if (StaticClass.FireCount >= 1)
+                                        else//小于一次  就清空告警计数
                                         {
-                                            BeginInvoke(new MethodInvoker(delegate
-                                            {
-                                                dgvWarning.Rows.Add(DateTime.Now, "火警", StaticClass.intPtrs_Ip[i], StaticClass.intPtrs_CameraName[i]);
-                                            }));
+                                            StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount = 0;
                                         }
-                                        StaticClass.intPtrs_Status[i] = (int)RunningStatus.温度告警;//改变状态记录数组
                                     }
-                                    areaAlarmCount.AreaCount = 3;
+                                    else if (StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].Spark == 1)//触发方式  小于
+                                    {
+                                        if (StaticClass.intPtrs_RealtimeTemper[i].realTimeTemper[j].temper <= StaticClass.intPtrs_AlarmConfig[i].structAlarmconfigs[j].AlarmTemper)//小于一次
+                                        {
+                                            StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount++;
+                                        }
+                                        else//大于一次就清空计数
+                                        {
+                                            StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount = 0;
+                                        }
+                                    }
+                                    if (StaticClass.intPtrs_structCameraAlarmCounts[i].areaAlarmCounts[j].AreaCount >= 3)//超过3次 就告警
+                                    {
+                                        if (StaticClass.intPtrs_Status[i] == (int)RunningStatus.正常)//原来不是报警 
+                                        {
+                                            if (StaticClass.FireCount == 0)//全局火警计数
+                                            {
+                                                Data_Frie(i + 1, StaticClass.intPtrs_Ip[i], DateTime.Now, "首警", StaticClass.intPtrs_CameraName[i]);
+                                            }
+                                            else if (StaticClass.FireCount >= 1)
+                                            {
+                                                Data_Frie(i + 1, StaticClass.intPtrs_Ip[i], DateTime.Now, "火警", StaticClass.intPtrs_CameraName[i]);
+                                            }
+                                            StaticClass.intPtrs_Status[i] = (int)RunningStatus.火警;//原来不报警 现在报警
+                                        }
+                                        areaAlarmCount.AreaCount = 3;
+                                    }
                                 }
                             }
                         }
+                        Thread.Sleep(50);
+                    }
+                    //stopwatch.Stop();
+                    //string time = stopwatch.ElapsedMilliseconds.ToString();
                 }
-                Thread.Sleep(50);
-            }
-                //stopwatch.Stop();
-                //string time = stopwatch.ElapsedMilliseconds.ToString();
+                catch(Exception ex)
+                {
+                    if (ex.Message == "正在中止线程。")
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message + "火警监测异常");
+                    }
+                }
             }
         }
 
@@ -1311,18 +1491,43 @@ namespace InfraredAnalyze
                     break;
             }
         }
-
-
         #endregion
 
         bool IsCallBack = false;
 
-        private void tlpTools_Paint(object sender, PaintEventArgs e)
+        private void Data_Frie(int cameraId,string Ip,DateTime dateTime,string type,string message) 
         {
-
+            fireData.CameraID = cameraId;
+            fireData.IPAddress = Ip;
+            fireData.dateTime = dateTime;
+            fireData.Type = type;
+            fireData.Message = message;
+            StaticClass.arrayList_FireData.Add(fireData);
+            sqlCreate.Insert_HisRecords(fireData.CameraID, fireData.IPAddress, fireData.dateTime, fireData.Type, fireData.Message);
         }
 
+        private void Data_Err(int cameraId, string Ip, DateTime dateTime, string type, string message,bool IsShowOnDgv)
+        {
+            errData.CameraID = cameraId;
+            errData.IPAddress = Ip;
+            errData.dateTime = dateTime;
+            errData.Type = type;
+            errData.Message = message;
+            if (IsShowOnDgv)//通讯故障是需要展示在dgv上的
+            {
+                StaticClass.arrayList_ErrData.Add(errData);
+            }
+            sqlCreate.Insert_HisRecords(errData.CameraID, errData.IPAddress, errData.dateTime, errData.Type, errData.Message);
+        }
 
-      
+        private void btnSaveVideo_Click(object sender, EventArgs e)//保存视频.avi
+        {
+            //StaticClass.intPtrs_Operate[1] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[1], "192.168.1.2", 5000);
+            //DMSDK.DM_Record(StaticClass.intPtrs_Operate[1], "F:\\热成像仪光盘内容");
+            //Thread.Sleep(5000);
+            //DMSDK.DM_StopRecord(StaticClass.intPtrs_Operate[1]);
+        }
+
+        
     }
 }

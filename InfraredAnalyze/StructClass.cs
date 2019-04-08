@@ -83,11 +83,31 @@ namespace InfraredAnalyze
             public string Status;
         }
 
-        public struct StructDataFilter
+        public struct StructFireData
         {
+            public int CameraID;
+            public string IPAddress;
             public DateTime dateTime;
-            public int type;
-            public int num;
+            public string Type;
+            public string Message;
+        }
+
+        public struct StructErrData
+        {
+            public int CameraID;
+            public string IPAddress;
+            public DateTime dateTime;
+            public string Type;
+            public string Message;
+        }
+
+        public struct StructRecordsData
+        {
+            public int CameraID;
+            public string IPAddress;
+            public DateTime dateTime;
+            public string Type;
+            public string Message;
         }
     }
 }

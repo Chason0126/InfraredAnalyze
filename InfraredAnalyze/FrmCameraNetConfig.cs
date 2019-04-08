@@ -18,46 +18,19 @@ namespace InfraredAnalyze
             InitializeComponent();
         }
 
-        private int iPCameraID;
         SqlCreate sqlCreate = new SqlCreate();
-        int tempOperateIntptr;
-
-        public int IPCameraID { get => iPCameraID; set => iPCameraID = value; }
-
-
-
-        private void btnClose_MouseEnter(object sender, EventArgs e)
-        {
-            btnClose.BackColor = Color.Red;
-        }
-
-        private void btnClose_MouseLeave(object sender, EventArgs e)
-        {
-            btnClose.BackColor = Color.Transparent;
-        }
-
-        Point point;
-        private void panHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            point = new Point(e.X, e.Y);
-        }
-
-        private void panHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if(e.Button==MouseButtons.Left)
-            {
-                Point tempPoint = MousePosition;
-                tempPoint.Offset(-point.X, -point.Y);
-                this.Location = tempPoint;
-            }
-        }
 
         StringBuilder Mac;
         StringBuilder SubMask;
         StringBuilder GateWay;
         private void FrmCameraConfig_Load(object sender, EventArgs e)
         {
-            ArrayList arrayList = sqlCreate.Select_SMInfraredConfig(iPCameraID);
+            if (StaticClass.SelectedNode == 0)
+            {
+                MessageBox.Show("请选择探测器！");
+                return;
+            }
+            ArrayList arrayList = sqlCreate.Select_SMInfraredConfig(StaticClass.Temper_CameraId);
             Mac = new StringBuilder();
             SubMask = new StringBuilder();
             GateWay = new StringBuilder();
@@ -70,8 +43,8 @@ namespace InfraredAnalyze
                 IPAddressIP.tbx3.Text = str[2];
                 IPAddressIP.tbx4.Text = str[3];
                 DMSDK.DM_Init();
-                tempOperateIntptr = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[iPCameraID - 1], structSM7003Tag.IP, 80);//
-                if (tempOperateIntptr <= 0)
+                StaticClass.Temper_Connect = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[StaticClass.Temper_CameraId - 1], structSM7003Tag.IP, 80);//
+                if (StaticClass.Temper_Connect <= 0)
                 {
                     MessageBox.Show("连接失败，请检查线路,或修改参数后新连接试！");
                     btnConfirm.Tag = "Reconnect";
@@ -83,9 +56,9 @@ namespace InfraredAnalyze
                 }
                 else
                 {
-                    DMSDK.DM_GetMAC(tempOperateIntptr, Mac);
-                    DMSDK.DM_GetNetmask(tempOperateIntptr, SubMask);
-                    DMSDK.DM_GetGateway(tempOperateIntptr, GateWay);
+                    DMSDK.DM_GetMAC(StaticClass.Temper_Connect, Mac);
+                    DMSDK.DM_GetNetmask(StaticClass.Temper_Connect, SubMask);
+                    DMSDK.DM_GetGateway(StaticClass.Temper_Connect, GateWay);
                     Update_IpAddrGateWay(GateWay.ToString());
                     Update_IpAddrSubMask(SubMask.ToString());
                     tbxMAC.Text = Mac.ToString();
@@ -132,7 +105,7 @@ namespace InfraredAnalyze
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            DMSDK.DM_Disconnect(tempOperateIntptr);
+            DMSDK.DM_Disconnect(StaticClass.Temper_Connect);
             this.Close();
         }
 
@@ -177,16 +150,15 @@ namespace InfraredAnalyze
             if(btnConfirm.Tag.ToString()=="Confirm")
             {
                 btnConfirm.Text = "确认修改";
-                DMSDK.DM_SetIPAddr(tempOperateIntptr, IPAddressIP.IPAdd.ToString(), IPAddressSubMask.IPAdd.ToString(), IPAddressGateWay.IPAdd.ToString());
-                sqlCreate.UpDate_IPAddress(iPCameraID, IPAddressIP.IPAdd.ToString());
+                DMSDK.DM_SetIPAddr(StaticClass.Temper_Connect, IPAddressIP.IPAdd.ToString(), IPAddressSubMask.IPAdd.ToString(), IPAddressGateWay.IPAdd.ToString());
                 MessageBox.Show("修改成功！");
             }
             else if(btnConfirm.Tag.ToString()=="Reconnect")
             {
                 btnConfirm.Text = "重新连接";
                 DMSDK.DM_Init();
-                tempOperateIntptr = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[iPCameraID - 1], IPAddressIP.IPAdd.ToString(), 80);
-                if (tempOperateIntptr <= 0)
+                StaticClass.Temper_Connect = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[StaticClass.Temper_CameraId - 1], IPAddressIP.IPAdd.ToString(), 80);
+                if (StaticClass.Temper_Connect <= 0)
                 {
                     MessageBox.Show("无法连接探测器，请检查线路,或修改参数后重新连接！");
                     btnConfirm.Tag = "Reconnect";
@@ -201,9 +173,9 @@ namespace InfraredAnalyze
                     Mac = new StringBuilder();
                     SubMask = new StringBuilder();
                     GateWay = new StringBuilder();
-                    DMSDK.DM_GetMAC(tempOperateIntptr, Mac);
-                    DMSDK.DM_GetNetmask(tempOperateIntptr, SubMask);
-                    DMSDK.DM_GetGateway(tempOperateIntptr, GateWay);
+                    DMSDK.DM_GetMAC(StaticClass.Temper_Connect, Mac);
+                    DMSDK.DM_GetNetmask(StaticClass.Temper_Connect, SubMask);
+                    DMSDK.DM_GetGateway(StaticClass.Temper_Connect, GateWay);
                     Update_IpAddrGateWay(GateWay.ToString());
                     Update_IpAddrSubMask(SubMask.ToString());
                     tbxMAC.Text = Mac.ToString();

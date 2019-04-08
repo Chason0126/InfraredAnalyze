@@ -253,7 +253,7 @@ namespace InfraredAnalyze
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            ArrayList arrayList = sqlCreate.Select_TemperData(1, cbxAreaType.SelectedIndex, cbxAreaNum.SelectedIndex, dtpStart.Value, dtpEnd.Value);
+            ArrayList arrayList = sqlCreate.Select_TemperData(cameraID, cbxAreaType.SelectedIndex, cbxAreaNum.SelectedIndex, dtpStart.Value, dtpEnd.Value);
             dgvHistoricalData.Rows.Clear();
             foreach(var series in chartHisrotricalData.Series)
             {

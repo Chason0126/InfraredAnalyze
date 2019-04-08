@@ -90,6 +90,8 @@ namespace InfraredAnalyze
                 con_DB.Open();
                 cmd = new SqlCommand("create table SMInfraredAnalyze(CameraId int,CameraName nvarchar(MAX),IPAddress varchar(15),Port int,NodeID int,Remarks nvarchar(max),Enable bit)", con_DB);
                 cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("create table SMInfraredHisRecords(CameraId int,IPAddress varchar(15),DateTime datetime,Type nvarchar(max),Message nvarchar(max))", con_DB);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -197,7 +199,7 @@ namespace InfraredAnalyze
         }
 
         SqlCommand cmdCTable;
-        public void Drop_AllDatabase()//数据库删除 请谨慎操作
+        public void Drop_AllDatabase()//数据库删除 请谨慎操作 相当危险
         {
             try
             {
@@ -208,8 +210,7 @@ namespace InfraredAnalyze
                 cmdCTable.ExecuteNonQuery();
                 for (int i = 1; i <= 16; i++)
                 {
-                    sqlcommandText = @"ALTER DATABASE " + ("SM_InfraredCamera" + i.ToString()) + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE;DROP DATABASE [ " + ("SM_InfraredCamera" + i.ToString()) + "]";//drop数据库  单纯的使用drop 如果数据库正在使用  则会删除异常
-                    //sqlcommandText = @"ALTER DATABASE SM_InfraredCamera1 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;DROP DATABASE [SM_InfraredCamera1]";
+                    sqlcommandText = @"ALTER DATABASE SM_InfraredCamera" +i+ " SET SINGLE_USER WITH ROLLBACK IMMEDIATE;DROP DATABASE [SM_InfraredCamera" + i+ "]";//drop数据库  单纯的使用drop 如果数据库正在使用  则会删除异常
                     cmdCTable = new SqlCommand(sqlcommandText, con_DB);
                     cmdCTable.ExecuteNonQuery();
                 }
@@ -488,6 +489,78 @@ namespace InfraredAnalyze
             }
         }
 
+
+        public void Insert_HisRecords(int CameraId, string Ip, DateTime  dateTime,string Type,string Message)
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("insert into SMInfraredHisRecords(CameraId,IPAddress,DateTime,Type,Message) values('"+ CameraId + "','" + Ip + "','" + dateTime + "','" + Type + "','" + Message + "') ", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("报警信息插入异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public ArrayList Select_HisRecords(int CameraId, string Ip, string Type, DateTime StartdateTime, DateTime EnddateTime)
+        {
+            ArrayList arrayList = new ArrayList();
+            StructClass.StructRecordsData structRecords = new StructClass.StructRecordsData();
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                if (CameraId == 0)//全部探测器
+                {
+                    if (Type == "全部")//全部类型
+                    {
+                        cmd = new SqlCommand("Select * from SMInfraredHisRecords where convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                    }
+                    else
+                    {
+                        cmd = new SqlCommand("Select * from SMInfraredHisRecords where type='"+Type+"' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                    }
+                }
+                else
+                {
+                    if (Type == "全部")//全部类型
+                    {
+                        cmd = new SqlCommand("Select * from SMInfraredHisRecords where cameraId='" + CameraId + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                    }
+                    else
+                    {
+                        cmd = new SqlCommand("Select * from SMInfraredHisRecords where cameraId='" + CameraId + "' and type='" + Type + "' and convert(varchar(10),dateTime,120)>='" + StartdateTime.ToString("yyyy-MM-dd") + "' AND convert(varchar(10),dateTime,120)<='" + EnddateTime.ToString("yyyy-MM-dd") + "' order by datetime desc", con_DB);
+                    }
+                }
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    structRecords.CameraID = (int)sqlDataReader.GetValue(0);
+                    structRecords.IPAddress = (string)sqlDataReader.GetValue(1);
+                    structRecords.dateTime = (DateTime)sqlDataReader.GetValue(2);
+                    structRecords.Type = (string)sqlDataReader.GetValue(3);
+                    structRecords.Message = (string)sqlDataReader.GetValue(4);
+                    arrayList.Add(structRecords);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("报警信息插入异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return arrayList;
+        }
+
         public ArrayList Select_Spot(int CameraId,string type)
         {
             ArrayList arrayList = new ArrayList();
@@ -751,7 +824,7 @@ namespace InfraredAnalyze
             {
                 con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
                 con_DB.Open();
-                cmd = new SqlCommand("update TemperArea set X1='0',Y1='0', X2='0',Y2='0' where Type='" + type + "'", con_DB);
+                cmd = new SqlCommand("update TemperArea set X1='0',Y1='0', X2='0',Y2='0',MeasureType='-1' where Type='" + type + "'", con_DB);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -820,33 +893,6 @@ namespace InfraredAnalyze
                 con_DB.Close();
             }
         }
-
-
-        //public StructClass.StructDataFilter Select_TemperData_Top1(int CameraId,int num)
-        //{
-        //    StructClass.StructDataFilter structDataFilter = new StructClass.StructDataFilter();
-        //    try
-        //    {
-        //        con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_InfraredCamera" + CameraId + "");
-        //        con_DB.Open();
-        //        cmd = new SqlCommand("select top 1 * from TemperData order by datetime desc ", con_DB);
-        //        SqlDataReader sqlDataReader = cmd.ExecuteReader();
-        //        while (sqlDataReader.Read())
-        //        {
-        //            structDataFilter.dateTime = (DateTime)sqlDataReader.GetValue(2);
-        //            structDataFilter.num = (int)sqlDataReader.GetValue(4);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("一秒钟一次：" + CameraId + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        con_DB.Close();
-        //    }
-        //    return structDataFilter;
-        //}
 
         public DateTime Select_TemperData_Top1(int CameraId, int num)
         {
