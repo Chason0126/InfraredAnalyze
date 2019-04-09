@@ -121,6 +121,12 @@
     <Compile Include="FrmAddIPCamera.Designer.cs">
       <DependentUpon>FrmAddIPCamera.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAlarmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAlarmConfig.Designer.cs">
+      <DependentUpon>FrmAlarmConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCameraNetConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,12 @@
     <Compile Include="FrmImgConfig.Designer.cs">
       <DependentUpon>FrmImgConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMaintain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMaintain.Designer.cs">
+      <DependentUpon>FrmMaintain.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSaveImageConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,12 +192,6 @@
     </Compile>
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmMassureConfig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmMassureConfig.Designer.cs">
-      <DependentUpon>FrmMassureConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMeasureTemperConfig.cs">
       <SubType>Form</SubType>
@@ -217,11 +223,23 @@
     <Compile Include="FrmTemperParamConfig.Designer.cs">
       <DependentUpon>FrmTemperParamConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmVideoConfig.cs">
+    <Compile Include="FrmTemperParConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmVideoConfig.Designer.cs">
-      <DependentUpon>FrmVideoConfig.cs</DependentUpon>
+    <Compile Include="FrmTemperParConfig.Designer.cs">
+      <DependentUpon>FrmTemperParConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSystemConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSystemConfig.Designer.cs">
+      <DependentUpon>FrmSystemConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSaveVideoConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSaveVideoConfig.Designer.cs">
+      <DependentUpon>FrmSaveVideoConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="InfraredSDK.cs" />
     <Compile Include="Program.cs" />
@@ -257,6 +275,9 @@
     <EmbeddedResource Include="FrmAddIPCamera.resx">
       <DependentUpon>FrmAddIPCamera.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmAlarmConfig.resx">
+      <DependentUpon>FrmAlarmConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmCameraNetConfig.resx">
       <DependentUpon>FrmCameraNetConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,6 +296,9 @@
     <EmbeddedResource Include="FrmImgConfig.resx">
       <DependentUpon>FrmImgConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmMaintain.resx">
+      <DependentUpon>FrmMaintain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmSaveImageConfig.resx">
       <DependentUpon>FrmSaveImageConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -286,9 +310,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmMassureConfig.resx">
-      <DependentUpon>FrmMassureConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMeasureTemperConfig.resx">
       <DependentUpon>FrmMeasureTemperConfig.cs</DependentUpon>
@@ -305,8 +326,14 @@
     <EmbeddedResource Include="FrmTemperParamConfig.resx">
       <DependentUpon>FrmTemperParamConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmVideoConfig.resx">
-      <DependentUpon>FrmVideoConfig.cs</DependentUpon>
+    <EmbeddedResource Include="FrmTemperParConfig.resx">
+      <DependentUpon>FrmTemperParConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSystemConfig.resx">
+      <DependentUpon>FrmSystemConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSaveVideoConfig.resx">
+      <DependentUpon>FrmSaveVideoConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

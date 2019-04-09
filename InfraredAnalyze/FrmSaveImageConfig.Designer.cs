@@ -32,12 +32,14 @@
             this.tbxSaveImage = new System.Windows.Forms.TextBox();
             this.btnSnapShot = new System.Windows.Forms.Button();
             this.btnChangePath = new System.Windows.Forms.Button();
+            this.pbxTemper = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTemper)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(183, 79);
+            this.label1.Location = new System.Drawing.Point(173, 270);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
@@ -45,14 +47,14 @@
             // 
             // tbxSaveImage
             // 
-            this.tbxSaveImage.Location = new System.Drawing.Point(254, 76);
+            this.tbxSaveImage.Location = new System.Drawing.Point(244, 267);
             this.tbxSaveImage.Name = "tbxSaveImage";
             this.tbxSaveImage.Size = new System.Drawing.Size(208, 21);
             this.tbxSaveImage.TabIndex = 1;
             // 
             // btnSnapShot
             // 
-            this.btnSnapShot.Location = new System.Drawing.Point(294, 177);
+            this.btnSnapShot.Location = new System.Drawing.Point(298, 310);
             this.btnSnapShot.Name = "btnSnapShot";
             this.btnSnapShot.Size = new System.Drawing.Size(75, 23);
             this.btnSnapShot.TabIndex = 2;
@@ -62,7 +64,7 @@
             // 
             // btnChangePath
             // 
-            this.btnChangePath.Location = new System.Drawing.Point(505, 73);
+            this.btnChangePath.Location = new System.Drawing.Point(495, 264);
             this.btnChangePath.Name = "btnChangePath";
             this.btnChangePath.Size = new System.Drawing.Size(75, 23);
             this.btnChangePath.TabIndex = 3;
@@ -70,11 +72,21 @@
             this.btnChangePath.UseVisualStyleBackColor = true;
             this.btnChangePath.Click += new System.EventHandler(this.btnChangePath_Click);
             // 
+            // pbxTemper
+            // 
+            this.pbxTemper.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pbxTemper.Location = new System.Drawing.Point(175, 12);
+            this.pbxTemper.Name = "pbxTemper";
+            this.pbxTemper.Size = new System.Drawing.Size(320, 240);
+            this.pbxTemper.TabIndex = 4;
+            this.pbxTemper.TabStop = false;
+            // 
             // FrmSaveImageConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 284);
+            this.ClientSize = new System.Drawing.Size(650, 360);
+            this.Controls.Add(this.pbxTemper);
             this.Controls.Add(this.btnChangePath);
             this.Controls.Add(this.btnSnapShot);
             this.Controls.Add(this.tbxSaveImage);
@@ -83,6 +95,7 @@
             this.Name = "FrmSaveImageConfig";
             this.Text = "FrmImageSaveConfig";
             this.Load += new System.EventHandler(this.FrmSaveImageConfig_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTemper)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,5 +107,6 @@
         private System.Windows.Forms.TextBox tbxSaveImage;
         private System.Windows.Forms.Button btnSnapShot;
         private System.Windows.Forms.Button btnChangePath;
+        private System.Windows.Forms.PictureBox pbxTemper;
     }
 }

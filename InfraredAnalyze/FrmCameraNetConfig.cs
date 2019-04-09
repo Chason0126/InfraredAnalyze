@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,25 +26,18 @@ namespace InfraredAnalyze
         StringBuilder GateWay;
         private void FrmCameraConfig_Load(object sender, EventArgs e)
         {
-            if (StaticClass.SelectedNode == 0)
-            {
-                MessageBox.Show("请选择探测器！");
-                return;
-            }
-            ArrayList arrayList = sqlCreate.Select_SMInfraredConfig(StaticClass.Temper_CameraId);
             Mac = new StringBuilder();
             SubMask = new StringBuilder();
             GateWay = new StringBuilder();
-            if (arrayList.Count > 0)
+            if (StaticClass.Temper_Ip != "")
             {
-                StructClass.StructIAnalyzeConfig structSM7003Tag = (StructClass.StructIAnalyzeConfig)arrayList[0];
-                string[] str = structSM7003Tag.IP.Split('.');
+                string[] str = StaticClass.Temper_Ip.Split('.');
                 IPAddressIP.tbx1.Text = str[0];
                 IPAddressIP.tbx2.Text = str[1];
                 IPAddressIP.tbx3.Text = str[2];
                 IPAddressIP.tbx4.Text = str[3];
                 DMSDK.DM_Init();
-                StaticClass.Temper_Connect = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[StaticClass.Temper_CameraId - 1], structSM7003Tag.IP, 80);//
+                StaticClass.Temper_Connect = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[StaticClass.Temper_CameraId - 1], StaticClass.Temper_Ip, 80);//
                 if (StaticClass.Temper_Connect <= 0)
                 {
                     MessageBox.Show("连接失败，请检查线路,或修改参数后新连接试！");
@@ -53,6 +47,7 @@ namespace InfraredAnalyze
                     chbModifyGateWay.Enabled = false;
                     chbModifyMac.Enabled = false;
                     chbModifyNetMask.Enabled = false;
+                    cbxIsEnable.Enabled = false;
                 }
                 else
                 {
@@ -62,13 +57,14 @@ namespace InfraredAnalyze
                     Update_IpAddrGateWay(GateWay.ToString());
                     Update_IpAddrSubMask(SubMask.ToString());
                     tbxMAC.Text = Mac.ToString();
+                    cbxIsEnable.SelectedIndex = Convert.ToInt32(StaticClass.Temper_IsEnanle);
                     btnConfirm.Tag = "Confirm";
                     chbModifyGateWay.Enabled = true;
                     chbModifyMac.Enabled = true;
                     chbModifyNetMask.Enabled = true;
+                    cbxIsEnable.Enabled = true;
                 }
             }
-            arrayList.Clear();
             if (btnConfirm.Tag.ToString() == "Confirm")
             {
                 btnConfirm.Text = "确认修改";
@@ -151,6 +147,7 @@ namespace InfraredAnalyze
             {
                 btnConfirm.Text = "确认修改";
                 DMSDK.DM_SetIPAddr(StaticClass.Temper_Connect, IPAddressIP.IPAdd.ToString(), IPAddressSubMask.IPAdd.ToString(), IPAddressGateWay.IPAdd.ToString());
+                sqlCreate.UpDate_CameraEnable(StaticClass.Temper_CameraId, "无", Convert.ToBoolean(cbxIsEnable.SelectedIndex));
                 MessageBox.Show("修改成功！");
             }
             else if(btnConfirm.Tag.ToString()=="Reconnect")
@@ -165,6 +162,7 @@ namespace InfraredAnalyze
                     chbModifyGateWay.Enabled = false;
                     chbModifyMac.Enabled = false;
                     chbModifyNetMask.Enabled = false;
+                    cbxIsEnable.Enabled = false;
                 }
                 else
                 {
@@ -176,6 +174,7 @@ namespace InfraredAnalyze
                     DMSDK.DM_GetMAC(StaticClass.Temper_Connect, Mac);
                     DMSDK.DM_GetNetmask(StaticClass.Temper_Connect, SubMask);
                     DMSDK.DM_GetGateway(StaticClass.Temper_Connect, GateWay);
+                    cbxIsEnable.SelectedIndex = Convert.ToInt32(StaticClass.Temper_IsEnanle);
                     Update_IpAddrGateWay(GateWay.ToString());
                     Update_IpAddrSubMask(SubMask.ToString());
                     tbxMAC.Text = Mac.ToString();
@@ -183,8 +182,11 @@ namespace InfraredAnalyze
                     chbModifyGateWay.Enabled = true;
                     chbModifyMac.Enabled = true;
                     chbModifyNetMask.Enabled = true;
+                    cbxIsEnable.Enabled = true; ;
+
                 }
             }
         }
+
     }
 }

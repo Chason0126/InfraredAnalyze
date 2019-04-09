@@ -45,6 +45,8 @@
             this.cbxPallette = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbxVideoOutType
@@ -76,7 +78,7 @@
             this.cbxVideoMode.Items.AddRange(new object[] {
             "手动",
             "自动"});
-            this.cbxVideoMode.Location = new System.Drawing.Point(184, 76);
+            this.cbxVideoMode.Location = new System.Drawing.Point(184, 112);
             this.cbxVideoMode.Name = "cbxVideoMode";
             this.cbxVideoMode.Size = new System.Drawing.Size(118, 22);
             this.cbxVideoMode.TabIndex = 10;
@@ -85,7 +87,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(107, 79);
+            this.label4.Location = new System.Drawing.Point(107, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 14);
             this.label4.TabIndex = 9;
@@ -98,7 +100,7 @@
             this.cbxTempOnImage.Items.AddRange(new object[] {
             "隐藏",
             "显示"});
-            this.cbxTempOnImage.Location = new System.Drawing.Point(184, 124);
+            this.cbxTempOnImage.Location = new System.Drawing.Point(184, 196);
             this.cbxTempOnImage.Name = "cbxTempOnImage";
             this.cbxTempOnImage.Size = new System.Drawing.Size(118, 22);
             this.cbxTempOnImage.TabIndex = 12;
@@ -107,7 +109,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(92, 127);
+            this.label2.Location = new System.Drawing.Point(92, 199);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 14);
             this.label2.TabIndex = 11;
@@ -117,7 +119,7 @@
             // 
             this.tbxISOHight.Enabled = false;
             this.tbxISOHight.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxISOHight.Location = new System.Drawing.Point(184, 221);
+            this.tbxISOHight.Location = new System.Drawing.Point(135, 81);
             this.tbxISOHight.Name = "tbxISOHight";
             this.tbxISOHight.Size = new System.Drawing.Size(118, 23);
             this.tbxISOHight.TabIndex = 15;
@@ -126,7 +128,7 @@
             // 
             this.tbxISOTemp.Enabled = false;
             this.tbxISOTemp.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxISOTemp.Location = new System.Drawing.Point(184, 172);
+            this.tbxISOTemp.Location = new System.Drawing.Point(135, 32);
             this.tbxISOTemp.Name = "tbxISOTemp";
             this.tbxISOTemp.Size = new System.Drawing.Size(118, 23);
             this.tbxISOTemp.TabIndex = 16;
@@ -135,7 +137,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(92, 223);
+            this.label7.Location = new System.Drawing.Point(43, 83);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 14);
             this.label7.TabIndex = 13;
@@ -145,7 +147,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(92, 175);
+            this.label6.Location = new System.Drawing.Point(43, 35);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 14);
             this.label6.TabIndex = 14;
@@ -160,7 +162,7 @@
             "0",
             "1",
             "2"});
-            this.cbxISOColor.Location = new System.Drawing.Point(184, 270);
+            this.cbxISOColor.Location = new System.Drawing.Point(135, 130);
             this.cbxISOColor.Name = "cbxISOColor";
             this.cbxISOColor.Size = new System.Drawing.Size(118, 22);
             this.cbxISOColor.TabIndex = 19;
@@ -172,7 +174,7 @@
             this.cbxTempUnit.Items.AddRange(new object[] {
             "°C",
             "°F"});
-            this.cbxTempUnit.Location = new System.Drawing.Point(184, 318);
+            this.cbxTempUnit.Location = new System.Drawing.Point(184, 280);
             this.cbxTempUnit.Name = "cbxTempUnit";
             this.cbxTempUnit.Size = new System.Drawing.Size(118, 22);
             this.cbxTempUnit.TabIndex = 20;
@@ -181,7 +183,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(92, 319);
+            this.label9.Location = new System.Drawing.Point(92, 283);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(82, 14);
             this.label9.TabIndex = 17;
@@ -191,7 +193,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(100, 271);
+            this.label8.Location = new System.Drawing.Point(51, 131);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 14);
             this.label8.TabIndex = 18;
@@ -212,7 +214,7 @@
             "色标7",
             "色标8",
             "色标9"});
-            this.cbxPallette.Location = new System.Drawing.Point(184, 366);
+            this.cbxPallette.Location = new System.Drawing.Point(184, 364);
             this.cbxPallette.Name = "cbxPallette";
             this.cbxPallette.Size = new System.Drawing.Size(118, 22);
             this.cbxPallette.TabIndex = 22;
@@ -237,22 +239,31 @@
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tbxISOHight);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.tbxISOTemp);
+            this.panel1.Controls.Add(this.cbxISOColor);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Location = new System.Drawing.Point(332, 168);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(68, 181);
+            this.panel1.TabIndex = 24;
+            this.panel1.Visible = false;
+            // 
             // FrmImageConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 476);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.cbxPallette);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.cbxISOColor);
             this.Controls.Add(this.cbxTempUnit);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.tbxISOHight);
-            this.Controls.Add(this.tbxISOTemp);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.cbxTempOnImage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbxVideoMode);
@@ -263,6 +274,8 @@
             this.Name = "FrmImageConfig";
             this.Text = "FrmImageConfig";
             this.Load += new System.EventHandler(this.FrmImageConfig_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,5 +300,6 @@
         private System.Windows.Forms.ComboBox cbxPallette;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Panel panel1;
     }
 }

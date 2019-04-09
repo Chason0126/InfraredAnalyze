@@ -52,7 +52,10 @@ namespace InfraredAnalyze
             InitializeComponent();
             timer1.Start();
             DMSDK.DM_Init();//关闭时需要释放资源
-            DMSDK.DM_PlayerInit(spcScreen.Handle);//初始化视频  只能调用一次
+            if (DMSDK.DM_PlayerInit(spcScreen.Handle) < 0)//初始化视频  只能调用一次
+            {
+                MessageBox.Show("初始化失败！");
+            }
             try//为list赋初值
             {
                 structAlarm = new StructClass.StructAlarm();
@@ -65,8 +68,6 @@ namespace InfraredAnalyze
                 areaAlarmCount = new StructClass.AreaAlarmCount();
                 alarmStructCount = new StructClass.alarmStructCount();
               
-
-
 
                 for (int i = 0; i < 16; i++)
                 {
@@ -126,6 +127,7 @@ namespace InfraredAnalyze
         private void btnClose_Click(object sender, EventArgs e)//关闭窗体 退出程序
         {
             DMSDK.DM_PlayerCleanup();
+            iconInfrared.Dispose();
             this.Close();
             Environment.Exit(0);
         }
@@ -674,7 +676,12 @@ namespace InfraredAnalyze
                 FrmConfig frmConfig = new FrmConfig();
                 StaticClass.Temper_CameraId= structSM7003Tag.CameraID;
                 StaticClass.Temper_Ip = structSM7003Tag.IP;
-                frmConfig.ShowDialog();
+                StaticClass.Temper_CameraName = tvwSensor.SelectedNode.Text;
+                StaticClass.Temper_IsEnanle = structSM7003Tag.Enable;
+                if(frmConfig.ShowDialog() == DialogResult.OK)
+                {
+                    LoadTreeView();
+                }
             }
         }
         #endregion
@@ -748,7 +755,7 @@ namespace InfraredAnalyze
         #region//视频参数设置
         private void 视频设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmVideoConfig frmVideoConfig = new FrmVideoConfig();
+            FrmSystemConfig frmVideoConfig = new FrmSystemConfig();
             structSM7003Tag = new StructClass.StructSM7003Tag();
             tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
             if(tvwSensor.SelectedNode!=null)
@@ -756,7 +763,6 @@ namespace InfraredAnalyze
                 structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                 frmVideoConfig.IPCameraId = structSM7003Tag.CameraID;
                 frmVideoConfig.IPAddress = structSM7003Tag.IP;
-                frmVideoConfig.CName = tvwSensor.SelectedNode.Text;
                 if(frmVideoConfig.ShowDialog()==DialogResult.OK)
                 {
                     LoadTreeView();
@@ -1047,21 +1053,21 @@ namespace InfraredAnalyze
         {
             if (StaticClass.SelectedNode == 0)
             {
-                MessageBox.Show("请先选择需要启用的探测器!");
+                MessageBox.Show("请先选择需要设置的探测器!");
             }
             else
             {
-                FrmAddIPCamera frmAddIPCamera = new FrmAddIPCamera();
+                FrmConfig frmConfig = new  FrmConfig();
                 StructClass.StructIAnalyzeConfig temp_structIAnalyzeConfig = new StructClass.StructIAnalyzeConfig();
                 ArrayList arrayList= sqlCreate.Select_SMInfraredConfig(StaticClass.SelectedNode);
                 foreach(StructClass.StructIAnalyzeConfig structIAnalyzeConfig in arrayList)
                 {
                     temp_structIAnalyzeConfig = structIAnalyzeConfig;
                 }
-                frmAddIPCamera.IP = temp_structIAnalyzeConfig.IP;
-                frmAddIPCamera.Num = StaticClass.SelectedNode;
-                frmAddIPCamera.CameraName = temp_structIAnalyzeConfig.CameraName;
-                if (frmAddIPCamera.ShowDialog() == DialogResult.OK)
+                StaticClass.Temper_Ip = temp_structIAnalyzeConfig.IP;
+                StaticClass.Temper_CameraId= StaticClass.SelectedNode;
+                StaticClass.Temper_CameraName = temp_structIAnalyzeConfig.CameraName;
+                if (frmConfig.ShowDialog() == DialogResult.OK)
                 {
                     LoadTreeView();
                 }
@@ -1086,6 +1092,11 @@ namespace InfraredAnalyze
         private void btnStart_Click(object sender, EventArgs e)
         {
             thread = new Thread(showIsRunning);//显示请勿操作界面 防止误操作
+            //lbl:
+            //if (this.IsHandleCreated)
+            //{
+            //    goto lbl;
+            //}
             thread.IsBackground = true;
             thread.Start();
             try

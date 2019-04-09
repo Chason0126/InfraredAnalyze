@@ -41,6 +41,8 @@
             this.IPAddressGateWay = new InfraredAnalyze.IpAddressTextBox();
             this.IPAddressSubMask = new InfraredAnalyze.IpAddressTextBox();
             this.IPAddressIP = new InfraredAnalyze.IpAddressTextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbxIsEnable = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label2
@@ -48,7 +50,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("黑体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(179, 54);
+            this.label2.Location = new System.Drawing.Point(209, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 2;
@@ -59,7 +61,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("黑体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(170, 91);
+            this.label3.Location = new System.Drawing.Point(198, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 14);
             this.label3.TabIndex = 2;
@@ -70,7 +72,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("黑体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(193, 121);
+            this.label4.Location = new System.Drawing.Point(225, 141);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 14);
             this.label4.TabIndex = 2;
@@ -81,7 +83,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("黑体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(170, 156);
+            this.label5.Location = new System.Drawing.Point(198, 182);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 14);
             this.label5.TabIndex = 2;
@@ -91,10 +93,10 @@
             // 
             this.tbxMAC.Enabled = false;
             this.tbxMAC.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxMAC.Location = new System.Drawing.Point(248, 150);
+            this.tbxMAC.Location = new System.Drawing.Point(289, 175);
             this.tbxMAC.Name = "tbxMAC";
             this.tbxMAC.ReadOnly = true;
-            this.tbxMAC.Size = new System.Drawing.Size(227, 26);
+            this.tbxMAC.Size = new System.Drawing.Size(264, 26);
             this.tbxMAC.TabIndex = 4;
             this.tbxMAC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -103,9 +105,9 @@
             this.btnConfirm.FlatAppearance.BorderSize = 0;
             this.btnConfirm.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnConfirm.ForeColor = System.Drawing.Color.Black;
-            this.btnConfirm.Location = new System.Drawing.Point(300, 189);
+            this.btnConfirm.Location = new System.Drawing.Point(365, 227);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(90, 30);
+            this.btnConfirm.Size = new System.Drawing.Size(105, 35);
             this.btnConfirm.TabIndex = 6;
             this.btnConfirm.Tag = "null";
             this.btnConfirm.Text = "确认修改";
@@ -116,7 +118,8 @@
             // 
             this.chbModifyMac.AutoSize = true;
             this.chbModifyMac.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chbModifyMac.Location = new System.Drawing.Point(495, 154);
+            this.chbModifyMac.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chbModifyMac.Location = new System.Drawing.Point(577, 180);
             this.chbModifyMac.Name = "chbModifyMac";
             this.chbModifyMac.Size = new System.Drawing.Size(48, 16);
             this.chbModifyMac.TabIndex = 5;
@@ -127,9 +130,10 @@
             // chbModifyGateWay
             // 
             this.chbModifyGateWay.AutoSize = true;
-            this.chbModifyGateWay.Location = new System.Drawing.Point(495, 121);
+            this.chbModifyGateWay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chbModifyGateWay.Location = new System.Drawing.Point(577, 141);
             this.chbModifyGateWay.Name = "chbModifyGateWay";
-            this.chbModifyGateWay.Size = new System.Drawing.Size(48, 16);
+            this.chbModifyGateWay.Size = new System.Drawing.Size(54, 18);
             this.chbModifyGateWay.TabIndex = 7;
             this.chbModifyGateWay.Text = "修改";
             this.chbModifyGateWay.UseVisualStyleBackColor = true;
@@ -138,9 +142,10 @@
             // chbModifyNetMask
             // 
             this.chbModifyNetMask.AutoSize = true;
-            this.chbModifyNetMask.Location = new System.Drawing.Point(495, 89);
+            this.chbModifyNetMask.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chbModifyNetMask.Location = new System.Drawing.Point(577, 104);
             this.chbModifyNetMask.Name = "chbModifyNetMask";
-            this.chbModifyNetMask.Size = new System.Drawing.Size(48, 16);
+            this.chbModifyNetMask.Size = new System.Drawing.Size(54, 18);
             this.chbModifyNetMask.TabIndex = 7;
             this.chbModifyNetMask.Text = "修改";
             this.chbModifyNetMask.UseVisualStyleBackColor = true;
@@ -150,39 +155,63 @@
             // 
             this.IPAddressGateWay.Enabled = false;
             this.IPAddressGateWay.IPAdd = ((System.Net.IPAddress)(resources.GetObject("IPAddressGateWay.IPAdd")));
-            this.IPAddressGateWay.Location = new System.Drawing.Point(248, 116);
+            this.IPAddressGateWay.Location = new System.Drawing.Point(289, 135);
             this.IPAddressGateWay.Name = "IPAddressGateWay";
-            this.IPAddressGateWay.Size = new System.Drawing.Size(241, 26);
+            this.IPAddressGateWay.Size = new System.Drawing.Size(281, 30);
             this.IPAddressGateWay.TabIndex = 3;
             // 
             // IPAddressSubMask
             // 
             this.IPAddressSubMask.Enabled = false;
             this.IPAddressSubMask.IPAdd = ((System.Net.IPAddress)(resources.GetObject("IPAddressSubMask.IPAdd")));
-            this.IPAddressSubMask.Location = new System.Drawing.Point(248, 84);
+            this.IPAddressSubMask.Location = new System.Drawing.Point(289, 98);
             this.IPAddressSubMask.Name = "IPAddressSubMask";
-            this.IPAddressSubMask.Size = new System.Drawing.Size(241, 26);
+            this.IPAddressSubMask.Size = new System.Drawing.Size(281, 30);
             this.IPAddressSubMask.TabIndex = 2;
             // 
             // IPAddressIP
             // 
             this.IPAddressIP.IPAdd = ((System.Net.IPAddress)(resources.GetObject("IPAddressIP.IPAdd")));
-            this.IPAddressIP.Location = new System.Drawing.Point(248, 47);
+            this.IPAddressIP.Location = new System.Drawing.Point(289, 55);
             this.IPAddressIP.Name = "IPAddressIP";
-            this.IPAddressIP.Size = new System.Drawing.Size(241, 26);
+            this.IPAddressIP.Size = new System.Drawing.Size(281, 30);
             this.IPAddressIP.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("黑体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(198, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 14);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "是否启用：";
+            // 
+            // cbxIsEnable
+            // 
+            this.cbxIsEnable.FormattingEnabled = true;
+            this.cbxIsEnable.Items.AddRange(new object[] {
+            "否",
+            "是"});
+            this.cbxIsEnable.Location = new System.Drawing.Point(289, 12);
+            this.cbxIsEnable.Name = "cbxIsEnable";
+            this.cbxIsEnable.Size = new System.Drawing.Size(98, 22);
+            this.cbxIsEnable.TabIndex = 11;
             // 
             // FrmCameraNetConfig
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(680, 235);
+            this.ClientSize = new System.Drawing.Size(793, 288);
+            this.Controls.Add(this.cbxIsEnable);
             this.Controls.Add(this.chbModifyNetMask);
             this.Controls.Add(this.chbModifyGateWay);
             this.Controls.Add(this.chbModifyMac);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.tbxMAC);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -190,6 +219,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.IPAddressSubMask);
             this.Controls.Add(this.IPAddressIP);
+            this.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmCameraNetConfig";
@@ -215,5 +245,7 @@
         private System.Windows.Forms.CheckBox chbModifyMac;
         private System.Windows.Forms.CheckBox chbModifyGateWay;
         private System.Windows.Forms.CheckBox chbModifyNetMask;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbxIsEnable;
     }
 }

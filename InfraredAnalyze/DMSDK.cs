@@ -1309,7 +1309,7 @@ namespace InfraredAnalyze
         *返回值：无
         */
         [DllImport("DMSDK.dll", EntryPoint = "DM_GetSystemInfo")]
-        public static extern void DM_GetSystemInfo(int handle, ref string SysInfo);
+        public static extern void DM_GetSystemInfo(int handle, StringBuilder SysInfo);
 
         /*
             函数名称:	DM_SetZoom

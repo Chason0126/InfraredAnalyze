@@ -32,6 +32,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLeftMenu = new System.Windows.Forms.Panel();
+            this.btnMaintain = new System.Windows.Forms.Button();
             this.btnPTZConfig = new System.Windows.Forms.Button();
             this.btnVideoConfig = new System.Windows.Forms.Button();
             this.btnSystemConfig = new System.Windows.Forms.Button();
@@ -91,6 +92,7 @@
             // 
             this.pnlLeftMenu.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pnlLeftMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlLeftMenu.Controls.Add(this.btnMaintain);
             this.pnlLeftMenu.Controls.Add(this.btnPTZConfig);
             this.pnlLeftMenu.Controls.Add(this.btnVideoConfig);
             this.pnlLeftMenu.Controls.Add(this.btnSystemConfig);
@@ -100,11 +102,28 @@
             this.pnlLeftMenu.Controls.Add(this.btnDataConfig);
             this.pnlLeftMenu.Controls.Add(this.btnMeasureConfig);
             this.pnlLeftMenu.Controls.Add(this.btnNetConfig);
-            this.pnlLeftMenu.Location = new System.Drawing.Point(12, 84);
+            this.pnlLeftMenu.Location = new System.Drawing.Point(12, 210);
             this.pnlLeftMenu.Name = "pnlLeftMenu";
-            this.pnlLeftMenu.Size = new System.Drawing.Size(148, 450);
+            this.pnlLeftMenu.Size = new System.Drawing.Size(148, 400);
             this.pnlLeftMenu.TabIndex = 2;
             this.pnlLeftMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlLeftMenu_MouseDown);
+            // 
+            // btnMaintain
+            // 
+            this.btnMaintain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnMaintain.FlatAppearance.BorderSize = 0;
+            this.btnMaintain.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMaintain.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnMaintain.Location = new System.Drawing.Point(0, 360);
+            this.btnMaintain.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMaintain.Name = "btnMaintain";
+            this.btnMaintain.Padding = new System.Windows.Forms.Padding(3);
+            this.btnMaintain.Size = new System.Drawing.Size(146, 40);
+            this.btnMaintain.TabIndex = 9;
+            this.btnMaintain.Tag = "0";
+            this.btnMaintain.Text = "系统维护";
+            this.btnMaintain.UseVisualStyleBackColor = true;
+            this.btnMaintain.Click += new System.EventHandler(this.btnMaintain_Click);
             // 
             // btnPTZConfig
             // 
@@ -112,10 +131,11 @@
             this.btnPTZConfig.FlatAppearance.BorderSize = 0;
             this.btnPTZConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPTZConfig.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPTZConfig.Location = new System.Drawing.Point(0, 400);
+            this.btnPTZConfig.Location = new System.Drawing.Point(0, 320);
             this.btnPTZConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnPTZConfig.Name = "btnPTZConfig";
-            this.btnPTZConfig.Size = new System.Drawing.Size(146, 50);
+            this.btnPTZConfig.Padding = new System.Windows.Forms.Padding(3);
+            this.btnPTZConfig.Size = new System.Drawing.Size(146, 40);
             this.btnPTZConfig.TabIndex = 8;
             this.btnPTZConfig.Tag = "0";
             this.btnPTZConfig.Text = "云台控制";
@@ -130,10 +150,10 @@
             this.btnVideoConfig.FlatAppearance.BorderSize = 0;
             this.btnVideoConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnVideoConfig.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnVideoConfig.Location = new System.Drawing.Point(0, 350);
+            this.btnVideoConfig.Location = new System.Drawing.Point(0, 280);
             this.btnVideoConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnVideoConfig.Name = "btnVideoConfig";
-            this.btnVideoConfig.Size = new System.Drawing.Size(146, 50);
+            this.btnVideoConfig.Size = new System.Drawing.Size(146, 40);
             this.btnVideoConfig.TabIndex = 7;
             this.btnVideoConfig.Tag = "0";
             this.btnVideoConfig.Text = "视频采集设置";
@@ -148,10 +168,10 @@
             this.btnSystemConfig.FlatAppearance.BorderSize = 0;
             this.btnSystemConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSystemConfig.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSystemConfig.Location = new System.Drawing.Point(0, 300);
+            this.btnSystemConfig.Location = new System.Drawing.Point(0, 240);
             this.btnSystemConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnSystemConfig.Name = "btnSystemConfig";
-            this.btnSystemConfig.Size = new System.Drawing.Size(146, 50);
+            this.btnSystemConfig.Size = new System.Drawing.Size(146, 40);
             this.btnSystemConfig.TabIndex = 6;
             this.btnSystemConfig.Tag = "0";
             this.btnSystemConfig.Text = "系统设置";
@@ -166,10 +186,10 @@
             this.btnAlarmConfig.FlatAppearance.BorderSize = 0;
             this.btnAlarmConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAlarmConfig.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAlarmConfig.Location = new System.Drawing.Point(0, 250);
+            this.btnAlarmConfig.Location = new System.Drawing.Point(0, 200);
             this.btnAlarmConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnAlarmConfig.Name = "btnAlarmConfig";
-            this.btnAlarmConfig.Size = new System.Drawing.Size(146, 50);
+            this.btnAlarmConfig.Size = new System.Drawing.Size(146, 40);
             this.btnAlarmConfig.TabIndex = 5;
             this.btnAlarmConfig.Tag = "0";
             this.btnAlarmConfig.Text = "报警设置";
@@ -184,10 +204,10 @@
             this.btnTemperParam.FlatAppearance.BorderSize = 0;
             this.btnTemperParam.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTemperParam.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTemperParam.Location = new System.Drawing.Point(0, 200);
+            this.btnTemperParam.Location = new System.Drawing.Point(0, 160);
             this.btnTemperParam.Margin = new System.Windows.Forms.Padding(0);
             this.btnTemperParam.Name = "btnTemperParam";
-            this.btnTemperParam.Size = new System.Drawing.Size(146, 50);
+            this.btnTemperParam.Size = new System.Drawing.Size(146, 40);
             this.btnTemperParam.TabIndex = 4;
             this.btnTemperParam.Tag = "0";
             this.btnTemperParam.Text = "测温参数设置";
@@ -203,10 +223,10 @@
             this.btnImageConfig.FlatAppearance.BorderSize = 0;
             this.btnImageConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnImageConfig.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnImageConfig.Location = new System.Drawing.Point(0, 150);
+            this.btnImageConfig.Location = new System.Drawing.Point(0, 120);
             this.btnImageConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnImageConfig.Name = "btnImageConfig";
-            this.btnImageConfig.Size = new System.Drawing.Size(146, 50);
+            this.btnImageConfig.Size = new System.Drawing.Size(146, 40);
             this.btnImageConfig.TabIndex = 3;
             this.btnImageConfig.Tag = "0";
             this.btnImageConfig.Text = "图像设置";
@@ -221,10 +241,10 @@
             this.btnDataConfig.FlatAppearance.BorderSize = 0;
             this.btnDataConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDataConfig.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDataConfig.Location = new System.Drawing.Point(0, 100);
+            this.btnDataConfig.Location = new System.Drawing.Point(0, 80);
             this.btnDataConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnDataConfig.Name = "btnDataConfig";
-            this.btnDataConfig.Size = new System.Drawing.Size(146, 50);
+            this.btnDataConfig.Size = new System.Drawing.Size(146, 40);
             this.btnDataConfig.TabIndex = 2;
             this.btnDataConfig.Tag = "0";
             this.btnDataConfig.Text = "图像采集设置";
@@ -239,10 +259,10 @@
             this.btnMeasureConfig.FlatAppearance.BorderSize = 0;
             this.btnMeasureConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMeasureConfig.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnMeasureConfig.Location = new System.Drawing.Point(0, 50);
+            this.btnMeasureConfig.Location = new System.Drawing.Point(0, 40);
             this.btnMeasureConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnMeasureConfig.Name = "btnMeasureConfig";
-            this.btnMeasureConfig.Size = new System.Drawing.Size(146, 50);
+            this.btnMeasureConfig.Size = new System.Drawing.Size(146, 40);
             this.btnMeasureConfig.TabIndex = 1;
             this.btnMeasureConfig.Tag = "0";
             this.btnMeasureConfig.Text = "测温设置";
@@ -260,7 +280,7 @@
             this.btnNetConfig.Location = new System.Drawing.Point(0, 0);
             this.btnNetConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnNetConfig.Name = "btnNetConfig";
-            this.btnNetConfig.Size = new System.Drawing.Size(146, 50);
+            this.btnNetConfig.Size = new System.Drawing.Size(146, 40);
             this.btnNetConfig.TabIndex = 0;
             this.btnNetConfig.Tag = "0";
             this.btnNetConfig.Text = "网络设置";
@@ -275,7 +295,7 @@
             this.grpConfig.Location = new System.Drawing.Point(187, 53);
             this.grpConfig.Margin = new System.Windows.Forms.Padding(0);
             this.grpConfig.Name = "grpConfig";
-            this.grpConfig.Size = new System.Drawing.Size(801, 835);
+            this.grpConfig.Size = new System.Drawing.Size(801, 840);
             this.grpConfig.TabIndex = 3;
             this.grpConfig.TabStop = false;
             this.grpConfig.Text = "网络设置";
@@ -316,5 +336,6 @@
         private System.Windows.Forms.Button btnDataConfig;
         private System.Windows.Forms.Button btnMeasureConfig;
         private System.Windows.Forms.Button btnNetConfig;
+        private System.Windows.Forms.Button btnMaintain;
     }
 }

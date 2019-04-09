@@ -54,5 +54,7 @@ namespace InfraredAnalyze
         public static int Temper_Connect;
         public static string Temper_Ip;
         public static int Temper_CameraId;
+        public static string Temper_CameraName;
+        public static bool Temper_IsEnanle;
     }
 }

@@ -254,7 +254,6 @@ namespace InfraredAnalyze
                     int ErrId = tagAlarm.AlarmID;
                     break;
             }
-            Thread.Sleep(100);
         }
 
         private void timer1_Tick(object sender, EventArgs e)

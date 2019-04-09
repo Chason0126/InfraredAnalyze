@@ -11,20 +11,14 @@ using System.Windows.Forms;
 
 namespace InfraredAnalyze
 {
-    public partial class FrmSaveImageConfig : Form
+    public partial class FrmSaveVideoConfig : Form
     {
-        public FrmSaveImageConfig()
+        public FrmSaveVideoConfig()
         {
             InitializeComponent();
         }
 
-        private void FrmSaveImageConfig_Load(object sender, EventArgs e)
-        {
-            tbxSaveImage.Text = ConfigurationManager.AppSettings["ImageSavePath"];
-            StaticClass.Temper_Monitor = DMSDK.DM_OpenMonitor(pbxTemper.Handle, StaticClass.Temper_Ip, 5000);
-        }
-
-        string path = string.Empty;
+        string path;
         private void btnChangePath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -32,23 +26,31 @@ namespace InfraredAnalyze
             {
                 path = fbd.SelectedPath;
             }
-            tbxSaveImage.Text = path;
+            tbxSaveVideo.Text = path;
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);//保存配置文件
-            config.AppSettings.Settings["ImageSavePath"].Value = path.ToString();
-            ConfigurationManager.RefreshSection("ImageSavePath");
+            config.AppSettings.Settings["VideoSavePath"].Value = path.ToString();
+            ConfigurationManager.RefreshSection("VideoSavePath");
             config.Save(ConfigurationSaveMode.Modified);
         }
 
-        private void btnSnapShot_Click(object sender, EventArgs e)
+        private void FrmSaveVideoConfig_Load(object sender, EventArgs e)
         {
             path = ConfigurationManager.AppSettings["ImageSavePath"];
-            if (DMSDK.DM_Capture(StaticClass.Temper_Monitor, path) < 0)
+            tbxSaveVideo.Text = path;
+            StaticClass.Temper_Monitor = DMSDK.DM_OpenMonitor(pbxTemper.Handle, StaticClass.Temper_Ip, 5000);
+        }
+
+        private void btnSaveVideo_Click(object sender, EventArgs e)
+        {
+            if (btnSaveVideo.Text == "保存视频")
             {
-                MessageBox.Show("保存图片失败！请重试");
+                DMSDK.DM_Record(StaticClass.Temper_Monitor,path);
+                btnSaveVideo.Text = "停止保存";
             }
-            else
+            else if(btnSaveVideo.Text == "停止保存")
             {
-                MessageBox.Show("拍摄完成！");
+                DMSDK.DM_StopRecord(StaticClass.Temper_Monitor);
+                btnSaveVideo.Text = "保存视频";
             }
         }
     }

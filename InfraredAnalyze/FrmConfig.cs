@@ -29,6 +29,15 @@ namespace InfraredAnalyze
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            DMSDK.DM_CloseMonitor(StaticClass.Temper_Monitor);
+            DMSDK.DM_Disconnect(StaticClass.Temper_Connect);
+            StaticClass.Temper_Monitor = 0;
+            StaticClass.Temper_Connect = 0;
+            StaticClass.Temper_Ip = "";
+            StaticClass.Temper_CameraId = 0;
+            StaticClass.Temper_CameraName = "";
+            StaticClass.Temper_IsEnanle = false;
+            DialogResult = DialogResult.OK;
             this.Close();
             this.Dispose();
         }
@@ -176,7 +185,7 @@ namespace InfraredAnalyze
         }
 
         #endregion
-      
+
 
         #region//单击事件
         private void btnNetConfig_Click(object sender, EventArgs e)//网络设置
@@ -187,7 +196,7 @@ namespace InfraredAnalyze
             frmCameraNetConfig.TopLevel = false;
             grpConfig.Controls.Add(frmCameraNetConfig);
             frmCameraNetConfig.BringToFront();
-            frmCameraNetConfig.Location = new Point(0, grpConfig.Height / 4);
+            frmCameraNetConfig.Location = new Point(4, grpConfig.Height / 4);
             frmCameraNetConfig.Show();
             if (StaticClass.Temper_Connect <= 0)
             {
@@ -195,7 +204,7 @@ namespace InfraredAnalyze
             }
         }
 
-        private void btnMeasureConfig_Click(object sender, EventArgs e)
+        private void btnMeasureConfig_Click(object sender, EventArgs e)//测温设置
         {
             grpConfig.Controls.Clear();
             if (StaticClass.Temper_Connect <= 0)
@@ -207,12 +216,16 @@ namespace InfraredAnalyze
             FrmMeasureTemperConfig frmMeasureTemperConfig = new FrmMeasureTemperConfig();
             frmMeasureTemperConfig.TopLevel = false;
             grpConfig.Controls.Add(frmMeasureTemperConfig);
+            frmMeasureTemperConfig.pbxScreen.Width = 640;
+            frmMeasureTemperConfig.pbxScreen.Height = 480;
+            frmMeasureTemperConfig.pbxScreen.Location = new Point(40, 20);
+            frmMeasureTemperConfig.tabArea.Location = new Point(frmMeasureTemperConfig.tabArea.Location.X, frmMeasureTemperConfig.tabArea.Location.Y - 30);
             frmMeasureTemperConfig.BringToFront();
-            frmMeasureTemperConfig.Location = new Point(20, 20);
+            frmMeasureTemperConfig.Location = new Point(30, 30);
             frmMeasureTemperConfig.Show();
         }
 
-        private void btnDataConfig_Click(object sender, EventArgs e)
+        private void btnDataConfig_Click(object sender, EventArgs e)//保存图片设置
         {
             grpConfig.Controls.Clear();
             if (StaticClass.Temper_Connect <= 0)
@@ -229,7 +242,7 @@ namespace InfraredAnalyze
             frmSaveImageConfig.Show();
         }
 
-        private void btnImageConfig_Click(object sender, EventArgs e)
+        private void btnImageConfig_Click(object sender, EventArgs e)//图像设置
         {
             grpConfig.Controls.Clear();
             if (StaticClass.Temper_Connect <= 0)
@@ -242,52 +255,76 @@ namespace InfraredAnalyze
             frmImageConfig.TopLevel = false;
             grpConfig.Controls.Add(frmImageConfig);
             frmImageConfig.BringToFront();
-            frmImageConfig.Location = new Point(20, 20);
+            frmImageConfig.Location = new Point(100, 50);
             frmImageConfig.Show();
         }
 
         private void btnTemperParam_Click(object sender, EventArgs e)
         {
+            grpConfig.Controls.Clear();
             if (StaticClass.Temper_Connect <= 0)
             {
                 MessageBox.Show("设备连接失败！请重新连接设备！");
                 return;
             }
             btnBackColor_Init(sender as Button);
-
+            FrmTemperParamConfig frmTemperParamConfig = new FrmTemperParamConfig();
+            frmTemperParamConfig.TopLevel = false;
+            grpConfig.Controls.Add(frmTemperParamConfig);
+            frmTemperParamConfig.BringToFront();
+            frmTemperParamConfig.Location = new Point(200, 50);
+            frmTemperParamConfig.Show();
         }
 
         private void btnAlarmConfig_Click(object sender, EventArgs e)
         {
+            grpConfig.Controls.Clear();
             if (StaticClass.Temper_Connect <= 0)
             {
                 MessageBox.Show("设备连接失败！请重新连接设备！");
                 return;
             }
             btnBackColor_Init(sender as Button);
-
+            FrmAlarmConfig frmAlarmConfig = new FrmAlarmConfig();
+            frmAlarmConfig.TopLevel = false;
+            grpConfig.Controls.Add(frmAlarmConfig);
+            frmAlarmConfig.BringToFront();
+            frmAlarmConfig.Location = new Point(5, 150);
+            frmAlarmConfig.Show();
         }
 
         private void btnSystemConfig_Click(object sender, EventArgs e)
         {
+            grpConfig.Controls.Clear();
             if (StaticClass.Temper_Connect <= 0)
             {
                 MessageBox.Show("设备连接失败！请重新连接设备！");
                 return;
             }
             btnBackColor_Init(sender as Button);
-
+            FrmSystemConfig frmSystemConfig = new FrmSystemConfig();
+            frmSystemConfig.TopLevel = false;
+            grpConfig.Controls.Add(frmSystemConfig);
+            frmSystemConfig.BringToFront();
+            frmSystemConfig.Location = new Point(5, 20);
+            frmSystemConfig.Show();
         }
 
         private void btnVideoConfig_Click(object sender, EventArgs e)
         {
+            grpConfig.Controls.Clear();
             if (StaticClass.Temper_Connect <= 0)
             {
                 MessageBox.Show("设备连接失败！请重新连接设备！");
                 return;
             }
             btnBackColor_Init(sender as Button);
-
+            FrmSaveVideoConfig frmSaveVideoConfig = new FrmSaveVideoConfig();
+            frmSaveVideoConfig.TopLevel = false;
+            grpConfig.Controls.Add(frmSaveVideoConfig);
+            frmSaveVideoConfig.BringToFront();
+            frmSaveVideoConfig.Location = new Point(5, 20);
+            frmSaveVideoConfig.Show();
         }
 
         private void btnPTZConfig_Click(object sender, EventArgs e)
@@ -301,5 +338,22 @@ namespace InfraredAnalyze
 
         }
         #endregion
+
+        private void btnMaintain_Click(object sender, EventArgs e)
+        {
+            grpConfig.Controls.Clear();
+            if (StaticClass.Temper_Connect <= 0)
+            {
+                MessageBox.Show("设备连接失败！请重新连接设备！");
+                return;
+            }
+            btnBackColor_Init(sender as Button);
+            FrmMaintain frmMaintain = new FrmMaintain();
+            frmMaintain.TopLevel = false;
+            grpConfig.Controls.Add(frmMaintain);
+            frmMaintain.BringToFront();
+            frmMaintain.Location = new Point(150, 20);
+            frmMaintain.Show();
+        }
     }
 }
