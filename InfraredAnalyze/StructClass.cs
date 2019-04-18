@@ -109,5 +109,11 @@ namespace InfraredAnalyze
             public string Type;
             public string Message;
         }
+
+        public struct StructPwd
+        {
+            public int level;
+            public string pwd;
+        }
     }
 }

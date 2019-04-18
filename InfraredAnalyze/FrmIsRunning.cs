@@ -12,9 +12,15 @@ namespace InfraredAnalyze
 {
     public partial class FrmIsRunning : Form
     {
-        public FrmIsRunning()
+        public FrmIsRunning(BackgroundWorker worker)
         {
             InitializeComponent();
+            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Worker_RunWorkerCompleted);
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

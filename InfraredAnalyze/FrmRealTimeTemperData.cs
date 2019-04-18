@@ -115,6 +115,15 @@ namespace InfraredAnalyze
         Queue<double> queueArea_2 = new Queue<double>(250);
         Queue<double> queueArea_3 = new Queue<double>(250);
         Queue<double> queueArea_4 = new Queue<double>(250);
+        int Count_queuePoint_1;//线程同步用
+        int Count_queuePoint_2;
+        int Count_queuePoint_3;
+        int Count_queuePoint_4;
+        int Count_queueArea_1;
+        int Count_queueArea_2;
+        int Count_queueArea_3;
+        int Count_queueArea_4;
+        int Count_queueLine;
 
         private void ChartType()
         {
@@ -173,7 +182,8 @@ namespace InfraredAnalyze
             chartRealTimeData.Series.Add(seriesLine);
         }
 
-        private DMSDK.fMessCallBack fMessCallBack;
+        //private DMSDK.fMessCallBack fMessCallBack;
+        Thread thread_AddTemperData;
         private void FrmRealTimeTemperData_Load(object sender, EventArgs e)
         {
             if (StaticClass.intPtrs_Operate[cameraID - 1] <= 0)
@@ -182,154 +192,163 @@ namespace InfraredAnalyze
                 this.Dispose();
                 return;
             }
+            thread_AddTemperData = new Thread(AddTemperData);
+            timer1.Start();
             cbxAreaNum.SelectedIndex = 4;
             cbxAreaType.SelectedIndex = 3;
             tbxCameraID.Text = cameraID.ToString();
-            timer1.Start();
+            thread_AddTemperData.Start();
             chartRealTimeData.Series.Clear();//清除默认的series
             ChartHis_AddSeries();
             ChartType();
-            fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
-            DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[cameraID - 1], 1);//连续获取测温对象的数据
-            DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
         }
 
-        DMSDK.tagTempMessage tempMessage;
-        DMSDK.tagTemperature tagTemperature;
-        DMSDK.tagAlarm tagAlarm;
-        int len;
-        private void dmMessCallBack(int msg, IntPtr pBuf, int dwBufLen, uint dwUser)
+        private void AddTemperData()
         {
-            int Msg = msg - 0x8000;
-            switch (Msg)
+            StructClass.realTimeStructTemper realTimeStructTemper = new StructClass.realTimeStructTemper();
+            StructClass.realTimeTemper[] realTimeTempers = new StructClass.realTimeTemper[8];
+            StructClass.realTimeTemper realTimeTemper = new StructClass.realTimeTemper();
+            while (true)
             {
-                case 0x3051://错误
-
-                    break;
-                case 0x3053://温度数据
-                    tempMessage = (DMSDK.tagTempMessage)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagTempMessage));
-                    len = tempMessage.len;
-                    if (tempMessage.dvrIP == StaticClass.intPtrs_Ip[cameraID - 1])
+                try
+                {
+                    realTimeStructTemper = StaticClass.intPtrs_RealtimeTemper[cameraID - 1];
+                    realTimeTempers = realTimeStructTemper.realTimeTemper;
+                    for (int i = 0; i < 8; i++)
                     {
-                        for (int i = 0; i < len; i++)
+                        realTimeTemper = realTimeTempers[i];
+                        if (realTimeTemper.number != 0 && realTimeTemper.temper != 0 && realTimeTemper.type != 0)
                         {
-                            tagTemperature = new DMSDK.tagTemperature();
-                            tagTemperature = tempMessage.temperInfo[i];
-                            int ID = tagTemperature.number + 1;
-                            switch (ID)
+                            switch (realTimeTemper.number + 1)
                             {
                                 case 1://线
-                                    queueLine.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    queueLine.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Line = queueLine.ToList();
+                                    Interlocked.Increment(ref Count_queueLine);
                                     break;
                                 case 2:
-                                    queuePoint_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    queuePoint_1.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Point1 = queuePoint_1.ToList();
+                                    Interlocked.Increment(ref Count_queuePoint_1);
                                     break;
                                 case 3:
-                                    queuePoint_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    queuePoint_2.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Point2 = queuePoint_2.ToList();
+                                    Interlocked.Increment(ref Count_queuePoint_2);
                                     break;
                                 case 4:
-                                    queuePoint_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    queuePoint_3.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Point3 = queuePoint_3.ToList();
+                                    Interlocked.Increment(ref Count_queuePoint_3);
                                     break;
                                 case 5:
-                                    queuePoint_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    queuePoint_4.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Point4 = queuePoint_4.ToList();
+                                    Interlocked.Increment(ref Count_queuePoint_4);
                                     break;
                                 case 6:
-                                    queueArea_1.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);//
+                                    queueArea_1.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Area1 = queueArea_1.ToList();
+                                    Interlocked.Increment(ref Count_queueArea_1);
                                     break;
                                 case 7:
-                                    queueArea_2.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    queueArea_2.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Area2 = queueArea_2.ToList();
+                                    Interlocked.Increment(ref Count_queueArea_1);
                                     break;
                                 case 8:
-                                    queueArea_3.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    queueArea_3.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Area3 = queueArea_3.ToList();
+                                    Interlocked.Increment(ref Count_queueArea_1);
                                     break;
                                 case 9:
-                                    queueArea_4.Enqueue(Convert.ToDouble(tagTemperature.temper) / 100);
+                                    queueArea_4.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
+                                    tempList_Area4 = queueArea_4.ToList();
+                                    Interlocked.Increment(ref Count_queueArea_1);
                                     break;
                             }
                         }
                     }
-                    break;
-                case 0x3054://报警消息
-                    tagAlarm = (DMSDK.tagAlarm)Marshal.PtrToStructure(pBuf, typeof(DMSDK.tagAlarm));
-                    int ErrId = tagAlarm.AlarmID;
-                    break;
-            }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                seriesPoint_1.Points.Clear();
-                seriesPoint_2.Points.Clear();
-                seriesPoint_3.Points.Clear();
-                seriesPoint_4.Points.Clear();
-                seriesLine.Points.Clear();
-                seriesArea_1.Points.Clear();
-                seriesArea_2.Points.Clear();
-                seriesArea_3.Points.Clear();
-                seriesArea_4.Points.Clear();
-                for (int i = 0; i < queueArea_1.Count; i++)
-                {
-                    seriesArea_1.Points.AddXY(i + 1, queueArea_1.ElementAt(i));//DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss")
+                    #region
+                    if (Count_queueArea_1 > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queueArea_1.Dequeue();
+                            Interlocked.Decrement(ref Count_queueArea_1);
+                        }
+                    }
+                    if (Count_queueArea_2 > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queueArea_2.Dequeue();
+                            Interlocked.Decrement(ref Count_queueArea_2);
+                        }
+                    }
+                    if (Count_queueArea_3 > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queueArea_3.Dequeue();
+                            Interlocked.Decrement(ref Count_queueArea_3);
+                        }
+                    }
+                    if (Count_queueArea_4 > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queueArea_4.Dequeue();
+                            Interlocked.Decrement(ref Count_queueArea_4);
+                        }
+                    }
+                    if (Count_queuePoint_1 > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queuePoint_1.Dequeue();
+                            Interlocked.Decrement(ref Count_queuePoint_1);
+                        }
+                    }
+                    if (Count_queuePoint_2 > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queuePoint_1.Dequeue();
+                            Interlocked.Decrement(ref Count_queuePoint_2);
+                        }
+                    }
+                    if (Count_queuePoint_3 > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queuePoint_3.Dequeue();
+                            Interlocked.Decrement(ref Count_queuePoint_3);
+                        }
+                    }
+                    if (Count_queuePoint_4 > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queuePoint_4.Dequeue();
+                            Interlocked.Decrement(ref Count_queuePoint_4);
+                        }
+                    }
+                    if (Count_queueLine > 250)
+                    {
+                        for (int b = 0; b < 5; b++)
+                        {
+                            queueLine.Dequeue();
+                            Interlocked.Decrement(ref Count_queueLine);
+                        }
+                    }
+                    #endregion
                 }
-                for (int i = 0; i < queueArea_2.Count; i++)
+                catch (Exception ex)
                 {
-                    seriesArea_2.Points.AddXY(i + 1, queueArea_2.ElementAt(i));
+                    MessageBox.Show("获取实时温度数据异常！" + ex.Message);
                 }
-                for (int i = 0; i < queueArea_3.Count; i++)
-                {
-                    seriesArea_3.Points.AddXY(i + 1, queueArea_3.ElementAt(i));
-                }
-                for (int i = 0; i < queueArea_4.Count; i++)
-                {
-                    seriesArea_4.Points.AddXY(i + 1, queueArea_4.ElementAt(i));
-                }
-                for (int i = 0; i < queuePoint_1.Count; i++)
-                {
-                    seriesPoint_1.Points.AddXY(i + 1, queuePoint_1.ElementAt(i));
-                }
-                for (int i = 0; i < queuePoint_2.Count; i++)
-                {
-                    seriesPoint_2.Points.AddXY(i + 1, queuePoint_2.ElementAt(i));
-
-                }
-                for (int i = 0; i < queuePoint_3.Count; i++)
-                {
-                    seriesPoint_3.Points.AddXY(i + 1, queuePoint_3.ElementAt(i));
-                }
-                for (int i = 0; i < queuePoint_4.Count; i++)
-                {
-                    seriesPoint_4.Points.AddXY(i + 1, queuePoint_4.ElementAt(i));
-                }
-                for (int i = 0; i < queueLine.Count; i++)
-                {
-                    seriesLine.Points.AddXY(i + 1, queueLine.ElementAt(i));
-                }
-                Dequ(queuePoint_1);
-                Dequ(queuePoint_2);
-                Dequ(queuePoint_3);
-                Dequ(queuePoint_4);
-                Dequ(queueArea_1);
-                Dequ(queueArea_2);
-                Dequ(queueArea_3);
-                Dequ(queueArea_4);
-                Dequ(queueLine);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Dequ(Queue<double> que)//数量超过250 压出五个
-        {
-            if (que.Count > 250)
-            {
-                for (int b = 0; b < 5; b++)
-                {
-                    que.Dequeue();
-                }
+                Thread.Sleep(20);
             }
         }
 
@@ -344,7 +363,7 @@ namespace InfraredAnalyze
             seriesArea_2.Enabled = false;
             seriesArea_3.Enabled = false;
             seriesArea_4.Enabled = false;
-            if (cbxAreaType.SelectedIndex == 0&& cbxAreaNum.SelectedIndex == 0)
+            if (cbxAreaType.SelectedIndex == 0 && cbxAreaNum.SelectedIndex == 0)
             {
                 seriesPoint_1.Enabled = true;
             }
@@ -399,6 +418,75 @@ namespace InfraredAnalyze
             if (cbxAreaType.SelectedIndex == 3)
             {
                 cbxAreaNum.SelectedIndex = 4;
+            }
+        }
+
+        List<double> tempList_Point1 = new List<double>();
+        List<double> tempList_Point2 = new List<double>();
+        List<double> tempList_Point3 = new List<double>();
+        List<double> tempList_Point4 = new List<double>();
+        List<double> tempList_Area1 = new List<double>();
+        List<double> tempList_Area2 = new List<double>();
+        List<double> tempList_Area3 = new List<double>();
+        List<double> tempList_Area4 = new List<double>();
+        List<double> tempList_Line = new List<double>();
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                seriesPoint_1.Points.Clear();
+                seriesPoint_2.Points.Clear();
+                seriesPoint_3.Points.Clear();
+                seriesPoint_4.Points.Clear();
+                seriesLine.Points.Clear();
+                seriesArea_1.Points.Clear();
+                seriesArea_2.Points.Clear();
+                seriesArea_3.Points.Clear();
+                seriesArea_4.Points.Clear();
+               
+                for (int i = 0; i < tempList_Area1.Count; i++)
+                {
+                    seriesArea_1.Points.AddXY(i + 1, tempList_Area1[i]);
+                }
+
+                for (int i = 0; i < tempList_Area2.Count; i++)
+                {
+                    seriesArea_2.Points.AddXY(i + 1, tempList_Area2[i]);
+                }
+                for (int i = 0; i < tempList_Area3.Count; i++)
+                {
+                    seriesArea_3.Points.AddXY(i + 1, tempList_Area3[i]);
+                }
+                for (int i = 0; i < tempList_Area4.Count; i++)
+                {
+                    seriesArea_4.Points.AddXY(i + 1, tempList_Area4[i]);
+                }
+                for (int i = 0; i < tempList_Point1.Count; i++)
+                {
+                    seriesPoint_1.Points.AddXY(i + 1, tempList_Point1[i]);
+                }
+                for (int i = 0; i < tempList_Point2.Count; i++)
+                {
+                    seriesPoint_2.Points.AddXY(i + 1, tempList_Point2[i]);
+
+                }
+                for (int i = 0; i < tempList_Point3.Count; i++)
+                {
+                    seriesPoint_3.Points.AddXY(i + 1, tempList_Point3[i]);
+                }
+                for (int i = 0; i < tempList_Point4.Count; i++)
+                {
+                    seriesPoint_4.Points.AddXY(i + 1, tempList_Point4[i]);
+                }
+                for (int i = 0; i < tempList_Line.Count; i++)
+                {
+                    seriesLine.Points.AddXY(i + 1, tempList_Line[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

@@ -40,7 +40,9 @@ namespace InfraredAnalyze
         public static string[] intPtrs_CameraName = new string[16];//存储相机名称
         public static int[] intPtrs_NodeId = new int[16];//存储nodeid地址  用于显示顺序
         public static bool[] intPtrs_Enable = new bool[16];//记录启用的探测器
+        public static bool[] intPtrs_IsOnline = new bool[16];//记录在不在线
         public static byte[] intPtrs_AlarmId = new byte[16];//单台仪器可以是使用 多台的话 要自己判断 
+        public static bool[] Is_CallBack = new bool[16];//纪录每台仪器是否回调获取数据，设备重连时，会出现回调失败的情况
         public static int SelectedNode = 0;
         public static List<StructClass.StructAlarm> intPtrs_AlarmConfig = new List<StructClass.StructAlarm>(16);//用于保存获取数据库中每台探测器的报警设置(存Structalarm)  引用类型 需要初始化
         public static List<StructClass.realTimeStructTemper> intPtrs_RealtimeTemper = new List<StructClass.realTimeStructTemper>(16);//用于存储每个探测器的每个测温区域的实时温度 （）

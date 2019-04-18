@@ -27,6 +27,7 @@ namespace InfraredAnalyze
         private void FrmMeasureTemperConfig_Load(object sender, EventArgs e)
         {
             DMSDK.DM_Init();
+            worker.WorkerSupportsCancellation = true;
             StaticClass.Temper_Connect = DMSDK.DM_Connect(pbxScreen.Handle, StaticClass.Temper_Ip, 80);
             StaticClass.Temper_Monitor = DMSDK.DM_OpenMonitor(pbxScreen.Handle, StaticClass.Temper_Ip, 5000);
             if(StaticClass.Temper_Connect<=0|| StaticClass.Temper_Monitor < 0)
@@ -766,11 +767,19 @@ namespace InfraredAnalyze
             }
         }
 
-        Thread thread;
+        FrmIsRunning isRunning;
+        BackgroundWorker worker = new BackgroundWorker();
         private void btnClaerAll_Click(object sender, EventArgs e)
         {
-            thread = new Thread(showIsRunning);
-            thread.Start();
+            isRunning = new FrmIsRunning(worker);
+            worker.DoWork += new DoWorkEventHandler(showIsRunning);
+            worker.RunWorkerAsync();
+            isRunning.ShowDialog();
+            MessageBox.Show("删除成功！");
+        }
+
+        private void showIsRunning(object sender,DoWorkEventArgs e)
+        {
             DMSDK.DM_ClearAllArea(StaticClass.Temper_Connect);
             DMSDK.DM_ClearAllLine(StaticClass.Temper_Connect);
             DMSDK.DM_ClearAllSpot(StaticClass.Temper_Connect);
@@ -783,15 +792,7 @@ namespace InfraredAnalyze
             sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A7");
             sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A8");
             sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A9");
-            thread.Abort();
             Get_Area_Param();
-            MessageBox.Show("删除成功！");
-        }
-
-        private void showIsRunning()
-        {
-            FrmIsRunning frmIsRunning = new FrmIsRunning();
-            frmIsRunning.ShowDialog();
         }
     }
 

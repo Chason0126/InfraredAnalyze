@@ -92,6 +92,8 @@ namespace InfraredAnalyze
                 cmd.ExecuteNonQuery();
                 cmd = new SqlCommand("create table SMInfraredHisRecords(CameraId int,IPAddress varchar(15),DateTime datetime,Type nvarchar(max),Message nvarchar(max))", con_DB);
                 cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("create table SMInfraredPwd(Level int,Pwd nvarchar(max))", con_DB);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -137,7 +139,13 @@ namespace InfraredAnalyze
                     cmd = new SqlCommand("insert into SMInfraredAnalyze(CameraId,CameraName,IPAddress,Port,NodeID,Remarks,Enable) values('" + i + "','" + ("探测器" + i) + "','" + ("192.168.1." + i) + "','5000','" + i + "','" + "无" + "','0')", con_DB);
                     cmd.ExecuteNonQuery();
                 }
-               
+                cmd = new SqlCommand("insert into SMInfraredPwd(Level, Pwd) values(1,'adsensor')", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("insert into SMInfraredPwd(Level, Pwd) values(2,'sm7003')", con_DB);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("insert into SMInfraredPwd(Level, Pwd) values(3,'123456')", con_DB);
+                cmd.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {
@@ -218,6 +226,53 @@ namespace InfraredAnalyze
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+        }
+
+        public  List<StructClass.StructPwd> Select_Pwd()//查询密码信息
+        {
+            List<StructClass.StructPwd> structPwds = new List<StructClass.StructPwd>();
+            try
+            {
+                StructClass.StructPwd structPwd = new StructClass.StructPwd();
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("select * from SMInfraredPwd order by level asc", con_DB);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    structPwd.level = (int)sqlDataReader.GetValue(0);
+                    structPwd.pwd = (string)sqlDataReader.GetValue(1);
+                    structPwds.Add(structPwd);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("获取密码数据异常：" + ex.Message);
+            }
+            finally
+            {
+                con_DB.Close();
+            }
+            return structPwds;
+        }
+
+        public void Update_Pwd(int level,string pwd)//查询密码信息
+        {
+            try
+            {
+                con_DB = new SqlConnection(@"server =.; integrated security = true;database=SM_Infrared");
+                con_DB.Open();
+                cmd = new SqlCommand("update SMInfraredPwd set  Pwd='" + pwd + "' where level='" + level + "'", con_DB);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("密码修改失败：" + ex.Message);
             }
             finally
             {

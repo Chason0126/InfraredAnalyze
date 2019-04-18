@@ -169,6 +169,18 @@
     <Compile Include="FrmMaintain.Designer.cs">
       <DependentUpon>FrmMaintain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPwd.Designer.cs">
+      <DependentUpon>FrmPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPwdManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPwdManage.Designer.cs">
+      <DependentUpon>FrmPwdManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSaveImageConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,6 +310,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMaintain.resx">
       <DependentUpon>FrmMaintain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPwd.resx">
+      <DependentUpon>FrmPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPwdManage.resx">
+      <DependentUpon>FrmPwdManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSaveImageConfig.resx">
       <DependentUpon>FrmSaveImageConfig.cs</DependentUpon>

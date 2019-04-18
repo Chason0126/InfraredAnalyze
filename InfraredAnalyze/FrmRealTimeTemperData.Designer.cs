@@ -299,7 +299,7 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnWindow;
         private System.Windows.Forms.Button btnMin;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Timer timer1;
     }
 }

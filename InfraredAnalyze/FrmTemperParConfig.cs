@@ -58,6 +58,7 @@ namespace InfraredAnalyze
 
         private void FrmTemperParamConfig_Load(object sender, EventArgs e)
         {
+            worker.WorkerSupportsCancellation = true;
             DMSDK.DM_Init();
             StaticClass.Temper_Connect = DMSDK.DM_Connect(pbxScreen.Handle, ip, 80);
             StaticClass.Temper_Monitor = DMSDK.DM_OpenMonitor(pbxScreen.Handle, ip, 5000);
@@ -226,11 +227,20 @@ namespace InfraredAnalyze
             MessageBox.Show("设置成功！");
         }
 
-        Thread thread;
+        FrmIsRunning isRunning;
+        BackgroundWorker worker = new BackgroundWorker();
         private void btnUpdateAlarmInfo_Click(object sender, EventArgs e)
         {
-            thread = new Thread(showIsRunning);
-            thread.Start();
+            isRunning = new FrmIsRunning(worker);
+            worker.DoWork += new DoWorkEventHandler(showIsRunning);
+            worker.RunWorkerAsync();
+            isRunning.ShowDialog();
+            MessageBox.Show("设置完成！");
+        }
+
+
+        private void showIsRunning(object sender,DoWorkEventArgs e)
+        {
             if (cbxAlarm.SelectedIndex == 0)//打开或关闭 报警功能
             {
                 DMSDK.DM_CloseRemoteAlarm(StaticClass.Temper_Connect);
@@ -286,15 +296,6 @@ namespace InfraredAnalyze
                 }
             }
             GetAlarmParam();
-            thread.Abort();
-            MessageBox.Show("设置完成！");
-        }
-
-
-        private void showIsRunning()
-        {
-            FrmIsRunning frmIsRunning = new FrmIsRunning();
-            frmIsRunning.ShowDialog();
         }
 
         private void ckbIO_CheckedChanged(object sender, EventArgs e)

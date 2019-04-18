@@ -20,6 +20,7 @@ namespace InfraredAnalyze
 
         private void FrmAlarmConfig_Load(object sender, EventArgs e)
         {
+            worker.WorkerSupportsCancellation = true;
             Init_Param();
         }
 
@@ -65,12 +66,20 @@ namespace InfraredAnalyze
             }
         }
 
-        Thread thread;
         SqlCreate sqlCreate = new SqlCreate();
+        FrmIsRunning isRunning;
+        BackgroundWorker worker = new BackgroundWorker();
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            thread = new Thread(showIsRunning);
-            thread.Start();
+            isRunning = new FrmIsRunning(worker);
+            worker.DoWork += new DoWorkEventHandler(showIsRunning);
+            worker.RunWorkerAsync();
+            isRunning.ShowDialog();
+            MessageBox.Show("设置完成！");
+        }
+
+        private void showIsRunning(object sender,DoWorkEventArgs e)
+        {
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 1; j <= 4; j++)
@@ -84,7 +93,7 @@ namespace InfraredAnalyze
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerSpot_" + j + "", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeSpot_" + j + "", false)[0])).SelectedIndex;
                             DMSDK.DM_SetAlarmInfo(StaticClass.Temper_Connect, i, j + 1, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测温点 编号+1 从1开始算
-                            sqlCreate.Update_Alarmconfig(StaticClass.Temper_Connect, "S" + (j + 1), AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));//向数据库写入 告警设置信息 供 判断告警时使用
+                            sqlCreate.Update_Alarmconfig(StaticClass.Temper_CameraId, "S" + (j + 1), AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));//向数据库写入 告警设置信息 供 判断告警时使用
                             break;
                         case 2://设置区域温度告警
                             AlarmType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmTypeArea_" + j + "", false)[0])).SelectedIndex;
@@ -93,7 +102,7 @@ namespace InfraredAnalyze
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerArea_" + j + "", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeArea_" + j + "", false)[0])).SelectedIndex;
                             DMSDK.DM_SetAlarmInfo(StaticClass.Temper_Connect, i, j + 5, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测区域 编号 +5 从6开始算起
-                            sqlCreate.Update_Alarmconfig(StaticClass.Temper_Connect, "A" + (j + 5), AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));
+                            sqlCreate.Update_Alarmconfig(StaticClass.Temper_CameraId, "A" + (j + 5), AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));
                             break;
                         case 1://设置线 温度告警
                             AlarmType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmTypeLine_1", false)[0])).SelectedIndex;
@@ -102,20 +111,12 @@ namespace InfraredAnalyze
                             AlarmPower = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmPowerLine_1", false)[0])).SelectedIndex;
                             AlarmMessageType = ((ComboBox)(grpAlarmInfo.Controls.Find("cbxAlarmMessageTypeLine_1", false)[0])).SelectedIndex;
                             DMSDK.DM_SetAlarmInfo(StaticClass.Temper_Connect, i, j, AlarmPower, AlarmType, AlarmTemp, AlarmColorID, AlarmMessageType);//设置测温线  仅一条
-                            sqlCreate.Update_Alarmconfig(StaticClass.Temper_Connect, "L1", AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));
+                            sqlCreate.Update_Alarmconfig(StaticClass.Temper_CameraId, "L1", AlarmType, AlarmTemp, Convert.ToBoolean(AlarmPower));
                             break;
                     }
                 }
             }
             Init_Param();
-            thread.Abort();
-            MessageBox.Show("设置完成！");
-        }
-
-        private void showIsRunning()
-        {
-            FrmIsRunning frmIsRunning = new FrmIsRunning();
-            frmIsRunning.ShowDialog();
         }
     }
 }
