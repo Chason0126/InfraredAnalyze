@@ -118,7 +118,7 @@ namespace InfraredAnalyze
                 cbxCameraID.SelectedIndex = cameraId;
             }
             cbxAlarmType.SelectedIndex = 0;
-            ArrayList arrayList = sqlCreate.Select_HisRecords(cbxCameraID.SelectedIndex, "tbxIPAddress.Text", cbxAlarmType.Text, dtpStart.Value, dtpEnd.Value);
+            ArrayList arrayList = sqlCreate.Select_HisRecords(cbxCameraID.SelectedIndex, "tbxIPAddress.Text", cbxAlarmType.Text, dtpStart.Value, dtpEnd.Value);//ip地址没用到
             dgvHisRecords.Rows.Clear();
             foreach (StructClass.StructRecordsData structRecords in arrayList)
             {

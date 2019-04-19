@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Drawing;
-using Microsoft.DirectX.PrivateImplementationDetails;
-using Microsoft.DirectX;
 
 namespace InfraredAnalyze
 {

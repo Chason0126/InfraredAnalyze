@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using Microsoft.DirectX.PrivateImplementationDetails;
 using System.Configuration;
 using System.Collections;
 using System.Threading;
@@ -18,11 +17,6 @@ using System.Diagnostics;
 namespace InfraredAnalyze
 {
 
-    interface IFrmStyle//窗体样式控制  无边框  拖动 改变位置  不方便  算了
-    {
-        void FrmBorderStyle(Form form);//传入窗体改变 窗题的borderstyle
-        void FrmMove(Panel panel);//按住panle 改变窗体的位置
-    }
     public partial class FrmMain : Form
     {
         SqlCreate sqlCreate = new SqlCreate();
@@ -504,38 +498,48 @@ namespace InfraredAnalyze
             try
             {
                 tvwSensor.Nodes.Clear();
+                tvwData.Nodes.Clear();
                 if(temp_arrayList.Count>0)
                 {
                     foreach(StructClass.StructIAnalyzeConfig structIAnalyzeConfig in temp_arrayList)
                     {
-                        TreeNode temp_Node = new TreeNode();
+                        TreeNode camera_Node = new TreeNode();
+                        TreeNode data_Node = new TreeNode();
                         StructClass.StructSM7003Tag structSM7003Tag = new StructClass.StructSM7003Tag();
-                        temp_Node.Text = structIAnalyzeConfig.CameraName;
+
+                        camera_Node.Text = structIAnalyzeConfig.CameraName;
+                        data_Node.Text = structIAnalyzeConfig.CameraName;
+
                         structSM7003Tag.CameraID = structIAnalyzeConfig.CameraID;
                         structSM7003Tag.IP = structIAnalyzeConfig.IP;
                         structSM7003Tag.Port = structIAnalyzeConfig.Port;
                         structSM7003Tag.NodeID = structIAnalyzeConfig.NodeID;
                         structSM7003Tag.Reamrks = structIAnalyzeConfig.Reamrks;
                         structSM7003Tag.Enable = structIAnalyzeConfig.Enable;
-                        if(structSM7003Tag.Enable==false)
+
+                        camera_Node.Tag = structSM7003Tag;
+                        data_Node.Tag = structSM7003Tag;
+                        camera_Node.ContextMenuStrip = cmsSensor;
+                        data_Node.ContextMenuStrip = cmsData;
+
+                        if (structSM7003Tag.Enable==false)
                         {
-                            temp_Node.ForeColor = Color.Gray;
-                            temp_Node.NodeFont = new Font("微软雅黑", 10, FontStyle.Strikeout);
+                            camera_Node.ForeColor = Color.Gray;
+                            camera_Node.NodeFont = new Font("微软雅黑", 10, FontStyle.Strikeout);
                         }
-                        temp_Node.Tag = structSM7003Tag;
-                        temp_Node.ContextMenuStrip = cmsIPCameraConfig;
-                        tvwSensor.Nodes.Add(temp_Node);
+                        tvwSensor.Nodes.Add(camera_Node);
+                        tvwData.Nodes.Add(data_Node);//先加载到数据栏
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("加载探测器列表失败！" + ex.Message);
+                MessageBox.Show("树视图列表失败！" + ex.Message);
             }
         }
         #endregion
 
-        #region//树视图点击事件
+        #region//探测器树视图点击事件
         StructClass.StructSM7003Tag structSM7003Tag;
        
         Point tvwPoint;
@@ -558,7 +562,7 @@ namespace InfraredAnalyze
                         structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
                         StaticClass.SelectedNode = structSM7003Tag.CameraID;
                     }
-                }else if(e.Button==MouseButtons.Right)
+                }else if(e.Button==MouseButtons.Right)//废弃喽 
                 {
                     tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
                     if (tvwSensor.SelectedNode != null)
@@ -588,7 +592,7 @@ namespace InfraredAnalyze
         }
         #endregion
 
-        #region//树视图双击事件
+        #region//探测器树视图双击事件
         private void tvwSensor_DoubleClick(object sender, EventArgs e)
         {
             //TreeNode treeNode = tvwSensor.GetNodeAt(tvwPoint);
@@ -734,7 +738,7 @@ namespace InfraredAnalyze
         }
         #endregion
 
-        #region//连接
+        #region//连接  废弃了
         private void 连接ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             structSM7003Tag = new StructClass.StructSM7003Tag();
@@ -775,7 +779,6 @@ namespace InfraredAnalyze
                     LoadTreeView();
                 }
             }
-
         }
         #endregion
 
@@ -886,11 +889,10 @@ namespace InfraredAnalyze
                 frmPwd.PwdLevel = 1;
                 if (frmPwd.ShowDialog() == DialogResult.OK)
                 {
-                    thread = new Thread(showIsRunning);//显示请勿操作界面 防止误操作
-                    thread.IsBackground = true;
-                    thread.Start();
-                    sqlCreate.Drop_AllDatabase();
-                    thread.Abort();
+                     frmIsRunning = new FrmIsRunning(worker);
+                    worker.DoWork += new DoWorkEventHandler(DropAllDataBase);
+                    worker.RunWorkerAsync();
+                    frmIsRunning.ShowDialog();
                     if(MessageBox.Show("请重新启动软件来完成初始化数据库！","请重启软件！", MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
                         Environment.Exit(0);
@@ -898,6 +900,12 @@ namespace InfraredAnalyze
                 }
             }
         }
+
+        private void DropAllDataBase(object sender,DoWorkEventArgs e)
+        {
+            sqlCreate.Drop_AllDatabase();
+        }
+
         #endregion
 
         #region//显示时间 火警数量 故障数量
@@ -1080,10 +1088,10 @@ namespace InfraredAnalyze
         #endregion
 
         #region//历史记录（包括火警  故障）
-        private void btnHistoryRecord_Click(object sender, EventArgs e)
+        private void btnHistoryRecord_Click(object sender, EventArgs e)//全部的历史告警记录
         {
             FrmHisRecords frmHisRecords = new FrmHisRecords();
-            frmHisRecords.CameraId = StaticClass.SelectedNode;
+            frmHisRecords.CameraId = 0;
             frmHisRecords.Show();
         }
 
@@ -1130,6 +1138,126 @@ namespace InfraredAnalyze
         }
         #endregion
 
+        #region//新增树视图快捷菜单的右击事件
+        private void toolStripMenuItem1_Click_1(object sender, EventArgs e)//单个探测器连接事件
+        {
+            if (RunStaus)
+            {
+                MessageBox.Show("系统运行中！");
+                return;
+            }
+            structSM7003Tag = new StructClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            try
+            {
+                if (tvwSensor.SelectedNode != null)
+                {
+                    structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                    StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] = DMSDK.DM_OpenMonitor(StaticClass.intPtrs_UCPbx[structSM7003Tag.CameraID - 1], structSM7003Tag.IP, 5000);
+                    if (StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1] < 0)
+                    {
+                        MessageBox.Show("探测器连接失败");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void toolStripMenuItem2_Click_1(object sender, EventArgs e)//单个探测器断开连接
+        {
+            if (RunStaus)
+            {
+                MessageBox.Show("系统运行中！");
+                return;
+            }
+            structSM7003Tag = new StructClass.StructSM7003Tag();
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                DMSDK.DM_CloseMonitor(StaticClass.intPtrs_Connect[structSM7003Tag.CameraID - 1]);
+            }
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)//探测器设置
+        {
+            if (RunStaus)
+            {
+                MessageBox.Show("系统运行中！");
+                return;
+            }
+            tvwSensor.SelectedNode = tvwSensor.GetNodeAt(tvwPoint);
+            structSM7003Tag = new StructClass.StructSM7003Tag();
+            if (tvwSensor.SelectedNode != null)
+            {
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwSensor.SelectedNode.Tag;
+                FrmConfig frmConfig = new FrmConfig();
+                StaticClass.Temper_CameraId = structSM7003Tag.CameraID;
+                StaticClass.Temper_Ip = structSM7003Tag.IP;
+                StaticClass.Temper_CameraName = tvwSensor.SelectedNode.Text;
+                StaticClass.Temper_IsEnanle = structSM7003Tag.Enable;
+                if (frmConfig.ShowDialog() == DialogResult.OK)
+                {
+                    LoadTreeView();
+                }
+            }
+        }
+
+        private void toolStripMenuItem4_Click_1(object sender, EventArgs e)//历史温度数据
+        {
+            FrmHistoricalTemperData frmHistoricalTemperData = new FrmHistoricalTemperData();
+            StructClass.StructSM7003Tag structSM7003Tag = new StructClass.StructSM7003Tag();
+            tvwData.SelectedNode = tvwData.GetNodeAt(tvwPoint);
+            if (tvwData.SelectedNode != null)
+            {
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwData.SelectedNode.Tag;
+                frmHistoricalTemperData.CameraID = structSM7003Tag.CameraID;
+                frmHistoricalTemperData.Show();
+            }
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)//实时数据
+        {
+            if (!RunStaus)
+            {
+                MessageBox.Show("系统未运行！");
+                return;
+            }
+            FrmRealTimeTemperData frmRealTimeTemperData = new FrmRealTimeTemperData();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
+            tvwData.SelectedNode = tvwData.GetNodeAt(tvwPoint);
+            if (tvwData.SelectedNode != null)
+            {
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwData.SelectedNode.Tag;
+                frmRealTimeTemperData.CameraID = structSM7003Tag.CameraID;
+                frmRealTimeTemperData.ShowDialog();
+            }
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)//告警数据
+        {
+
+            FrmHisRecords frmHisRecords = new FrmHisRecords();
+            structSM7003Tag = new StructClass.StructSM7003Tag();
+            tvwData.SelectedNode = tvwData.GetNodeAt(tvwPoint);
+            if (tvwData.SelectedNode != null)
+            {
+                structSM7003Tag = (StructClass.StructSM7003Tag)tvwData.SelectedNode.Tag;
+                frmHisRecords.CameraId = structSM7003Tag.CameraID;
+                frmHisRecords.Show();
+            }
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)//图像数据
+        {
+
+        }
+        #endregion
+
+        #region//主窗体加载事件
         private void FrmMain_Load(object sender, EventArgs e)
         {
             LoadTreeView();
@@ -1137,13 +1265,9 @@ namespace InfraredAnalyze
             Refresh_Screen(ScreenNum);
             worker.WorkerSupportsCancellation = true;
         }
+        #endregion
 
-        private void btnStart_MouseEnter(object sender, EventArgs e)
-        {
-            ToolTip toolTip = new ToolTip();
-            toolTip.SetToolTip(btnStart, "开始");
-        }
-
+        #region//初始化事件
         ArrayList temp_arrayList;
         Thread thread;//提示请勿操作线程
         Thread threadStatus;//检测状态数组线程
@@ -1151,7 +1275,6 @@ namespace InfraredAnalyze
         Thread threadCheckAlarm;//温度判断线程 用于报警检测  很关键
         BackgroundWorker worker = new BackgroundWorker();
         FrmIsRunning frmIsRunning;
-
 
         private void Initialization()//开始初始化 一通操作
         {
@@ -1181,8 +1304,16 @@ namespace InfraredAnalyze
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("初始化异常"+ex.Message);
             }
+        }
+        #endregion
+
+        #region//开始与停止按钮事件
+        private void btnStart_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnStart, "开始");
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -1263,26 +1394,9 @@ namespace InfraredAnalyze
             btnStart.BackgroundImage = Properties.Resources.start;
             RunStaus = false;
         }
+        #endregion
 
-        private void showIsRunning()
-        {
-            try
-            {
-                frmIsRunning.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == "正在中止线程。")
-                {
-
-                }
-                else
-                {
-                    MessageBox.Show(ex.Message + "状态监测异常");
-                }
-            }
-        }
-
+        #region//状态判断
         private void StatusJudgment()//状态判断 调用回调函数 获取数据
         {
             while (true)
@@ -1385,7 +1499,9 @@ namespace InfraredAnalyze
                     break;
             }
         }
+        #endregion
 
+        #region//探测器在线监测（通讯故障）
         private void CheckOnline()//在线检测
         {
             try
@@ -1454,8 +1570,9 @@ namespace InfraredAnalyze
                 }
             }
         }
+        #endregion
 
-
+        #region//火警判断
         private void CheckAlarm()//判断火警使用
         {
             while (true)
@@ -1531,24 +1648,8 @@ namespace InfraredAnalyze
                 }
             }
         }
-
-        private void GetTemper()
-        {
-            while (true)
-            {
-                for(int i = 0; i < 16; i++)
-                {
-                    if (StaticClass.intPtrs_Operate[i] > 0 && StaticClass.intPtrs_Connect[i] >= 0)
-                    {
-                        DMSDK.DM_GetTemp(StaticClass.intPtrs_Operate[i], 0);//获取一次温度数据
-                        fMessCallBack = new DMSDK.fMessCallBack(dmMessCallBack);//回调函数实例
-                        DMSDK.DM_SetAllMessCallBack(fMessCallBack, 0);
-                        int j = DMSDK.DM_GetUpdateMeaTemp(StaticClass.intPtrs_Operate[i]);
-                    }
-                    Thread.Sleep(5000);
-                }
-            }
-        }
+        #endregion
+      
         #region//回调函数
         /*
          * 多台仪器的告警信息无法获取（判断是那一台的告警信息），需要程序自己判断（大立公司人员确认过了）
@@ -1592,6 +1693,7 @@ namespace InfraredAnalyze
         }
         #endregion
 
+        #region//告警信息显示与插入数据库
         private void Data_Frie(int cameraId,string Ip,DateTime dateTime,string type,string message) 
         {
             fireData.CameraID = cameraId;
@@ -1616,8 +1718,8 @@ namespace InfraredAnalyze
             }
             sqlCreate.Insert_HisRecords(errData.CameraID, errData.IPAddress, errData.dateTime, errData.Type, errData.Message);
         }
+        #endregion
 
-      
 
 
 
