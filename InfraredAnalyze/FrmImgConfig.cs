@@ -15,6 +15,7 @@ namespace InfraredAnalyze
         public FrmImgConfig()
         {
             InitializeComponent();
+            this.Disposed += FrmImgConfig_Disposed;
         }
 
         private int cameraId;
@@ -106,7 +107,7 @@ namespace InfraredAnalyze
             }
             else
             {
-                tempConnectIntptr = DMSDK.DM_OpenMonitor(pbxScreen.Handle, ip, 5000);
+                tempConnectIntptr = DMSDK.DM_OpenMonitor(pbxScreen.Handle, ip, 5000, 0);
                 GetImageConfigParam();
                 UpdateCbx();
             }
@@ -163,6 +164,13 @@ namespace InfraredAnalyze
         {
             DMSDK.DM_AutoFocus(tempOperateIntptr);
         }
+
+        private void FrmImgConfig_Disposed(object sender, EventArgs e)
+        {
+            DMSDK.DM_CloseMonitor(tempConnectIntptr);
+            DMSDK.DM_Disconnect(tempOperateIntptr);
+        }
+
 
         private void FrmImageConfig_FormClosed(object sender, FormClosedEventArgs e)
         {

@@ -12,18 +12,26 @@ using System.Windows.Forms;
 
 namespace InfraredAnalyze
 {
+    public delegate void childclose();
     public partial class FrmCameraNetConfig : Form
     {
         public FrmCameraNetConfig()
         {
             InitializeComponent();
+            this.Disposed += FrmCameraNetConfig_Disposed;
+            DMSDK.DM_Init();
         }
+
+       
 
         SqlCreate sqlCreate = new SqlCreate();
 
         StringBuilder Mac;
         StringBuilder SubMask;
         StringBuilder GateWay;
+        public event childclose closefather;
+        private int tempConnect;//临时连接句柄
+
         private void FrmCameraConfig_Load(object sender, EventArgs e)
         {
             Mac = new StringBuilder();
@@ -36,33 +44,55 @@ namespace InfraredAnalyze
                 IPAddressIP.tbx2.Text = str[1];
                 IPAddressIP.tbx3.Text = str[2];
                 IPAddressIP.tbx4.Text = str[3];
-                DMSDK.DM_Init();
-                StaticClass.Temper_Connect = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[StaticClass.Temper_CameraId - 1], StaticClass.Temper_Ip, 80);//
-                if (StaticClass.Temper_Connect <= 0)
+                if (DMSDK.DM_CheckOnline(StaticClass.Temper_Ip, 80) < 0)// 离线检测  为离线
                 {
-                    MessageBox.Show("连接失败，请检查线路,或修改参数后新连接试！");
                     btnConfirm.Tag = "Reconnect";
                     Update_IpAddrGateWay("0.0.0.0");
                     Update_IpAddrSubMask("0.0.0.0");
                     chbModifyGateWay.Enabled = false;
                     chbModifyMac.Enabled = false;
                     chbModifyNetMask.Enabled = false;
-                    cbxIsEnable.Enabled = false;
-                }
-                else
-                {
-                    DMSDK.DM_GetMAC(StaticClass.Temper_Connect, Mac);
-                    DMSDK.DM_GetNetmask(StaticClass.Temper_Connect, SubMask);
-                    DMSDK.DM_GetGateway(StaticClass.Temper_Connect, GateWay);
-                    Update_IpAddrGateWay(GateWay.ToString());
-                    Update_IpAddrSubMask(SubMask.ToString());
-                    tbxMAC.Text = Mac.ToString();
+                    btnUpdateIsenable.Visible = true;
                     cbxIsEnable.SelectedIndex = Convert.ToInt32(StaticClass.Temper_IsEnanle);
-                    btnConfirm.Tag = "Confirm";
-                    chbModifyGateWay.Enabled = true;
-                    chbModifyMac.Enabled = true;
-                    chbModifyNetMask.Enabled = true;
-                    cbxIsEnable.Enabled = true;
+                    StaticClass.Temper_IsEnanle = Convert.ToBoolean(cbxIsEnable.SelectedIndex);
+                }
+                else if (DMSDK.DM_CheckOnline(StaticClass.Temper_Ip, 80) > 0)//连接成功
+                {
+                    tempConnect = DMSDK.DM_Connect(this.Handle, StaticClass.Temper_Ip, 80);//
+                    if (tempConnect <= 0)
+                    {
+                        MessageBox.Show("连接失败！请检查设备与参数后重试！");
+                        return;
+                    }
+                    DMSDK.DM_GetMAC(tempConnect, Mac);
+                    if (Mac.Length==0)
+                    {
+                        btnConfirm.Tag = "Reconnect";
+                        Update_IpAddrGateWay("0.0.0.0");
+                        Update_IpAddrSubMask("0.0.0.0");
+                        chbModifyGateWay.Enabled = false;
+                        chbModifyMac.Enabled = false;
+                        chbModifyNetMask.Enabled = false;
+                        btnUpdateIsenable.Visible = true;
+                        cbxIsEnable.SelectedIndex = Convert.ToInt32(StaticClass.Temper_IsEnanle);
+                        StaticClass.Temper_IsEnanle = Convert.ToBoolean(cbxIsEnable.SelectedIndex);
+                        MessageBox.Show("连接失败！请检查设备与参数后重试！");
+                    }
+                    else
+                    {
+                        DMSDK.DM_GetNetmask(tempConnect, SubMask);
+                        DMSDK.DM_GetGateway(tempConnect, GateWay);
+                        Update_IpAddrGateWay(GateWay.ToString());
+                        Update_IpAddrSubMask(SubMask.ToString());
+                        tbxMAC.Text = Mac.ToString();
+                        cbxIsEnable.SelectedIndex = Convert.ToInt32(StaticClass.Temper_IsEnanle);
+                        StaticClass.Temper_IsEnanle = Convert.ToBoolean(cbxIsEnable.SelectedIndex);
+                        btnConfirm.Tag = "Confirm";
+                        chbModifyGateWay.Enabled = true;
+                        chbModifyMac.Enabled = true;
+                        chbModifyNetMask.Enabled = true;
+                        btnUpdateIsenable.Visible = false;
+                    }
                 }
             }
             if (btnConfirm.Tag.ToString() == "Confirm")
@@ -101,7 +131,6 @@ namespace InfraredAnalyze
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            DMSDK.DM_Disconnect(StaticClass.Temper_Connect);
             this.Close();
         }
 
@@ -146,35 +175,48 @@ namespace InfraredAnalyze
             if(btnConfirm.Tag.ToString()=="Confirm")
             {
                 btnConfirm.Text = "确认修改";
-                DMSDK.DM_SetIPAddr(StaticClass.Temper_Connect, IPAddressIP.IPAdd.ToString(), IPAddressSubMask.IPAdd.ToString(), IPAddressGateWay.IPAdd.ToString());
-                sqlCreate.UpDate_CameraEnable(StaticClass.Temper_CameraId, "无", Convert.ToBoolean(cbxIsEnable.SelectedIndex));
-                MessageBox.Show("修改成功！");
+                if (Mac.Length == 0)
+                {
+                    MessageBox.Show("MAC地址无效！重试！");
+                    return;
+                }
+                DMSDK.DM_SetIPAddr(tempConnect, IPAddressIP.IPAdd.ToString(), IPAddressSubMask.IPAdd.ToString(), IPAddressGateWay.IPAdd.ToString());
+                sqlCreate.UpDate_CameraEnable(StaticClass.Temper_CameraId, "无", Convert.ToBoolean(cbxIsEnable.SelectedIndex), StaticClass.DataBaseName);
+                MessageBox.Show("修改成功！请重新进入！");
+                StaticClass.Temper_IsEnanle = Convert.ToBoolean(cbxIsEnable.SelectedIndex);
+                this.Close();
             }
             else if(btnConfirm.Tag.ToString()=="Reconnect")
             {
                 btnConfirm.Text = "重新连接";
-                DMSDK.DM_Init();
-                StaticClass.Temper_Connect = DMSDK.DM_Connect(StaticClass.intPtrs_UCPbx[StaticClass.Temper_CameraId - 1], IPAddressIP.IPAdd.ToString(), 80);
-                if (StaticClass.Temper_Connect <= 0)
+                if (DMSDK.DM_CheckOnline(StaticClass.Temper_Ip, 80) < 0)// 离线检测  为离线
                 {
                     MessageBox.Show("无法连接探测器，请检查线路,或修改参数后重新连接！");
                     btnConfirm.Tag = "Reconnect";
                     chbModifyGateWay.Enabled = false;
                     chbModifyMac.Enabled = false;
                     chbModifyNetMask.Enabled = false;
-                    cbxIsEnable.Enabled = false;
+                    cbxIsEnable.SelectedIndex = Convert.ToInt32(StaticClass.Temper_IsEnanle);
+                    StaticClass.Temper_IsEnanle = Convert.ToBoolean(cbxIsEnable.SelectedIndex);
                 }
                 else
                 {
+                    tempConnect = DMSDK.DM_Connect(this.Handle, IPAddressIP.IPAdd.ToString(), 80);
+                    if (tempConnect < 0)
+                    {
+                        MessageBox.Show("连接失败！请检查设备与参数后重试！");
+                        return;
+                    }
                     btnConfirm.Text = "确认修改";
                     btnConfirm.Tag = "Confirm";
                     Mac = new StringBuilder();
                     SubMask = new StringBuilder();
                     GateWay = new StringBuilder();
-                    DMSDK.DM_GetMAC(StaticClass.Temper_Connect, Mac);
-                    DMSDK.DM_GetNetmask(StaticClass.Temper_Connect, SubMask);
-                    DMSDK.DM_GetGateway(StaticClass.Temper_Connect, GateWay);
+                    DMSDK.DM_GetMAC(tempConnect, Mac);
+                    DMSDK.DM_GetNetmask(tempConnect, SubMask);
+                    DMSDK.DM_GetGateway(tempConnect, GateWay);
                     cbxIsEnable.SelectedIndex = Convert.ToInt32(StaticClass.Temper_IsEnanle);
+                    StaticClass.Temper_IsEnanle = Convert.ToBoolean(cbxIsEnable.SelectedIndex);
                     Update_IpAddrGateWay(GateWay.ToString());
                     Update_IpAddrSubMask(SubMask.ToString());
                     tbxMAC.Text = Mac.ToString();
@@ -186,6 +228,25 @@ namespace InfraredAnalyze
 
                 }
             }
+        }
+
+        private void btnUpdateIsenable_Click(object sender, EventArgs e)
+        {
+            sqlCreate.UpDate_CameraEnable(StaticClass.Temper_CameraId, "无", Convert.ToBoolean(cbxIsEnable.SelectedIndex), StaticClass.DataBaseName);
+            MessageBox.Show("修改成功！请重新进入！");
+            this.Close();
+
+        }
+
+        private void FrmCameraNetConfig_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            closefather();
+            DMSDK.DM_Disconnect(tempConnect);
+        }
+
+        private void FrmCameraNetConfig_Disposed(object sender, EventArgs e)
+        {
+            DMSDK.DM_Disconnect(tempConnect);
         }
 
     }

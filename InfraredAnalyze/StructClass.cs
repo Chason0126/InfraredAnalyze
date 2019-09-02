@@ -7,8 +7,18 @@ using System.Threading.Tasks;
 
 namespace InfraredAnalyze
 {
-    class StructClass
+    public class StructClass
     {
+        /// <summary>
+        /// 结构体StructSMInfrared_Config 项目名称 数据库名称
+        /// </summary>
+        public struct StructSMInfrared_Config
+        {
+            public int ProjId;
+            public string ProjName;
+            public string DataBaseName;
+            public bool Enable;
+        }
         public struct StructIAnalyzeConfig
         {
             public int CameraID;
@@ -77,28 +87,45 @@ namespace InfraredAnalyze
             public int CameraID;
             public string IPAddress;
             public DateTime dateTime;
-            public int Type;
-            public int Number;
+            public string Type;
             public decimal Temper;
             public string Status;
         }
 
+        public struct StructCameraId_Datetime
+        {
+            public int CameraID;//相机ID
+            public StructNumber_Datetime[] structNumber_DateTime;
+        }
+
+        public struct StructNumber_Datetime
+        {
+            public int number;
+            public DateTime dateTime;
+        }
+
+        /// <summary>
+        /// 火警数组
+        /// </summary>
         public struct StructFireData
         {
             public int CameraID;
             public string IPAddress;
             public DateTime dateTime;
             public string Type;
-            public string Message;
+            public string Message;//报警信息
         }
 
+        /// <summary>
+        /// 故障数组
+        /// </summary>
         public struct StructErrData
         {
             public int CameraID;
             public string IPAddress;
             public DateTime dateTime;
             public string Type;
-            public string Message;
+            public string Message;//报警信息
         }
 
         public struct StructRecordsData

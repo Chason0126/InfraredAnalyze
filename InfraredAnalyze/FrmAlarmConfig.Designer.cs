@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpAlarmInfo = new System.Windows.Forms.GroupBox();
+            this.btnConfirm = new System.Windows.Forms.Button();
             this.tbxAlarmTempLine_1 = new System.Windows.Forms.TextBox();
             this.cbxAlarmColorSpot_4 = new System.Windows.Forms.ComboBox();
             this.tbxAlarmTempArea_4 = new System.Windows.Forms.TextBox();
@@ -99,7 +100,6 @@
             this.cbxAlarmMessageTypeArea_3 = new System.Windows.Forms.ComboBox();
             this.cbxAlarmMessageTypeArea_1 = new System.Windows.Forms.ComboBox();
             this.cbxAlarmMessageTypeArea_2 = new System.Windows.Forms.ComboBox();
-            this.btnConfirm = new System.Windows.Forms.Button();
             this.grpAlarmInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,6 +183,16 @@
             this.grpAlarmInfo.Size = new System.Drawing.Size(677, 374);
             this.grpAlarmInfo.TabIndex = 4;
             this.grpAlarmInfo.TabStop = false;
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Location = new System.Drawing.Point(305, 328);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.TabIndex = 24;
+            this.btnConfirm.Text = "确认";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // tbxAlarmTempLine_1
             // 
@@ -562,9 +572,9 @@
             this.label60.AutoSize = true;
             this.label60.Location = new System.Drawing.Point(156, 111);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(11, 12);
+            this.label60.Size = new System.Drawing.Size(17, 12);
             this.label60.TabIndex = 20;
-            this.label60.Text = "2";
+            this.label60.Text = "S2";
             // 
             // cbxAlarmColorArea_3
             // 
@@ -591,9 +601,9 @@
             this.label61.AutoSize = true;
             this.label61.Location = new System.Drawing.Point(156, 135);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(11, 12);
+            this.label61.Size = new System.Drawing.Size(17, 12);
             this.label61.TabIndex = 20;
-            this.label61.Text = "3";
+            this.label61.Text = "S3";
             // 
             // cbxAlarmColorArea_2
             // 
@@ -620,9 +630,9 @@
             this.label64.AutoSize = true;
             this.label64.Location = new System.Drawing.Point(156, 207);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(11, 12);
+            this.label64.Size = new System.Drawing.Size(17, 12);
             this.label64.TabIndex = 20;
-            this.label64.Text = "6";
+            this.label64.Text = "A6";
             // 
             // cbxAlarmColorArea_1
             // 
@@ -649,18 +659,18 @@
             this.label62.AutoSize = true;
             this.label62.Location = new System.Drawing.Point(156, 159);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(11, 12);
+            this.label62.Size = new System.Drawing.Size(17, 12);
             this.label62.TabIndex = 20;
-            this.label62.Text = "4";
+            this.label62.Text = "S4";
             // 
             // label65
             // 
             this.label65.AutoSize = true;
             this.label65.Location = new System.Drawing.Point(156, 231);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(11, 12);
+            this.label65.Size = new System.Drawing.Size(17, 12);
             this.label65.TabIndex = 20;
-            this.label65.Text = "7";
+            this.label65.Text = "A7";
             // 
             // cbxAlarmColorSpot_3
             // 
@@ -687,9 +697,9 @@
             this.label63.AutoSize = true;
             this.label63.Location = new System.Drawing.Point(156, 183);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(11, 12);
+            this.label63.Size = new System.Drawing.Size(17, 12);
             this.label63.TabIndex = 20;
-            this.label63.Text = "5";
+            this.label63.Text = "S5";
             // 
             // cbxAlarmColorSpot_2
             // 
@@ -716,9 +726,9 @@
             this.label66.AutoSize = true;
             this.label66.Location = new System.Drawing.Point(156, 255);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(11, 12);
+            this.label66.Size = new System.Drawing.Size(17, 12);
             this.label66.TabIndex = 20;
-            this.label66.Text = "8";
+            this.label66.Text = "A8";
             // 
             // cbxAlarmPowerLine_1
             // 
@@ -737,9 +747,9 @@
             this.label67.AutoSize = true;
             this.label67.Location = new System.Drawing.Point(156, 279);
             this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(11, 12);
+            this.label67.Size = new System.Drawing.Size(17, 12);
             this.label67.TabIndex = 20;
-            this.label67.Text = "9";
+            this.label67.Text = "A9";
             this.label67.Visible = false;
             // 
             // cbxAlarmPowerArea_4
@@ -760,9 +770,9 @@
             this.label68.AutoSize = true;
             this.label68.Location = new System.Drawing.Point(156, 87);
             this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(11, 12);
+            this.label68.Size = new System.Drawing.Size(17, 12);
             this.label68.TabIndex = 21;
-            this.label68.Text = "1";
+            this.label68.Text = "L1";
             // 
             // cbxAlarmPowerArea_3
             // 
@@ -1010,16 +1020,6 @@
             this.cbxAlarmMessageTypeArea_2.Size = new System.Drawing.Size(84, 20);
             this.cbxAlarmMessageTypeArea_2.TabIndex = 22;
             // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Location = new System.Drawing.Point(305, 328);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
-            this.btnConfirm.TabIndex = 24;
-            this.btnConfirm.Text = "确认";
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
-            // 
             // FrmAlarmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1029,6 +1029,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmAlarmConfig";
             this.Text = "FrmAlarmConfig";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAlarmConfig_FormClosed);
             this.Load += new System.EventHandler(this.FrmAlarmConfig_Load);
             this.grpAlarmInfo.ResumeLayout(false);
             this.grpAlarmInfo.PerformLayout();

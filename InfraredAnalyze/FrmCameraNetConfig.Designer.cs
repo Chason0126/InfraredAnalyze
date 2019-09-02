@@ -38,11 +38,12 @@
             this.chbModifyMac = new System.Windows.Forms.CheckBox();
             this.chbModifyGateWay = new System.Windows.Forms.CheckBox();
             this.chbModifyNetMask = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbxIsEnable = new System.Windows.Forms.ComboBox();
+            this.btnUpdateIsenable = new System.Windows.Forms.Button();
             this.IPAddressGateWay = new InfraredAnalyze.IpAddressTextBox();
             this.IPAddressSubMask = new InfraredAnalyze.IpAddressTextBox();
             this.IPAddressIP = new InfraredAnalyze.IpAddressTextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbxIsEnable = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label2
@@ -151,6 +152,41 @@
             this.chbModifyNetMask.UseVisualStyleBackColor = true;
             this.chbModifyNetMask.CheckedChanged += new System.EventHandler(this.chbModifyNetMask_CheckedChanged);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("黑体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(198, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 14);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "是否启用：";
+            // 
+            // cbxIsEnable
+            // 
+            this.cbxIsEnable.FormattingEnabled = true;
+            this.cbxIsEnable.Items.AddRange(new object[] {
+            "否",
+            "是"});
+            this.cbxIsEnable.Location = new System.Drawing.Point(289, 12);
+            this.cbxIsEnable.Name = "cbxIsEnable";
+            this.cbxIsEnable.Size = new System.Drawing.Size(98, 22);
+            this.cbxIsEnable.TabIndex = 11;
+            // 
+            // btnUpdateIsenable
+            // 
+            this.btnUpdateIsenable.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnUpdateIsenable.ForeColor = System.Drawing.Color.Black;
+            this.btnUpdateIsenable.Location = new System.Drawing.Point(445, 12);
+            this.btnUpdateIsenable.Name = "btnUpdateIsenable";
+            this.btnUpdateIsenable.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateIsenable.TabIndex = 12;
+            this.btnUpdateIsenable.Text = "更新启用";
+            this.btnUpdateIsenable.UseVisualStyleBackColor = true;
+            this.btnUpdateIsenable.Visible = false;
+            this.btnUpdateIsenable.Click += new System.EventHandler(this.btnUpdateIsenable_Click);
+            // 
             // IPAddressGateWay
             // 
             this.IPAddressGateWay.Enabled = false;
@@ -177,34 +213,13 @@
             this.IPAddressIP.Size = new System.Drawing.Size(281, 30);
             this.IPAddressIP.TabIndex = 1;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("黑体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(198, 15);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 14);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "是否启用：";
-            // 
-            // cbxIsEnable
-            // 
-            this.cbxIsEnable.FormattingEnabled = true;
-            this.cbxIsEnable.Items.AddRange(new object[] {
-            "否",
-            "是"});
-            this.cbxIsEnable.Location = new System.Drawing.Point(289, 12);
-            this.cbxIsEnable.Name = "cbxIsEnable";
-            this.cbxIsEnable.Size = new System.Drawing.Size(98, 22);
-            this.cbxIsEnable.TabIndex = 11;
-            // 
             // FrmCameraNetConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(793, 288);
+            this.Controls.Add(this.btnUpdateIsenable);
             this.Controls.Add(this.cbxIsEnable);
             this.Controls.Add(this.chbModifyNetMask);
             this.Controls.Add(this.chbModifyGateWay);
@@ -225,6 +240,7 @@
             this.Name = "FrmCameraNetConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmCameraConfig";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmCameraNetConfig_FormClosed);
             this.Load += new System.EventHandler(this.FrmCameraConfig_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -247,5 +263,6 @@
         private System.Windows.Forms.CheckBox chbModifyNetMask;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbxIsEnable;
+        private System.Windows.Forms.Button btnUpdateIsenable;
     }
 }

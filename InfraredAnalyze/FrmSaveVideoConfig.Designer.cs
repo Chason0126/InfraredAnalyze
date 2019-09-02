@@ -94,6 +94,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmSaveVideoConfig";
             this.Text = "FrmVideoConfig";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmSaveVideoConfig_FormClosed);
             this.Load += new System.EventHandler(this.FrmSaveVideoConfig_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxTemper)).EndInit();
             this.ResumeLayout(false);

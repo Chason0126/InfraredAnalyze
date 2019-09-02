@@ -273,6 +273,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmImageConfig";
             this.Text = "FrmImageConfig";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmImageConfig_FormClosed);
             this.Load += new System.EventHandler(this.FrmImageConfig_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

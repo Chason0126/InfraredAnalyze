@@ -263,6 +263,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmTemperParamConfig";
             this.Text = "FrmTemperParamConfig";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmTemperParamConfig_FormClosed);
             this.Load += new System.EventHandler(this.FrmTemperParamConfig_Load);
             this.grpRefeTemp.ResumeLayout(false);
             this.grpRefeTemp.PerformLayout();

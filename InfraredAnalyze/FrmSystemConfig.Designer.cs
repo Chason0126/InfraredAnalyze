@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlCameraName = new System.Windows.Forms.Panel();
             this.rdbNotCameraName = new System.Windows.Forms.RadioButton();
@@ -46,7 +45,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dtpCameraDateTime = new System.Windows.Forms.DateTimePicker();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -206,7 +204,7 @@
             // btnUpdateTime
             // 
             this.btnUpdateTime.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUpdateTime.Location = new System.Drawing.Point(376, 429);
+            this.btnUpdateTime.Location = new System.Drawing.Point(362, 432);
             this.btnUpdateTime.Name = "btnUpdateTime";
             this.btnUpdateTime.Size = new System.Drawing.Size(60, 23);
             this.btnUpdateTime.TabIndex = 4;
@@ -250,14 +248,10 @@
             this.dtpCameraDateTime.Enabled = false;
             this.dtpCameraDateTime.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dtpCameraDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpCameraDateTime.Location = new System.Drawing.Point(182, 431);
+            this.dtpCameraDateTime.Location = new System.Drawing.Point(180, 432);
             this.dtpCameraDateTime.Name = "dtpCameraDateTime";
             this.dtpCameraDateTime.Size = new System.Drawing.Size(173, 23);
             this.dtpCameraDateTime.TabIndex = 3;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label7
             // 
@@ -485,9 +479,9 @@
             this.pnlEncodingInfo.Controls.Add(this.cbxResolution);
             this.pnlEncodingInfo.Controls.Add(this.pnlEncodingInfoChoose);
             this.pnlEncodingInfo.Controls.Add(this.cbxBitrate);
-            this.pnlEncodingInfo.Location = new System.Drawing.Point(515, 349);
+            this.pnlEncodingInfo.Location = new System.Drawing.Point(540, 415);
             this.pnlEncodingInfo.Name = "pnlEncodingInfo";
-            this.pnlEncodingInfo.Size = new System.Drawing.Size(42, 176);
+            this.pnlEncodingInfo.Size = new System.Drawing.Size(88, 210);
             this.pnlEncodingInfo.TabIndex = 20;
             this.pnlEncodingInfo.Visible = false;
             // 
@@ -516,9 +510,9 @@
             this.Controls.Add(this.btnLocationLeft);
             this.Controls.Add(this.btnLocationUp);
             this.Controls.Add(this.pnlLocation);
+            this.Controls.Add(this.dtpCameraDateTime);
             this.Controls.Add(this.btnUpdateTime);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.dtpCameraDateTime);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pbxVideo);
@@ -568,7 +562,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtpCameraDateTime;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;

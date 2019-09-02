@@ -88,9 +88,9 @@
             this.label2.ForeColor = System.Drawing.Color.Red;
             this.label2.Location = new System.Drawing.Point(163, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(497, 14);
+            this.label2.Size = new System.Drawing.Size(546, 14);
             this.label2.TabIndex = 1;
-            this.label2.Text = "注意：该功能只用于修改IP地址为默认的仪器，设置时请保证只连接一台仪器。";
+            this.label2.Text = "注意：该功能只用于修改IP地址为【192.168.1.2】的探测器，请保证只连接一台仪器。";
             // 
             // ucPbx1
             // 
@@ -134,6 +134,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmIpConfig";
             this.Text = "FrmIpConfig";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmIpConfig_FormClosing);

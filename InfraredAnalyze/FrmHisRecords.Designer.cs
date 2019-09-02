@@ -30,12 +30,14 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHisRecords));
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnMin = new System.Windows.Forms.Button();
             this.btnWindow = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnQuery = new System.Windows.Forms.Button();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
@@ -84,7 +86,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 19);
             this.label1.TabIndex = 3;
-            this.label1.Text = "历史记录";
+            this.label1.Text = "告警记录";
             // 
             // btnMin
             // 
@@ -144,6 +146,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnExport);
             this.splitContainer1.Panel1.Controls.Add(this.btnQuery);
             this.splitContainer1.Panel1.Controls.Add(this.dtpEnd);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
@@ -161,11 +164,23 @@
             this.splitContainer1.SplitterDistance = 52;
             this.splitContainer1.TabIndex = 1;
             // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExport.BackColor = System.Drawing.Color.LightGray;
+            this.btnExport.Location = new System.Drawing.Point(1041, 12);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 16;
+            this.btnExport.Text = "导出";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // btnQuery
             // 
             this.btnQuery.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnQuery.BackColor = System.Drawing.Color.LightGray;
-            this.btnQuery.Location = new System.Drawing.Point(1018, 15);
+            this.btnQuery.Location = new System.Drawing.Point(937, 13);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 16;
@@ -237,7 +252,7 @@
             "全部",
             "首警",
             "火警",
-            "通讯故障"});
+            "通讯"});
             this.cbxAlarmType.Location = new System.Drawing.Point(370, 16);
             this.cbxAlarmType.Name = "cbxAlarmType";
             this.cbxAlarmType.Size = new System.Drawing.Size(83, 20);
@@ -318,12 +333,12 @@
             // 
             // Column4
             // 
-            this.Column4.HeaderText = "报警类型";
+            this.Column4.HeaderText = "告警类型";
             this.Column4.Name = "Column4";
             // 
             // Column5
             // 
-            this.Column5.HeaderText = "报警内容";
+            this.Column5.HeaderText = "告警内容";
             this.Column5.Name = "Column5";
             // 
             // FrmHisRecords
@@ -334,9 +349,10 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmHisRecords";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmHisRecords";
+            this.Text = "告警记录";
             this.Load += new System.EventHandler(this.FrmHisRecords_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
@@ -368,6 +384,7 @@
         private System.Windows.Forms.ComboBox cbxAlarmType;
         private System.Windows.Forms.ComboBox cbxCameraID;
         private System.Windows.Forms.DataGridView dgvHisRecords;
+        private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;

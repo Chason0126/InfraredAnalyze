@@ -9,7 +9,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+/// <summary>
+/// 为了便于解析测温区域的数据 现在只支持 一条测温线L1  四个测温点S2 S3 S4 S5 三个测温区域 A6 A7 A8 以上
+/// </summary>
 namespace InfraredAnalyze
 {
     public partial class FrmMeasureTemperConfig : Form
@@ -17,20 +19,21 @@ namespace InfraredAnalyze
         public FrmMeasureTemperConfig()
         {
             InitializeComponent();
+            DMSDK.DM_Init();
+            DMSDK.DM_PlayerInit(pbxScreen.Handle);
+            this.Disposed += FrmMeasureTemperConfig_Disposed;
         }
-        private int iPCameraID;
-        private string ip;
 
-        public int IPCameraID { get => iPCameraID; set => iPCameraID = value; }
-        public string Ip { get => ip; set => ip = value; }
-
+        private int tempConnect;
+        private int tempMonitor;
         private void FrmMeasureTemperConfig_Load(object sender, EventArgs e)
         {
-            DMSDK.DM_Init();
-            worker.WorkerSupportsCancellation = true;
-            StaticClass.Temper_Connect = DMSDK.DM_Connect(pbxScreen.Handle, StaticClass.Temper_Ip, 80);
-            StaticClass.Temper_Monitor = DMSDK.DM_OpenMonitor(pbxScreen.Handle, StaticClass.Temper_Ip, 5000);
-            if(StaticClass.Temper_Connect<=0|| StaticClass.Temper_Monitor < 0)
+            tempConnect = DMSDK.DM_Connect(pbxScreen.Handle, StaticClass.Temper_Ip, 80);
+            if (tempConnect > 0)
+            {
+                tempMonitor = DMSDK.DM_OpenMonitor(pbxScreen.Handle, StaticClass.Temper_Ip, 5000, 0);
+            }
+            if (tempConnect < 0|| tempMonitor < 0)
             {
                 MessageBox.Show("连接异常！请重试！");
                 return;
@@ -39,54 +42,66 @@ namespace InfraredAnalyze
         }
 
         SqlCreate sqlCreate = new SqlCreate();
-        ArrayList arrayList_All_Spot;
+        List<DMSDK.temperSpot> list_All_Spot;
         DMSDK.temperSpot Struct_temperSpot;
-        ArrayList arrayList_All_Area;
+
+        List<DMSDK.temperArea> list_All_Area;
         DMSDK.temperArea Struct_temperArea;
-        ArrayList arrayList_All_Line;
+
+        List<DMSDK.temperLine> list_All_Line;
         DMSDK.temperLine Struct_temperLine;
+
         private void Get_Area_Param()//从数据库中加载 测温目标的位置信息
         {
-            arrayList_All_Spot = sqlCreate.Select_All_Spot(StaticClass.Temper_CameraId, "S");
-            arrayList_All_Area = sqlCreate.Select_All_Area(StaticClass.Temper_CameraId, "A");
-            arrayList_All_Line = sqlCreate.Select_All_Line(StaticClass.Temper_CameraId, "L");
-            Struct_temperSpot = new DMSDK.temperSpot();
-            Struct_temperArea = new DMSDK.temperArea();
-            Struct_temperLine = new DMSDK.temperLine();
-            if (arrayList_All_Spot.Count > 0 && arrayList_All_Area.Count > 0 && arrayList_All_Line.Count > 0)
+            try
             {
-                for (int i = 0; i < arrayList_All_Spot.Count; i++)
+                list_All_Spot = new List<DMSDK.temperSpot>();
+                list_All_Area = new List<DMSDK.temperArea>();
+                list_All_Line = new List<DMSDK.temperLine>();
+                list_All_Spot = sqlCreate.Select_All_Spot(StaticClass.Temper_CameraId, "S",StaticClass.DataBaseName);
+                list_All_Area = sqlCreate.Select_All_Area(StaticClass.Temper_CameraId, "A", StaticClass.DataBaseName);
+                list_All_Line = sqlCreate.Select_All_Line(StaticClass.Temper_CameraId, "L", StaticClass.DataBaseName);
+                Struct_temperSpot = new DMSDK.temperSpot();
+                Struct_temperArea = new DMSDK.temperArea();
+                Struct_temperLine = new DMSDK.temperLine();
+                if (list_All_Spot.Count > 0 && list_All_Area.Count > 0 && list_All_Line.Count > 0)
                 {
-                    Struct_temperSpot = (DMSDK.temperSpot)arrayList_All_Spot[i];
-                    ((TextBox)(tabSpot.Controls.Find("tbxSpot_" + (i + 1) + "_X", false)[0])).Text = Struct_temperSpot.X1.ToString();
-                    ((TextBox)(tabSpot.Controls.Find("tbxSpot_" + (i + 1) + "_Y", false)[0])).Text = Struct_temperSpot.Y1.ToString();
-                    ((TextBox)(tabSpot.Controls.Find("tbxSpot_" + (i + 1) + "_Emiss", false)[0])).Text = Struct_temperSpot.Emiss.ToString();
+                    for (int i = 0; i < list_All_Spot.Count; i++)
+                    {
+                        Struct_temperSpot = (DMSDK.temperSpot)list_All_Spot[i];
+                        ((TextBox)(tabSpot.Controls.Find("tbxSpot_" + (i + 1) + "_X", false)[0])).Text = Struct_temperSpot.X1.ToString();
+                        ((TextBox)(tabSpot.Controls.Find("tbxSpot_" + (i + 1) + "_Y", false)[0])).Text = Struct_temperSpot.Y1.ToString();
+                        ((TextBox)(tabSpot.Controls.Find("tbxSpot_" + (i + 1) + "_Emiss", false)[0])).Text = Struct_temperSpot.Emiss.ToString();
+                    }
+                    for (int i = 0; i < list_All_Area.Count; i++)
+                    {
+                        Struct_temperArea = (DMSDK.temperArea)list_All_Area[i];
+                        ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_X1", false)[0])).Text = Struct_temperArea.X1.ToString();
+                        ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_Y1", false)[0])).Text = Struct_temperArea.Y1.ToString();
+                        ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_X2", false)[0])).Text = Struct_temperArea.X2.ToString();
+                        ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_Y2", false)[0])).Text = Struct_temperArea.Y2.ToString();
+                        ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_Emiss", false)[0])).Text = Struct_temperArea.Emiss.ToString();
+                        ((ComboBox)(tabAreas.Controls.Find("cbxMeasureType_" + (i + 1) + "", false)[0])).SelectedIndex = Struct_temperArea.MeasureType;//cbxMeasureType_1
+                    }
+                    for (int i = 0; i < list_All_Line.Count; i++)
+                    {
+                        Struct_temperLine = (DMSDK.temperLine)list_All_Line[i];
+                        ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_X1", false)[0])).Text = Struct_temperLine.X1.ToString();//
+                        ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_Y1", false)[0])).Text = Struct_temperLine.Y1.ToString();//
+                        ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_X2", false)[0])).Text = Struct_temperLine.X2.ToString();//
+                        ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_Y2", false)[0])).Text = Struct_temperLine.Y2.ToString();//
+                        ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_X3", false)[0])).Text = Struct_temperLine.X3.ToString();//
+                        ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_Y3", false)[0])).Text = Struct_temperLine.Y3.ToString();//
+                        ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_Emiss", false)[0])).Text = Struct_temperLine.Emiss.ToString();//
+                    }
                 }
-                for (int i = 0; i < arrayList_All_Area.Count; i++)
+                else
                 {
-                    Struct_temperArea = (DMSDK.temperArea)arrayList_All_Area[i];
-                    ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_X1", false)[0])).Text = Struct_temperArea.X1.ToString();
-                    ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_Y1", false)[0])).Text = Struct_temperArea.Y1.ToString();
-                    ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_X2", false)[0])).Text = Struct_temperArea.X2.ToString();
-                    ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_Y2", false)[0])).Text = Struct_temperArea.Y2.ToString();
-                    ((TextBox)(tabAreas.Controls.Find("tbxArea_" + (i + 1) + "_Emiss", false)[0])).Text = Struct_temperArea.Emiss.ToString();
-                    ((ComboBox)(tabAreas.Controls.Find("cbxMeasureType_" + (i + 1) + "", false)[0])).SelectedIndex = Struct_temperArea.MeasureType;//cbxMeasureType_1
+                    MessageBox.Show("测温参数-数据库异常！请检查数据库！");
                 }
-                for (int i = 0; i < arrayList_All_Line.Count; i++)
-                {
-                    Struct_temperLine = (DMSDK.temperLine)arrayList_All_Line[i];
-                    ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_X1", false)[0])).Text = Struct_temperLine.X1.ToString();//
-                    ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_Y1", false)[0])).Text = Struct_temperLine.Y1.ToString();//
-                    ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_X2", false)[0])).Text = Struct_temperLine.X2.ToString();//
-                    ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_Y2", false)[0])).Text = Struct_temperLine.Y2.ToString();//
-                    ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_X3", false)[0])).Text = Struct_temperLine.X3.ToString();//
-                    ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_Y3", false)[0])).Text = Struct_temperLine.Y3.ToString();//
-                    ((TextBox)(tabLine.Controls.Find("tbxLine_" + (i + 1) + "_Emiss", false)[0])).Text = Struct_temperLine.Emiss.ToString();//
-                }
-            }
-            else
+            }catch(Exception ex)
             {
-                MessageBox.Show("测温参数-数据库异常！请检查数据库！");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -372,26 +387,26 @@ namespace InfraredAnalyze
                     if (tbxSpot_1_X.Enabled)
                     {
                         type = "S2";
-                        DMSDK.DM_SetSpot(StaticClass.Temper_Connect, 2, x - 2, y - 2, emiss);
-                        sqlCreate.Update_Spot(StaticClass.Temper_CameraId, type, x - 2, y - 2, emiss);
+                        DMSDK.DM_SetSpot(tempConnect, 2, x - 2, y - 2, emiss);
+                        sqlCreate.Update_Spot(StaticClass.Temper_CameraId, type, x - 2, y - 2, emiss,StaticClass.DataBaseName);
                     }
                     else if (tbxSpot_2_X.Enabled)
                     {
                         type = "S3";
-                        DMSDK.DM_SetSpot(StaticClass.Temper_Connect, 3, x - 2, y - 2, emiss);
-                        sqlCreate.Update_Spot(StaticClass.Temper_CameraId, type, x - 2, y - 2, emiss);
+                        DMSDK.DM_SetSpot(tempConnect, 3, x - 2, y - 2, emiss);
+                        sqlCreate.Update_Spot(StaticClass.Temper_CameraId, type, x - 2, y - 2, emiss, StaticClass.DataBaseName);
                     }
                     else if (tbxSpot_3_X.Enabled)
                     {
                         type = "S4";
-                        DMSDK.DM_SetSpot(StaticClass.Temper_Connect, 4, x - 2, y - 2, emiss);
-                        sqlCreate.Update_Spot(StaticClass.Temper_CameraId, type, x - 2, y - 2, emiss);
+                        DMSDK.DM_SetSpot(tempConnect, 4, x - 2, y - 2, emiss);
+                        sqlCreate.Update_Spot(StaticClass.Temper_CameraId, type, x - 2, y - 2, emiss, StaticClass.DataBaseName);
                     }
                     else if (tbxSpot_4_X.Enabled)
                     {
                         type = "S5";
-                        DMSDK.DM_SetSpot(StaticClass.Temper_Connect, 5, x - 2, y - 2, emiss);
-                        sqlCreate.Update_Spot(StaticClass.Temper_CameraId, type, x - 2, y - 2, emiss);
+                        DMSDK.DM_SetSpot(tempConnect, 5, x - 2, y - 2, emiss);
+                        sqlCreate.Update_Spot(StaticClass.Temper_CameraId, type, x - 2, y - 2, emiss, StaticClass.DataBaseName);
                     }
                     Cancel_SetSpot(type, btnAdd_Spot, tbxSpot_X, tbxSpot_Y, tbxSpot_Emiss, btnClear_Spot);
                 }
@@ -442,7 +457,7 @@ namespace InfraredAnalyze
                     int y2 = Convert.ToInt32(tbxArea_Y2.Text);
                     int emiss = Convert.ToInt32(tbxArea_Emiss.Text);
                     int messuretype = Convert.ToInt32(cbxMeasureType.SelectedIndex);
-                    if (x1 <= 0 || x1 > 320 || y1 <= 0 || y1 > 240 || x2 <= 0 || x2 > 320 || y2 <= 0 || y2 > 240)
+                    if (x1 < 0 || x1 > 320 || y1 < 0 || y1 > 240 || x2 < 0 || x2 > 320 || y2 < 0 || y2 > 240)
                     {
                         MessageBox.Show("请输入合适的坐标");
                         return;
@@ -450,26 +465,26 @@ namespace InfraredAnalyze
                     if (tbxArea_1_X1.Enabled)
                     {
                         type = "A6";
-                        DMSDK.DM_SetArea(StaticClass.Temper_Connect, 6, x1, y1, x2, y2, emiss, messuretype);
-                        sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A6", x1, y1, x2, y2, emiss, messuretype);
+                        DMSDK.DM_SetArea(tempConnect, 6, x1, y1, x2, y2, emiss, messuretype);
+                        sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A6", x1, y1, x2, y2, emiss, messuretype, StaticClass.DataBaseName);
                     }
                     else if (tbxArea_2_X1.Enabled)
                     {
                         type = "A7";
-                        DMSDK.DM_SetArea(StaticClass.Temper_Connect, 7, x1, y1, x2, y2, emiss, messuretype);
-                        sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A7", x1, y1, x2, y2, emiss, messuretype);
+                        DMSDK.DM_SetArea(tempConnect, 7, x1, y1, x2, y2, emiss, messuretype);
+                        sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A7", x1, y1, x2, y2, emiss, messuretype, StaticClass.DataBaseName);
                     }
                     else if (tbxArea_3_X1.Enabled)
                     {
                         type = "A8";
-                        DMSDK.DM_SetArea(StaticClass.Temper_Connect, 8, x1, y1, x2, y2, emiss, messuretype);
-                        sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A8", x1, y1, x2, y2, emiss, messuretype);
+                        DMSDK.DM_SetArea(tempConnect, 8, x1, y1, x2, y2, emiss, messuretype);
+                        sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A8", x1, y1, x2, y2, emiss, messuretype, StaticClass.DataBaseName);
                     }
                     else if (tbxArea_4_X1.Enabled)
                     {
                         type = "A9";
-                        DMSDK.DM_SetArea(StaticClass.Temper_Connect, 9, x1, y1, x2, y2, emiss, messuretype);
-                        sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A9", x1, y1, x2, y2, emiss, messuretype);
+                        DMSDK.DM_SetArea(tempConnect, 9, x1, y1, x2, y2, emiss, messuretype);
+                        sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A9", x1, y1, x2, y2, emiss, messuretype, StaticClass.DataBaseName);
                     }
                     Cancel_SetArea(type, btnAdd_Area, tbxArea_X1, tbxArea_Y1, tbxArea_X2, tbxArea_Y2, tbxArea_Emiss, cbxMeasureType, btnClear_Area);
                 }
@@ -525,8 +540,8 @@ namespace InfraredAnalyze
                     if (tbxLine_X1.Enabled)
                     {
                         type = "L1";
-                        DMSDK.DM_SetLine(StaticClass.Temper_Connect, 1, x1, y1, x2, y2, ((x1 + x2) / 2) - 2, ((y1 + y2) / 2) - 4, emiss);
-                        sqlCreate.Update_Line(StaticClass.Temper_CameraId, "L1", x1, y1, x2, y2, (x1 + x2) / 2, (y1 + y2) / 2, emiss);
+                        DMSDK.DM_SetLine(tempConnect, 1, x1, y1, x2, y2, ((x1 + x2) / 2) - 2, ((y1 + y2) / 2) - 4, emiss);
+                        sqlCreate.Update_Line(StaticClass.Temper_CameraId, "L1", x1, y1, x2, y2, (x1 + x2) / 2, (y1 + y2) / 2, emiss, StaticClass.DataBaseName);
                     }
                     Cancel_SetLine(type, btnAdd_Line, tbxLine_X1, tbxLine_Y1, tbxLine_X2, tbxLine_Y2, tbxLine_X3, tbxLine_Y3, tbxLine_Emiss, btnClear_Line);
                 }
@@ -541,8 +556,9 @@ namespace InfraredAnalyze
         #region//取消事件
         private void Cancel_SetSpot(string type, Button btnAdd_Spot, TextBox tbxSpot_X, TextBox tbxSpot_Y, TextBox tbxSpot_Emiss, Button btnClear_Spot)//取消设置点
         {
-            arrayList_All_Spot = sqlCreate.Select_Spot(StaticClass.Temper_CameraId, type);
-            Struct_temperSpot = (DMSDK.temperSpot)arrayList_All_Spot[0];
+            list_All_Spot = new List<DMSDK.temperSpot>();
+            list_All_Spot = sqlCreate.Select_Spot(StaticClass.Temper_CameraId, type,StaticClass.DataBaseName);
+            Struct_temperSpot = (DMSDK.temperSpot)list_All_Spot[0];
             tbxSpot_X.Text = Struct_temperSpot.X1.ToString();
             tbxSpot_Y.Text = Struct_temperSpot.Y1.ToString();
             tbxSpot_Emiss.Text = Struct_temperSpot.Emiss.ToString();//文本框数据还原
@@ -563,8 +579,9 @@ namespace InfraredAnalyze
 
         private void Cancel_SetArea(string type, Button btnAdd_Area, TextBox tbxArea_X1, TextBox tbxArea_Y1, TextBox tbxArea_X2, TextBox tbxArea_Y2, TextBox tbxArea_Emiss, ComboBox cbxMeasureType, Button btnClear_Area)//取消设置区域
         {
-            arrayList_All_Area = sqlCreate.Select_Area(StaticClass.Temper_CameraId, type);
-            Struct_temperArea = (DMSDK.temperArea)arrayList_All_Area[0];
+            list_All_Area = new List<DMSDK.temperArea>();
+            list_All_Area = sqlCreate.Select_Area(StaticClass.Temper_CameraId, type,StaticClass.DataBaseName);
+            Struct_temperArea = (DMSDK.temperArea)list_All_Area[0];
             tbxArea_X1.Text = Struct_temperArea.X1.ToString();
             tbxArea_Y1.Text = Struct_temperArea.Y1.ToString();
             tbxArea_X2.Text = Struct_temperArea.X2.ToString();
@@ -591,8 +608,9 @@ namespace InfraredAnalyze
 
         private void Cancel_SetLine(string type, Button btnAdd_Line, TextBox tbxLine_X1, TextBox tbxLine_Y1, TextBox tbxLine_X2, TextBox tbxLine_Y2, TextBox tbxLine_X3, TextBox tbxLine_Y3, TextBox tbxLine_Emiss, Button btnClear_Line)//取消设置线
         {
-            arrayList_All_Line = sqlCreate.Select_Line(StaticClass.Temper_CameraId, type);
-            Struct_temperLine = (DMSDK.temperLine)arrayList_All_Line[0];
+            list_All_Line = new List<DMSDK.temperLine>();
+            list_All_Line = sqlCreate.Select_Line(StaticClass.Temper_CameraId, type, StaticClass.DataBaseName);
+            Struct_temperLine = (DMSDK.temperLine)list_All_Line[0];
             tbxLine_X1.Text = Struct_temperLine.X1.ToString();
             tbxLine_Y1.Text = Struct_temperLine.Y1.ToString();
             tbxLine_X2.Text = Struct_temperLine.X2.ToString();
@@ -624,8 +642,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Line_1.Text == "清除")
             {
-                DMSDK.DM_ClearLine(StaticClass.Temper_Connect, 1);
-                sqlCreate.Delete_Line(StaticClass.Temper_CameraId, "L1");
+                DMSDK.DM_ClearLine(tempConnect, 1);
+                sqlCreate.Delete_Line(StaticClass.Temper_CameraId, "L1",StaticClass.DataBaseName);
                 tbxLine_1_X1.Text = "0";
                 tbxLine_1_Y1.Text = "0";
                 tbxLine_1_X2.Text = "0";
@@ -643,8 +661,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Spot_1.Text == "清除")
             {
-                DMSDK.DM_ClearSpot(StaticClass.Temper_Connect, 2);
-                sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S2");
+                DMSDK.DM_ClearSpot(tempConnect, 2);
+                sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S2", StaticClass.DataBaseName);
                 tbxSpot_1_X.Text = "0";
                 tbxSpot_1_Y.Text = "0";
             }
@@ -658,8 +676,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Spot_2.Text == "清除")
             {
-                DMSDK.DM_ClearSpot(StaticClass.Temper_Connect, 3);
-                sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S3");
+                DMSDK.DM_ClearSpot(tempConnect, 3);
+                sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S3", StaticClass.DataBaseName);
                 tbxSpot_2_X.Text = "0";
                 tbxSpot_2_Y.Text = "0";
             }
@@ -673,8 +691,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Spot_3.Text == "清除")
             {
-                DMSDK.DM_ClearSpot(StaticClass.Temper_Connect, 4);
-                sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S4");
+                DMSDK.DM_ClearSpot(tempConnect, 4);
+                sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S4", StaticClass.DataBaseName);
                 tbxSpot_3_X.Text = "0";
                 tbxSpot_3_Y.Text = "0";
             }
@@ -688,8 +706,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Spot_4.Text == "清除")
             {
-                DMSDK.DM_ClearSpot(StaticClass.Temper_Connect, 5);
-                sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S5");
+                DMSDK.DM_ClearSpot(tempConnect, 5);
+                sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S5", StaticClass.DataBaseName);
                 tbxSpot_4_X.Text = "0";
                 tbxSpot_4_Y.Text = "0";
             }
@@ -703,8 +721,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Area_1.Text == "清除")
             {
-                DMSDK.DM_ClearArea(StaticClass.Temper_Connect, 6);
-                sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A6");
+                DMSDK.DM_ClearArea(tempConnect, 6);
+                sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A6", StaticClass.DataBaseName);
                 tbxArea_1_X1.Text = "0";
                 tbxArea_1_X2.Text = "0";
                 tbxArea_1_Y1.Text = "0";
@@ -720,8 +738,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Area_2.Text == "清除")
             {
-                DMSDK.DM_ClearArea(StaticClass.Temper_Connect, 7);
-                sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A7");
+                DMSDK.DM_ClearArea(tempConnect, 7);
+                sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A7", StaticClass.DataBaseName);
                 tbxArea_2_X1.Text = "0";
                 tbxArea_2_X2.Text = "0";
                 tbxArea_2_Y1.Text = "0";
@@ -737,8 +755,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Area_3.Text == "清除")
             {
-                DMSDK.DM_ClearArea(StaticClass.Temper_Connect, 8);
-                sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A8");
+                DMSDK.DM_ClearArea(tempConnect, 8);
+                sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A8", StaticClass.DataBaseName);
                 tbxArea_3_X1.Text = "0";
                 tbxArea_3_X2.Text = "0";
                 tbxArea_3_Y1.Text = "0";
@@ -754,8 +772,8 @@ namespace InfraredAnalyze
         {
             if (btnClear_Area_4.Text == "清除")
             {
-                DMSDK.DM_ClearArea(StaticClass.Temper_Connect, 9);
-                sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A9");
+                DMSDK.DM_ClearArea(tempConnect, 9);
+                sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A9", StaticClass.DataBaseName);
                 tbxArea_4_X1.Text = "0";
                 tbxArea_4_X2.Text = "0";
                 tbxArea_4_Y1.Text = "0";
@@ -768,31 +786,58 @@ namespace InfraredAnalyze
         }
 
         FrmIsRunning isRunning;
-        BackgroundWorker worker = new BackgroundWorker();
+        
         private void btnClaerAll_Click(object sender, EventArgs e)
         {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerSupportsCancellation = true;
             isRunning = new FrmIsRunning(worker);
             worker.DoWork += new DoWorkEventHandler(showIsRunning);
             worker.RunWorkerAsync();
             isRunning.ShowDialog();
-            MessageBox.Show("删除成功！");
         }
 
         private void showIsRunning(object sender,DoWorkEventArgs e)
         {
-            DMSDK.DM_ClearAllArea(StaticClass.Temper_Connect);
-            DMSDK.DM_ClearAllLine(StaticClass.Temper_Connect);
-            DMSDK.DM_ClearAllSpot(StaticClass.Temper_Connect);
-            sqlCreate.Delete_Line(StaticClass.Temper_CameraId, "L1");
-            sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S2");
-            sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S3");
-            sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S4");
-            sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S5");
-            sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A6");
-            sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A7");
-            sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A8");
-            sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A9");
+            DMSDK.DM_ClearAllArea(tempConnect);
+            DMSDK.DM_ClearAllLine(tempConnect);
+            DMSDK.DM_ClearAllSpot(tempConnect);
+            sqlCreate.Delete_Line(StaticClass.Temper_CameraId, "L1", StaticClass.DataBaseName);
+            sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S2", StaticClass.DataBaseName);
+            sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S3", StaticClass.DataBaseName);
+            sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S4", StaticClass.DataBaseName);
+            sqlCreate.Delete_Spot(StaticClass.Temper_CameraId, "S5", StaticClass.DataBaseName);
+            sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A6", StaticClass.DataBaseName);
+            sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A7", StaticClass.DataBaseName);
+            sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A8", StaticClass.DataBaseName);
+            sqlCreate.Delete_Area(StaticClass.Temper_CameraId, "A9", StaticClass.DataBaseName);
+            Invoke(new MethodInvoker(delegate ()
+            {
+                Get_Area_Param();
+            }));
+            
+        }
+
+        private void btnDefaultArea_Click(object sender, EventArgs e)
+        {
+            btnClearAll.PerformClick();
+            DMSDK.DM_SetArea(tempConnect, 6, 6, 2, 312, 236, 90, 0);
+            sqlCreate.Update_Area(StaticClass.Temper_CameraId, "A6", 6, 2, 312, 236, 90, 0, StaticClass.DataBaseName);
             Get_Area_Param();
+        }
+
+        private void FrmMeasureTemperConfig_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DMSDK.DM_Disconnect(tempConnect);
+            DMSDK.DM_CloseMonitor(tempMonitor);
+            //DMSDK.DM_PlayerCleanup();
+        }
+
+        private void FrmMeasureTemperConfig_Disposed(object sender, EventArgs e)
+        {
+            DMSDK.DM_Disconnect(tempConnect);
+            DMSDK.DM_CloseMonitor(tempMonitor);
+            //DMSDK.DM_PlayerCleanup();//有坑
         }
     }
 

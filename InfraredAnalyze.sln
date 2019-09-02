@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DM_InfraredAnalyze", "InfraredAnalyze\DM_InfraredAnalyze.csproj", "{01B5C190-A72E-46EE-9A19-F25F39ADB2C6}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SMInfrared-Setup", "SMInfrared-Setup\SMInfrared-Setup.vdproj", "{9548BE49-13DA-4AC0-955A-AE7CDEC073AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,12 @@ Global
 		{01B5C190-A72E-46EE-9A19-F25F39ADB2C6}.Release|x64.Build.0 = Release|x64
 		{01B5C190-A72E-46EE-9A19-F25F39ADB2C6}.Release|x86.ActiveCfg = Release|x86
 		{01B5C190-A72E-46EE-9A19-F25F39ADB2C6}.Release|x86.Build.0 = Release|x86
+		{9548BE49-13DA-4AC0-955A-AE7CDEC073AF}.Debug|Any CPU.ActiveCfg = Debug
+		{9548BE49-13DA-4AC0-955A-AE7CDEC073AF}.Debug|x64.ActiveCfg = Debug
+		{9548BE49-13DA-4AC0-955A-AE7CDEC073AF}.Debug|x86.ActiveCfg = Debug
+		{9548BE49-13DA-4AC0-955A-AE7CDEC073AF}.Release|Any CPU.ActiveCfg = Release
+		{9548BE49-13DA-4AC0-955A-AE7CDEC073AF}.Release|x64.ActiveCfg = Release
+		{9548BE49-13DA-4AC0-955A-AE7CDEC073AF}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -90,7 +90,7 @@ namespace InfraredAnalyze
                 {
                     Enable = true;
                 }
-                sqlCreate.UpDate_CameraEnable(num, Remarks, Enable);
+                sqlCreate.UpDate_CameraEnable(num, Remarks, Enable, StaticClass.DataBaseName);
             }
             catch(Exception ex)
             {

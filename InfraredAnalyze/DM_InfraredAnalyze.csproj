@@ -8,10 +8,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>InfraredAnalyze</RootNamespace>
     <AssemblyName>InfraredAnalyze</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -34,7 +35,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -90,6 +91,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>DMsdk\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -106,23 +112,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DMSDK.cs" />
-    <Compile Include="FrmAddIPCamera.cs">
+    <Compile Include="Class\Chason_Log.cs" />
+    <Compile Include="Class\DMSDK.cs" />
+    <Compile Include="Class\Excel.cs" />
+    <Compile Include="Froms\FrmHistoricalTemperLines.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAddIPCamera.Designer.cs">
+    <Compile Include="Froms\FrmHistoricalTemperLines.Designer.cs">
+      <DependentUpon>FrmHistoricalTemperLines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Froms_bak\FrmAddIPCamera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms_bak\FrmAddIPCamera.Designer.cs">
       <DependentUpon>FrmAddIPCamera.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmAlarmConfig.cs">
+    <Compile Include="From_Config\FrmAlarmConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAlarmConfig.Designer.cs">
+    <Compile Include="From_Config\FrmAlarmConfig.Designer.cs">
       <DependentUpon>FrmAlarmConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmCameraNetConfig.cs">
+    <Compile Include="From_Config\FrmCameraNetConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmCameraNetConfig.Designer.cs">
+    <Compile Include="From_Config\FrmCameraNetConfig.Designer.cs">
       <DependentUpon>FrmCameraNetConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmConfig.cs">
@@ -131,64 +145,76 @@
     <Compile Include="FrmConfig.Designer.cs">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmHisRecords.cs">
+    <Compile Include="Froms\FrmHisRecords.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmHisRecords.Designer.cs">
+    <Compile Include="Froms\FrmHisRecords.Designer.cs">
       <DependentUpon>FrmHisRecords.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmHistoricalTemperData.cs">
+    <Compile Include="Froms\FrmHistoricalTemperData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmHistoricalTemperData.Designer.cs">
+    <Compile Include="Froms\FrmHistoricalTemperData.Designer.cs">
       <DependentUpon>FrmHistoricalTemperData.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmImageConfig.cs">
+    <Compile Include="From_Config\FrmImageConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmImageConfig.Designer.cs">
+    <Compile Include="From_Config\FrmImageConfig.Designer.cs">
       <DependentUpon>FrmImageConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmImgConfig.cs">
+    <Compile Include="Froms_bak\FrmImgConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmImgConfig.Designer.cs">
+    <Compile Include="Froms_bak\FrmImgConfig.Designer.cs">
       <DependentUpon>FrmImgConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmMaintain.cs">
+    <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMaintain.Designer.cs">
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="From_Config\FrmMaintain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="From_Config\FrmMaintain.Designer.cs">
       <DependentUpon>FrmMaintain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmPwd.cs">
+    <Compile Include="Froms\FrmPwd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPwd.Designer.cs">
+    <Compile Include="Froms\FrmPwd.Designer.cs">
       <DependentUpon>FrmPwd.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmPwdManage.cs">
+    <Compile Include="Froms\FrmPwdManage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPwdManage.Designer.cs">
+    <Compile Include="Froms\FrmPwdManage.Designer.cs">
       <DependentUpon>FrmPwdManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSaveImageConfig.cs">
+    <Compile Include="Froms\FrmRealTimeData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSaveImageConfig.Designer.cs">
+    <Compile Include="Froms\FrmRealTimeData.designer.cs">
+      <DependentUpon>FrmRealTimeData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="From_Config\FrmSaveImageConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="From_Config\FrmSaveImageConfig.Designer.cs">
       <DependentUpon>FrmSaveImageConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmIpConfig.cs">
+    <Compile Include="From_Config\FrmIpConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmIpConfig.Designer.cs">
+    <Compile Include="From_Config\FrmIpConfig.Designer.cs">
       <DependentUpon>FrmIpConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmIsRunning.cs">
+    <Compile Include="Froms\FrmIsRunning.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmIsRunning.Designer.cs">
+    <Compile Include="Froms\FrmIsRunning.Designer.cs">
       <DependentUpon>FrmIsRunning.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMain.cs">
@@ -197,153 +223,180 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmMeasureTemperConfig.cs">
+    <Compile Include="From_Config\FrmMeasureTemperConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMeasureTemperConfig.Designer.cs">
+    <Compile Include="From_Config\FrmMeasureTemperConfig.Designer.cs">
       <DependentUpon>FrmMeasureTemperConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmMointorArea.cs">
+    <Compile Include="Froms\FrmRealTimeTemperData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMointorArea.Designer.cs">
-      <DependentUpon>FrmMointorArea.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmRealTimeTemperData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmRealTimeTemperData.Designer.cs">
+    <Compile Include="Froms\FrmRealTimeTemperData.Designer.cs">
       <DependentUpon>FrmRealTimeTemperData.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSample.cs">
+    <Compile Include="Froms\FrmSample.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSample.Designer.cs">
+    <Compile Include="Froms\FrmSample.Designer.cs">
       <DependentUpon>FrmSample.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmTemperParamConfig.cs">
+    <Compile Include="Froms\FrmSelectCamera.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmTemperParamConfig.Designer.cs">
+    <Compile Include="Froms\FrmSelectCamera.Designer.cs">
+      <DependentUpon>FrmSelectCamera.cs</DependentUpon>
+    </Compile>
+    <Compile Include="From_Config\FrmTemperParamConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="From_Config\FrmTemperParamConfig.Designer.cs">
       <DependentUpon>FrmTemperParamConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmTemperParConfig.cs">
+    <Compile Include="From_Config\FrmSystemConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmTemperParConfig.Designer.cs">
-      <DependentUpon>FrmTemperParConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmSystemConfig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmSystemConfig.Designer.cs">
+    <Compile Include="From_Config\FrmSystemConfig.Designer.cs">
       <DependentUpon>FrmSystemConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSaveVideoConfig.cs">
+    <Compile Include="From_Config\FrmSaveVideoConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSaveVideoConfig.Designer.cs">
+    <Compile Include="From_Config\FrmSaveVideoConfig.Designer.cs">
       <DependentUpon>FrmSaveVideoConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfraredSDK.cs" />
+    <Compile Include="Froms\FrmVersion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\FrmVersion.Designer.cs">
+      <DependentUpon>FrmVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class\InfraredSDK.cs" />
+    <Compile Include="UControl\HistoricalDGV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UControl\HistoricalDGV.Designer.cs">
+      <DependentUpon>HistoricalDGV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UControl\Historicalines.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UControl\Historicalines.Designer.cs">
+      <DependentUpon>Historicalines.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UControl\RealTimeLines.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UControl\RealTimeLines.designer.cs">
+      <DependentUpon>RealTimeLines.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources\FrmAddSensor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Resources\FrmAddSensor.Designer.cs">
       <DependentUpon>FrmAddSensor.cs</DependentUpon>
     </Compile>
-    <Compile Include="SqlCreate.cs" />
-    <Compile Include="SqlInsert.cs" />
-    <Compile Include="StaticClass.cs" />
-    <Compile Include="IpAddressTextBox.cs">
+    <Compile Include="Class\SqlCreate.cs" />
+    <Compile Include="Class\SqlInsert.cs" />
+    <Compile Include="Class\StaticClass.cs" />
+    <Compile Include="UControl\IpAddressTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="IpAddressTextBox.Designer.cs">
+    <Compile Include="UControl\IpAddressTextBox.Designer.cs">
       <DependentUpon>IpAddressTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="StructClass.cs" />
-    <Compile Include="UCPbx.cs">
+    <Compile Include="Class\StructClass.cs" />
+    <Compile Include="UControl\UCPbx.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UCPbx.Designer.cs">
+    <Compile Include="UControl\UCPbx.Designer.cs">
       <DependentUpon>UCPbx.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCPictureBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCPictureBox.Designer.cs">
-      <DependentUpon>UCPictureBox.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="FrmAddIPCamera.resx">
+    <EmbeddedResource Include="Froms\FrmHistoricalTemperLines.resx">
+      <DependentUpon>FrmHistoricalTemperLines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms_bak\FrmAddIPCamera.resx">
       <DependentUpon>FrmAddIPCamera.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAlarmConfig.resx">
+    <EmbeddedResource Include="From_Config\FrmAlarmConfig.resx">
       <DependentUpon>FrmAlarmConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmCameraNetConfig.resx">
+    <EmbeddedResource Include="From_Config\FrmCameraNetConfig.resx">
       <DependentUpon>FrmCameraNetConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmHisRecords.resx">
+    <EmbeddedResource Include="Froms\FrmHisRecords.resx">
       <DependentUpon>FrmHisRecords.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmHistoricalTemperData.resx">
+    <EmbeddedResource Include="Froms\FrmHistoricalTemperData.resx">
       <DependentUpon>FrmHistoricalTemperData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmImageConfig.resx">
+    <EmbeddedResource Include="From_Config\FrmImageConfig.resx">
       <DependentUpon>FrmImageConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmImgConfig.resx">
+    <EmbeddedResource Include="Froms_bak\FrmImgConfig.resx">
       <DependentUpon>FrmImgConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMaintain.resx">
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="From_Config\FrmMaintain.resx">
       <DependentUpon>FrmMaintain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPwd.resx">
+    <EmbeddedResource Include="Froms\FrmPwd.resx">
       <DependentUpon>FrmPwd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPwdManage.resx">
+    <EmbeddedResource Include="Froms\FrmPwdManage.resx">
       <DependentUpon>FrmPwdManage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSaveImageConfig.resx">
+    <EmbeddedResource Include="Froms\FrmRealTimeData.resx">
+      <DependentUpon>FrmRealTimeData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="From_Config\FrmSaveImageConfig.resx">
       <DependentUpon>FrmSaveImageConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmIpConfig.resx">
+    <EmbeddedResource Include="From_Config\FrmIpConfig.resx">
       <DependentUpon>FrmIpConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmIsRunning.resx">
+    <EmbeddedResource Include="Froms\FrmIsRunning.resx">
       <DependentUpon>FrmIsRunning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMeasureTemperConfig.resx">
+    <EmbeddedResource Include="From_Config\FrmMeasureTemperConfig.resx">
       <DependentUpon>FrmMeasureTemperConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMointorArea.resx">
-      <DependentUpon>FrmMointorArea.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmRealTimeTemperData.resx">
+    <EmbeddedResource Include="Froms\FrmRealTimeTemperData.resx">
       <DependentUpon>FrmRealTimeTemperData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSample.resx">
+    <EmbeddedResource Include="Froms\FrmSample.resx">
       <DependentUpon>FrmSample.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmTemperParamConfig.resx">
+    <EmbeddedResource Include="Froms\FrmSelectCamera.resx">
+      <DependentUpon>FrmSelectCamera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="From_Config\FrmTemperParamConfig.resx">
       <DependentUpon>FrmTemperParamConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmTemperParConfig.resx">
-      <DependentUpon>FrmTemperParConfig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSystemConfig.resx">
+    <EmbeddedResource Include="From_Config\FrmSystemConfig.resx">
       <DependentUpon>FrmSystemConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSaveVideoConfig.resx">
+    <EmbeddedResource Include="From_Config\FrmSaveVideoConfig.resx">
       <DependentUpon>FrmSaveVideoConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FrmVersion.resx">
+      <DependentUpon>FrmVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UControl\HistoricalDGV.resx">
+      <DependentUpon>HistoricalDGV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UControl\Historicalines.resx">
+      <DependentUpon>Historicalines.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -355,17 +408,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UControl\RealTimeLines.resx">
+      <DependentUpon>RealTimeLines.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\FrmAddSensor.resx">
       <DependentUpon>FrmAddSensor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IpAddressTextBox.resx">
+    <EmbeddedResource Include="UControl\IpAddressTextBox.resx">
       <DependentUpon>IpAddressTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCPbx.resx">
+    <EmbeddedResource Include="UControl\UCPbx.resx">
       <DependentUpon>UCPbx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCPictureBox.resx">
-      <DependentUpon>UCPictureBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -384,6 +437,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\waiting" />
     <None Include="Resources\关闭.png" />
   </ItemGroup>
   <ItemGroup>
@@ -393,36 +447,10 @@
     <None Include="Resources\最小化.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxMSComCtl2">
-      <Guid>{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="DXTMSFTLib">
       <Guid>{5E77EB03-937C-11D1-B047-00AA003B6061}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="DXTRANSLib">
-      <Guid>{54314D1D-35FE-11D1-81A1-0000F87557DB}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="MSComCtl2">
-      <Guid>{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
@@ -545,6 +573,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CameraErr+Fire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sound_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sound_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\故障声音.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\火警声音.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\config.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Function_Disable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Checking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_Bgi.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

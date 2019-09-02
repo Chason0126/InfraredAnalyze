@@ -31,8 +31,10 @@
             this.btnClearAll = new System.Windows.Forms.Button();
             this.pbxScreen = new System.Windows.Forms.PictureBox();
             this.tabArea = new System.Windows.Forms.TabControl();
-            this.tabLine = new System.Windows.Forms.TabPage();
+            this.tabFastSet = new System.Windows.Forms.TabPage();
+            this.btnDefaultArea = new System.Windows.Forms.Button();
             this.btnClaerAll = new System.Windows.Forms.Button();
+            this.tabLine = new System.Windows.Forms.TabPage();
             this.pnlBtnLine = new System.Windows.Forms.Panel();
             this.btnClear_Line_1 = new System.Windows.Forms.Button();
             this.btnAdd_Line_1 = new System.Windows.Forms.Button();
@@ -129,6 +131,7 @@
             this.tbxArea_1_Emiss = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).BeginInit();
             this.tabArea.SuspendLayout();
+            this.tabFastSet.SuspendLayout();
             this.tabLine.SuspendLayout();
             this.pnlBtnLine.SuspendLayout();
             this.tabSpot.SuspendLayout();
@@ -159,6 +162,7 @@
             // tabArea
             // 
             this.tabArea.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tabArea.Controls.Add(this.tabFastSet);
             this.tabArea.Controls.Add(this.tabLine);
             this.tabArea.Controls.Add(this.tabSpot);
             this.tabArea.Controls.Add(this.tabAreas);
@@ -169,9 +173,39 @@
             this.tabArea.Size = new System.Drawing.Size(640, 200);
             this.tabArea.TabIndex = 7;
             // 
+            // tabFastSet
+            // 
+            this.tabFastSet.Controls.Add(this.btnDefaultArea);
+            this.tabFastSet.Controls.Add(this.btnClaerAll);
+            this.tabFastSet.Location = new System.Drawing.Point(4, 22);
+            this.tabFastSet.Name = "tabFastSet";
+            this.tabFastSet.Size = new System.Drawing.Size(632, 174);
+            this.tabFastSet.TabIndex = 3;
+            this.tabFastSet.Text = "快捷操作";
+            this.tabFastSet.UseVisualStyleBackColor = true;
+            // 
+            // btnDefaultArea
+            // 
+            this.btnDefaultArea.Location = new System.Drawing.Point(367, 76);
+            this.btnDefaultArea.Name = "btnDefaultArea";
+            this.btnDefaultArea.Size = new System.Drawing.Size(75, 23);
+            this.btnDefaultArea.TabIndex = 22;
+            this.btnDefaultArea.Text = "快速设置";
+            this.btnDefaultArea.UseVisualStyleBackColor = true;
+            this.btnDefaultArea.Click += new System.EventHandler(this.btnDefaultArea_Click);
+            // 
+            // btnClaerAll
+            // 
+            this.btnClaerAll.Location = new System.Drawing.Point(183, 76);
+            this.btnClaerAll.Name = "btnClaerAll";
+            this.btnClaerAll.Size = new System.Drawing.Size(75, 23);
+            this.btnClaerAll.TabIndex = 23;
+            this.btnClaerAll.Text = "全部清除";
+            this.btnClaerAll.UseVisualStyleBackColor = true;
+            this.btnClaerAll.Click += new System.EventHandler(this.btnClaerAll_Click);
+            // 
             // tabLine
             // 
-            this.tabLine.Controls.Add(this.btnClaerAll);
             this.tabLine.Controls.Add(this.pnlBtnLine);
             this.tabLine.Controls.Add(this.tbxLine_1_X1);
             this.tabLine.Controls.Add(this.tbxLine_1_Emiss);
@@ -197,21 +231,11 @@
             this.tabLine.Text = "测温线";
             this.tabLine.UseVisualStyleBackColor = true;
             // 
-            // btnClaerAll
-            // 
-            this.btnClaerAll.Location = new System.Drawing.Point(261, 134);
-            this.btnClaerAll.Name = "btnClaerAll";
-            this.btnClaerAll.Size = new System.Drawing.Size(75, 23);
-            this.btnClaerAll.TabIndex = 21;
-            this.btnClaerAll.Text = "全部清除";
-            this.btnClaerAll.UseVisualStyleBackColor = true;
-            this.btnClaerAll.Click += new System.EventHandler(this.btnClaerAll_Click);
-            // 
             // pnlBtnLine
             // 
             this.pnlBtnLine.Controls.Add(this.btnClear_Line_1);
             this.pnlBtnLine.Controls.Add(this.btnAdd_Line_1);
-            this.pnlBtnLine.Location = new System.Drawing.Point(499, 79);
+            this.pnlBtnLine.Location = new System.Drawing.Point(499, 46);
             this.pnlBtnLine.Name = "pnlBtnLine";
             this.pnlBtnLine.Size = new System.Drawing.Size(127, 34);
             this.pnlBtnLine.TabIndex = 20;
@@ -241,7 +265,7 @@
             this.tbxLine_1_X1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLine_1_X1.Enabled = false;
             this.tbxLine_1_X1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxLine_1_X1.Location = new System.Drawing.Point(92, 86);
+            this.tbxLine_1_X1.Location = new System.Drawing.Point(92, 53);
             this.tbxLine_1_X1.Name = "tbxLine_1_X1";
             this.tbxLine_1_X1.Size = new System.Drawing.Size(25, 21);
             this.tbxLine_1_X1.TabIndex = 18;
@@ -252,7 +276,7 @@
             this.tbxLine_1_Emiss.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLine_1_Emiss.Enabled = false;
             this.tbxLine_1_Emiss.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxLine_1_Emiss.Location = new System.Drawing.Point(432, 86);
+            this.tbxLine_1_Emiss.Location = new System.Drawing.Point(432, 53);
             this.tbxLine_1_Emiss.Name = "tbxLine_1_Emiss";
             this.tbxLine_1_Emiss.Size = new System.Drawing.Size(25, 21);
             this.tbxLine_1_Emiss.TabIndex = 17;
@@ -264,7 +288,7 @@
             this.tbxLine_1_Y1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLine_1_Y1.Enabled = false;
             this.tbxLine_1_Y1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxLine_1_Y1.Location = new System.Drawing.Point(145, 85);
+            this.tbxLine_1_Y1.Location = new System.Drawing.Point(145, 52);
             this.tbxLine_1_Y1.Name = "tbxLine_1_Y1";
             this.tbxLine_1_Y1.Size = new System.Drawing.Size(25, 21);
             this.tbxLine_1_Y1.TabIndex = 16;
@@ -275,7 +299,7 @@
             this.tbxLine_1_Y3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLine_1_Y3.Enabled = false;
             this.tbxLine_1_Y3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxLine_1_Y3.Location = new System.Drawing.Point(357, 86);
+            this.tbxLine_1_Y3.Location = new System.Drawing.Point(357, 53);
             this.tbxLine_1_Y3.Name = "tbxLine_1_Y3";
             this.tbxLine_1_Y3.Size = new System.Drawing.Size(25, 21);
             this.tbxLine_1_Y3.TabIndex = 15;
@@ -286,7 +310,7 @@
             this.tbxLine_1_X3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLine_1_X3.Enabled = false;
             this.tbxLine_1_X3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxLine_1_X3.Location = new System.Drawing.Point(304, 86);
+            this.tbxLine_1_X3.Location = new System.Drawing.Point(304, 53);
             this.tbxLine_1_X3.Name = "tbxLine_1_X3";
             this.tbxLine_1_X3.Size = new System.Drawing.Size(25, 21);
             this.tbxLine_1_X3.TabIndex = 14;
@@ -297,7 +321,7 @@
             this.tbxLine_1_Y2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLine_1_Y2.Enabled = false;
             this.tbxLine_1_Y2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxLine_1_Y2.Location = new System.Drawing.Point(251, 86);
+            this.tbxLine_1_Y2.Location = new System.Drawing.Point(251, 53);
             this.tbxLine_1_Y2.Name = "tbxLine_1_Y2";
             this.tbxLine_1_Y2.Size = new System.Drawing.Size(25, 21);
             this.tbxLine_1_Y2.TabIndex = 13;
@@ -308,7 +332,7 @@
             this.tbxLine_1_X2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLine_1_X2.Enabled = false;
             this.tbxLine_1_X2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxLine_1_X2.Location = new System.Drawing.Point(198, 85);
+            this.tbxLine_1_X2.Location = new System.Drawing.Point(198, 52);
             this.tbxLine_1_X2.Name = "tbxLine_1_X2";
             this.tbxLine_1_X2.Size = new System.Drawing.Size(25, 21);
             this.tbxLine_1_X2.TabIndex = 19;
@@ -363,7 +387,7 @@
             // 
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label40.Location = new System.Drawing.Point(34, 88);
+            this.label40.Location = new System.Drawing.Point(34, 55);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(11, 12);
             this.label40.TabIndex = 4;
@@ -527,7 +551,7 @@
             this.tbxSpot_1_Emiss.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxSpot_1_Emiss.Enabled = false;
             this.tbxSpot_1_Emiss.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxSpot_1_Emiss.Location = new System.Drawing.Point(428, 52);
+            this.tbxSpot_1_Emiss.Location = new System.Drawing.Point(428, 47);
             this.tbxSpot_1_Emiss.Name = "tbxSpot_1_Emiss";
             this.tbxSpot_1_Emiss.Size = new System.Drawing.Size(25, 21);
             this.tbxSpot_1_Emiss.TabIndex = 23;
@@ -673,7 +697,7 @@
             this.tbxSpot_2_Emiss.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxSpot_2_Emiss.Enabled = false;
             this.tbxSpot_2_Emiss.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxSpot_2_Emiss.Location = new System.Drawing.Point(428, 79);
+            this.tbxSpot_2_Emiss.Location = new System.Drawing.Point(428, 76);
             this.tbxSpot_2_Emiss.Name = "tbxSpot_2_Emiss";
             this.tbxSpot_2_Emiss.Size = new System.Drawing.Size(25, 21);
             this.tbxSpot_2_Emiss.TabIndex = 14;
@@ -703,7 +727,7 @@
             this.tbxSpot_3_Emiss.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxSpot_3_Emiss.Enabled = false;
             this.tbxSpot_3_Emiss.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbxSpot_3_Emiss.Location = new System.Drawing.Point(428, 106);
+            this.tbxSpot_3_Emiss.Location = new System.Drawing.Point(428, 105);
             this.tbxSpot_3_Emiss.Name = "tbxSpot_3_Emiss";
             this.tbxSpot_3_Emiss.Size = new System.Drawing.Size(25, 21);
             this.tbxSpot_3_Emiss.TabIndex = 13;
@@ -802,7 +826,7 @@
             // 
             // btnAdd_Area_1
             // 
-            this.btnAdd_Area_1.Location = new System.Drawing.Point(10, 3);
+            this.btnAdd_Area_1.Location = new System.Drawing.Point(10, 5);
             this.btnAdd_Area_1.Name = "btnAdd_Area_1";
             this.btnAdd_Area_1.Size = new System.Drawing.Size(50, 23);
             this.btnAdd_Area_1.TabIndex = 4;
@@ -812,7 +836,7 @@
             // 
             // btnClear_Area_1
             // 
-            this.btnClear_Area_1.Location = new System.Drawing.Point(78, 3);
+            this.btnClear_Area_1.Location = new System.Drawing.Point(78, 5);
             this.btnClear_Area_1.Name = "btnClear_Area_1";
             this.btnClear_Area_1.Size = new System.Drawing.Size(50, 23);
             this.btnClear_Area_1.TabIndex = 4;
@@ -832,7 +856,7 @@
             // 
             // btnClear_Area_4
             // 
-            this.btnClear_Area_4.Location = new System.Drawing.Point(78, 95);
+            this.btnClear_Area_4.Location = new System.Drawing.Point(78, 94);
             this.btnClear_Area_4.Name = "btnClear_Area_4";
             this.btnClear_Area_4.Size = new System.Drawing.Size(50, 23);
             this.btnClear_Area_4.TabIndex = 4;
@@ -843,7 +867,7 @@
             // 
             // btnAdd_Area_3
             // 
-            this.btnAdd_Area_3.Location = new System.Drawing.Point(10, 66);
+            this.btnAdd_Area_3.Location = new System.Drawing.Point(10, 65);
             this.btnAdd_Area_3.Name = "btnAdd_Area_3";
             this.btnAdd_Area_3.Size = new System.Drawing.Size(50, 23);
             this.btnAdd_Area_3.TabIndex = 4;
@@ -853,7 +877,7 @@
             // 
             // btnAdd_Area_4
             // 
-            this.btnAdd_Area_4.Location = new System.Drawing.Point(10, 95);
+            this.btnAdd_Area_4.Location = new System.Drawing.Point(10, 94);
             this.btnAdd_Area_4.Name = "btnAdd_Area_4";
             this.btnAdd_Area_4.Size = new System.Drawing.Size(50, 23);
             this.btnAdd_Area_4.TabIndex = 4;
@@ -864,7 +888,7 @@
             // 
             // btnClear_Area_3
             // 
-            this.btnClear_Area_3.Location = new System.Drawing.Point(78, 66);
+            this.btnClear_Area_3.Location = new System.Drawing.Point(78, 65);
             this.btnClear_Area_3.Name = "btnClear_Area_3";
             this.btnClear_Area_3.Size = new System.Drawing.Size(50, 23);
             this.btnClear_Area_3.TabIndex = 4;
@@ -1266,9 +1290,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmMeasureTemperConfig";
             this.Text = "FrmMeasureTemperConfig";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMeasureTemperConfig_FormClosing);
             this.Load += new System.EventHandler(this.FrmMeasureTemperConfig_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxScreen)).EndInit();
             this.tabArea.ResumeLayout(false);
+            this.tabFastSet.ResumeLayout(false);
             this.tabLine.ResumeLayout(false);
             this.tabLine.PerformLayout();
             this.pnlBtnLine.ResumeLayout(false);
@@ -1379,8 +1405,10 @@
         private System.Windows.Forms.TextBox tbxArea_3_X1;
         private System.Windows.Forms.TextBox tbxArea_2_X1;
         private System.Windows.Forms.TextBox tbxArea_1_Emiss;
-        private System.Windows.Forms.Button btnClaerAll;
         public System.Windows.Forms.PictureBox pbxScreen;
         public System.Windows.Forms.TabControl tabArea;
+        private System.Windows.Forms.TabPage tabFastSet;
+        private System.Windows.Forms.Button btnDefaultArea;
+        private System.Windows.Forms.Button btnClaerAll;
     }
 }

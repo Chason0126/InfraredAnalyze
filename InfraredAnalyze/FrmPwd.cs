@@ -58,51 +58,68 @@ namespace InfraredAnalyze
         private void GetPwd()
         {
             SqlCreate sqlCreate = new SqlCreate();
-            structPwds = sqlCreate.Select_Pwd();
+            structPwds = sqlCreate.Select_Pwd(StaticClass.DataBaseName);
         }
 
         private void FrmPwd_Load(object sender, EventArgs e)
         {
-            GetPwd();
-            if (pwdLevel == 1)
+            if (pwdLevel != -1)
+            {
+                GetPwd();
+                if (pwdLevel == 1)
+                {
+                    lblPwdLevel.Text = "权限等级：系统管理员";
+                }
+                if (pwdLevel == 2)
+                {
+                    lblPwdLevel.Text = "权限等级：管理员";
+                }
+                if (pwdLevel == 3 || pwdLevel == 0)
+                {
+                    lblPwdLevel.Text = "权限等级：普通用户";
+                }
+            }else if (pwdLevel == -1)
             {
                 lblPwdLevel.Text = "权限等级：系统管理员";
-            }
-            if (pwdLevel == 2)
-            {
-                lblPwdLevel.Text = "权限等级：管理员";
-            }
-            if (pwdLevel == 3||pwdLevel==0)
-            {
-                lblPwdLevel.Text = "权限等级：普通用户";
             }
             tbxPwd.Focus();
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (pwdLevel == 1&& tbxPwd.Text == structPwds[0].pwd)
+            try
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else if (pwdLevel == 2 && (tbxPwd.Text == structPwds[0].pwd || tbxPwd.Text == structPwds[1].pwd))
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else if ((pwdLevel == 3 || pwdLevel == 0) && (tbxPwd.Text == structPwds[0].pwd || tbxPwd.Text == structPwds[1].pwd || tbxPwd.Text == structPwds[2].pwd))
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else
-            {
-                if (MessageBox.Show("密码错误！") == DialogResult.OK)
+                if (pwdLevel == 1 && tbxPwd.Text == structPwds[0].pwd)
                 {
-                    tbxPwd.Focus();
-                    tbxPwd.SelectAll();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
+                else if (pwdLevel == 2 && (tbxPwd.Text == structPwds[0].pwd || tbxPwd.Text == structPwds[1].pwd))
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else if ((pwdLevel == 3 || pwdLevel == 0) && (tbxPwd.Text == structPwds[0].pwd || tbxPwd.Text == structPwds[1].pwd || tbxPwd.Text == structPwds[2].pwd))
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else if (pwdLevel == -1 && tbxPwd.Text == "adsensor")//缺省状态
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    if (MessageBox.Show("密码错误！") == DialogResult.OK)
+                    {
+                        tbxPwd.Focus();
+                        tbxPwd.SelectAll();
+                    }
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

@@ -56,6 +56,7 @@ namespace InfraredAnalyze
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            thread_AddTemperData.Abort();
             this.Close();
             this.Dispose();
         }
@@ -96,56 +97,56 @@ namespace InfraredAnalyze
         }
         #endregion
 
-        Series seriesPoint_1 = new Series("测温点1");
-        Series seriesPoint_2 = new Series("测温点2");
-        Series seriesPoint_3 = new Series("测温点3");
-        Series seriesPoint_4 = new Series("测温点4");
-        Series seriesLine = new Series("测温线");
-        Series seriesArea_1 = new Series("测温区域1");
-        Series seriesArea_2 = new Series("测温区域2");
-        Series seriesArea_3 = new Series("测温区域3");
-        Series seriesArea_4 = new Series("测温区域4");
+        Series seriesPoint_1 = new Series("测温点S2");
+        Series seriesPoint_2 = new Series("测温点S3");
+        Series seriesPoint_3 = new Series("测温点S4");
+        Series seriesPoint_4 = new Series("测温点S5");
+        Series seriesLine = new Series("测温线L1");
+        Series seriesArea_1 = new Series("测温区域A6");
+        Series seriesArea_2 = new Series("测温区域A7");
+        Series seriesArea_3 = new Series("测温区域A8");
 
-        Queue<double> queuePoint_1 = new Queue<double>(250);//一秒钟两次数据(大概)  两分钟的数据量
-        Queue<double> queuePoint_2 = new Queue<double>(250);
-        Queue<double> queuePoint_3 = new Queue<double>(250);
-        Queue<double> queuePoint_4 = new Queue<double>(250);
-        Queue<double> queueLine = new Queue<double>(250);
-        Queue<double> queueArea_1 = new Queue<double>(250);
-        Queue<double> queueArea_2 = new Queue<double>(250);
-        Queue<double> queueArea_3 = new Queue<double>(250);
-        Queue<double> queueArea_4 = new Queue<double>(250);
-        int Count_queuePoint_1;//线程同步用
-        int Count_queuePoint_2;
-        int Count_queuePoint_3;
-        int Count_queuePoint_4;
-        int Count_queueArea_1;
-        int Count_queueArea_2;
-        int Count_queueArea_3;
-        int Count_queueArea_4;
-        int Count_queueLine;
+        private  struct Temper_Time
+        {
+           public DateTime Time;
+           public double Temper;
+
+        }
+
+        Queue<Temper_Time> queuePoint_1 = new Queue<Temper_Time>(3000);
+        Queue<Temper_Time> queuePoint_2 = new Queue<Temper_Time>(3000);
+        Queue<Temper_Time> queuePoint_3 = new Queue<Temper_Time>(3000);
+        Queue<Temper_Time> queuePoint_4 = new Queue<Temper_Time>(3000);
+        Queue<Temper_Time> queueLine = new Queue<Temper_Time>(3000);
+        Queue<Temper_Time> queueArea_1 = new Queue<Temper_Time>(3000);
+        Queue<Temper_Time> queueArea_2 = new Queue<Temper_Time>(3000);
+        Queue<Temper_Time> queueArea_3 = new Queue<Temper_Time>(3000);
 
         private void ChartType()
         {
             seriesPoint_1.ChartType = SeriesChartType.Spline;
-            seriesArea_1.BorderWidth = 2;
+            seriesPoint_1.BorderWidth = 2;
             seriesPoint_2.ChartType = SeriesChartType.Spline;
-            seriesArea_2.BorderWidth = 2;
+            seriesPoint_2.BorderWidth = 2;
             seriesPoint_3.ChartType = SeriesChartType.Spline;
-            seriesArea_3.BorderWidth = 2;
+            seriesPoint_3.BorderWidth = 2;
             seriesPoint_4.ChartType = SeriesChartType.Spline;
-            seriesArea_4.BorderWidth = 2;
+            seriesPoint_4.BorderWidth = 2;
+
             seriesLine.ChartType = SeriesChartType.Spline;
             seriesLine.BorderWidth = 2;
+
+            chartRealTimeData.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+            chartRealTimeData.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
             seriesArea_1.ChartType = SeriesChartType.Line;
             seriesArea_1.BorderWidth = 2;
             seriesArea_2.ChartType = SeriesChartType.Spline;
             seriesArea_2.BorderWidth = 2;
             seriesArea_3.ChartType = SeriesChartType.Spline;
             seriesArea_3.BorderWidth = 2;
-            seriesArea_4.ChartType = SeriesChartType.Spline;
-            seriesArea_4.BorderWidth = 2;
-            //chartRealTimeData.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "yyyy-MM-dd-HH:mm:ss";
+         
+            chartRealTimeData.ChartAreas["ChartArea1"].AxisX.LabelStyle.Enabled = false;
             chartRealTimeData.ChartAreas[0].AxisX.LineWidth = 2;
             chartRealTimeData.ChartAreas[0].AxisY.LineWidth = 2;
             chartRealTimeData.ChartAreas[0].AxisX.Title = "时间:(S)";
@@ -153,10 +154,17 @@ namespace InfraredAnalyze
             //chartRealTimeData.ChartAreas[0].AxisY.Minimum = -30;//Y轴的最小值
             //chartRealTimeData.ChartAreas[0].AxisY.Maximum = 200;//Y 轴的最大值
             chartRealTimeData.ChartAreas[0].AxisX.Minimum = 0;//X轴的最小值
-            chartRealTimeData.ChartAreas[0].AxisX.Maximum = 250;//X轴的最大值
-            chartRealTimeData.ChartAreas[0].AxisX.Interval = 5;//X轴的间隔
-            chartRealTimeData.ChartAreas[0].AxisY.Interval = 2;//Y轴的间隔
+            chartRealTimeData.ChartAreas[0].AxisX.Maximum = 3000;//X轴的最大值
+            //chartRealTimeData.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd-HH:mm:ss";
+            chartRealTimeData.ChartAreas[0].AxisX.Interval = 100;//X轴的间隔
+            chartRealTimeData.ChartAreas[0].AxisY.Interval = 5;//Y轴的间隔
             chartRealTimeData.ChartAreas[0].CursorX.IsUserEnabled = true;
+            chartRealTimeData.ChartAreas[0].CursorY.IsUserEnabled = true;
+            chartRealTimeData.ChartAreas[0].CursorX.LineColor = Color.Black;
+            chartRealTimeData.ChartAreas[0].CursorY.LineColor = Color.Black;
+            chartRealTimeData.ChartAreas[0].CursorX.LineWidth = 1;
+            chartRealTimeData.ChartAreas[0].CursorY.LineWidth = 1;
+
             chartRealTimeData.Titles.Clear();
         }
 
@@ -174,7 +182,6 @@ namespace InfraredAnalyze
             chartRealTimeData.Series.Add(seriesArea_1);
             chartRealTimeData.Series.Add(seriesArea_2);
             chartRealTimeData.Series.Add(seriesArea_3);
-            chartRealTimeData.Series.Add(seriesArea_4);
             chartRealTimeData.Series.Add(seriesPoint_1);
             chartRealTimeData.Series.Add(seriesPoint_2);
             chartRealTimeData.Series.Add(seriesPoint_3);
@@ -192,302 +199,352 @@ namespace InfraredAnalyze
                 this.Dispose();
                 return;
             }
+
             thread_AddTemperData = new Thread(AddTemperData);
             timer1.Start();
-            cbxAreaNum.SelectedIndex = 4;
-            cbxAreaType.SelectedIndex = 3;
             tbxCameraID.Text = cameraID.ToString();
             thread_AddTemperData.Start();
             chartRealTimeData.Series.Clear();//清除默认的series
             ChartHis_AddSeries();
             ChartType();
+
+            seriesLine.Enabled = toolStripMenuItem1.Checked;
+            seriesPoint_1.Enabled = toolStripMenuItem2.Checked;
+            seriesPoint_2.Enabled = toolStripMenuItem3.Checked;
+            seriesPoint_3.Enabled = toolStripMenuItem4.Checked;
+            seriesPoint_4.Enabled = toolStripMenuItem5.Checked;
+            seriesArea_1.Enabled = toolStripMenuItem6.Checked;
+            seriesArea_2.Enabled = toolStripMenuItem7.Checked;
+            seriesArea_3.Enabled = toolStripMenuItem8.Checked;
         }
 
+        object obj = new object();
         private void AddTemperData()
         {
             StructClass.realTimeStructTemper realTimeStructTemper = new StructClass.realTimeStructTemper();
             StructClass.realTimeTemper[] realTimeTempers = new StructClass.realTimeTemper[8];
             StructClass.realTimeTemper realTimeTemper = new StructClass.realTimeTemper();
+            Temper_Time temper_Time = new Temper_Time();
             while (true)
             {
                 try
                 {
-                    realTimeStructTemper = StaticClass.intPtrs_RealtimeTemper[cameraID - 1];
-                    realTimeTempers = realTimeStructTemper.realTimeTemper;
-                    for (int i = 0; i < 8; i++)
+                    lock (obj)
                     {
-                        realTimeTemper = realTimeTempers[i];
-                        if (realTimeTemper.number != 0 && realTimeTemper.temper != 0 && realTimeTemper.type != 0)
+                        realTimeStructTemper = StaticClass.intPtrs_RealtimeTemper[cameraID - 1];
+                        realTimeTempers = realTimeStructTemper.realTimeTemper;
+                        for (int i = 0; i < 8; i++)
                         {
-                            switch (realTimeTemper.number + 1)
+                            realTimeTemper = realTimeTempers[i];
+                            if (realTimeTemper.temper != 0)
                             {
-                                case 1://线
-                                    queueLine.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Line = queueLine.ToList();
-                                    Interlocked.Increment(ref Count_queueLine);
-                                    break;
-                                case 2:
-                                    queuePoint_1.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Point1 = queuePoint_1.ToList();
-                                    Interlocked.Increment(ref Count_queuePoint_1);
-                                    break;
-                                case 3:
-                                    queuePoint_2.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Point2 = queuePoint_2.ToList();
-                                    Interlocked.Increment(ref Count_queuePoint_2);
-                                    break;
-                                case 4:
-                                    queuePoint_3.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Point3 = queuePoint_3.ToList();
-                                    Interlocked.Increment(ref Count_queuePoint_3);
-                                    break;
-                                case 5:
-                                    queuePoint_4.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Point4 = queuePoint_4.ToList();
-                                    Interlocked.Increment(ref Count_queuePoint_4);
-                                    break;
-                                case 6:
-                                    queueArea_1.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Area1 = queueArea_1.ToList();
-                                    Interlocked.Increment(ref Count_queueArea_1);
-                                    break;
-                                case 7:
-                                    queueArea_2.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Area2 = queueArea_2.ToList();
-                                    Interlocked.Increment(ref Count_queueArea_1);
-                                    break;
-                                case 8:
-                                    queueArea_3.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Area3 = queueArea_3.ToList();
-                                    Interlocked.Increment(ref Count_queueArea_1);
-                                    break;
-                                case 9:
-                                    queueArea_4.Enqueue(Convert.ToDouble(realTimeTemper.temper) / 100);
-                                    tempList_Area4 = queueArea_4.ToList();
-                                    Interlocked.Increment(ref Count_queueArea_1);
-                                    break;
+                                temper_Time.Time = DateTime.Now;
+                                temper_Time.Temper = Convert.ToDouble(realTimeTemper.temper) / 100;
+                                switch (realTimeTemper.number + 1)
+                                {
+                                    case 1://编号
+                                        queueLine.Enqueue(temper_Time);
+                                        break;
+                                    case 2:
+                                        queuePoint_1.Enqueue(temper_Time);
+                                        break;
+                                    case 3:
+                                        queuePoint_2.Enqueue(temper_Time);
+                                        break;
+                                    case 4:
+                                        queuePoint_3.Enqueue(temper_Time);
+                                        break;
+                                    case 5:
+                                        queuePoint_4.Enqueue(temper_Time);
+                                        break;
+                                    case 6:
+                                        queueArea_1.Enqueue(temper_Time);
+                                        break;
+                                    case 7:
+                                        queueArea_2.Enqueue(temper_Time);
+                                        break;
+                                    case 8:
+                                        queueArea_3.Enqueue(temper_Time);
+                                        break;
+                                }
                             }
                         }
-                    }
-                    #region
-                    if (Count_queueArea_1 > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
+                        #region
+                        if (queueArea_1.Count > 3000)
                         {
-                            queueArea_1.Dequeue();
-                            Interlocked.Decrement(ref Count_queueArea_1);
+                            for (int b = 0; b < 5; b++)
+                            {
+                                queueArea_1.Dequeue();
+                            }
                         }
-                    }
-                    if (Count_queueArea_2 > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
+                        if (queueArea_2.Count > 3000)
                         {
-                            queueArea_2.Dequeue();
-                            Interlocked.Decrement(ref Count_queueArea_2);
+                            for (int b = 0; b < 5; b++)
+                            {
+                                queueArea_2.Dequeue();
+                            }
                         }
-                    }
-                    if (Count_queueArea_3 > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
+                        if (queueArea_3.Count > 3000)
                         {
-                            queueArea_3.Dequeue();
-                            Interlocked.Decrement(ref Count_queueArea_3);
+                            for (int b = 0; b < 5; b++)
+                            {
+                                queueArea_3.Dequeue();
+                            }
                         }
-                    }
-                    if (Count_queueArea_4 > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
+                        if (queuePoint_1.Count > 3000)
                         {
-                            queueArea_4.Dequeue();
-                            Interlocked.Decrement(ref Count_queueArea_4);
+                            for (int b = 0; b < 5; b++)
+                            {
+                                queuePoint_1.Dequeue();
+                            }
                         }
-                    }
-                    if (Count_queuePoint_1 > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
+                        if (queuePoint_2.Count > 3000)
                         {
-                            queuePoint_1.Dequeue();
-                            Interlocked.Decrement(ref Count_queuePoint_1);
+                            for (int b = 0; b < 5; b++)
+                            {
+                                queuePoint_2.Dequeue();
+                            }
                         }
-                    }
-                    if (Count_queuePoint_2 > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
+                        if (queuePoint_3.Count > 3000)
                         {
-                            queuePoint_1.Dequeue();
-                            Interlocked.Decrement(ref Count_queuePoint_2);
+                            for (int b = 0; b < 5; b++)
+                            {
+                                queuePoint_3.Dequeue();
+                            }
                         }
-                    }
-                    if (Count_queuePoint_3 > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
+                        if (queuePoint_4.Count > 3000)
                         {
-                            queuePoint_3.Dequeue();
-                            Interlocked.Decrement(ref Count_queuePoint_3);
+                            for (int b = 0; b < 5; b++)
+                            {
+                                queuePoint_4.Dequeue();
+                            }
                         }
-                    }
-                    if (Count_queuePoint_4 > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
+                        if (queueLine.Count > 3000)
                         {
-                            queuePoint_4.Dequeue();
-                            Interlocked.Decrement(ref Count_queuePoint_4);
+                            for (int b = 0; b < 5; b++)
+                            {
+                                queueLine.Dequeue();
+                            }
                         }
+                        #endregion
                     }
-                    if (Count_queueLine > 250)
-                    {
-                        for (int b = 0; b < 5; b++)
-                        {
-                            queueLine.Dequeue();
-                            Interlocked.Decrement(ref Count_queueLine);
-                        }
-                    }
-                    #endregion
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("获取实时温度数据异常！" + ex.Message);
+                    if (ex.Message == "正在中止线程。")
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("获取实时温度数据异常！" + ex.Message + ex.StackTrace);
+                    }
                 }
-                Thread.Sleep(20);
+                Thread.Sleep(100);
             }
         }
-
-        private void btnConfirm_Click(object sender, EventArgs e)
-        {
-            seriesPoint_1.Enabled = false;
-            seriesPoint_2.Enabled = false;
-            seriesPoint_3.Enabled = false;
-            seriesPoint_4.Enabled = false;
-            seriesLine.Enabled = false;
-            seriesArea_1.Enabled = false;
-            seriesArea_2.Enabled = false;
-            seriesArea_3.Enabled = false;
-            seriesArea_4.Enabled = false;
-            if (cbxAreaType.SelectedIndex == 0 && cbxAreaNum.SelectedIndex == 0)
-            {
-                seriesPoint_1.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 0 && cbxAreaNum.SelectedIndex == 1)
-            {
-                seriesPoint_2.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 0 && cbxAreaNum.SelectedIndex == 2)
-            {
-                seriesPoint_3.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 0 && cbxAreaNum.SelectedIndex == 3)
-            {
-                seriesPoint_4.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 1)
-            {
-                seriesLine.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 2 && cbxAreaNum.SelectedIndex == 0)
-            {
-                seriesArea_1.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 2 && cbxAreaNum.SelectedIndex == 1)
-            {
-                seriesArea_2.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 2 && cbxAreaNum.SelectedIndex == 2)
-            {
-                seriesArea_3.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 2 && cbxAreaNum.SelectedIndex == 3)
-            {
-                seriesArea_4.Enabled = true;
-            }
-            else if (cbxAreaType.SelectedIndex == 3 && cbxAreaNum.SelectedIndex == 4)
-            {
-                seriesPoint_1.Enabled = true;
-                seriesPoint_2.Enabled = true;
-                seriesPoint_3.Enabled = true;
-                seriesPoint_4.Enabled = true;
-                seriesLine.Enabled = true;
-                seriesArea_1.Enabled = true;
-                seriesArea_2.Enabled = true;
-                seriesArea_3.Enabled = true;
-                seriesArea_4.Enabled = true;
-            }
-        }
-
-        private void cbxAreaType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbxAreaType.SelectedIndex == 3)
-            {
-                cbxAreaNum.SelectedIndex = 4;
-            }
-        }
-
-        List<double> tempList_Point1 = new List<double>();
-        List<double> tempList_Point2 = new List<double>();
-        List<double> tempList_Point3 = new List<double>();
-        List<double> tempList_Point4 = new List<double>();
-        List<double> tempList_Area1 = new List<double>();
-        List<double> tempList_Area2 = new List<double>();
-        List<double> tempList_Area3 = new List<double>();
-        List<double> tempList_Area4 = new List<double>();
-        List<double> tempList_Line = new List<double>();
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             try
             {
-                seriesPoint_1.Points.Clear();
-                seriesPoint_2.Points.Clear();
-                seriesPoint_3.Points.Clear();
-                seriesPoint_4.Points.Clear();
-                seriesLine.Points.Clear();
-                seriesArea_1.Points.Clear();
-                seriesArea_2.Points.Clear();
-                seriesArea_3.Points.Clear();
-                seriesArea_4.Points.Clear();
-               
-                for (int i = 0; i < tempList_Area1.Count; i++)
+                lock (obj)
                 {
-                    seriesArea_1.Points.AddXY(i + 1, tempList_Area1[i]);
-                }
+                    seriesPoint_1.Points.Clear();
+                    seriesPoint_2.Points.Clear();
+                    seriesPoint_3.Points.Clear();
+                    seriesPoint_4.Points.Clear();
+                    seriesLine.Points.Clear();
+                    seriesArea_1.Points.Clear();
+                    seriesArea_2.Points.Clear();
+                    seriesArea_3.Points.Clear();
 
-                for (int i = 0; i < tempList_Area2.Count; i++)
-                {
-                    seriesArea_2.Points.AddXY(i + 1, tempList_Area2[i]);
-                }
-                for (int i = 0; i < tempList_Area3.Count; i++)
-                {
-                    seriesArea_3.Points.AddXY(i + 1, tempList_Area3[i]);
-                }
-                for (int i = 0; i < tempList_Area4.Count; i++)
-                {
-                    seriesArea_4.Points.AddXY(i + 1, tempList_Area4[i]);
-                }
-                for (int i = 0; i < tempList_Point1.Count; i++)
-                {
-                    seriesPoint_1.Points.AddXY(i + 1, tempList_Point1[i]);
-                }
-                for (int i = 0; i < tempList_Point2.Count; i++)
-                {
-                    seriesPoint_2.Points.AddXY(i + 1, tempList_Point2[i]);
-
-                }
-                for (int i = 0; i < tempList_Point3.Count; i++)
-                {
-                    seriesPoint_3.Points.AddXY(i + 1, tempList_Point3[i]);
-                }
-                for (int i = 0; i < tempList_Point4.Count; i++)
-                {
-                    seriesPoint_4.Points.AddXY(i + 1, tempList_Point4[i]);
-                }
-                for (int i = 0; i < tempList_Line.Count; i++)
-                {
-                    seriesLine.Points.AddXY(i + 1, tempList_Line[i]);
+                    for (int i = 0; i < queueArea_1.Count; i++)
+                    {
+                        seriesArea_1.Points.AddXY(i + 1, queueArea_1.ElementAt(i).Temper);
+                    }
+                    for (int i = 0; i < queueArea_2.Count; i++)
+                    {
+                        seriesArea_2.Points.AddXY(i + 1, queueArea_2.ElementAt(i).Temper);
+                    }
+                    for (int i = 0; i < queueArea_3.Count; i++)
+                    {
+                        seriesArea_3.Points.AddXY(i + 1, queueArea_3.ElementAt(i).Temper);
+                    }
+                    for (int i = 0; i < queuePoint_1.Count; i++)
+                    {
+                        seriesPoint_1.Points.AddXY(i + 1, queuePoint_1.ElementAt(i).Temper);
+                    }
+                    for (int i = 0; i < queuePoint_2.Count; i++)
+                    {
+                        seriesPoint_2.Points.AddXY(i + 1, queuePoint_2.ElementAt(i).Temper);
+                    }
+                    for (int i = 0; i < queuePoint_3.Count; i++)
+                    {
+                        seriesPoint_3.Points.AddXY(i + 1, queuePoint_3.ElementAt(i).Temper);
+                    }
+                    for (int i = 0; i < queuePoint_4.Count; i++)
+                    {
+                        seriesPoint_4.Points.AddXY(i + 1, queuePoint_4.ElementAt(i).Temper);
+                    }
+                    for (int i = 0; i < queueLine.Count; i++)
+                    {
+                        seriesLine.Points.AddXY(i + 1, queueLine.ElementAt(i).Temper);
+                    }
+                    Show_Temper(tbxChoosePointTemper, lblStartTime);
+                    lblEndTime.Text = DateTime.Now.ToString("T");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("绘制曲线异常" + ex.Message + ex.StackTrace);
             }
+        }
+
+        Series Temp_series = new Series();
+        int Temp_index;
+        private void chartRealTimeData_MouseDown(object sender, MouseEventArgs e)//根据点击的点坐标 返回 series和点的index值
+        {
+            try
+            {
+                Point Temperpoint = new Point(e.X, e.Y);
+                //HitTestResult hitTestResult = chartRealTimeData.HitTest(e.X, e.Y, ChartElementType.DataPoint);
+                //if (hitTestResult.ChartElementType == ChartElementType.DataPoint)
+                //{
+                //    int i = hitTestResult.PointIndex;
+                //    DataPoint dataPoint = hitTestResult.Series.Points[i];
+                //    string XValue = dataPoint.XValue.ToString();
+                //    string YValue = dataPoint.YValues[0].ToString();
+                //    tbxChoosePointTemper.Text = YValue;
+                //}
+                Get_SeriesAndIndex(Temperpoint, out Temp_series, out Temp_index);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        private void Get_SeriesAndIndex(Point point,out Series Temp_series, out int count)//点击一下以后 获取到 那个点的series 和点的Index值
+        {
+            try
+            {
+                HitTestResult hitTestResult = chartRealTimeData.HitTest(point.X, point.Y, ChartElementType.DataPoint);
+                if (hitTestResult.ChartElementType == ChartElementType.DataPoint)
+                {
+                    count = hitTestResult.PointIndex;
+                    Temp_series = hitTestResult.Series;
+                }
+                else
+                {
+                    count = 1;
+                    Temp_series = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                count = 1;
+                Temp_series = null;
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+            
+        }
+
+        private void Show_Temper(TextBox textBox,Label lblStartTime)//根据series和index 显示温度
+        {
+            try
+            {
+                if (Temp_series==null|| Temp_series.Name == "")
+                {
+                    textBox.Text = "无";
+                    lblStartTime.Text = "无";
+                }
+                else
+                {
+                    DataPoint dataPoint = Temp_series.Points[Temp_index];
+                    textBox.Text = dataPoint.YValues[0].ToString();
+                    if (Temp_series.Name == "测温区域A6")
+                    {
+                        lblStartTime.Text = queueArea_1.ElementAt(0).Time.ToString("T");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+           
+        }
+
+        ToolTip toolTip = new ToolTip();
+        private void chartRealTimeData_MouseMove(object sender, MouseEventArgs e)
+        {
+            //Point point = new Point(e.X, e.Y);
+            //Get_SeriesAndIndex(point, out Temp_series, out Temp_index);
+            //chartRealTimeData.ChartAreas[0].CursorX.SetCursorPixelPosition(point, true);
+            //chartRealTimeData.ChartAreas[0].CursorY.SetCursorPixelPosition(point, true);
+            //chartRealTimeData.ChartAreas[0].CursorX.LineColor = Color.Black;
+            //chartRealTimeData.ChartAreas[0].CursorY.LineColor = Color.Black;
+            //chartRealTimeData.ChartAreas[0].CursorX.LineWidth = 1;
+            //chartRealTimeData.ChartAreas[0].CursorY.LineWidth = 1;
+            //var result = chartRealTimeData.HitTest(e.X, e.Y, ChartElementType.DataPoint);
+            //if (result.ChartElementType == ChartElementType.DataPoint)
+            //{
+            //    int i = result.PointIndex;
+            //    DataPoint dataPoint = result.Series.Points[i];
+            //    Temp_series = result.Series;
+            //    toolTip.AutoPopDelay = 1000;
+            //    toolTip.SetToolTip(chartRealTimeData, dataPoint.YValues[0].ToString() + "°C");
+            //}
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem1.Checked = !toolStripMenuItem1.Checked;
+            seriesLine.Enabled = toolStripMenuItem1.Checked;
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem2.Checked = !toolStripMenuItem2.Checked;
+            seriesPoint_1.Enabled = toolStripMenuItem2.Checked;
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem3.Checked = !toolStripMenuItem3.Checked;
+            seriesPoint_2.Enabled = toolStripMenuItem3.Checked;
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem4.Checked = !toolStripMenuItem4.Checked;
+            seriesPoint_3.Enabled = toolStripMenuItem4.Checked;
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem5.Checked = !toolStripMenuItem5.Checked;
+            seriesPoint_4.Enabled = toolStripMenuItem5.Checked;
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem6.Checked = !toolStripMenuItem6.Checked;
+            seriesArea_1.Enabled = toolStripMenuItem6.Checked;
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem7.Checked = !toolStripMenuItem7.Checked;
+            seriesArea_2.Enabled = toolStripMenuItem7.Checked;
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem8.Checked = !toolStripMenuItem8.Checked;
+            seriesArea_3.Enabled = toolStripMenuItem8.Checked;
         }
     }
 }

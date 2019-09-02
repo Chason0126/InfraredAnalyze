@@ -79,7 +79,7 @@ namespace InfraredAnalyze
         {
             try
             {
-                structPwds = sqlCreate.Select_Pwd();
+                structPwds = sqlCreate.Select_Pwd(StaticClass.DataBaseName);
                 tbxAdminPwd.Text = structPwds[1].pwd;
                 tbxUserPwd.Text = structPwds[2].pwd;
             }
@@ -99,8 +99,8 @@ namespace InfraredAnalyze
         {
             try
             {
-                sqlCreate.Update_Pwd(1, tbxAdminPwd.Text);
-                sqlCreate.Update_Pwd(2, tbxUserPwd.Text);
+                sqlCreate.Update_Pwd(1, tbxAdminPwd.Text,StaticClass.DataBaseName);
+                sqlCreate.Update_Pwd(2, tbxUserPwd.Text, StaticClass.DataBaseName);
                 MessageBox.Show("修改成功！");
                 GetPwd();
             }

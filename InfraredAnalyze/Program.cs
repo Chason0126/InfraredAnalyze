@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace InfraredAnalyze
 {
@@ -14,9 +15,32 @@ namespace InfraredAnalyze
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMain());
+            bool ret;
+            Mutex mutex = new Mutex(true, Application.ProductName, out ret);
+            if (ret)
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                FrmLogin frmLogin = new FrmLogin();
+                if (frmLogin.ShowDialog() == DialogResult.OK)
+                {
+                    Application.Run(new FrmMain());
+                }
+                mutex.ReleaseMutex();
+            }
+            else
+            {
+                MessageBox.Show("软件运行中，请忽重复运行！");
+                Application.Exit();
+            }
+
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //FrmLogin frmLogin = new FrmLogin();
+            //if (frmLogin.ShowDialog() == DialogResult.OK)
+            //{
+            //    Application.Run(new FrmMain());
+            //}
         }
     }
 }

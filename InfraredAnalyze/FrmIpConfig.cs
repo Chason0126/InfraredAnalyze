@@ -55,7 +55,7 @@ namespace InfraredAnalyze
         StringBuilder GateWay = new StringBuilder();
         private void FrmIpConfig_Load(object sender, EventArgs e)
         {
-            if (DMSDK.DM_CheckOnline("192.168.1.2", 5000) < 0)
+            if (DMSDK.DM_CheckOnline("192.168.1.2", 80) < 0)
             {
                 MessageBox.Show("未检测到在线仪器，请检查后重试！");
                 btnConfirm.Text = "重新连接";
@@ -64,7 +64,7 @@ namespace InfraredAnalyze
             {
                 DMSDK.DM_Init();
                 temp_OperateHandle = DMSDK.DM_Connect(ucPbx1.Handle, "192.168.1.2", 80);
-                temp_ConnectHandle = DMSDK.DM_OpenMonitor(ucPbx1.Handle, "192.168.1.2", 5000);
+                temp_ConnectHandle = DMSDK.DM_OpenMonitor(ucPbx1.Handle, "192.168.1.2", 5000, 0);
                 DMSDK.DM_GetNetmask(temp_OperateHandle, SubMask);
                 DMSDK.DM_GetGateway(temp_OperateHandle, GateWay);
             }
@@ -83,7 +83,7 @@ namespace InfraredAnalyze
         {
             if (btnConfirm.Text == "重新连接")
             {
-                if (DMSDK.DM_CheckOnline("192.168.1.2", 5000) < 0)
+                if (DMSDK.DM_CheckOnline("192.168.1.2", 80) < 0)
                 {
                     MessageBox.Show("未检测到在线仪器，请检查后重试！");
                     btnConfirm.Text = "重新连接";
@@ -92,7 +92,7 @@ namespace InfraredAnalyze
                 {
                     DMSDK.DM_Init();
                     temp_OperateHandle = DMSDK.DM_Connect(ucPbx1.Handle, "192.168.1.2", 80);
-                    temp_ConnectHandle = DMSDK.DM_OpenMonitor(ucPbx1.Handle, "192.168.1.2", 5000);
+                    temp_ConnectHandle = DMSDK.DM_OpenMonitor(ucPbx1.Handle, "192.168.1.2", 5000, 0);
                     DMSDK.DM_GetNetmask(temp_OperateHandle, SubMask);
                     DMSDK.DM_GetGateway(temp_OperateHandle, GateWay);
                     btnConfirm.Text = "确认修改";

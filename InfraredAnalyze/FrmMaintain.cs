@@ -15,24 +15,35 @@ namespace InfraredAnalyze
         public FrmMaintain()
         {
             InitializeComponent();
+            DMSDK.DM_Init();
+            this.Disposed += FrmMaintain_Disposed;
         }
 
+       
+
+        int tempConnect;
         private void btnReset_Click(object sender, EventArgs e)//重启仪器
         {
-            DMSDK.DM_Reset(StaticClass.Temper_Connect);
+            DMSDK.DM_Reset(tempConnect);
             MessageBox.Show("操作成功");
         }
 
         private void btnLoadDefault_Click(object sender, EventArgs e)//恢复出厂设置
         {
-            DMSDK.DM_LoadDefault(StaticClass.Temper_Connect);
+            DMSDK.DM_LoadDefault(tempConnect);
             MessageBox.Show("操作成功");
         }
 
         StringBuilder systemInfo = new StringBuilder();
         private void FrmMaintain_Load(object sender, EventArgs e)
         {
-            DMSDK.DM_GetSystemInfo(StaticClass.Temper_Connect, systemInfo);
+            tempConnect = DMSDK.DM_Connect(this.Handle, StaticClass.Temper_Ip, 80);//
+            if (tempConnect < 0)
+            {
+                MessageBox.Show("连接失败，请重试！");
+                return;
+            }
+            DMSDK.DM_GetSystemInfo(tempConnect, systemInfo);
             lblSystemInfo.Text = systemInfo.ToString();
         }
 
@@ -54,6 +65,16 @@ namespace InfraredAnalyze
         private void btnLoadDefault_MouseEnter(object sender, EventArgs e)
         {
             btnLoadDefault.BackColor = Color.Red;
+        }
+
+        private void FrmMaintain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DMSDK.DM_Disconnect(tempConnect);
+        }
+
+        private void FrmMaintain_Disposed(object sender, EventArgs e)
+        {
+            DMSDK.DM_Disconnect(tempConnect);
         }
     }
 }

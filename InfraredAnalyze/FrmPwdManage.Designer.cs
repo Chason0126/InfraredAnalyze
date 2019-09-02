@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPwdManage));
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbxAdminPwd = new System.Windows.Forms.TextBox();
@@ -54,6 +55,17 @@
             this.pnlHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseDown);
             this.pnlHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseMove);
             // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(285, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 14);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "密码管理";
+            // 
             // btnClose
             // 
             this.btnClose.BackgroundImage = global::InfraredAnalyze.Properties.Resources.关闭;
@@ -70,17 +82,6 @@
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
             this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(285, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 14);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "密码管理";
             // 
             // label2
             // 
@@ -151,10 +152,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPwdManage";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmPwdManage";
+            this.Text = "密码管理";
             this.Load += new System.EventHandler(this.FrmPwdManage_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
